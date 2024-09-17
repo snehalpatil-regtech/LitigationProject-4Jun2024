@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
@@ -17,11 +19,11 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
-import litigationExternalLawyer.MethodsPOM;
+import litigationAdditionalOwner.MethodsPOM;
+import litigationExternalLawyer.MethodPOM;
+import litigationManagement.CFOMethod;
 
-import login.BasePage;
-
-public class ExternalLawyer extends BasePage
+public class ExternalLawyer
 {
 	
 	public static WebDriver driver = null;		//WebDriver instance created
@@ -33,15 +35,15 @@ public class ExternalLawyer extends BasePage
 	public static XSSFSheet sheet = null;		//Sheet variable
 	public static List<WebElement> elementsList = null;
 	
-//	public static XSSFSheet ReadExcel() throws IOException
-//	{
-//	
-//		fis = new FileInputStream("E:\\Snehal\\ComplianceLatest\\Litigation-Project-main (1)\\Litigation-Project-main\\TestData\\LitigationSheet.xlsx");
-//	
-//		workbook = new XSSFWorkbook(fis);
-//		sheet = workbook.getSheetAt(9);					//Retrieving second sheet of Workbook
-//		return sheet;
-//	}
+	public static XSSFSheet ReadExcel() throws IOException
+	{
+	
+		fis = new FileInputStream("E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
+	
+		workbook = new XSSFWorkbook(fis);
+		sheet = workbook.getSheetAt(6);					//Retrieving second sheet of Workbook
+		return sheet;
+	}
 	
 	@BeforeTest
 	void setBrowser() throws InterruptedException, IOException
@@ -62,7 +64,7 @@ public class ExternalLawyer extends BasePage
 	{
 		
 	
-		/*XSSFSheet sheet = ReadExcel();
+		XSSFSheet sheet = ReadExcel();
 		Row row0 = sheet.getRow(0);						//Selected 0th index row (First row)
 		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
 		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
@@ -78,9 +80,7 @@ public class ExternalLawyer extends BasePage
 		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
 		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
 		
-		driver = login.Login.UserLogin(uname,password,"company");		//Method of Login class to login user.*/
-		
-		initialization("company",3);
+		driver = login.Login.UserLogin(uname,password,"company");		//Method of Login class to login user.
 		
 	}
 	
@@ -91,7 +91,7 @@ public class ExternalLawyer extends BasePage
 			test = extent.startTest("Notice - Open Count Verification");
 			
 			
-			MethodsPOM.NoticeOpen( test);
+			MethodPOM.NoticeOpen(driver, test, workbook, "Performer");
 			
 			
 			extent.endTest(test);
@@ -100,13 +100,13 @@ public class ExternalLawyer extends BasePage
 
 
 
-@Test(priority = 1)
+@Test(priority =1)
 			void CaseOpen() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Case - Open Count Verification");
 				
 				
-				MethodsPOM.CaseOpen( test);
+				MethodPOM.CaseOpen(driver, test, workbook, "Performer");
 				
 				extent.endTest(test);
 				extent.flush();
@@ -119,7 +119,7 @@ public class ExternalLawyer extends BasePage
 					test = extent.startTest("Close Notice Count Verification");
 				
 				
-					MethodsPOM.CloseNoticeCase( test,"Notice","External Lawyer");
+					MethodPOM.CloseNoticeCase(driver, test, workbook,"Notice","External Lawyer");
 						extent.endTest(test);
 					extent.flush();
 				}
@@ -129,7 +129,7 @@ public class ExternalLawyer extends BasePage
 				test = extent.startTest("Close Case Count Verification");
 					
 					
-				MethodsPOM.CloseNoticeCase(test,"Case","External Lawyer");
+				MethodPOM.CloseNoticeCase(driver, test, workbook,"Case","External Lawyer");
 					
 				extent.endTest(test);
 					extent.flush();
@@ -141,7 +141,7 @@ public class ExternalLawyer extends BasePage
 					test = extent.startTest("Notice - Closed Count Verification");
 			
 					
-					MethodsPOM.NoticeClosed( test);
+					MethodPOM.NoticeClosed(driver, test, workbook, "Performer");
 					
 					extent.endTest(test);
 					extent.flush();
@@ -152,7 +152,7 @@ public class ExternalLawyer extends BasePage
 					test = extent.startTest("Case - Closed Count Verification");
 			
 					
-					MethodsPOM.CaseClosed(test);
+					MethodPOM.CaseClosed(driver, test, workbook, "Performer");
 					
 					extent.endTest(test);
 					extent.flush();
@@ -162,7 +162,7 @@ public class ExternalLawyer extends BasePage
 				{
 					test = extent.startTest("Task - Open Count Verification");
 					
-					MethodsPOM.TaskOpen( test, workbook, "Performer");
+					MethodPOM.TaskOpen(driver, test, workbook, "Performer");
 					
 					extent.endTest(test);
 					extent.flush();
@@ -175,7 +175,7 @@ public class ExternalLawyer extends BasePage
 		 				test = extent.startTest("Task Delete verification");
 		 				
 		 				
-		 				MethodsPOM.TaskDelete( test);
+		 				MethodPOM.TaskDelete(driver, test);
 		 				
 		 				extent.endTest(test);
 		 				extent.flush();
@@ -187,81 +187,81 @@ public class ExternalLawyer extends BasePage
 					test = extent.startTest("Task - Closed Count Verification");
 					
 					
-					MethodsPOM.TaskClosed( test);
+					MethodPOM.TaskClosed(driver, test, workbook, "Performer");
 					
 					extent.endTest(test);
 					extent.flush();
 				}
 			
 			
-			@Test(priority = 9)
+			@Test(priority =9)
  			void ClosedTask() throws InterruptedException, IOException
  			{
  				test = extent.startTest(" Closed Task Count verification");
  				
  				
- 				MethodsPOM.CloseNoticeCase( test, "Task","External Lawyer");
+ 				MethodsPOM.CloseNoticeCase(driver, test, workbook, "Task","External Lawyer");
  				
  				extent.endTest(test);
  				extent.flush();
  			}
 	
-		  @Test(priority = 9)
+		  @Test(priority = 10)
 			void NoticeDocumentTab() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Notice Document verification");
 				
 				
-				MethodsPOM.NoticeDocument( test);
+				MethodPOM.NoticeDocument(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
 	
 
-	@Test(priority =8)
+	@Test(priority =11)
 		void NoticeTaskActivityTab() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice Task/Activity verification");
 			
 			
-			MethodsPOM.TaskActivtity( test);
+			MethodPOM.TaskActivtity(driver, test,workbook);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-	@Test(priority =9)
+	//@Test(priority =0)
 	void TaskActivtityDeleteResponse() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Task/Activtiy Delete Response verification");
 		
 		
-		MethodsPOM.TaskActivtityDeleteResponse(test);
+		MethodPOM.TaskActivtityDeleteResponse(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 
-		@Test(priority = 11)
+		@Test(priority = 13)
 			void NoticeResponseTab() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Notice Response tab verification");
 				
 				
-				MethodsPOM.Response(test);
+				MethodPOM.Response(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
 
 	
-	@Test(priority = 12)
+	@Test(priority = 14)
 			void NoticePaymentLogTab() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Notice PaymentLog tab verification");
 				
 				
-				MethodsPOM.PaymentLog(test);
+				MethodPOM.PaymentLog(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
@@ -269,13 +269,13 @@ public class ExternalLawyer extends BasePage
 
 	
 
-		@Test(priority =13)
+		@Test(priority =15)
 				void NoticeAuditLogTab() throws InterruptedException, IOException
 				{
 					test = extent.startTest("Notice AuditLog tab verification");
 				
 				
-					MethodsPOM.AuditLog(test);
+					MethodPOM.AuditLog(driver, test);
 				
 					extent.endTest(test);
 					extent.flush();
@@ -286,7 +286,7 @@ public class ExternalLawyer extends BasePage
 							test = extent.startTest("Case Document verification");
 							
 							
-							MethodsPOM.Document( test);
+							MethodPOM.Document(driver, test);
 							
 							extent.endTest(test);
 							extent.flush();
@@ -299,7 +299,7 @@ public class ExternalLawyer extends BasePage
 							test = extent.startTest("Case Task/Activity verification");
 					
 							
-							MethodsPOM.TaskActivity1(test);
+							MethodPOM.TaskActivity1(driver, test,workbook,"Performer");
 							
 							extent.endTest(test);
 							extent.flush();
@@ -312,7 +312,7 @@ public class ExternalLawyer extends BasePage
 					test = extent.startTest("Case Hearing verification");
 				
 					
-					MethodsPOM.CaseHearing(test);
+					MethodPOM.CaseHearing(driver, test,workbook);
 					
 					extent.endTest(test);
 					extent.flush();
@@ -325,7 +325,7 @@ public class ExternalLawyer extends BasePage
 				test = extent.startTest("Case Order verification");
 				
 				
-				MethodsPOM.CaseOrder(test);
+				MethodPOM.CaseOrder(driver, test,workbook,"Performer");
 				
 				extent.endTest(test);
 				extent.flush();
@@ -337,18 +337,18 @@ public class ExternalLawyer extends BasePage
 	{
 		test = extent.startTest("Case advocate bill verification");
 			
-		MethodsPOM.AdvocateBill(test);
+		MethodPOM.AdvocateBill(driver, test);
 				
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 18)
+@Test(priority =18)
 	void StatusPayment() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Status/Payment verification");
 			
 				
-		MethodsPOM.StatusPayment(test);
+		MethodPOM.StatusPayment(driver, test,workbook);
 				
 		extent.endTest(test);
 		extent.flush();
@@ -361,7 +361,7 @@ public class ExternalLawyer extends BasePage
 				test = extent.startTest("Case Audit Log verification");
 	
 				
-				MethodsPOM.Auditlog(test);
+				MethodPOM.Auditlog(driver,test);
 				
 				extent.endTest(test);
 				extent.flush();
@@ -373,7 +373,7 @@ public class ExternalLawyer extends BasePage
 	 		test = extent.startTest("My Document-Download and View Document");
 	 	
 	 		
-	 		MethodsPOM.MyDocument( test, workbook, "Performer");
+	 		MethodPOM.MyDocument(driver, test, workbook, "Performer");
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
@@ -387,18 +387,18 @@ void MyReports() throws InterruptedException, IOException
 	test = extent.startTest("Reports excel count verification");
 	
 	
-	MethodsPOM.MyReports(test);
+	MethodPOM.MyReports(driver, test, workbook, "Performer");
 	
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority = 21)
+@Test(priority = 22)
 void MoreReports() throws InterruptedException, IOException
 {
 	test = extent.startTest("More Report-Reports excel  verification");
 	
 	
-	MethodsPOM.MoreReport(test, "Company Admin");
+	MethodPOM.MoreReport(driver, test, "Company Admin");
 	
 	extent.endTest(test);
 	extent.flush();
@@ -410,7 +410,7 @@ void MyReminder() throws InterruptedException, IOException
 	test = extent.startTest("My Reminder verification");
 
 	
-	MethodsPOM.MyReminder(test, workbook);
+	MethodPOM.MyReminder(driver, test, workbook);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -422,7 +422,7 @@ void ImportUtility() throws InterruptedException, IOException
 	test = extent.startTest("Import Utility verification");
 	
 	
-	MethodsPOM.ImportUtility(test);
+	MethodPOM.ImportUtility(driver,test);
 	extent.endTest(test);
 	extent.flush();
 }
@@ -432,7 +432,7 @@ void CaseUpdationImportUtility() throws InterruptedException, IOException
 	test = extent.startTest("Case Updation Import Utility verification");
 	
 	
-	MethodsPOM.CaseUpdationImportUtility(test);
+	CFOMethod.CaseUpdationImportUtility(driver,test);
 	extent.endTest(test);
 	extent.flush();
 }
@@ -443,7 +443,7 @@ void NoticeUpdation() throws InterruptedException, IOException
 test = extent.startTest("Notice Updation Import Utility verification");
 
 
-MethodsPOM.NoticeUpdation(test);
+CFOMethod.NoticeUpdation(driver,test);
 extent.endTest(test);
 extent.flush();
 }
@@ -456,7 +456,7 @@ void CaseAdvocateBill() throws InterruptedException, IOException
 	test = extent.startTest("Advocate bill verification");
 	
 	
-	MethodsPOM.AdvocateBillTab(test);
+	MethodPOM.AdvocateBillTab(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -467,7 +467,7 @@ void CaseAdvocateBill() throws InterruptedException, IOException
 
 void Close()
 {
-	closeBrowser();
+	 driver.close(); 
 }
 }
 

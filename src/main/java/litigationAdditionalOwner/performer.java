@@ -21,12 +21,11 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import litigationManagement.CFOMethod;
-import login.BasePage;
 
 
 
 
-public class performer  extends BasePage
+public class performer 
 {
 	public static WebDriver driver = null;		//WebDriver instance created
 	public static WebElement upload = null;		//WebElement to get upload button
@@ -37,16 +36,16 @@ public class performer  extends BasePage
 	public static XSSFSheet sheet = null;		//Sheet variable
 	public static List<WebElement> elementsList = null;
 	
-	public static String XmlFilePath = "E:\\Snehal\\ComplianceLatest\\Litigation-Project-main (1)\\Litigation-Project-main\\TestData\\LitigationSheet.xlsx";
+	public static String XmlFilePath = "E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx";
 	
-//	public static XSSFSheet ReadExcel() throws IOException
-//	{
-//		
-//		fis = new FileInputStream(performer.XmlFilePath);
-//		workbook = new XSSFWorkbook(fis);
-//		sheet = workbook.getSheetAt(0);                        //Retrieving second sheet of Workbook
-//		return sheet;
-//	}
+	public static XSSFSheet ReadExcel() throws IOException
+	{
+		
+		fis = new FileInputStream(performer.XmlFilePath);
+		workbook = new XSSFWorkbook(fis);
+		sheet = workbook.getSheetAt(0);                        //Retrieving second sheet of Workbook
+		return sheet;
+	}
 	
 	@BeforeTest
 	void setBrowser() throws InterruptedException, IOException
@@ -64,27 +63,25 @@ public class performer  extends BasePage
 	void Login() throws InterruptedException, IOException
 	{
      
-//		XSSFSheet sheet = ReadExcel();
-//		Row row0 = sheet.getRow(0);						//Selected 0th index row (First row)
-//		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
-//		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
-//		
-//		login.Login.BrowserSetup(URL);					//Method of Login class to set browser.
-//		
-//
-//		Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
-//		 c1 = row1.getCell(1);						//Selected cell (1 row,1 column)
-//		String uname = c1.getStringCellValue();			//Got the URL stored at position 1,1
-//		
-//		
-//		Row row2 = sheet.getRow(2);						//Selected 2nd index row (Third row)
-//		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
-//		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
-//		System.out.println(password);
-//		
-//		driver = login.Login.UserLogin(uname,password, "Litigation");     //Method of Login class to login user Performer.
+		XSSFSheet sheet = ReadExcel();
+		Row row0 = sheet.getRow(0);						//Selected 0th index row (First row)
+		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
+		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
 		
-		initialization("Litigation",0);
+		login.Login.BrowserSetup(URL);					//Method of Login class to set browser.
+		
+
+		Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
+		 c1 = row1.getCell(1);						//Selected cell (1 row,1 column)
+		String uname = c1.getStringCellValue();			//Got the URL stored at position 1,1
+		
+		
+		Row row2 = sheet.getRow(2);						//Selected 2nd index row (Third row)
+		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
+		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
+		System.out.println(password);
+		
+		driver = login.Login.UserLogin(uname,password, "company");     //Method of Login class to login user Performer.
 
 	}
 	
@@ -94,327 +91,374 @@ public class performer  extends BasePage
 		test = extent.startTest("Notice - Open Count Verification");
 		
 		
-		MethodsPOM.NoticeOpen( test, workbook, "Performer");
+		MethodsPOM.NoticeOpen(driver, test, workbook, "Performer");
 		
 		//test.log(LogStatus.PASS, "Test Passed.");
 		extent.endTest(test);
 		extent.flush();
 	}
   
-@Test(priority =3)
+@Test(priority =2)
 		void NoticeWithExistingData() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice With Existing Data verification");
-		   MethodsPOM.NoticeWithExistingData( test,workbook);
+		   MethodsPOM.NoticeWithExistingData(driver, test,workbook);
 		  extent.endTest(test);
 			extent.flush();
 		}
 	
-@Test(priority =4)
+@Test(priority =3)
    void NoticeWithInvalidData() throws InterruptedException, IOException
   {
 	     test = extent.startTest("Notice With Invalid Data verification");
 	
 	
-	     MethodsPOM.NoticeWithInvalidData( test, workbook);
+	     MethodsPOM.NoticeWithInvalidData(driver, test, workbook);
 	
 	     extent.endTest(test);
 	     extent.flush();
  }
 	 
-@Test(priority =5)
+@Test(priority =4)
 	   void NoticeWithTwoMandatoryData() throws InterruptedException, IOException
 	  {
 		     test = extent.startTest("Notice With Two Mandatory Fields verification");
 		
 		
-		     MethodsPOM.NoticeWithTwoMandatoryData( test, workbook);
+		     MethodsPOM.NoticeWithTwoMandatoryData(driver, test, workbook);
 		
 		     extent.endTest(test);
 		     extent.flush();
 	 }
 	 
-@Test(priority =6) 
+@Test(priority =5) 
 	   void NoticeWithEmptyFields() throws InterruptedException, IOException
 	  {
 		     test = extent.startTest("Notice With Empty Fields verification");
 		
 		
-		     MethodsPOM.NoticeWithEmptyFields( test);
+		     MethodsPOM.NoticeWithEmptyFields(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 	 }
 
-@Test(priority =7)
+@Test(priority =6)
 	void NoticeClearBtn() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Summary -Clear button verification");
 	
 	
-		MethodsPOM.NoticeClearBtn( test);
+		MethodsPOM.NoticeClearBtn(driver, test);
 	
 	     extent.endTest(test);
 	     extent.flush();
 	}
-	@Test(priority =8)
+	@Test(priority =7)
 	 void NoticeSendMailWithDoc() throws InterruptedException, IOException
 	{
 		     test = extent.startTest("Notice Summary-Send Mail With Document verification");
 		
 		
-		     MethodsPOM.NoticeSendMailWithDoc( test);
+		     MethodsPOM.NoticeSendMailWithDoc(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 	}
 	 
-@Test(priority =9)
+@Test(priority =8)
 	 void NoticeSendMailWithDocInvalidFields() throws InterruptedException, IOException
 	 {
 	     test = extent.startTest(" Notice Summary -Send Mail With Document Invalid Fields verification");
 
 
-	     MethodsPOM.NoticeSendMailWithDocInvalidFields( test);
+	     MethodsPOM.NoticeSendMailWithDocInvalidFields(driver, test);
 
 	     extent.endTest(test);
 	     extent.flush();
 	 }
-	@Test(priority =10)
+	@Test(priority =9)
 		void NoticeSendMailWithDocEmptyFields() throws InterruptedException, IOException
 		{
 		     test = extent.startTest("Notice Summary -Send Mail With Document Empty Fields verification");
 		
 		
-		     MethodsPOM.NoticeSendMailWithDocEmptyFields( test);
+		     MethodsPOM.NoticeSendMailWithDocEmptyFields(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 		}
 	  
-//@Test(priority =11)
+//@Test(priority =10)
 	  	void NoticeUserAssignment() throws InterruptedException, IOException
 	 	{
 		     test = extent.startTest("Notice User Assignment  verification");
 		
-	         MethodsPOM.NoticeUserAssignment( test);
+	         MethodsPOM.NoticeUserAssignment(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 	 	}
-//@Test(priority =12)
+@Test(priority =11)
 	void NoticeDeleteUserAssignment() throws InterruptedException, IOException
 	{
      test = extent.startTest("Notice Delete User Assignment  verification");
 
-     MethodsPOM.NoticeDeleteUserAssignment( test);
+     MethodsPOM.NoticeDeleteUserAssignment(driver, test);
 
      extent.endTest(test);
      extent.flush();
 	}
 
-@Test(priority =13)
+@Test(priority =12)
 	void CaseOpen() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case - Open Count Verification");
 		
-		MethodsPOM.CaseOpen( test, workbook, "Performer");
+		MethodsPOM.CaseOpen(driver, test, workbook, "Performer");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-@Test(priority =14)
+@Test(priority =13)
 		void CaseExistingData() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Case with Existing Data verification");
 			
 			
-			MethodsPOM.CaseExistingData( test, workbook);
+			MethodsPOM.CaseExistingData(driver, test, workbook);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
 	 
-@Test(priority =15)
+@Test(priority =14)
 		void CaseWithInvalidData() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Case with Invalid Data verification");
 			
 			
-			MethodsPOM.CaseWithInvalidData( test, workbook);
+			MethodsPOM.CaseWithInvalidData(driver, test, workbook);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-@Test(priority =16)
+@Test(priority =15)
 		void CaseWithTwoFieldsData() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Case with Two Manadatory fields verification");
 			
 			
-			MethodsPOM.CaseWithTwoFieldsData( test);
+			MethodsPOM.CaseWithTwoFieldsData(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-@Test(priority =17)
+@Test(priority =16)
 		void CaseWithEmptyFields() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Case with Empty fields verification");
 			
 			
-			MethodsPOM.CaseWithEmptyFields( test);
+			MethodsPOM.CaseWithEmptyFields(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-@Test(priority =18)
+@Test(priority =17)
 		void CaseWithClearBtn() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Case Summary - Clear button verification");
 			
 			
-			MethodsPOM.CaseWithClearBtn( test);
+			MethodsPOM.CaseWithClearBtn(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
 
-//@Test(priority =19)
+//@Test(priority =18)
 void CaseUserAssignment() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case User Assignment verification");
 	
 	
-		MethodsPOM.CaseUserAssignment( test,workbook);
+		MethodsPOM.CaseUserAssignment(driver, test,workbook);
 	
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =20)
+@Test(priority =19)
 	void CaseUserAssignmentDelete() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case User Assignment Delete Icon  verification");
 
 		
-		MethodsPOM.CaseUserAssignmentDelete( test);
+		MethodsPOM.CaseUserAssignmentDelete(driver, test);
 
 		extent.endTest(test);
 		extent.flush();
-	}*/
+	}
 	
 	
-@Test(priority =0)
+@Test(priority =20)
 		void CloseNotice() throws InterruptedException, IOException
 		{
 		test = extent.startTest("Close Notice Count Verification");
-		MethodsPOM.CloseNoticeCase(test,"Notice","performer a");
+		MethodsPOM.CloseNoticeCase(driver, test, workbook,"Notice","performer a");
 		extent.endTest(test);
 		extent.flush();
 		}
 
-/*@Test(priority = 21)
+@Test(priority = 21)
 		void CloseCase() throws InterruptedException, IOException
 		{
 		test = extent.startTest("Close Case Count Verification");
 			
-			MethodsPOM.CloseNoticeCase( test, workbook,"Case","performer a");
+			MethodsPOM.CloseNoticeCase(driver, test, workbook,"Case","performer a");
 			
 		extent.endTest(test);
 			extent.flush();
 		}
+		
+		@Test(priority =22)
+	void NoticeClosedDoc() throws InterruptedException, IOException
+	{
+		test = extent.startTest("Close Notice Document verification");
+		
+		MethodsPOM.NoticeClosedDoc(driver, test);
+		
+		extent.endTest(test);
+		extent.flush();
+	}
+@Test(priority = 23)
+	void NoticeClosedWithoutDoc() throws InterruptedException, IOException
+	{
+		test = extent.startTest("Close Notice Without Document verification");
+		
+		MethodsPOM.NoticeClosedWithoutDoc(driver, test);
+		
+		extent.endTest(test);
+		extent.flush();
+	}
 
-	@Test(priority = 21)
+
+@Test(priority = 24)
+	void CaseClosedDoc() throws InterruptedException, IOException
+	{
+		test = extent.startTest("Close Case Document verification");
+		
+		MethodsPOM.CaseClosedDoc(driver, test);
+		
+		extent.endTest(test);
+		extent.flush();
+	}
+
+
+@Test(priority = 25)
+	void CaseClosedWithoutDoc() throws InterruptedException, IOException
+	{
+		test = extent.startTest("Close Case Without Document verification");
+		
+		MethodsPOM.CaseClosedWithoutDoc(driver, test);
+		
+		extent.endTest(test);
+		extent.flush();
+	}
+ 	 
+ 	  
+
+	@Test(priority = 26)
 	void LinkNotice() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Link Notice Verification");
 		
 		
-		MethodsPOM.LinkDocument( test, workbook, "Notice");
+		MethodsPOM.LinkDocument(driver, test, workbook, "Notice");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-@Test(priority =22)
+@Test(priority =27)
 		void LinkNoticeViewIcon() throws InterruptedException, IOException
 		{
 		     test = extent.startTest("Linked notice view icon  verification");
 		
 		
 
-		 	MethodsPOM.LinkNoticeViewIcon( test);
+		 	MethodsPOM.LinkNoticeViewIcon(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 		}
-@Test(priority=23)
+@Test(priority=28)
 	  void LinkNoticeDeleteIcon() throws InterruptedException, IOException
 		{
 		     test = extent.startTest("Linked notice Delete icon  verification");
 		
 		
 
-		 	MethodsPOM.LinkNoticeDeleteIcon( test);
+		 	MethodsPOM.LinkNoticeDeleteIcon(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 		}
-@Test(priority = 24)
+@Test(priority = 29)
 	void LinkCase() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Link Case Verification");
 
 		
-		MethodsPOM.LinkDocument( test, workbook, "Case");
+		MethodsPOM.LinkDocument(driver, test, workbook, "Case");
 	
 	extent.endTest(test);
 		extent.flush();
 	}
 	
-@Test(priority =25)
+@Test(priority =30)
 	   void LinkCaseViewIcon() throws InterruptedException, IOException
 	  {
 		     test = extent.startTest("Linked case view icon  verification");
 		
 		
-		     MethodsPOM.LinkCaseViewIcon( test);
+		     MethodsPOM.LinkCaseViewIcon(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 	  }
-	@Test(priority =26)
+	@Test(priority =31)
 	   void LinkCaseDeleteIcon() throws InterruptedException, IOException
 	  {
 		     test = extent.startTest("Linked case delete icon  verification");
 		
 		
-		     MethodsPOM.LinkCaseDeleteIcon( test);
+		     MethodsPOM.LinkCaseDeleteIcon(driver, test);
 		
 		     extent.endTest(test);
 		     extent.flush();
 	 }
 	
 	
-@Test(priority = 27)
+@Test(priority = 31)
 	void NoticeClosed() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice - Closed Count Verification");
 		
 		
-		MethodsPOM.NoticeClosed( test, workbook, "Performer");
+		CFOMethod.NoticeClosed(driver, test, workbook, "Company Admin");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 28)
+@Test(priority = 33)
 	void CaseClose() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case - Closed Count Verification");
 	
 		
-		MethodsPOM.CaseClosed( test, workbook, "Performer");
+		CFOMethod.CaseClosed(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -422,141 +466,141 @@ void CaseUserAssignment() throws InterruptedException, IOException
 	
 
 	
-@Test(priority = 29)
+@Test(priority = 34)
  	void NoticeDocumentTab() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Notice Document verification");
  		
  		
- 		MethodsPOM.NoticeDocument( test);
+ 		MethodsPOM.NoticeDocument(driver, test);
  		
  		extent.endTest(test);
  		extent.flush();
 	}
-@Test(priority = 30)
+@Test(priority = 35)
 	void NoticeWithoutUploadDocument() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Without Upload Document verification");
 		
 		
-		MethodsPOM.NoticeWithoutUploadDocument( test);
+		MethodsPOM.NoticeWithoutUploadDocument(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 31)
+@Test(priority = 36)
 	void NoticeDocumentSearchFields() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Document Search Fields verification");
 		
 		
-		MethodsPOM.NoticeDocumentSearchFields( test);
+		MethodsPOM.NoticeDocumentSearchFields(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 32)
+@Test(priority = 37)
 	void NoticeDocumentShareInvalidData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Document Share with Invalid data verification");
 		
 		
-		MethodsPOM.NoticeDocumentShareInvalidData( test);
+		MethodsPOM.NoticeDocumentShareInvalidData(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-@Test(priority =33)
+@Test(priority =38)
 		void NoticeDocumentShareWithoutData() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice Document Share without data verification");
 	
 			
-			MethodsPOM.NoticeDocumentShareWithoutData( test);
+			MethodsPOM.NoticeDocumentShareWithoutData(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
 	
-@Test(priority = 34)
+@Test(priority = 39)
 	void NoticeDocumentShareCloseBtn() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Document Share close button verification");
 		
 		
-		MethodsPOM.NoticeDocumentShareCloseBtn( test);
+		MethodsPOM.NoticeDocumentShareCloseBtn(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 
-@Test(priority = 35)
+@Test(priority = 40)
 void NoticeTaskActivityTab() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Task/Activity verification");
 	
 	
-	MethodsPOM.TaskActivtity( test,workbook);
+	MethodsPOM.TaskActivtity(driver, test,workbook);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 
 
-@Test(priority =36)
+@Test(priority =41)
 	void TaskActivtityExistingData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Task/Activtiy with existing data verification");
 		
 		
-		MethodsPOM.TaskActivtityExistingData( test,workbook);
+		MethodsPOM.TaskActivtityExistingData(driver, test,workbook);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 
-@Test(priority =37)
+@Test(priority =42)
 	void TaskActivtityWithoutData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Task/Activtiy Without data verification");
 		
 		
-		MethodsPOM.TaskActivtityWithoutData( test);
+		MethodsPOM.TaskActivtityWithoutData(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =38)
+@Test(priority =43)
 void TaskActivtityResponseWithoutStatus() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Task/Activtiy Response Without data verification");
 	
 	
-	MethodsPOM.TaskActivtityResponseWithoutStatus( test);
+	MethodsPOM.TaskActivtityResponseWithoutStatus(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority = 39)
+@Test(priority = 44)
 void TaskActivtityResponseClearBtn() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Task/Activtiy  Response clear button verification");
 	
 	
-	MethodsPOM.TaskActivtityResponseClearBtn( test);
+	MethodsPOM.TaskActivtityResponseClearBtn(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority =40)
+@Test(priority =45)
 void TaskActivtityDeleteResponse() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Task/Activtiy Delete Response verification");
 	
 	
-	MethodsPOM.TaskActivtityDeleteResponse( test);
+	MethodsPOM.TaskActivtityDeleteResponse(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -564,146 +608,146 @@ void TaskActivtityDeleteResponse() throws InterruptedException, IOException
 
 
 
-@Test(priority = 41)
+@Test(priority = 46)
 void NoticeResponseTab() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Response tab verification");
 	
 	
-	MethodsPOM.Response( test,workbook);
+	MethodsPOM.Response(driver, test,workbook);
 	
 	extent.endTest(test);
 	extent.flush();
-}*/
+}
 
-@Test(priority =2)
+@Test(priority =47)
 void ResponseExistingData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Response Existing Data verification");
 
 
-	MethodsPOM.ResponseExistingData( test,workbook);
+	MethodsPOM.ResponseExistingData(driver, test,workbook);
 
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority =3)
+@Test(priority =48)
 void NoticeResponseWithoutData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Response Without data verification");
 
-	MethodsPOM.ResponseWithoutData(test);
+	MethodsPOM.ResponseWithoutData(driver, test);
     extent.endTest(test);
 	extent.flush();
 }	
 
-/*@Test(priority =44)
+@Test(priority =49)
 void ResponseClearBtn() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Response Clear button verification");
-	MethodsPOM.ResponseClearBtn( test);
+	MethodsPOM.ResponseClearBtn(driver, test);
      extent.endTest(test);
      extent.flush();
 }
 
 
 
-@Test(priority = 45)
+@Test(priority = 50)
 void NoticePaymentLogTab() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice PaymentLog tab verification");
 	
 	
-	MethodsPOM.PaymentLog(test);
+	MethodsPOM.PaymentLog(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority = 46)
+@Test(priority = 51)
 void PaymentLogwithExistingData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Payment with existing data verification");
-	MethodsPOM.PaymentLogExistingData(test);
+	MethodsPOM.PaymentLogExistingData(driver,test);
    extent.endTest(test);
     extent.flush();
 }
-@Test(priority = 47)
+@Test(priority = 52)
 void PaymentLogwithInvalidData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Payment with Invalid data verification");
 	
 	
-	MethodsPOM.PaymentLogwithInvalidData(test);
+	MethodsPOM.PaymentLogwithInvalidData(driver,test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 
 
-@Test(priority = 48)
+@Test(priority = 53)
 void NoticePaymentWithoutData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Payment Without data verification");
 
 
-	MethodsPOM.PaymentLogWithoutData(test,workbook);
+	MethodsPOM.PaymentLogWithoutData(driver,test,workbook);
 
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority = 49)
+@Test(priority = 54)
 void NoticeExternalLawyerTab() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice ExternalLawyerRating tab verification");
 	
 	
-	MethodsPOM.ExternalLawyerRating( test);
+	MethodsPOM.ExternalLawyerRating(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority = 50)
+@Test(priority = 55)
 void ExternalLawyerWithoutRating() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice External Lawyer without rating verification");
 	
-	MethodsPOM.ExternalLawyerWithoutRating(test);
+	MethodsPOM.ExternalLawyerWithoutRating(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority =51)
+@Test(priority =56)
 void CriteriaInvalidData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Criteria Invalid Data verification");
 	
-	MethodsPOM.CriteriaInvalidData( test);
+	MethodsPOM.CriteriaInvalidData(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority = 52)
+@Test(priority = 57)
 void CriteriaExistingData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Criteria Existing Data verification");
 	
-	MethodsPOM.CriteriaExistingData(test);
+	MethodsPOM.CriteriaExistingData(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority =53)
+@Test(priority =58)
 void CriteriaWithoutData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Criteria Without Data verification");
 	
-	MethodsPOM.CriteriaWithoutData(test);
+	MethodsPOM.CriteriaWithoutData(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -712,982 +756,1010 @@ void CriteriaWithoutData() throws InterruptedException, IOException
 
 
 
-@Test(priority = 54)
+@Test(priority = 59)
 void NoticeAuditLogTab() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice AuditLog tab verification");
 	
 	
-	MethodsPOM.AuditLog(test);
+	MethodsPOM.AuditLog(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 	
-@Test(priority = 55)
+@Test(priority = 60)
 	void NoticeDocViewandDownload() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Summary Document verification");
 	
 		
-		MethodsPOM.NoticeDocViewandDownload(test);
+		MethodsPOM.NoticeDocViewandDownload(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority =56)
+	@Test(priority =61)
 	void CaseDocumentTab() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Document verification");
 		
 		
-		MethodsPOM.Document(test);
+		MethodsPOM.Document(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 57)
+	@Test(priority = 62)
  	void CaseWithoutUploadDocument() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case Document -Without Upload File verification");
  		
  		
- 		MethodsPOM.CaseWithoutUploadDocument(test);
+ 		MethodsPOM.CaseWithoutUploadDocument(driver, test);
  		
  		extent.endTest(test);
  		extent.flush();
  	}
 	
-@Test(priority =58)
+@Test(priority =63)
 	void CaseDocumentEmptyFields() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Document with empty fields verification");
 		
 		
-		MethodsPOM.CaseDocumentEmptyFields(test);
+		MethodsPOM.CaseDocumentEmptyFields(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =59)
+//@Test(priority =64)
 	void CaseDocumentSearchFields() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Document Search Fields verification");
 		
 		
-		MethodsPOM.CaseDocumentSearchFields(test);
+		MethodsPOM.CaseDocumentSearchFields(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-@Test(priority =60)
+@Test(priority =65)
 	void CaseDocumentShareInvalidData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Document Share with Invalid data verification");
 		
 		
-		MethodsPOM.CaseDocumentShareInvalidData(test);
+		MethodsPOM.CaseDocumentShareInvalidData(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =61)
+@Test(priority =66)
 	void CaseDocumentShareWithoutData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Document Share without data verification");
 		
 		
-		MethodsPOM.CaseDocumentShareWithoutData(test);
+		MethodsPOM.CaseDocumentShareWithoutData(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =4)
+@Test(priority =67)
 	void CaseDocumentShareCloseBtn() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Document Share close button verification");
 		
 		
-		MethodsPOM.CaseDocumentShareCloseBtn(test);
+		MethodsPOM.CaseDocumentShareCloseBtn(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
- @Test(priority =63)
+ @Test(priority =68)
     void CaseSendMailWithDoc() throws InterruptedException, IOException
    {
  	     test = extent.startTest("Case Summary-Send Mail With Document verification");
  	
- 	    MethodsPOM.CaseSendMailWithDoc(test);
+ 	    MethodsPOM.CaseSendMailWithDoc(driver, test);
  	
  	     extent.endTest(test);
  	     extent.flush();
   }
- @Test(priority =64)
+ @Test(priority =69)
 	    void CaseSendMailWithDocInvalidFields() throws InterruptedException, IOException
 	   {
 	 	     test = extent.startTest("Case  Summary-Send Mail With Document Invalid Fields verification");
 	 	
 	 	
-	 	    MethodsPOM.CaseSendMailWithDocInvalidFields(test);
+	 	    MethodsPOM.CaseSendMailWithDocInvalidFields(driver, test);
 	 	
 	 	     extent.endTest(test);
 	 	     extent.flush();
 	  }
-@Test(priority =65)
+@Test(priority =70)
 	    void CaseSendMailWithEmptyFields() throws InterruptedException, IOException
 	   {
 	 	     test = extent.startTest("Case  Summary-Send Mail With Empty Fields verification");
 	 	
 	 	
-	 	    MethodsPOM.CaseSendMailWithEmptyFields(test);
+	 	    MethodsPOM.CaseSendMailWithEmptyFields(driver, test);
 	 	
 	 	     extent.endTest(test);
 	 	     extent.flush();
 	  }
-@Test(priority = 66)
+@Test(priority = 71)
  	void CaseTaskActivityTab() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case Task/Activity verification");
  		
  		
- 		MethodsPOM.TaskActivity1( test,"Performer");
+ 		MethodsPOM.TaskActivity1(driver, test,workbook,"Performer");
  		
  		extent.endTest(test);
  		extent.flush();
  	}
  	
-@Test(priority = 67)
+@Test(priority = 72)
 	void CaseTaskActivityWithoutData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Task/Activtiy Without data verification");
 		
 		
-		MethodsPOM.CaseTaskActivityWithoutData( test);
+		MethodsPOM.CaseTaskActivityWithoutData(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
-	}
+	}*/
  
-*/
+
  
-@Test(priority = 5)
+@Test(priority =74)
 	void CaseTaskActivtityResponseWithoutStatus() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Task/Activitiy Response Without data verification");
 		
 		
-		MethodsPOM.CaseTaskActivtityResponseWithoutStatus( test);
+		MethodsPOM.CaseTaskActivtityResponseWithoutStatus(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 
-@Test(priority =6)
+@Test(priority =75)
 	void CaseTaskActivtityResponseClearBtn() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Task/Activtiy  Response clear button verification");
 		
 		
-		MethodsPOM.CaseTaskActivtityResponseClearBtn(test);
+		MethodsPOM.CaseTaskActivtityResponseClearBtn(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 
-/*@Test(priority =71)
+@Test(priority =76)
 void CaseTaskActivtityDeleteResponse() throws InterruptedException, IOException
 {
 	test = extent.startTest("Case Task/Activtiy Delete Response verification");
 	
 	
-	MethodsPOM.CaseTaskActivtityDeleteResponse( test);
+	MethodsPOM.CaseTaskActivtityDeleteResponse(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority = 71)
+@Test(priority = 77)
  	void CaseHearingTab() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case Hearing verification");
  		
  		
- 		MethodsPOM.CaseHearing( test,workbook);
+ 		MethodsPOM.CaseHearing(driver, test,workbook);
  		
  		extent.endTest(test);
  		extent.flush();
  	}
  	
-	//@Test(priority =72)
-	void CaseExistingHearingData() throws InterruptedException, IOException
-	{
-		test = extent.startTest("Case with Existing Hearing Date Verification");
-		
-		
-		MethodsPOM.CaseExistingHearingData( test);
-		
-		extent.endTest(test);
-		extent.flush();
-	}
+	
  	
-	 @Test(priority= 73)
+	 @Test(priority= 79)
  	  void CaseWithoutHearingData() throws InterruptedException, IOException
  	  {
  		test = extent.startTest("Case without hearing data Verification");
  		
  		
- 		MethodsPOM.CaseHearingWithoutData( test);
+ 		MethodsPOM.CaseHearingWithoutData(driver, test);
  		
  		extent.endTest(test);
  		extent.flush();
  	  }
  	 
- @Test(priority =74)
+ @Test(priority =80)
  	   void CaseHearingInvalidDate() throws InterruptedException, IOException
  	   {
  	 	test = extent.startTest("Case Invalid Hearing Date Verification");
  	 	
  	 	
- 	 	MethodsPOM.CaseHearingInvalidDate( test);
+ 	 	MethodsPOM.CaseHearingInvalidDate(driver, test);
  	 	
  	 	extent.endTest(test);
  	 	extent.flush();
  	   }
-	@Test(priority =75)
+	@Test(priority =81)
  	   void CaseHearingClearBtn() throws InterruptedException, IOException
  	   {
- 	 	test = extent.startTest("Case heraing clear button Verification");
+ 	 	test = extent.startTest("Case hearing clear button Verification");
  	 	
  	 	
- 	 	MethodsPOM.CaseHearingClearBtn( test);
+ 	 	MethodsPOM.CaseHearingClearBtn(driver, test);
  	 	
  	 	extent.endTest(test);
  	 	extent.flush();
  	   }
-	@Test(priority = 76)
+	@Test(priority = 82)
  	void CaseOrderTab() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case Order verification");
  		
  		
- 		MethodsPOM.CaseOrder( test,workbook,"Performer");
+ 		MethodsPOM.CaseOrder(driver, test,workbook,"Performer");
  		
  		extent.endTest(test);
  		extent.flush();
  	}
  	
-@Test(priority =77)
+@Test(priority =83)
  		void CaseOrderExistingData() throws InterruptedException, IOException
  		{
  			test = extent.startTest("To check validation message displayed  for case order with existing data");
 
  		
- 			MethodsPOM.CaseOrderWithExistingData( test,workbook);
+ 			MethodsPOM.CaseOrderWithExistingData(driver, test,workbook);
  		
  			extent.endTest(test);
  			extent.flush();
  		}
- @Test(priority =78)
+ @Test(priority =84)
 		void CaseOrderWithoutData() throws InterruptedException, IOException
 		{
 			test = extent.startTest("To check validation message displayed  for case order without data");
 
 		
-			MethodsPOM.CaseOrderWithoutData( test);
+			MethodsPOM.CaseOrderWithoutData(driver, test);
 		
 			extent.endTest(test);
 			extent.flush();
 		}
-	@Test(priority =79)
+	@Test(priority =85)
 	void CaseOrderwithClearBtn() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Order with clear button");
 
 	
-		MethodsPOM.CaseOrderwithClearBtn( test);
+		MethodsPOM.CaseOrderwithClearBtn(driver, test);
 	
 		extent.endTest(test);
 		extent.flush();
 	}
 
-	//@Test(priority = 80)
+	//@Test(priority = 86)
  	void CaseAdvocateBillTab() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case advocate bill verification");
  	
  		
- 		MethodsPOM.AdvocateBill( test);
+ 		MethodsPOM.AdvocateBill(driver, test);
  		
  		extent.endTest(test);
  		extent.flush();
  	}
-@Test(priority = 80)
+@Test(priority = 87)
  	void StatusPayment() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case Status/Payment verification");
  	
  		
- 		MethodsPOM.StatusPayment( test,workbook);
+ 		MethodsPOM.StatusPayment(driver, test,workbook);
  		
  		extent.endTest(test);
  		extent.flush();
  	}
  	
-@Test(priority = 81)
+@Test(priority = 88)
  	void StatusPaymentWithExistingData() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case Status/Payment with existing data verification");
  	
  		
- 		MethodsPOM.StatusPaymentWithExistingData( test,workbook);
+ 		MethodsPOM.StatusPaymentWithExistingData(driver, test,workbook);
  		
  		extent.endTest(test);
  		extent.flush();
  	}
-@Test(priority =82)
+@Test(priority =89)
 	void StatusPaymentWithoutdata() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Status/Payment without data ");
 		
 		
-		MethodsPOM.StatusPaymentWithoutdata( test);
+		MethodsPOM.StatusPaymentWithoutdata(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 
-@Test(priority =83)
+@Test(priority =90)
 void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 {
 	test = extent.startTest("Case Status/Payment with Invalid data ");
 	
 	
-	MethodsPOM.StatusPaymentwithInvaliddata( test,workbook);
+	MethodsPOM.StatusPaymentwithInvaliddata(driver, test,workbook);
 	
 	extent.endTest(test);
 	extent.flush();
 }
  	
-@Test(priority =84)
+@Test(priority =91)
 	void CaseStatusAppealtoNextCourt() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Status Appeal to Next Court");
 		
 		
-		MethodsPOM.CaseStatusAppealtoNextCourt( test);
+		MethodsPOM.CaseStatusAppealtoNextCourt(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-@Test(priority =85)
+@Test(priority =92)
 	void CaseStatuswithEmptyFields() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Status With Empty Fields");
 		
-		MethodsPOM.CaseStatuswithEmptyFields( test);
+		MethodsPOM.CaseStatuswithEmptyFields(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 86)
+@Test(priority = 93)
  	void ExternalLawyer() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case External Lawyer verification");
  		
  		
- 		MethodsPOM.ExternalLawyer( test,1);
+ 		MethodsPOM.ExternalLawyer(driver, test,1);
  		
  		extent.endTest(test);
  		extent.flush();
  	}
- 	@Test(priority =87)
+ 	@Test(priority =89)
 	void CaseExternalLawyerWitoutRating() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case - External Lawyer Without Rating");
 		
 		
-		MethodsPOM.CaseExternalLawyerWitoutRating( test);
+		MethodsPOM.CaseExternalLawyerWitoutRating(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
  	
-	@Test(priority =88)
+	@Test(priority =90)
  		void CaseExternalLawyerCriteria() throws InterruptedException, IOException
  		{
  			test = extent.startTest("Case - External Lawyer Rating -Add New Criteria ");
  			
  			
- 			MethodsPOM.CaseExternalLawyerCriteria(test);
+ 			MethodsPOM.CaseExternalLawyerCriteria(driver, test);
  			
  			extent.endTest(test);
  			extent.flush();
- 		}*/
+ 		}
  	
-  @Test(priority = 7)
+  @Test(priority = 91)
  	void CaseExistingCriteria() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Case Criteria Existing Data verification");
  		
- 		MethodsPOM.CaseExistingCriteria(test);
+ 		MethodsPOM.CaseExistingCriteria(driver, test);
  		
  		extent.endTest(test);
  		extent.flush();
  	}
  	
- 	@Test(priority =8)
+ 	@Test(priority =92)
  		void CaseCriteriaInvalidData() throws InterruptedException, IOException
  		{
  			test = extent.startTest("Case Criteria Invalid Data verification");
  			
- 			MethodsPOM.CaseCriteriaInvalidData( test);
+ 			MethodsPOM.CaseCriteriaInvalidData(driver, test);
  			
  			extent.endTest(test);
  			extent.flush();
  		}
  	
-/*	@Test(priority =91)
+	@Test(priority =93)
  		void CaseCriteriaWithoutData() throws InterruptedException, IOException
  		{
  			test = extent.startTest("Case Criteria Without Data verification");
  			
- 			MethodsPOM.CaseCriteriaWithoutData(test);
+ 			MethodsPOM.CaseCriteriaWithoutData(driver, test);
  			
  			extent.endTest(test);
  			extent.flush();
  		}
-	@Test(priority = 92)
+	@Test(priority = 94)
 	void Auditlog() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Audit Log verification");
 		
 		
-		MethodsPOM.Auditlog(test);
+		MethodsPOM.Auditlog(driver,test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 93)
+	@Test(priority = 95)
 	void TaskOpen() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Task - Open Count Verification");
 	
 		
-		MethodsPOM.TaskOpen( test, "Performer");
+		MethodsPOM.TaskOpen(driver, test, workbook, "Performer");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-	@Test(priority = 94)
+	@Test(priority = 96)
 	void TaskwithExistingData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Task With existing data verification");
 		
 		
-		MethodsPOM.TaskWithExistingData(test, workbook);
+		MethodsPOM.TaskWithExistingData(driver, test, workbook);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =95)
+@Test(priority =97)
 	void TaskwithTwoManadatoryFields() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Task With Two manadatory fields verification");
 		
 		
-		MethodsPOM.TaskWithTwoMandatoryFields(test, workbook);
+		MethodsPOM.TaskWithTwoMandatoryFields(driver, test, workbook);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
  
-@Test(priority =96)
+@Test(priority =98)
 			void TaskwithoutData() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Task Without  data verification");
 				
 				
-				MethodsPOM.TaskwithoutData( test);
+				MethodsPOM.TaskwithoutData(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
-@Test(priority =97)
+@Test(priority =99)
 			void TaskwithClearBtn() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Task Clear button verification");
 				
 				
-				MethodsPOM.TaskwithClearBtn( test);
+				MethodsPOM.TaskwithClearBtn(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
-@Test(priority =98)
+@Test(priority =100)
 void TaskShowDetailesClearBtn() throws InterruptedException, IOException
 {
 	test = extent.startTest("Task-Show Detailes Icon -Clear button verification");
 	
 	
-	MethodsPOM.TaskShowDetailesClearBtn( test);
+	MethodsPOM.TaskShowDetailesClearBtn(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority = 99)
+@Test(priority = 101)
 void TaskDelete() throws InterruptedException, IOException
 {
 	test = extent.startTest("Task Delete verification");
 	
 	
-	MethodsPOM.TaskDelete( test);
+	MethodsPOM.TaskDelete(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 }
 	
-	@Test(priority = 100)
+	@Test(priority = 102)
 	void TaskClosed() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Task - Closed Count Verification");
 		
 		
-		MethodsPOM.TaskClosed( test, workbook, "Performer");
+		MethodsPOM.TaskClosed(driver, test, workbook, "Performer");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	 @Test(priority = 101)
+	 @Test(priority = 103)
 		void ClosedTask() throws InterruptedException, IOException
 		{
 			test = extent.startTest(" Closed Task Count verification");
 			
 			
-			MethodsPOM.CloseNoticeCase( test, "Task","performer a");
+			MethodsPOM.CloseNoticeCase(driver, test, workbook,"Task","performer a");
 			
 			extent.endTest(test);
 			extent.flush();
 		}
 	
-	@Test(priority = 102)
+	//@Test(priority = 104)
 	void WorkspaceFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Workspace - Notice - Multiple Filters verification");
 		
 		
-		MethodPOM1.WorkspaceFilter( test);
+		MethodPOM1.WorkspaceFilter(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 103)
+	//@Test(priority = 105)
 	void CaseWorkspaceFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Workspace - Case - Multiple Filters verification");
 		
 		
-		MethodPOM1.CaseWorkspaceFilter(test);
+		MethodPOM1.CaseWorkspaceFilter(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority =104)
+	//@Test(priority =106)
 	void WorkspaceTaskFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Workspace - Task - Multiple Filters verification");
 		
 		
-		MethodPOM1.WorkspaceTaskFilter( test);
+		MethodPOM1.WorkspaceTaskFilter(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 105)
+	@Test(priority = 107)
 	void WorkspaceCaseHearingFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Workspace = Case Hearing = Search box  Filter verification");
 		
 		
-		CFOMethod.WorkspaceCaseHearingFilter(test,"ABC Mall, Thane");
+		CFOMethod.WorkspaceCaseHearingFilter(driver, test,"ABC Mall, Thane");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 106)
+	@Test(priority = 108)
 	void AdvancedSearchworkspace() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Workspace(Advanced Search)verification");
 	
 		
-		MethodPOM1.AdvancedSearchWorkspace(test, "Performer");
+		MethodPOM1.AdvancedSearchWorkspace(driver, test, "Performer");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 106)
+@Test(priority = 109)
 	void MyDocument() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Download and View Document Verification");
 		
 		
-		MethodsPOM.MyDocument( test, workbook, "Performer");
+		MethodsPOM.MyDocument(driver, test, workbook, "Performer");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 108)
+
+@Test(priority = 110)
+void ClosedCaseDoc() throws InterruptedException, IOException
+{
+	test = extent.startTest("Closed case document verification");
+			 	
+	MethodsPOM.ClosedCaseDoc(driver, test);
+	extent.endTest(test);
+     extent.flush();
+}
+@Test(priority = 111)
+void ClosedNoticeDoc() throws InterruptedException, IOException
+{
+test = extent.startTest("Closed notice document verification");
+		 	
+MethodsPOM.ClosedNoticeDoc(driver, test);
+extent.endTest(test);
+ extent.flush();
+}
+@Test(priority = 112)
 	void ShareCaseDocument() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Document-Share Case Document Verification");
 	
 		
-		MethodsPOM.ShareCaseDocument( test, workbook);
+		MethodsPOM.ShareCaseDocument(driver, test, workbook);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
 	
-@Test(priority = 109)
+@Test(priority = 113)
 		void ShareNoticeDocument() throws InterruptedException, IOException
 		{
 			test = extent.startTest("My Document-Share Notice Document Verification");
 		
-			MethodsPOM.ShareNoticeDocument( test, workbook);
+			MethodsPOM.ShareNoticeDocument(driver, test, workbook);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-@Test(priority =110)
+@Test(priority =114)
 		void ShareTaskDocument() throws InterruptedException, IOException
 		{
 			test = extent.startTest("My Document-Share Task Document Verification");
 		
 			
-			MethodsPOM.ShareTaskDocument(test, workbook);
+			MethodsPOM.ShareTaskDocument(driver, test, workbook);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
 
-	@Test(priority =111)
+//	@Test(priority =115)
 	void DocumentNoticeFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Document Tab - Notice - Multiple Filters verification");
 		
 		
-		MethodPOM1.DocumentNoticeFilter( test);
+		MethodPOM1.DocumentNoticeFilter(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 112)
+//	@Test(priority = 116)
 	void DocumentCaseFilter() throws InterruptedException, IOException
 	{
 	test = extent.startTest(" My Document = Case = Multiple  Filters verification");
 	
 	
-	MethodPOM1.DocumentCaseFilter(test);
+	MethodPOM1.DocumentCaseFilter(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 	}
 	
-	@Test(priority = 113)
+//	@Test(priority = 117)
 	void DocumentTaskFilter() throws InterruptedException, IOException
 	{
 	test = extent.startTest(" My Document = Task = Multiple  Filters verification");
 	
 	
-	MethodPOM1.DocumentTaskFilter( test);
+	MethodPOM1.DocumentTaskFilter(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
 	}
-	@Test(priority = 114)
+	@Test(priority = 118)
 	void AdvancedSearchDoc() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Document(Advanced search)Verification");
 	
 		
-		MethodsPOM.AdvancedSearchDocument(test, "Performer");
+		MethodsPOM.AdvancedSearchDocument(driver, test, "Performer");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 115)
+	@Test(priority = 179)
 	void AdvancedSearchShareCaseDocument() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Document-Advance search-Share Case Document Verification");
 	
 		
-		MethodsPOM.AdvancedSearchShareCaseDocument( test);
+		MethodsPOM.AdvancedSearchShareCaseDocument(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =116)
+@Test(priority =180)
 			void AdvancedSearchShareNoticeDocument() throws InterruptedException, IOException
 			{
 				test = extent.startTest("My Document-Advance search-Share Notice Document Verification");
 			
 				
-				MethodsPOM.AdvancedSearchShareNoticeDocument( test);
+				MethodsPOM.AdvancedSearchShareNoticeDocument(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
-@Test(priority =117)
+
+@Test(priority = 181)
+void AdvancedSearchClosedNoticeDoc() throws InterruptedException, IOException
+{
+	test = extent.startTest("My Document-Advanced search- Closed notice document verification");
+			 	
+	MethodsPOM.AdvancedSearchClosedNoticeDoc(driver, test);
+	extent.endTest(test);
+     extent.flush();
+}
+@Test(priority = 182)
+void AdvancedSearchClosedCaseDoc() throws InterruptedException, IOException
+{
+	test = extent.startTest("My Document-Advanced search- Closed case document verification");
+			 	
+	MethodsPOM.AdvancedSearchClosedCaseDoc(driver, test);
+	extent.endTest(test);
+     extent.flush();
+}
+@Test(priority =183)
 			void AdvancedSearchShareTaskDocument() throws InterruptedException, IOException
 			{
 				test = extent.startTest("My Document-Advance search-Share Task Document Verification");
 			
 				
-				MethodsPOM.AdvancedSearchShareTaskDocument( test);
+				MethodsPOM.AdvancedSearchShareTaskDocument(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
-@Test(priority = 118) 		//Sever is blocking and not allowing to upload the file.
+@Test(priority = 182) 		//Sever is blocking and not allowing to upload the file.
 			void CriticalDocuments() throws InterruptedException, IOException
 			{
 				test = extent.startTest(" Critical Document Verification");
 				
-				MethodsPOM.CriticalDocuments( test);
+				MethodsPOM.CriticalDocuments(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
 			
-	@Test(priority = 119) 		//Sever is blocking and not allowing to upload the file.
+	@Test(priority = 185) 		//Sever is blocking and not allowing to upload the file.
 			void CriticalDocuments1() throws InterruptedException, IOException
 			{
 				test = extent.startTest(" Critical Document Verification");
 				
-				MethodsPOM.CriticalDocuments1( test);
+				MethodsPOM.CriticalDocuments1(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
 			}
-	@Test(priority = 120)
+	@Test(priority = 186)
     void MyReports() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Reports excel count verification");
 
 		
-		MethodsPOM.MyReports( test, workbook, "Performer");
+		MethodsPOM.MyReports(driver, test, workbook, "Performer");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
- @Test(priority = 121)
+ @Test(priority = 187)
 	void MoreReports() throws InterruptedException, IOException
 	{
 		test = extent.startTest("More Report-Reports excel  verification");
 		
 		
-		MethodsPOM.MoreReport( test, "Company Admin");
+		MethodsPOM.MoreReport(driver, test, "Company Admin");
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
  
-	 @Test(priority = 122)
+	 @Test(priority = 188)
 		void ReportFilter() throws InterruptedException, IOException
 		{
 			test = extent.startTest("My Report - Notice - Multiple Filters verification");
 			
-			MethodPOM1.ReportFilter( test);
+			MethodPOM1.ReportFilter(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-	@Test(priority = 123)
+	@Test(priority = 189)
 	void ReportCaseFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Report - Case - Multiple Filters verification");
 		
-		MethodPOM1.ReportCaseFilter( test);
+		MethodPOM1.ReportCaseFilter(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-	@Test(priority =124)
+	@Test(priority =190)
 	void ReportTaskFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Report = Task =  Filters verification");
 		
 		
-		MethodPOM1.ReportTaskFilter( test);
+		MethodPOM1.ReportTaskFilter(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
-	 @Test(priority = 125)
+	 @Test(priority = 191)
 		void AdvancedSearch() throws InterruptedException, IOException
 		{
 			test = extent.startTest(" My Reports(Advanced Search) -  verification");
 			
 			
-			MethodPOM1.AdvancedSearchReport( test, "Company Admin");
+			MethodPOM1.AdvancedSearchReport(driver, test, "Company Admin");
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-@Test(priority = 126)
+@Test(priority = 192)
 	void MyReminder() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Reminder verification");
 	
 		
-		MethodsPOM.MyReminder( test, workbook);
+		MethodsPOM.MyReminder(driver, test, workbook);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-	@Test(priority= 127)
+	@Test(priority= 193)
 	void ReminderWithoutData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Reminder Without data verification");
 		
-		MethodsPOM.ReminderWithoutData( test);
+		MethodsPOM.ReminderWithoutData(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-@Test(priority = 128)
+@Test(priority = 194)
 	void ImportUtility() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Import Utility verification");
 
 		
-		MethodsPOM.ImportUtility(test);
+		MethodsPOM.ImportUtility(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-	@Test(priority = 129)
+	@Test(priority = 195)
 	void ImportUtilityWithoutData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Upload Empty File Import Utility verification");
 		
 		
-		MethodsPOM.ImportUtilityWithoutData(test);
+		MethodsPOM.ImportUtilityWithoutData(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
 
-	@Test(priority = 130)
+	@Test(priority = 196)
 	void ImportUtilityInvalidData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Enter Invalid data in Upload File Import Utility verification");
 		
 		
-		MethodsPOM.ImportUtilityInvalidData(test);
+		MethodsPOM.ImportUtilityInvalidData(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
 
-	@Test(priority = 131)
+	@Test(priority = 197)
 	void ImportUtilityTwoManadtoryFileds() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Enter Two Manadtory fields in Upload File Import Utility verification");
 		
 		
-		MethodsPOM.ImportUtilityTwoManadtoryFileds(test);
+		MethodsPOM.ImportUtilityTwoManadtoryFileds(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 132)
+	@Test(priority = 198)
 	void CaseUpdationImportUtility() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Updation Import Utility verification");
 		
 		
-		MethodsPOM.CaseUpdationImportUtility(test);
+		MethodsPOM.CaseUpdationImportUtility(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 133)
+@Test(priority = 199)
 	void CaseUpdationUploadEmtyFile() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Updation -Empty File Import Utility verification");
 		
 		
-		MethodsPOM.CaseUpdationUploadEmtyFile(test);
+		MethodsPOM.CaseUpdationUploadEmtyFile(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 134)
+@Test(priority = 200)
 	void CaseUpdationUploadInvalidData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Updation -Invalid Data Import Utility verification");
 		
-		MethodsPOM.CaseUpdationUploadInvalidData(test);
+		MethodsPOM.CaseUpdationUploadInvalidData(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 135)
+@Test(priority = 201)
 	void CaseUpdationUploadInvalidFile() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Updation -Invalid File Import Utility verification");
 		
 		
-		MethodsPOM.CaseUpdationUploadInvalidFile(test);
+		MethodsPOM.CaseUpdationUploadInvalidFile(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
 
-@Test(priority = 136)
+@Test(priority = 202)
 	void NoticeUpdation() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Updation Import Utility verification");
 		
 		
-		MethodsPOM.NoticeUpdation(test);
+		MethodsPOM.NoticeUpdation(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority = 137)
+@Test(priority = 203)
 void NoticeUpdationUploadEmtyFile() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Updation-Empty File Import Utility verification");
 	
 	
-	MethodsPOM.NoticeUpdationUploadEmtyFile(test);
+	MethodsPOM.NoticeUpdationUploadEmtyFile(driver,test);
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority =138)
+@Test(priority =204)
 void NoticeUpdationUploadInvalidData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Updation -Invalid Data Import Utility verification");
 	
 	
-	MethodsPOM.NoticeUpdationUploadInvalidData(test);
+	MethodsPOM.NoticeUpdationUploadInvalidData(driver,test);
 	extent.endTest(test);
 	extent.flush();
 }
 
-@Test(priority = 139)
+@Test(priority = 205)
 void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Updation -Invalid File Import Utility verification");
 	
 	
-	MethodsPOM.NoticeUpdationUploadInvalidFile(test);
+	MethodsPOM.NoticeUpdationUploadInvalidFile(driver,test);
 	extent.endTest(test);
 	extent.flush();
 }
-*/
+
 		
 	
 	
@@ -1705,7 +1777,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 			test = extent.startTest("Advocate bill verification");
 			
 			
-			MethodsPOM.AdvocateBillTab( test);
+			MethodsPOM.AdvocateBillTab(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
@@ -1715,7 +1787,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Approver Assignment Log verification");
 			
-			MethodsPOM.ApproverAssignmentLog( test);
+			MethodsPOM.ApproverAssignmentLog(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
@@ -1726,7 +1798,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 					test = extent.startTest("Case Hearing Calender Verification");
 				
 					
-					MethodsPOM.HearingCalender( test,"Performer","Company admin");
+					MethodsPOM.HearingCalender(driver, test,"Performer","Company admin");
 					
 					extent.endTest(test);
 					extent.flush();
@@ -1737,7 +1809,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 			test = extent.startTest("Case Hearing Count Verification");
 			
 			
-			MethodsPOM.CaseHearing( test,"Performer","Company admin");
+			MethodsPOM.CaseHearing(driver, test,"Performer","Company admin");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -1748,7 +1820,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 		test = extent.startTest("City-Customer Management verification");
 	
 		
-		MethodPOM1.CustomerMgmt( test);
+		MethodPOM1.CustomerMgmt(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -1759,7 +1831,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 		test = extent.startTest("Customer Mgmt Customer-Customer Management verification");
 
 		
-		MethodPOM1.CustomerMgmtCustomer( test);
+		MethodPOM1.CustomerMgmtCustomer(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -1770,7 +1842,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 		test = extent.startTest("Customer Mgmt Plan Visit-Customer Management verification");
 	
 		
-		MethodPOM1.CustomerMgmtPalnVisit( test);
+		MethodPOM1.CustomerMgmtPalnVisit(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -1781,7 +1853,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 		test = extent.startTest("Update Commitments after remarks-Customer Management verification");
 
 		
-		MethodPOM1.UpdateCommitmentsafterremarks( test);
+		MethodPOM1.UpdateCommitmentsafterremarks(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -1792,7 +1864,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 		test = extent.startTest("Update Commitments Status - Customer Management verification");
 	
 		
-		MethodPOM1.UpdateCommitmentsStatus( test);
+		MethodPOM1.UpdateCommitmentsStatus(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -1803,7 +1875,7 @@ void NoticeUpdationUploadInvalidFile() throws InterruptedException, IOException
 		test = extent.startTest("Report-Customer Management verification");
 	
 		
-		MethodPOM1.Report( test);
+		MethodPOM1.Report(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();

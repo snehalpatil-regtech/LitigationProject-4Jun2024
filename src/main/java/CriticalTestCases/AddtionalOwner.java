@@ -1,10 +1,12 @@
 package CriticalTestCases;
 
-
+import java.awt.AWTException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
@@ -19,11 +21,10 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import litigationAdditionalOwner.MethodsPOM;
-
+import litigationAdditionalOwner.performer;
 import litigationManagement.CFOMethod;
-import login.BasePage;
 
-public class AddtionalOwner extends BasePage
+public class AddtionalOwner
 {
 	
 	
@@ -33,17 +34,17 @@ public class AddtionalOwner extends BasePage
 	public static ExtentTest test;				//Instance created for tests
 	public static FileInputStream fis = null;	//File input stream variable
 	public static XSSFWorkbook workbook = null;	//Excel sheet workbook variable
-	//public static XSSFSheet sheet = null;		//Sheet variable
+	public static XSSFSheet sheet = null;		//Sheet variable
 	public static List<WebElement> elementsList = null;
 	
-//	public static XSSFSheet ReadExcel() throws IOException
-//	{
-//		
-//		fis = new FileInputStream("E:\\Snehal\\ComplianceLatest\\Litigation-Project-main (1)\\Litigation-Project-main\\TestData\\LitigationSheet.xlsx");
-//		workbook = new XSSFWorkbook(fis);
-//		sheet = workbook.getSheetAt(0);                        //Retrieving second sheet of Workbook
-//		return sheet;
-//	}
+	public static XSSFSheet ReadExcel() throws IOException
+	{
+		
+		fis = new FileInputStream(performer.XmlFilePath);
+		workbook = new XSSFWorkbook(fis);
+		sheet = workbook.getSheetAt(0);                        //Retrieving second sheet of Workbook
+		return sheet;
+	}
 	
 	@BeforeTest
 	void setBrowser() throws InterruptedException, IOException
@@ -63,7 +64,7 @@ public class AddtionalOwner extends BasePage
 	void Login() throws Exception
 	{
      
-	/*	XSSFSheet sheet = ReadExcel();
+		XSSFSheet sheet = ReadExcel();
 		Row row0 = sheet.getRow(0);						//Selected 0th index row (First row)
 		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
 		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
@@ -81,9 +82,8 @@ public class AddtionalOwner extends BasePage
 		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
 		System.out.println(password);
 		
-		driver = login.Login.UserLogin(uname,password, "Litigation");     //Method of Login class to login user Performer.*/
+		driver = login.Login.UserLogin(uname,password, "company");     //Method of Login class to login user Performer.
 
-		initialization("Litigation",0);
 	}
 	
 
@@ -95,7 +95,7 @@ public class AddtionalOwner extends BasePage
  		test = extent.startTest("Notice - Open Count Verification");
  		
  		
- 		MethodsPOM.NoticeOpen( test);
+ 		MethodsPOM.NoticeOpen(driver, test, workbook, "Performer");
  		
  		test.log(LogStatus.PASS, "Test Passed.");
  		extent.endTest(test);
@@ -108,7 +108,7 @@ public class AddtionalOwner extends BasePage
 	     		test = extent.startTest("Case - Open Count verification");
 	     		
 	     		
-	     		MethodsPOM.CaseOpen(test);
+	     		MethodsPOM.CaseOpen(driver, test, workbook, "CFO -");
 	     		
 	     		extent.endTest(test);
 	     		extent.flush();
@@ -121,7 +121,7 @@ public class AddtionalOwner extends BasePage
 	     				test = extent.startTest("Task - Open Count verification");
 	     				
 	     				
-	     				MethodsPOM.TaskOpen(test, workbook, "CFO");
+	     				MethodsPOM.TaskOpen(driver, test, workbook, "CFO");
 	     				
 	     				extent.endTest(test);
 	     				extent.flush();
@@ -134,7 +134,7 @@ public class AddtionalOwner extends BasePage
 	     		test = extent.startTest("Notice - Closed Count verification");
 	     		
 	     		
-	     		MethodsPOM.NoticeClosed(test);
+	     		MethodsPOM.NoticeClosed(driver, test, workbook, "Company Admin");
 	     		
 	     		extent.endTest(test);
 	     		extent.flush();
@@ -144,7 +144,7 @@ public class AddtionalOwner extends BasePage
 		{
 			test = extent.startTest("Case - Closed Count Verification");
 			
-			MethodsPOM.CaseClosed(test);
+			MethodsPOM.CaseClosed(driver, test, workbook, "Performer");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -157,7 +157,7 @@ public class AddtionalOwner extends BasePage
 	     	{
 	     		test = extent.startTest("Close Notice Count verification");
 	     		
-	     		MethodsPOM.CloseNoticeCase(test,"Notice","performer a");
+	     		MethodsPOM.CloseNoticeCase(driver, test, workbook,"Notice","performer a");
 	     		
 	     		extent.endTest(test);
 	     		extent.flush();
@@ -168,7 +168,7 @@ public class AddtionalOwner extends BasePage
 	 			test = extent.startTest("Close Case Count Verification");
 	 				
 	 				
-	 				MethodsPOM.CloseNoticeCase(test,"Case","performer a");
+	 				MethodsPOM.CloseNoticeCase(driver, test, workbook,"Case","performer a");
 	 				
 	 			extent.endTest(test);
 	 				extent.flush();
@@ -180,7 +180,7 @@ public class AddtionalOwner extends BasePage
 	 				test = extent.startTest("Task - Closed Count verification");
 	 				
 	 				
-	 				MethodsPOM.TaskClosed(test);
+	 				MethodsPOM.TaskClosed(driver, test, workbook, "CFO");
 	 				
 	 				extent.endTest(test);
 	 				extent.flush();
@@ -192,7 +192,7 @@ public class AddtionalOwner extends BasePage
 			test = extent.startTest(" Closed Task Count verification");
 			
 			
-			MethodsPOM.CloseNoticeCase(test,"Task","performer a");
+			MethodsPOM.CloseNoticeCase(driver, test, workbook, "Task","performer regtrack");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -203,7 +203,7 @@ public class AddtionalOwner extends BasePage
 	     		test = extent.startTest("Notice Document verification");
 	     		
 	     		
-	     		MethodsPOM.NoticeDocument(test);
+	     		MethodsPOM.NoticeDocument(driver, test);
 	     		
 	     		extent.endTest(test);
 	     		extent.flush();
@@ -217,18 +217,18 @@ public class AddtionalOwner extends BasePage
 	 		test = extent.startTest("Notice- TaskActivity verification");
 	 		
 	 		
-	 		MethodsPOM.TaskActivtity(test);
+	 		MethodsPOM.TaskActivtity(driver, test,workbook);
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
 	 	}
-	 	@Test(priority =11)
+	 //	@Test(priority =12)
 	    void TaskActivtityDeleteResponse() throws InterruptedException, IOException
 	    {
 		 test = extent.startTest("Notice Task/Activity Delete Response verification");
 		
 		
-		 MethodsPOM.TaskActivtityDeleteResponse(test);
+		 MethodsPOM.TaskActivtityDeleteResponse(driver, test);
 		
 		 extent.endTest(test);
 		 extent.flush();
@@ -240,7 +240,7 @@ public class AddtionalOwner extends BasePage
 	 	test = extent.startTest("Notice- Response verification");
 	 	
 	 	
-	 	MethodsPOM.Response( test);
+	 	MethodsPOM.Response(driver, test,workbook);
 	 	
 	 	extent.endTest(test);
 	 	extent.flush();
@@ -252,7 +252,7 @@ public class AddtionalOwner extends BasePage
 	 	test = extent.startTest("Notice- Payment verification");
 	 	
 	 	
-	 	MethodsPOM.PaymentLog(test);
+	 	MethodsPOM.PaymentLog(driver,test);
 	 	
 	 	extent.endTest(test);
 	 	extent.flush();
@@ -263,7 +263,7 @@ public class AddtionalOwner extends BasePage
 	 {
 	 	test = extent.startTest("Notice - External Lawyer verification");
 	 	
-	 	MethodsPOM.ExternalLawyerRating(test);
+	 	MethodsPOM.ExternalLawyerRating(driver, test);
 	 	
 	 	extent.endTest(test);
 	 	extent.flush();
@@ -275,7 +275,7 @@ public class AddtionalOwner extends BasePage
 	 	test = extent.startTest("Notice Audit Log verification");
 
 	 	
-	 	MethodsPOM.AuditLog(test);
+	 	MethodsPOM.AuditLog(driver, test);
 	 	
 	 	extent.endTest(test);
 	 	extent.flush();
@@ -286,7 +286,7 @@ public class AddtionalOwner extends BasePage
 	 	test = extent.startTest("Case - Document Tab");
 	 	
 	 	
-	 	MethodsPOM.Document( test);
+	 	MethodsPOM.Document(driver, test);
 	 	
 	 	extent.endTest(test);
 	 	extent.flush();
@@ -299,7 +299,7 @@ public class AddtionalOwner extends BasePage
 	 		test = extent.startTest("Case Task/Activity verification");
 	 		
 	 		
-	 		MethodsPOM.TaskActivity1( test);
+	 		MethodsPOM.TaskActivity1(driver, test,workbook,"Performer");
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
@@ -312,32 +312,32 @@ public class AddtionalOwner extends BasePage
 	 		test = extent.startTest("Case - CaseHearing Tab");
 	 		
 	 		
-	 		MethodsPOM.CaseHearing(test);
+	 		MethodsPOM.CaseHearing(driver, test,workbook);
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
 	 	}
 	
 	
-	@Test(priority = 18)
+	@Test(priority = 19)
 	 	void CaseOrderTab() throws InterruptedException, IOException
 	 	{
 	 		test = extent.startTest("Case Order verification");
 	 		
 	 		
-	 		MethodsPOM.CaseOrder(test);
+	 		MethodsPOM.CaseOrder(driver, test,workbook,"Performer");
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
 	 	}
 	
-	 @Test(priority =19)
+	 @Test(priority =20)
 	 void CaseStatusPayment() throws InterruptedException, IOException
 	 {
 	 	test = extent.startTest("Case - Status/Payment Tab");
 	 	
 	 	
-	 	MethodsPOM.StatusPayment(test);
+	 	MethodsPOM.StatusPayment(driver, test,workbook);
 	 	
 	 	extent.endTest(test);
 	 	extent.flush();
@@ -349,7 +349,7 @@ public class AddtionalOwner extends BasePage
 	 		test = extent.startTest("Case External Lawyer verification");
 	 		
 	 		
-	 		MethodsPOM.ExternalLawyer(test,1);
+	 		MethodsPOM.ExternalLawyer(driver, test,1);
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
@@ -362,7 +362,7 @@ public class AddtionalOwner extends BasePage
 	 		test = extent.startTest("Case - Audit Log Tab");
 	 		
 	 		
-	 		MethodsPOM.Auditlog(test);
+	 		MethodsPOM.Auditlog(driver, test);
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
@@ -373,7 +373,7 @@ public class AddtionalOwner extends BasePage
 	 		test = extent.startTest("My Document-Download and View Document");
 	 	
 	 		
-	 		MethodsPOM.MyDocument(test, workbook, "Performer");
+	 		MethodsPOM.MyDocument(driver, test, workbook, "Performer");
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
@@ -385,7 +385,7 @@ public class AddtionalOwner extends BasePage
 			test = extent.startTest("Reports -excel count verification");
 			
 			
-			MethodsPOM.MyReports( test);
+			MethodsPOM.MyReports(driver, test, workbook, "Company Admin");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -396,7 +396,7 @@ public class AddtionalOwner extends BasePage
 			test = extent.startTest("More Report-Reports excel  verification");
 			
 			
-			MethodsPOM.MoreReport(test, "Company Admin");
+			MethodsPOM.MoreReport(driver, test, "Company Admin");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -406,7 +406,7 @@ public class AddtionalOwner extends BasePage
 	 	{
 	 		test = extent.startTest("My Reminder verification");
 	 		
-	 		MethodsPOM.MyReminder( test, workbook);
+	 		MethodsPOM.MyReminder(driver, test, workbook);
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
@@ -419,7 +419,7 @@ public class AddtionalOwner extends BasePage
 	 		test = extent.startTest("Import Utility verification");
 	 		
 	 		
-	 		MethodsPOM.ImportUtility(test);
+	 		MethodsPOM.ImportUtility(driver,test);
 	 		extent.endTest(test);
 	 		extent.flush();
 	 	}
@@ -430,7 +430,7 @@ public class AddtionalOwner extends BasePage
 			test = extent.startTest("Case Updation Import Utility verification");
 			
 			
-			MethodsPOM.CaseUpdationImportUtility(test);
+			CFOMethod.CaseUpdationImportUtility(driver,test);
 			extent.endTest(test);
 			extent.flush();
 		}
@@ -441,7 +441,7 @@ public class AddtionalOwner extends BasePage
 		test = extent.startTest("Notice Updation Import Utility verification");
 		
 		
-		MethodsPOM.NoticeUpdation(test);
+		CFOMethod.NoticeUpdation(driver,test);
 		extent.endTest(test);
 		extent.flush();
 	}
@@ -450,7 +450,7 @@ public class AddtionalOwner extends BasePage
 	 
 	 void Close()
 	 {
-	 	closeBrowser(); 
+		 driver.close(); 
 	 }
 
 

@@ -27,10 +27,10 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import cfo.CFOcountPOM;
-import login.BasePage;
-import cfo.OverduePOM;
+import licensePerformer.LiPerformerPOM;
+import performer.OverduePOM;
 
-public class MethodPOM1 extends BasePage {
+public class MethodPOM1 {
 	
 	
     private static List<WebElement> elementsList = null;
@@ -40,24 +40,36 @@ public class MethodPOM1 extends BasePage {
 	public static XSSFSheet sheet1 = null;		//Sheet variable
 
 
-
-	
-//	public static XSSFSheet ReadExcel() throws IOException
-//	{
-//		//String workingDir = System.getProperty("user.dir");
-//		fis = new FileInputStream("C:\\Users\\Admin\\Desktop\\Snehal\\ComplianceLatest\\ComplianceLatest\\TestData\\LitigationSheet.xlsx");
-//		
-//		workbook = new XSSFWorkbook(fis);
-//		sheet = workbook.getSheetAt(4);					//Retrieving second sheet of Workbook
-//		return sheet;
-//	}
-	
-	public static void AdvancedSearchReport(ExtentTest test) throws InterruptedException
+	public static void progress(WebDriver driver) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+		WebDriverWait wait = new WebDriverWait(driver, 180);
+		try
+		{
+			Thread.sleep(300);
+			wait.until(ExpectedConditions.invisibilityOf(LiPerformerPOM.Progress(driver)));
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	
+	public static XSSFSheet ReadExcel() throws IOException
+	{
+		//String workingDir = System.getProperty("user.dir");
+		fis = new FileInputStream("C:\\Users\\Admin\\Desktop\\Snehal\\ComplianceLatest\\ComplianceLatest\\TestData\\LitigationSheet.xlsx");
+		
+		workbook = new XSSFWorkbook(fis);
+		sheet = workbook.getSheetAt(4);					//Retrieving second sheet of Workbook
+		return sheet;
+	}
+	
+	public static void AdvancedSearchReport(WebDriver driver,ExtentTest test, String type) throws InterruptedException
+	{
+		WebDriverWait wait=new WebDriverWait(driver,180);
 		
 		Thread.sleep(8000);
-        performerPOM.clickMyReports().click();					//Clicking on 'My Reports'
+        performerPOM.clickMyReports(driver).click();					//Clicking on 'My Reports'
         
         
 //        Thread.sleep(500);
@@ -65,25 +77,25 @@ public class MethodPOM1 extends BasePage {
 //        test.log(LogStatus.PASS, "Usage Report downloaded successfully.");
 		
 		Thread.sleep(8000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
 		Thread.sleep(8000);
 		
-		performerPOM.AdvancedSearchReports().click();
+		performerPOM.AdvancedSearchReports(driver).click();
 		
 	//-------------------------------------------Notice--------------------------------------------------
 		
 		Thread.sleep(8000);
-		performerPOM.startDate().sendKeys("05/10/2022");
+		performerPOM.startDate(driver).sendKeys("05/10/2022");
 		
 		Thread.sleep(8000);
-		performerPOM.endDate().sendKeys("05/12/2023");
+		performerPOM.endDate(driver).sendKeys("05/12/2023");
 		
 		Thread.sleep(8000);
-		performerPOM.clickApplyButton().click();
+		performerPOM.clickApplyButton(driver).click();
 		
 		Thread.sleep(8000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
 		Thread.sleep(8000);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -96,9 +108,9 @@ public class MethodPOM1 extends BasePage {
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 		Thread.sleep(8000);
 		
-		WebElement ViewButton = getDriver().findElement(locator);	
+		WebElement ViewButton = driver.findElement(locator);	
 		Thread.sleep(8000);
-	    JavascriptExecutor jse=(JavascriptExecutor)getDriver();
+	    JavascriptExecutor jse=(JavascriptExecutor)driver;
 	    jse.executeScript("arguments[0].click();", ViewButton);
 	
 		
@@ -109,7 +121,7 @@ public class MethodPOM1 extends BasePage {
 		
 		
 		Thread.sleep(8000);
-		performerPOM.Actionclosepopup().click();
+		performerPOM.Actionclosepopup(driver).click();
 		
 		Thread.sleep(8000);
 		By locator1 = By.xpath("//a[@class='k-button k-button-icontext ob-edit1 k-grid-edit1']");
@@ -117,9 +129,10 @@ public class MethodPOM1 extends BasePage {
 	    wait.until(ExpectedConditions.presenceOfElementLocated(locator1));
 		Thread.sleep(8000);
 			
-		WebElement ViewButton1 = getDriver().findElement(locator1);	
-		
-		jse.executeScript("arguments[0].click();", ViewButton1);
+		WebElement ViewButton1 = driver.findElement(locator1);	
+		Thread.sleep(8000);
+	    JavascriptExecutor jse1=(JavascriptExecutor)driver;
+		jse1.executeScript("arguments[0].click();", ViewButton1);
 		
 		
 //		Thread.sleep(2000);
@@ -127,20 +140,20 @@ public class MethodPOM1 extends BasePage {
 		test.log(LogStatus.PASS, "Show response details notice popup open successfully.");
 		
 		Thread.sleep(8000);
-		performerPOM.Actionclosepopup().click(); 
+		performerPOM.Actionclosepopup(driver).click(); 
 		
 		Thread.sleep(8000);
-		performerPOM.clickExportAdavanced().click();
-		test.log(LogStatus.PASS, "File downloaded successfully.");
+		performerPOM.clickExportAdavanced(driver).click();
+		test.log(LogStatus.PASS, " File downloaded successfully.");
 		
 	//-------------------------------------------Case--------------------------------------------------
 //		Thread.sleep(3000);
 //		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
 	    Thread.sleep(8000);
-		performerPOM.clickTypeDropdown1().click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
+		performerPOM.clickTypeDropdown1(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
 		Thread.sleep(8000);
-		performerPOM.selectTypeCase1().click();
+		performerPOM.selectTypeCase1(driver).click();
 		
 	
 		js.executeScript("window.scrollBy(0,800)");
@@ -152,28 +165,28 @@ public class MethodPOM1 extends BasePage {
 	    wait.until(ExpectedConditions.presenceOfElementLocated(locator2));
 		Thread.sleep(8000);
 			
-		WebElement ViewButton2 = getDriver().findElement(locator2);	
+		WebElement ViewButton2 = driver.findElement(locator2);	
 		Thread.sleep(8000);
-	 
-	    jse.executeScript("arguments[0].click();", ViewButton2);
+	    JavascriptExecutor jse2=(JavascriptExecutor)driver;
+	    jse2.executeScript("arguments[0].click();", ViewButton2);
 		
 //		Thread.sleep(3000);
-//		performerPOM.viewNoticeDetails().click();
+//		performerPOM.viewNoticeDetails(driver).click();
 	    
 	    
 		test.log(LogStatus.PASS, "Show details case popup open successfully.");
 		
 		Thread.sleep(8000);
-		performerPOM.Actionclosepopup().click();
+		performerPOM.Actionclosepopup(driver).click();
 		
 		Thread.sleep(8000);
 		By locator3 = By.xpath("//a[@class='k-button k-button-icontext ob-edit1 k-grid-edit1']");
 		 wait.until(ExpectedConditions.presenceOfElementLocated(locator3));
 		Thread.sleep(8000);
-		WebElement ViewButton3 = getDriver().findElement(locator3);	
+		WebElement ViewButton3 = driver.findElement(locator3);	
 		Thread.sleep(8000);
-	  
-	    js.executeScript("arguments[0].click();", ViewButton3);
+	    JavascriptExecutor jse3=(JavascriptExecutor)driver;
+	    jse3.executeScript("arguments[0].click();", ViewButton3);
 		
 //		Thread.sleep(3000);
 //		performerPOM.showResponseDetailIcon(driver).click();
@@ -181,10 +194,10 @@ public class MethodPOM1 extends BasePage {
 		test.log(LogStatus.PASS, "Show Hearing details Case popup open successfully.");
 		
 		Thread.sleep(8000);
-		performerPOM.Actionclosepopup().click();
+		performerPOM.Actionclosepopup(driver).click();
 		
 		Thread.sleep(8000);
-		performerPOM.clickExportAdavanced().click();					//Clicking on 'Excel Report' image.
+		performerPOM.clickExportAdavanced(driver).click();					//Clicking on 'Excel Report' image.
 		test.log(LogStatus.PASS, "File downloaded successfully.");
 		
 	//-------------------------------------------Task--------------------------------------------------
@@ -193,9 +206,9 @@ public class MethodPOM1 extends BasePage {
 		
 		
 		Thread.sleep(10000);
-		performerPOM.clickTypeDropdown1().click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
+		performerPOM.clickTypeDropdown1(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
 		Thread.sleep(10000);
-		performerPOM.selectTypeTask1().click();
+		performerPOM.selectTypeTask1(driver).click();
 		
 		
 		Thread.sleep(8000);
@@ -204,159 +217,158 @@ public class MethodPOM1 extends BasePage {
 	    wait.until(ExpectedConditions.presenceOfElementLocated(locator4));
 		Thread.sleep(8000);
 			
-		WebElement ViewButton4 = getDriver().findElement(locator4);	
+		WebElement ViewButton4 = driver.findElement(locator4);	
 		Thread.sleep(8000);
-		
-	    jse.executeScript("arguments[0].click();", ViewButton4);
+	    JavascriptExecutor jse4=(JavascriptExecutor)driver;
+	    jse4.executeScript("arguments[0].click();", ViewButton4);
 		
 		//Thread.sleep(3000);
-		//performerPOM.viewTaskDetails().click();	
+		//performerPOM.viewTaskDetails(driver).click();	
 		test.log(LogStatus.PASS, "Show details Task popup open successfully.");
 		
 		Thread.sleep(8000);
-		performerPOM.ActioncloseTaskpopup().click();
+		performerPOM.ActioncloseTaskpopup(driver).click();
 		
 		
 		Thread.sleep(8000);
-		performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+		performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 		test.log(LogStatus.PASS, "File downloaded successfully.");
 		
 		Thread.sleep(8000);
-		OverduePOM.clickDashboard().click();
+		OverduePOM.clickDashboard(driver).click();
 	}
 	
 	
-	public static void DashBoardFilter(ExtentTest test, String type) throws InterruptedException
+	public static void DashBoardFilter(WebDriver driver,ExtentTest test, String type) throws InterruptedException
 	{
 		
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		Thread.sleep(500);
-		JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
        	js.executeScript("window.scrollBy(0,800)");
        	
        	Thread.sleep(5000);
-		performerPOM.clickDashboardLocFilter().click();
+		performerPOM.clickDashboardLocFilter(driver).click();
 		
 		Thread.sleep(5000);
-		performerPOM.clickDashboardLocFilter1().click();
+		performerPOM.clickDashboardLocFilter1(driver).click();
 		
 		Thread.sleep(5000);
-		performerPOM.clickDashboardCaseNoticeFilter().click();
+		performerPOM.clickDashboardCaseNoticeFilter(driver).click();
 		
 //		Thread.sleep(5000);
 //		performerPOM.clickDashboardCaseNoticeFilter1(driver).click();
 		
 		Thread.sleep(5000);
-		performerPOM.clickDashboardTypeFilter().click();
+		performerPOM.clickDashboardTypeFilter(driver).click();
 		
 		Thread.sleep(5000);
-		performerPOM.clickDashboardTypeFilter1().click();
+		performerPOM.clickDashboardTypeFilter1(driver).click();
 		
 		Thread.sleep(5000);
-		performerPOM.clickDashboardDeptFilter().click();
+		performerPOM.clickDashboardDeptFilter(driver).click();
 			
 		Thread.sleep(6000);
-		performerPOM.clickDashboardDeptFilter1().click();
+		performerPOM.clickDashboardDeptFilter1(driver).click();
 		
 		Thread.sleep(6000);
-		performerPOM.clickDashboardstatusFilter().click();
+		performerPOM.clickDashboardstatusFilter(driver).click();
 		
 		Thread.sleep(6000);
-		performerPOM.clickDashboardstatusFilter1().click();
+		performerPOM.clickDashboardstatusFilter1(driver).click();
 		
         Thread.sleep(6000);
-		performerPOM.clickDashboardRiskFilter().click();
+		performerPOM.clickDashboardRiskFilter(driver).click();
 		
         Thread.sleep(6000);
-		performerPOM.clickDashboardRiskFilter1().click();
+		performerPOM.clickDashboardRiskFilter1(driver).click();
 		
 	    Thread.sleep(5000);
-		performerPOM.clickDashboardApplyBtn().click();
+		performerPOM.clickDashboardApplyBtn(driver).click();
 		
 	    Thread.sleep(5000);
-		performerPOM.clickDashboardClearBtn().click();
+		performerPOM.clickDashboardClearBtn(driver).click();
 		
 		test.log(LogStatus.PASS,"DashBoard Filter Work Successfully");
 		
 		}
-	public static void WorkspaceFilter(ExtentTest test) throws InterruptedException
+	public static void WorkspaceFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		Thread.sleep(500);
-		JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		Thread.sleep(3000);
-		performerPOM.clickMyWorkspace().click();
+		performerPOM.clickMyWorkspace(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickCaseNotice1().click();
+		performerPOM.clickCaseNotice1(driver).click();
 		
-		  Thread.sleep(3000);
-			performerPOM.clicklocationFilter().click();
-			Thread.sleep(3000);
-			performerPOM.clickExpand().click();
-			Thread.sleep(3000);
-	       String locationtext =performerPOM.SelectLocationDoceNonAdmin().getText();
+//		  Thread.sleep(3000);
+//			performerPOM.clicklocationFilter(driver).click();
+//			Thread.sleep(3000);
+//			performerPOM.clickExpand(driver).click();
+//			Thread.sleep(3000);
+//	       String locationtext =performerPOM.SelectLocationDoceNonAdmin(driver).getText();
+//	       Thread.sleep(3000);
+//	       performerPOM. SelectLocationDoceNonAdmin(driver).click();
+	       
+	       
+          Thread.sleep(3000);
+	       performerPOM.clickDepartmentFilterWorkspace(driver).click();
 	       Thread.sleep(3000);
-	       performerPOM. SelectLocationDoceNonAdmin().click();
-	       
-	       
-          Thread.sleep(500);
-	       performerPOM.clickDepartmentFilterWorkspace().click();
-	       Thread.sleep(500);
-	       String DeptText = performerPOM.selectDepartmentFilterDocNonAdmin().getText();
-	       Thread.sleep(500);
-	       performerPOM. selectDepartmentFilterDocNonAdmin().click();
+	       String DeptText = performerPOM.selectDepartmentFilterDocNonAdmin(driver).getText();
+	       Thread.sleep(3000);
+	       performerPOM. selectDepartmentFilterDocNonAdmin(driver).click();
 	       				        
-	       Thread.sleep(500);
-	       performerPOM.clickTypeFilter().click();
-	       Thread.sleep(500);
-	       String Typetext = performerPOM.SelectTypeFilterCA().getText();
-	       Thread.sleep(500);
-	       performerPOM.SelectTypeFilterCA().click();
+	       Thread.sleep(3000);
+	       performerPOM.clickTypeFilter(driver).click();
+	       Thread.sleep(3000);
+	       String Typetext = performerPOM.SelectTypeFilterCA(driver).getText();
+	       Thread.sleep(3000);
+	       performerPOM.SelectTypeFilterCA(driver).click();
 	           
 	       
 	        List<String> li=new ArrayList<String>();
-	        li.add(locationtext);
+	       // li.add(locationtext);
 	         li.add(DeptText);
 	         li.add(Typetext);
 	        
 	        Thread.sleep(3000);
 	        
 			List<String> filter=new ArrayList<String>();	
-			filter.add("Location");
+			//filter.add("Location");
 			filter.add("Dept");
 			filter.add("Type");
 			
 			
 			 Thread.sleep(500);
-			 performerPOM.clickTrignle().click();
+			 performerPOM.clickTrignle(driver).click();
 		     Thread.sleep(500);
-		     performerPOM.clickCol().click();
+		     performerPOM.clickCol(driver).click();
 
 		     
 		     By dept = By.xpath("(//span[@class='k-link k-menu-link'][normalize-space()='Department'])[1]");
             wait.until(ExpectedConditions.presenceOfElementLocated(dept));
 		     Thread.sleep(4000);
-            WebElement ViewButton = getDriver().findElement(dept);	
-			
-			 js.executeScript("arguments[0].click();", ViewButton);
+            WebElement ViewButton = driver.findElement(dept);	
+			 Thread.sleep(4000);
+			 JavascriptExecutor jse=(JavascriptExecutor)driver;
+			 jse.executeScript("arguments[0].click();", ViewButton);
 		     Thread.sleep(500);
-			 performerPOM.clickTrignle().click(); 
+			 performerPOM.clickTrignle(driver).click(); 
 			
 			
 			js.executeScript("window.scrollBy(0,250)");	
 			Thread.sleep(4000);
 
-			CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-			String s = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+			String s = CFOcountPOM.readTotalItems1(driver).getText();
 			Thread.sleep(2000);
 
 			if(!s.equalsIgnoreCase("No items to display")) {
 			Thread.sleep(5000);
 		
-			List<WebElement> entitycol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
-			List<WebElement> Dept=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[14]"));
-			List<WebElement> Type=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
+			//List<WebElement> entitycol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
+			List<WebElement> Dept=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[14]"));
+			List<WebElement> Type=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
 			
 			Thread.sleep(2000);
 
@@ -367,16 +379,16 @@ public class MethodPOM1 extends BasePage {
 				HashSet<String> fail=new LinkedHashSet<>();
 				List<WebElement> raw=new ArrayList<WebElement>();
 
-					if(i==0)
-					{
-						raw.addAll(entitycol);
-					}
+//					if(i==0)
+//					{
+//						raw.addAll(entitycol);
+//					}
 				
-				   else if(i==1)
+				  if(i==0)
 				   {
 					 raw.addAll(Dept);
 				   }
-				   else if(i==2)
+				   else if(i==1)
 				   {
 					   raw.addAll(Type);
 				   }
@@ -390,7 +402,7 @@ public class MethodPOM1 extends BasePage {
 					for(int l=0;l<text.size();l++)
 					{
 						
-						if(i==2)
+						if(i==1)
 						{
 							if(text.get(l).equalsIgnoreCase("Inward")||text.get(l).equalsIgnoreCase("Defendant"))
 							{
@@ -447,90 +459,92 @@ public class MethodPOM1 extends BasePage {
 			}
 			
 		}
-	public static void CaseWorkspaceFilter(ExtentTest test) throws InterruptedException
+	public static void CaseWorkspaceFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		Thread.sleep(3000);
-		performerPOM.clickMyWorkspace().click();
+		performerPOM.clickMyWorkspace(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickCaseNotice1().click();
+		performerPOM.clickCaseNotice1(driver).click();
 		
 		 Thread.sleep(1000);
-		 wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
+		 wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
 		Thread.sleep(3000);
-		performerPOM.clickTypeDropdown().click();
+		performerPOM.clickTypeDropdown(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.selectTypeNotice().click();
+		performerPOM.selectTypeNotice(driver).click();
 		
-		  Thread.sleep(3000);
-			performerPOM.clicklocationFilter().click();
-			Thread.sleep(3000);
-			performerPOM.clickExpand().click();
-			Thread.sleep(3000);
-	       String locationtext =performerPOM.SelectLocationCase().getText();
-	       Thread.sleep(3000);
-	       performerPOM. SelectLocationCase().click();
+//		  Thread.sleep(3000);
+//			performerPOM.clicklocationFilter(driver).click();
+//			Thread.sleep(3000);
+//			performerPOM.clickExpand(driver).click();
+//			Thread.sleep(3000);
+//	       String locationtext =performerPOM.SelectLocationCase(driver).getText();
+//	       Thread.sleep(3000);
+//	       performerPOM. SelectLocationCase(driver).click();
 	       
 	       
           Thread.sleep(500);
-	       performerPOM.clickDepartmentFilterWorkspace().click();
+	       performerPOM.clickDepartmentFilterWorkspace(driver).click();
 	       Thread.sleep(500);
-	       String DeptText = performerPOM.selectDepartmentFilterDocNonAdmin().getText();
+	       String DeptText = performerPOM.selectDepartmentFilterDocNonAdmin(driver).getText();
 	       Thread.sleep(500);
-	       performerPOM. selectDepartmentFilterDocNonAdmin().click();
+	       performerPOM. selectDepartmentFilterDocNonAdmin(driver).click();
 	       				        
 	       Thread.sleep(500);
-	       performerPOM.clickTypeFilter().click();
+	       performerPOM.clickTypeFilter(driver).click();
 	       Thread.sleep(500);
-	       String Typetext = performerPOM.SelectTypeFilterCA().getText();
+	       String Typetext = performerPOM.SelectTypeFilterCA(driver).getText();
 	       Thread.sleep(500);
-	       performerPOM.SelectTypeFilterCA().click();
+	       performerPOM.SelectTypeFilterCA(driver).click();
 	           
 	       
 	        List<String> li=new ArrayList<String>();
-	        li.add(locationtext);
+	       // li.add(locationtext);
 	         li.add(DeptText);
 	         li.add(Typetext);
 	        
 	        Thread.sleep(3000);
 	        
 			List<String> filter=new ArrayList<String>();	
-			filter.add("Location");
+			//filter.add("Location");
 			filter.add("Dept");
 			filter.add("Type");
 			
 			
 			 Thread.sleep(500);
-			 performerPOM.clickTrignle().click();
+			 performerPOM.clickTrignle(driver).click();
 		     Thread.sleep(500);
-		     performerPOM.clickCol().click();
+		     performerPOM.clickCol(driver).click();
 
 		     
 		     By dept = By.xpath("(//span[@class='k-link k-menu-link'][normalize-space()='Department'])[1]");
             wait.until(ExpectedConditions.presenceOfElementLocated(dept));
 		     Thread.sleep(4000);
-            WebElement ViewButton = getDriver().findElement(dept);	
-			 js.executeScript("arguments[0].click();", ViewButton);
+            WebElement ViewButton = driver.findElement(dept);	
+			 Thread.sleep(4000);
+			 JavascriptExecutor jse=(JavascriptExecutor)driver;
+			 jse.executeScript("arguments[0].click();", ViewButton);
 		     Thread.sleep(500);
-			 performerPOM.clickTrignle().click(); 
+			 performerPOM.clickTrignle(driver).click(); 
 			
 			
 			js.executeScript("window.scrollBy(0,300)");	
 			Thread.sleep(3000);
 
-			CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-			String s = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+			String s = CFOcountPOM.readTotalItems1(driver).getText();
 			Thread.sleep(2000);
 
 			if(!s.equalsIgnoreCase("No items to display")) {
 			Thread.sleep(5000);
 		
-			List<WebElement> entitycol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
-			List<WebElement> Dept=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[14]"));
-			List<WebElement> Type=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
+			//List<WebElement> entitycol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
+			List<WebElement> Dept=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[14]"));
+			List<WebElement> Type=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
 			
 			Thread.sleep(2000);
 
@@ -541,16 +555,16 @@ public class MethodPOM1 extends BasePage {
 				HashSet<String> fail=new LinkedHashSet<>();
 				List<WebElement> raw=new ArrayList<WebElement>();
 
-					if(i==0)
-					{
-						raw.addAll(entitycol);
-					}
-				
-				   else if(i==1)
+//					if(i==0)
+//					{
+//						raw.addAll(entitycol);
+//					}
+//				
+				   if(i==0)
 				   {
 					 raw.addAll(Dept);
 				   }
-				   else if(i==2)
+				   else if(i==1)
 				   {
 					   raw.addAll(Type);
 				   }
@@ -564,7 +578,7 @@ public class MethodPOM1 extends BasePage {
 					for(int l=0;l<text.size();l++)
 					{
 						
-						if(i==2)
+						if(i==1)
 						{
 							if(text.get(l).equalsIgnoreCase("Inward")||text.get(l).equalsIgnoreCase("Defendant"))
 							{
@@ -621,46 +635,46 @@ public class MethodPOM1 extends BasePage {
 			}
 			
 		}
-	public static void WorkspaceTaskFilter(ExtentTest test) throws InterruptedException
+	public static void WorkspaceTaskFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
 		
-		 JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		Thread.sleep(3000);
-		performerPOM.clickMyWorkspace().click();
+		performerPOM.clickMyWorkspace(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickCaseNotice1().click();
+		performerPOM.clickCaseNotice1(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickTypeDropdown().click();
+		performerPOM.clickTypeDropdown(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.selectTypeTask().click();
+		performerPOM.selectTypeTask(driver).click();
 		
 
-		  Thread.sleep(3000);
-			performerPOM.clickTaskLocFilter().click();
-			Thread.sleep(3000);
-			performerPOM.clickExpand().click();
-			Thread.sleep(3000);
-	       String locationtext =performerPOM.SelectLocationDoceNonAdmin().getText();
-	       Thread.sleep(3000);
-	       performerPOM. SelectLocationDoceNonAdmin().click();
+//		  Thread.sleep(3000);
+//			performerPOM.clickTaskLocFilter(driver).click();
+//			Thread.sleep(3000);
+//			performerPOM.clickExpand(driver).click();
+//			Thread.sleep(3000);
+//	       String locationtext =performerPOM.SelectLocationDoceNonAdmin(driver).getText();
+//	       Thread.sleep(3000);
+//	       performerPOM. SelectLocationDoceNonAdmin(driver).click();
 	       
 	       
            Thread.sleep(500);
-	       performerPOM.clickTaskPriorityFilter().click();
+	       performerPOM.clickTaskPriorityFilter(driver).click();
 	       Thread.sleep(500);
-	       String priorityText = performerPOM.SelectTaskPriorityFilter().getText();
+	       String priorityText = performerPOM.SelectTaskPriorityFilter(driver).getText();
 	       Thread.sleep(500);
-	       performerPOM. SelectTaskPriorityFilter().click();
+	       performerPOM. SelectTaskPriorityFilter(driver).click();
 	       				        
 	       Thread.sleep(500);
-	       performerPOM.clickTaskStatusFilter().click();
+	       performerPOM.clickTaskStatusFilter(driver).click();
 	       Thread.sleep(500);
-	       String Statustext = performerPOM.SelectTaskStatusFilter().getText();
+	       String Statustext = performerPOM.SelectTaskStatusFilter(driver).getText();
 	       Thread.sleep(500);
-	       performerPOM.SelectTaskStatusFilter().click();
+	       performerPOM.SelectTaskStatusFilter(driver).click();
 	           
 	       
 	        List<String> li=new ArrayList<String>();
@@ -678,16 +692,16 @@ public class MethodPOM1 extends BasePage {
 			js.executeScript("window.scrollBy(0,200)");	
 			Thread.sleep(3000);
 
-			CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-			String s = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+			String s = CFOcountPOM.readTotalItems1(driver).getText();
 			Thread.sleep(2000);
 
 			if(!s.equalsIgnoreCase("No items to display")) {
 			Thread.sleep(5000);
 		
-			List<WebElement> Prioritycol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
-			List<WebElement> Status=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[6]"));
-			//List<WebElement> Type=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
+			List<WebElement> Prioritycol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
+			List<WebElement> Status=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[6]"));
+			//List<WebElement> Type=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
 			
 			Thread.sleep(2000);
 
@@ -773,17 +787,17 @@ public class MethodPOM1 extends BasePage {
 		
 }
 	
-	public static void WorkspaceCaseHearingFilter(ExtentTest test,String type) throws InterruptedException
+	public static void WorkspaceCaseHearingFilter(WebDriver driver,ExtentTest test,String type) throws InterruptedException
 	{
 		
-		 JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 		Thread.sleep(3000);
-		performerPOM.clickMyWorkspace().click();
+		performerPOM.clickMyWorkspace(driver).click();
 		Thread.sleep(3000);
-		performerPOM.clickCaseHearing1().click();
+		performerPOM.clickCaseHearing1(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickSearchFilter().sendKeys(type,Keys.ENTER);
+		performerPOM.clickSearchFilter(driver).sendKeys(type,Keys.ENTER);
 		
 	      List<String> li=new ArrayList<String>();
 	        
@@ -799,14 +813,14 @@ public class MethodPOM1 extends BasePage {
 			js.executeScript("window.scrollBy(0,150)");	
 			Thread.sleep(3000);
 
-			CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-			String s = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+			String s = CFOcountPOM.readTotalItems1(driver).getText();
 			Thread.sleep(2000);
 
 			if(!s.equalsIgnoreCase("No items to display")) {
 			Thread.sleep(5000);
 	
-			List<WebElement> typecol=getDriver().findElements(By.xpath("//*[@id='gridPendingUpdation']/div[2]/table/tbody/tr/td[1]"));
+			List<WebElement> typecol=driver.findElements(By.xpath("//*[@id='gridPendingUpdation']/div[2]/table/tbody/tr/td[1]"));
 			Thread.sleep(2000);
 
 			for(int i=0; i<li.size(); i++){
@@ -871,59 +885,59 @@ public class MethodPOM1 extends BasePage {
 			}
 		}
 		
-	public static void DocumentNoticeFilter(ExtentTest test) throws InterruptedException
+	public static void DocumentNoticeFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		Thread.sleep(500);
-		JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		progress(driver);
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 	
-		 performerPOM.clickMyDocument().click();					//Clicking on 'My Document'
-		 performerPOM.clickmyDocument().click();	                    //Clicking on 'My Document'
+		 performerPOM.clickMyDocument(driver).click();					//Clicking on 'My Document'
+		 performerPOM.clickmyDocument(driver).click();	                    //Clicking on 'My Document'
 		 
 		 Thread.sleep(3000);
-			performerPOM.clickTypeDropdown().click();
+			performerPOM.clickTypeDropdown(driver).click();
 			Thread.sleep(3000);
-			performerPOM.selectTypeNotice().click();
+			performerPOM.selectTypeNotice(driver).click();
 	
 		 Thread.sleep(3000);
-		 wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		 wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 	
 	
 		
 	
 		Thread.sleep(3000);
-		performerPOM.clickDocStatusFilter().click();
+		performerPOM.clickDocStatusFilter(driver).click();
 		Thread.sleep(3000);
-		String Statustext =performerPOM.selectDocStatusFilter().getText();
+		String Statustext =performerPOM.selectDocStatusFilter(driver).getText();
 		Thread.sleep(3000);
-		performerPOM. selectDocStatusFilter().click();
+		performerPOM. selectDocStatusFilter(driver).click();
    
 
 		Thread.sleep(3000);
-		performerPOM.clickDocTypeFilter().click();
+		performerPOM.clickDocTypeFilter(driver).click();
 		Thread.sleep(3000);
-		String typetext =performerPOM.SelectTypeFilterCA().getText();
+		String typetext =performerPOM.SelectTypeFilterCA(driver).getText();
 		Thread.sleep(3000);
-		performerPOM. SelectTypeFilterCA().click();
+		performerPOM. SelectTypeFilterCA(driver).click();
      
      
      
   
-		Thread.sleep(3000);
-		performerPOM.clickDocLocFilter().click();
-		Thread.sleep(3000);
-		performerPOM.clickExpand().click();
-		Thread.sleep(3000);
-		String locationtext =performerPOM.SelectLocationCase().getText();
-		Thread.sleep(3000);
-		performerPOM. SelectLocationCase().click();
-		Thread.sleep(3000);
-		performerPOM.clickDocLocFilter().click();
+//		Thread.sleep(3000);
+//		performerPOM.clickDocLocFilter(driver).click();
+//		Thread.sleep(3000);
+//		performerPOM.clickExpand(driver).click();
+//		Thread.sleep(3000);
+//		String locationtext =performerPOM.SelectLocationCase(driver).getText();
+//		Thread.sleep(3000);
+//		performerPOM. SelectLocationCase(driver).click();
+//		Thread.sleep(3000);
+//		performerPOM.clickDocLocFilter(driver).click();
        
 	    List<String> li=new ArrayList<String>();
          li.add(Statustext);
          li.add(typetext);
-         li.add(locationtext);
+        // li.add(locationtext);
         
 		List<String> filter=new ArrayList<String>();	
 		filter.add("Status");
@@ -934,35 +948,37 @@ public class MethodPOM1 extends BasePage {
 		  By Tringle = By.xpath("//span[@class='k-icon k-i-more-vertical']");
           wait.until(ExpectedConditions.presenceOfElementLocated(Tringle));
 		  Thread.sleep(4000);
-          WebElement ViewButton = getDriver().findElement(Tringle);	
-		  
-		  js.executeScript("arguments[0].click();", ViewButton);
+          WebElement ViewButton = driver.findElement(Tringle);	
+		  Thread.sleep(4000);
+		  JavascriptExecutor jse=(JavascriptExecutor)driver;
+		  jse.executeScript("arguments[0].click();", ViewButton);
 	     
 		 Thread.sleep(3000);
-	     performerPOM.clickCol().click();
+	     performerPOM.clickCol(driver).click();
 
 	     
 	     By dept = By.xpath("//input[@data-field='Status']");
          wait.until(ExpectedConditions.presenceOfElementLocated(dept));
 	     Thread.sleep(4000);
-         WebElement ViewButton1 = getDriver().findElement(dept);	
-		
-		 js.executeScript("arguments[0].click();", ViewButton1);
+         WebElement ViewButton1 = driver.findElement(dept);	
+		 Thread.sleep(4000);
+		 JavascriptExecutor jse1=(JavascriptExecutor)driver;
+		 jse1.executeScript("arguments[0].click();", ViewButton1);
 	    
 		
 		js.executeScript("window.scrollBy(0,300)");	
 		Thread.sleep(3000);
 
-		CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-		String s = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+		String s = CFOcountPOM.readTotalItems1(driver).getText();
 		Thread.sleep(2000);
 
 		if(!s.equalsIgnoreCase("No items to display")) {
 		Thread.sleep(5000);
 	
-		List<WebElement> statuscol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr[1]/td[13]"));
-		List<WebElement> Type=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[4]"));
-		List<WebElement> Location=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
+		List<WebElement> statuscol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr[1]/td[13]"));
+		List<WebElement> Type=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[4]"));
+		//List<WebElement> Location=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
 		
 		Thread.sleep(2000);
 
@@ -984,10 +1000,10 @@ public class MethodPOM1 extends BasePage {
 			   {
 				 raw.addAll(Type);
 			   }
-			   else if(i==2)
-			   {
-				   raw.addAll(Location);
-			   }
+//			   else if(i==2)
+//			   {
+//				   raw.addAll(Location);
+//			   }
 			  		
 				for(int k=0;k<raw.size();k++)
 				{
@@ -1069,59 +1085,59 @@ public class MethodPOM1 extends BasePage {
 
 	
 	
-	public static void DocumentCaseFilter(ExtentTest test) throws InterruptedException
+	public static void DocumentCaseFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		Thread.sleep(500);
-		JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		progress(driver);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
-		performerPOM.clickMyDocument().click();					//Clicking on 'My Document'
-		performerPOM.clickmyDocument().click();	                    //Clicking on 'My Document'
+		performerPOM.clickMyDocument(driver).click();					//Clicking on 'My Document'
+		performerPOM.clickmyDocument(driver).click();	                    //Clicking on 'My Document'
 		
 		
 		Thread.sleep(3000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
 		
 
 		Thread.sleep(3000);
-		performerPOM.clickDocStatusFilter().click();
+		performerPOM.clickDocStatusFilter(driver).click();
 		Thread.sleep(3000);
-        String Statustext =performerPOM.selectDocStatusFilter1().getText();
+        String Statustext =performerPOM.selectDocStatusFilter1(driver).getText();
         Thread.sleep(3000);
-         performerPOM. selectDocStatusFilter1().click();
+         performerPOM. selectDocStatusFilter1(driver).click();
        
 	
          Thread.sleep(3000);
-		performerPOM.clickDocTypeFilter().click();
+		performerPOM.clickDocTypeFilter(driver).click();
 		Thread.sleep(3000);
-	    String typetext =performerPOM.selectDocTypeFilter().getText();
+	    String typetext =performerPOM.selectDocTypeFilter(driver).getText();
 	    Thread.sleep(3000);
-	     performerPOM. selectDocTypeFilter().click();
+	     performerPOM. selectDocTypeFilter(driver).click();
          
          
          
       
-		  Thread.sleep(3000);
-			performerPOM.clickDocLocFilter().click();
-			Thread.sleep(3000);
-			performerPOM.clickExpand().click();
-			Thread.sleep(3000);
-	       String locationtext =performerPOM.SelectLocationCase().getText();
-	       Thread.sleep(3000);
-	       performerPOM. SelectLocationCase().click();
-	       Thread.sleep(3000);
-			performerPOM.clickDocLocFilter().click();
+//		  Thread.sleep(3000);
+//			performerPOM.clickDocLocFilter(driver).click();
+//			Thread.sleep(3000);
+//			performerPOM.clickExpand(driver).click();
+//			Thread.sleep(3000);
+//	       String locationtext =performerPOM.SelectLocationCase(driver).getText();
+//	       Thread.sleep(3000);
+//	       performerPOM. SelectLocationCase(driver).click();
+//	       Thread.sleep(3000);
+//			performerPOM.clickDocLocFilter(driver).click();
 	       
 	        List<String> li=new ArrayList<String>();
 	         li.add(Statustext);
 	         li.add(typetext);
-	         li.add(locationtext);
+	         //li.add(locationtext);
 	        
 			List<String> filter=new ArrayList<String>();	
 			filter.add("Status");
 			filter.add("Type");
-			filter.add("Loaction");
+			//filter.add("Loaction");
 			
 			
 			// Thread.sleep(3000);
@@ -1130,35 +1146,37 @@ public class MethodPOM1 extends BasePage {
 			  By Tringle = By.xpath("//span[@class='k-icon k-i-more-vertical']");
                  wait.until(ExpectedConditions.presenceOfElementLocated(Tringle));
 			     Thread.sleep(4000);
-                 WebElement ViewButton = getDriver().findElement(Tringle);	
-				
-				 js.executeScript("arguments[0].click();", ViewButton);
+                 WebElement ViewButton = driver.findElement(Tringle);	
+				 Thread.sleep(4000);
+				 JavascriptExecutor jse=(JavascriptExecutor)driver;
+				 jse.executeScript("arguments[0].click();", ViewButton);
 		     
 				 Thread.sleep(3000);
-		     performerPOM.clickCol().click();
+		     performerPOM.clickCol(driver).click();
 
 		     
 		     By dept = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Status']");
              wait.until(ExpectedConditions.presenceOfElementLocated(dept));
 		     Thread.sleep(4000);
-             WebElement ViewButton1 = getDriver().findElement(dept);	
-			
-			 js.executeScript("arguments[0].click();", ViewButton1);
+             WebElement ViewButton1 = driver.findElement(dept);	
+			 Thread.sleep(4000);
+			 JavascriptExecutor jse1=(JavascriptExecutor)driver;
+			 jse1.executeScript("arguments[0].click();", ViewButton1);
 		    
 			
 			js.executeScript("window.scrollBy(0,150)");	
 			Thread.sleep(3000);
 
-			CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-			String s = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+			String s = CFOcountPOM.readTotalItems1(driver).getText();
 			Thread.sleep(2000);
 
 			if(!s.equalsIgnoreCase("No items to display")) {
 			Thread.sleep(5000);
 		
-			List<WebElement> statuscol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[13]"));
-			List<WebElement> Type=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[4]"));
-			List<WebElement> Location=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
+			List<WebElement> statuscol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[13]"));
+			List<WebElement> Type=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[4]"));
+			//List<WebElement> Location=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
 			
 			Thread.sleep(2000);
 
@@ -1178,10 +1196,10 @@ public class MethodPOM1 extends BasePage {
 			   {
 				 raw.addAll(Type);
 			   }
-			   else if(i==2)
-			   {
-				   raw.addAll(Location);
-			   }
+//			   else if(i==2)
+//			   {
+//				   raw.addAll(Location);
+//			   }
 			 
 						
 			for(int k=0;k<raw.size();k++)
@@ -1261,37 +1279,38 @@ public class MethodPOM1 extends BasePage {
 			}
 		}
 	
-	public static void DocumentTaskFilter(ExtentTest test) throws InterruptedException
+	public static void DocumentTaskFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		Thread.sleep(500);
-		JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+		
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		progress(driver);
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 	
-		 performerPOM.clickMyDocument().click();					//Clicking on 'My Document'
-		performerPOM.clickmyDocument().click();	                    //Clicking on 'My Document'
+		 performerPOM.clickMyDocument(driver).click();					//Clicking on 'My Document'
+		performerPOM.clickmyDocument(driver).click();	                    //Clicking on 'My Document'
 	
 		Thread.sleep(3000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 	
 	
 		  Thread.sleep(3000);
-		  performerPOM.clickTypeDropdown().click();
+		  performerPOM.clickTypeDropdown(driver).click();
 		  Thread.sleep(3000);
-		  performerPOM.selectTypeTask().click();
+		  performerPOM.selectTypeTask(driver).click();
 	
            Thread.sleep(500);
-	       performerPOM.clickDocTaskPriorityFilter().click();
+	       performerPOM.clickDocTaskPriorityFilter(driver).click();
 	       Thread.sleep(500);
-	       String priorityText = performerPOM.SelectTaskPriorityFilter().getText();
+	       String priorityText = performerPOM.SelectTaskPriorityFilter(driver).getText();
 	       Thread.sleep(500);
-	       performerPOM. SelectTaskPriorityFilter().click();
+	       performerPOM. SelectTaskPriorityFilter(driver).click();
 	       				        
 	       Thread.sleep(500);
-	       performerPOM.clickDocStatusFilter().click();
+	       performerPOM.clickDocStatusFilter(driver).click();
 	       Thread.sleep(500);
-	       String Statustext = performerPOM.selectDocStatusFilter().getText();
+	       String Statustext = performerPOM.selectDocStatusFilter(driver).getText();
 	       Thread.sleep(500);
-	       performerPOM.selectDocStatusFilter().click();
+	       performerPOM.selectDocStatusFilter(driver).click();
 	           
 	       
 	        List<String> li=new ArrayList<String>();
@@ -1308,15 +1327,15 @@ public class MethodPOM1 extends BasePage {
 			 
 			js.executeScript("window.scrollBy(0,200)");	
 			Thread.sleep(3000);
-			CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-			String s = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+			String s = CFOcountPOM.readTotalItems1(driver).getText();
 			Thread.sleep(2000);
 
 			if(!s.equalsIgnoreCase("No items to display")) {
 			Thread.sleep(5000);
 		
-			List<WebElement> Prioritycol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[9]"));
-			List<WebElement> Status=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[13]"));
+			List<WebElement> Prioritycol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[9]"));
+			List<WebElement> Status=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[13]"));
 			
 			
 			Thread.sleep(2000);
@@ -1405,70 +1424,70 @@ public class MethodPOM1 extends BasePage {
 			
 	}
 	
-	public static void ReportFilter(ExtentTest test) throws InterruptedException
+	public static void ReportFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-		Thread.sleep(500);
-		JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		Thread.sleep(8000);
+		performerPOM.clickMyReports(driver).click();					//Clicking on 'My Reports'
 		
 		Thread.sleep(8000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
-	
+		 JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(0,-150)");	
 		
 	
          Thread.sleep(8000);
-		performerPOM.clickReportDeptFilter().click();
+		performerPOM.clickReportDeptFilter(driver).click();
 		Thread.sleep(8000);
-	    String depttext =performerPOM.selectDepartmentFilterDocNonAdmin().getText();
+	    String depttext =performerPOM.selectDepartmentFilterDocNonAdmin(driver).getText();
 	    Thread.sleep(8000);
-	     performerPOM.selectDepartmentFilterDocNonAdmin().click();
+	     performerPOM.selectDepartmentFilterDocNonAdmin(driver).click();
          
 	     Thread.sleep(8000);
-			performerPOM.clickReportTypeFilter().click();
+			performerPOM.clickReportTypeFilter(driver).click();
 			Thread.sleep(8000);
-		    String typetext =performerPOM.SelectTypeFilterCA().getText();
+		    String typetext =performerPOM.SelectTypeFilterCA(driver).getText();
 		    Thread.sleep(8000);
-		     performerPOM. SelectTypeFilterCA().click();
+		     performerPOM. SelectTypeFilterCA(driver).click();
 	         
          
          
       
-		    Thread.sleep(8000);
-			performerPOM.clickReportLocFilter().click();
-			Thread.sleep(8000);
-			performerPOM.clickExpand().click();
-			Thread.sleep(8000);
-	       String locationtext =performerPOM.SelectLocationCase().getText();
+//		    Thread.sleep(8000);
+//			performerPOM.clickReportLocFilter(driver).click();
+//			Thread.sleep(8000);
+//			performerPOM.clickExpand(driver).click();
+//			Thread.sleep(8000);
+//	       String locationtext =performerPOM.SelectLocationCase(driver).getText();
 	       
-	       Thread.sleep(8000);
-	       performerPOM. SelectLocationCase().click();
+//	       Thread.sleep(8000);
+//	       performerPOM. SelectLocationCase(driver).click();
 	      
 			Thread.sleep(8000);
-			performerPOM.clickReportFYFilter().click();
+			performerPOM.clickReportFYFilter(driver).click();
 			Thread.sleep(8000);
-		    String FYtext =performerPOM.selectReportFYFilterCA().getText();
+		    String FYtext =performerPOM.selectReportFYFilterCA(driver).getText();
 		    Thread.sleep(8000);
-		     performerPOM. selectReportFYFilterCA().click();
+		     performerPOM. selectReportFYFilterCA(driver).click();
 	       
 	        List<String> li=new ArrayList<String>();
 	     
 	         li.add(depttext);
 	         li.add(typetext);
-	         li.add(locationtext);
+	        // li.add(locationtext);
 	         li.add(FYtext);
 	        
 			List<String> filter=new ArrayList<String>();	
 			
 			filter.add("Dept");
 			filter.add("Type");
-			filter.add("Loaction");
+			//filter.add("Loaction");
 			filter.add("FY");
 		
 			js.executeScript("window.scrollBy(0,200)");	
-			CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-			String s = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+			String s = CFOcountPOM.readTotalItems1(driver).getText();
 			Thread.sleep(8000);
 
 			if(!s.equalsIgnoreCase("No items to display"))
@@ -1476,10 +1495,10 @@ public class MethodPOM1 extends BasePage {
 			Thread.sleep(8000);
 		
 			
-			List<WebElement> deptcol=getDriver().findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[7]"));
-			List<WebElement> typecol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
-			List<WebElement> Locationcol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
-			List<WebElement> FYcol=getDriver().findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[14]"));
+			List<WebElement> deptcol=driver.findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[7]"));
+			List<WebElement> typecol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
+			//List<WebElement> Locationcol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
+			List<WebElement> FYcol=driver.findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[14]"));
 			
 			js.executeScript("document.querySelector(\"div[id='grid'] div[class='k-grid-content k-auto-scrollable']\").scrollLeft=400");
 			
@@ -1501,10 +1520,10 @@ public class MethodPOM1 extends BasePage {
 				   {
 					 raw.addAll(typecol);
 				   }
-				   else if(i==2)
-				   {
-					   raw.addAll(Locationcol);
-				   }
+//				   else if(i==2)
+//				   {
+//					   raw.addAll(Locationcol);
+//				   }
 				   else if(i==3)
 				   {
 					   Thread.sleep(8000);
@@ -1580,96 +1599,96 @@ public class MethodPOM1 extends BasePage {
 		}
 	
 	 
-	 public static void ReportCaseFilter(ExtentTest test) throws InterruptedException
+	 public static void ReportCaseFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 		{
-		 	WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-			Thread.sleep(500);
-			JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+			WebDriverWait wait=new WebDriverWait(driver,20);
+			Thread.sleep(8000);
+			performerPOM.clickMyReports(driver).click();					//Clicking on 'My Reports'
 			
 			Thread.sleep(8000);
-			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 			
 			
-		
+			 JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("window.scrollBy(0,-150)");	
 				
 				Thread.sleep(8000);
-				performerPOM.clickTypeDropdown().click();
+				performerPOM.clickTypeDropdown(driver).click();
 				Thread.sleep(8000);
-				performerPOM.selectTypeNotice().click();
+				performerPOM.selectTypeNotice(driver).click();
 				
 				Thread.sleep(8000);
-				wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+				wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 			
 			Thread.sleep(8000);
-			performerPOM.clickReportStatusFilter().click();
+			performerPOM.clickReportStatusFilter(driver).click();
 			Thread.sleep(8000);
-	        String Statustext =performerPOM.selectReportStatusFilter().getText();
+	        String Statustext =performerPOM.selectReportStatusFilter(driver).getText();
 	        Thread.sleep(8000);
-	         performerPOM. selectReportStatusFilter().click();
+	         performerPOM. selectReportStatusFilter(driver).click();
 	       
 		
 	         Thread.sleep(8000);
-			performerPOM.clickReportDeptFilter().click();
+			performerPOM.clickReportDeptFilter(driver).click();
 			Thread.sleep(8000);
-		    String depttext =performerPOM.selectReportCaseDeptFilter1().getText();
+		    String depttext =performerPOM.selectReportCaseDeptFilter1(driver).getText();
 		    Thread.sleep(8000);
-		     performerPOM.selectReportCaseDeptFilter1().click();
+		     performerPOM.selectReportCaseDeptFilter1(driver).click();
 	         
 		     Thread.sleep(8000);
-				performerPOM.clickReportTypeFilter().click();
+				performerPOM.clickReportTypeFilter(driver).click();
 				Thread.sleep(8000);
-			    String typetext =performerPOM.SelectTypeFilterCA().getText();
+			    String typetext =performerPOM.SelectTypeFilterCA(driver).getText();
 			    Thread.sleep(8000);
-			     performerPOM. SelectTypeFilterCA().click();
+			     performerPOM. SelectTypeFilterCA(driver).click();
 		         
 	         
 	         
-	      
-			    Thread.sleep(8000);
-				performerPOM.clickReportLocFilter().click();
-				Thread.sleep(8000);
-				performerPOM.clickExpand().click();
-				Thread.sleep(8000);
-		       String locationtext =performerPOM.SelectLocationCase().getText();
-		       Thread.sleep(8000);
-		       performerPOM. SelectLocationCase().click();
+//	      
+//			    Thread.sleep(8000);
+//				performerPOM.clickReportLocFilter(driver).click();
+//				Thread.sleep(8000);
+//				performerPOM.clickExpand(driver).click();
+//				Thread.sleep(8000);
+//		       String locationtext =performerPOM.SelectLocationCase(driver).getText();
+//		       Thread.sleep(8000);
+//		       performerPOM. SelectLocationCase(driver).click();
 		      
 				Thread.sleep(8000);
-				performerPOM.clickReportFYFilter().click();
+				performerPOM.clickReportFYFilter(driver).click();
 				Thread.sleep(8000);
-			    String FYtext =performerPOM.selectReportFYFilter().getText();
+			    String FYtext =performerPOM.selectReportFYFilter(driver).getText();
 			    Thread.sleep(8000);
-			     performerPOM. selectReportFYFilter().click();
+			     performerPOM. selectReportFYFilter(driver).click();
 		       
 		        List<String> li=new ArrayList<String>();
 		         li.add(Statustext);
 		         li.add(depttext);
 		         li.add(typetext);
-		         li.add(locationtext);
+		        // li.add(locationtext);
 		         li.add(FYtext);
 		        
 				List<String> filter=new ArrayList<String>();	
 				filter.add("Status");
 				filter.add("Dept");
 				filter.add("Type");
-				filter.add("Loaction");
+			//	filter.add("Loaction");
 				filter.add("FY");
 			
 				js.executeScript("window.scrollBy(0,300)");
 				Thread.sleep(8000);
-				CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-				String s = CFOcountPOM.readTotalItems1().getText();
+				CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+				String s = CFOcountPOM.readTotalItems1(driver).getText();
 				Thread.sleep(8000);
 
 				if(!s.equalsIgnoreCase("No items to display")) {
 				Thread.sleep(8000);
 			
-				List<WebElement> statuscol=getDriver().findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[4]"));
-				List<WebElement> deptcol=getDriver().findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[7]"));
-				List<WebElement> typecol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
-				List<WebElement> Locationcol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
-				List<WebElement> FYcol=getDriver().findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[14]"));
+				List<WebElement> statuscol=driver.findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[4]"));
+				List<WebElement> deptcol=driver.findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[7]"));
+				List<WebElement> typecol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[3]"));
+			//	List<WebElement> Locationcol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
+				List<WebElement> FYcol=driver.findElements(By.xpath("//*[@id='grid']/div[3]/table/tbody/tr/td[14]"));
 				Thread.sleep(8000);
 				js.executeScript("document.querySelector(\"div[id='grid'] div[class='k-grid-content k-auto-scrollable']\").scrollLeft=500");
 				for(int i=0; i<li.size(); i++){
@@ -1691,10 +1710,10 @@ public class MethodPOM1 extends BasePage {
 					   {
 						 raw.addAll(typecol);
 					   }
-					   else if(i==3)
-					   {
-						   raw.addAll(Locationcol);
-					   }
+//					   else if(i==3)
+//					   {
+//						   raw.addAll(Locationcol);
+//					   }
 					   else if(i==4)
 					   {
 						   Thread.sleep(5000);
@@ -1779,42 +1798,40 @@ public class MethodPOM1 extends BasePage {
 				}
 		}
 	 
-		public static void ReportTaskFilter(ExtentTest test) throws InterruptedException
+		public static void ReportTaskFilter(WebDriver driver,ExtentTest test) throws InterruptedException
 		{
 			
-				WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-					Thread.sleep(500);
-				JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
+				WebDriverWait wait=new WebDriverWait(driver,20);
 				Thread.sleep(8000);
-				performerPOM.clickMyReports().click();					//Clicking on 'My Reports'
+				performerPOM.clickMyReports(driver).click();					//Clicking on 'My Reports'
 			
 				Thread.sleep(8000);
-				wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+				wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 			
 			
-				
+				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("window.scrollBy(0,-150)");	
 		
 				Thread.sleep(8000);
-				performerPOM.clickTypeDropdown().click();
+				performerPOM.clickTypeDropdown(driver).click();
 				Thread.sleep(8000);
-				performerPOM.selectTypeTask().click();
+				performerPOM.selectTypeTask(driver).click();
 			
 
 		       
 				Thread.sleep(8000);
-				performerPOM.clickTaskPriorityFilter().click();
+				performerPOM.clickTaskPriorityFilter(driver).click();
 				Thread.sleep(8000);
-				String priorityText = performerPOM.SelectTaskPriorityFilter().getText();
+				String priorityText = performerPOM.SelectTaskPriorityFilter(driver).getText();
 				Thread.sleep(8000);
-				performerPOM. SelectTaskPriorityFilter().click();
+				performerPOM. SelectTaskPriorityFilter(driver).click();
 		       				        
 				Thread.sleep(8000);
-				performerPOM.clickTaskStatusFilter().click();
+				performerPOM.clickTaskStatusFilter(driver).click();
 				Thread.sleep(8000);
-				String Statustext = performerPOM.SelectTaskStatusFilter().getText();
+				String Statustext = performerPOM.SelectTaskStatusFilter(driver).getText();
 				Thread.sleep(8000);
-				performerPOM.SelectTaskStatusFilter().click();
+				performerPOM.SelectTaskStatusFilter(driver).click();
 		           
 		       
 			    List<String> li=new ArrayList<String>();
@@ -1831,16 +1848,16 @@ public class MethodPOM1 extends BasePage {
 				 
 				js.executeScript("window.scrollBy(0,200)");	
 				Thread.sleep(8000);
-				CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-				String s = CFOcountPOM.readTotalItems1().getText();
+				CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+				String s = CFOcountPOM.readTotalItems1(driver).getText();
 				Thread.sleep(8000);
 
 				if(!s.equalsIgnoreCase("No items to display"))
 				{
 				Thread.sleep(8000);
 			
-				List<WebElement> Prioritycol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
-				List<WebElement> Status=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[6]"));
+				List<WebElement> Prioritycol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[2]"));
+				List<WebElement> Status=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[6]"));
 				
 				
 				Thread.sleep(8000);
@@ -1927,31 +1944,31 @@ public class MethodPOM1 extends BasePage {
 			
 	}
 	 
-	public static void AdvancedSearchWorkspace(ExtentTest test) throws InterruptedException
+	public static void AdvancedSearchWorkspace(WebDriver driver,ExtentTest test, String type) throws InterruptedException
 	{
-		WebDriverWait wait=new WebDriverWait(getDriver(),60);
+		WebDriverWait wait=new WebDriverWait(driver,60);
  		
 		
 		Thread.sleep(3000);
-		performerPOM.clickMyWorkspace().click();
+		performerPOM.clickMyWorkspace(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickCaseNotice1().click();
+		performerPOM.clickCaseNotice1(driver).click();
 	
 		Thread.sleep(5000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
 //		Thread.sleep(5000);
-//		performerPOM.clickcategory().click();
+//		performerPOM.clickcategory(driver).click();
 //		
 //		Thread.sleep(5000);
-//		performerPOM.clickcategory2().click();
+//		performerPOM.clickcategory2(driver).click();
 		
 		
-		if(performerPOM.clearButton().isEnabled())
+		if(performerPOM.clearButton(driver).isEnabled())
   		{
 			Thread.sleep(5000);
-  			performerPOM.clearButton().click();
+  			performerPOM.clearButton(driver).click();
   			test.log(LogStatus.PASS, "Clear button working successfully");
   		}
   		else
@@ -1961,41 +1978,41 @@ public class MethodPOM1 extends BasePage {
 		
 		Thread.sleep(5000);
 		
-		performerPOM.AdvancedSearchReports().click();
+		performerPOM.AdvancedSearchReports(driver).click();
 		
 	//-------------------------------------------Notice--------------------------------------------------
 		
 		Thread.sleep(4000);
-		performerPOM.startDate().sendKeys("05/10/2022");
+		performerPOM.startDate(driver).sendKeys("05/10/2022");
 		
 		Thread.sleep(4000);
-		performerPOM.endDate().sendKeys("05/12/2023");
+		performerPOM.endDate(driver).sendKeys("05/12/2023");
 		
 		Thread.sleep(4000);
-		performerPOM.clickApplyButton().click();
+		performerPOM.clickApplyButton(driver).click();
 		
 		
 		Thread.sleep(5000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
 		
 		Thread.sleep(5000);
-		performerPOM.clickExportAdavanced().click();
+		performerPOM.clickExportAdavanced(driver).click();
 		test.log(LogStatus.PASS, "File downloaded successfully.");
 		
 		
 		Thread.sleep(4000);
-		performerPOM.clickeditButton().click();
+		performerPOM.clickeditButton(driver).click();
 		
 		test.log(LogStatus.PASS,"edit notice details icon open successfully");
 		
 		
 		Thread.sleep(5000);
-		performerPOM.Actionclosepopup().click();
+		performerPOM.Actionclosepopup(driver).click();
 		
 		
 	/*	Thread.sleep(4000);
-		performerPOM.clickdeleteButton().click();
+		performerPOM.clickdeleteButton(driver).click();
 		
 		  Thread.sleep(5000);
 		    // Switching to Alert        
@@ -2015,29 +2032,29 @@ public class MethodPOM1 extends BasePage {
 	        alert.accept();		*/
 	      //-------------------------------------------Case--------------------------------------------------
 			Thread.sleep(4000);
-			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 			
 			Thread.sleep(4000);
-			performerPOM.clickTypeDropdown1().click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
+			performerPOM.clickTypeDropdown1(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
 			Thread.sleep(4000);
-			performerPOM.selectTypeCase1().click();
+			performerPOM.selectTypeCase1(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickExportAdavanced().click();					//Clicking on 'Excel Report' image.
+			performerPOM.clickExportAdavanced(driver).click();					//Clicking on 'Excel Report' image.
 			test.log(LogStatus.PASS, "File downloaded successfully.");
 		
 			Thread.sleep(4000);
-			performerPOM.clickeditButton().click();
+			performerPOM.clickeditButton(driver).click();
 			
 			test.log(LogStatus.PASS,"edit case details icon open successfully");
 			
 			
 			Thread.sleep(5000);
-			performerPOM.Actionclosepopup().click();
+			performerPOM.Actionclosepopup(driver).click();
 			
 			
 	/*		Thread.sleep(4000);
-			performerPOM.clickdeleteButton().click();
+			performerPOM.clickdeleteButton(driver).click();
 			
 			  Thread.sleep(5000);
 			    // Switching to Alert        
@@ -2058,121 +2075,121 @@ public class MethodPOM1 extends BasePage {
 		        
           //-------------------------------------------Task--------------------------------------------------
 				Thread.sleep(3000);
-			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));	//Wait until records table gets visible.
+			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 			
 			
 			Thread.sleep(3000);
-			performerPOM.clickTypeDropdown1().click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
+			performerPOM.clickTypeDropdown1(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
 			Thread.sleep(3000);
-			performerPOM.selectTypeTask1().click();
+			performerPOM.selectTypeTask1(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+			performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 			test.log(LogStatus.PASS, "File downloaded successfully.");
 			
 			Thread.sleep(3000);
-			performerPOM.viewTaskDetails1().click();	
+			performerPOM.viewTaskDetails1(driver).click();	
 			test.log(LogStatus.PASS, "Show details Task popup open successfully.");
 			
 			Thread.sleep(3000);
-			performerPOM.ActioncloseTaskpopup().click();
+			performerPOM.ActioncloseTaskpopup(driver).click();
 			
 			Thread.sleep(3000);
-			OverduePOM.clickDashboard().click();
+			OverduePOM.clickDashboard(driver).click();
 		        
 	}
 	
-	public static void CustomerMgmt(ExtentTest test) throws InterruptedException
+	public static void CustomerMgmt(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait=new WebDriverWait(getDriver(),30);
+		WebDriverWait wait=new WebDriverWait(driver,30);
 		Thread.sleep(2000);
-	    performerPOM.clickCustomerMgmt().click();
+	    performerPOM.clickCustomerMgmt(driver).click();
 	    Thread.sleep(2000);
-	    performerPOM. clickCustomerMgmtCity().click();
+	    performerPOM. clickCustomerMgmtCity(driver).click();
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtAdd().click();
+	    performerPOM.clickCustomerMgmtAdd(driver).click();
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtCBU().click();
+	    performerPOM.clickCustomerMgmtCBU(driver).click();
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtCBUdropdown().click();
+	    performerPOM.clickCustomerMgmtCBUdropdown(driver).click();
 	   Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtZone().click();
+	    performerPOM.clickCustomerMgmtZone(driver).click();
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtZonedropdown().get(1).click();
+	    performerPOM.clickCustomerMgmtZonedropdown(driver).get(1).click();
 	    Thread.sleep(4000);
-	    performerPOM.clickCustomerMgmtRegion().click();
+	    performerPOM.clickCustomerMgmtRegion(driver).click();
 	 
 	    By locator = By.xpath("//*[@id='ddlRegion_listbox']/li");
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
 		Thread.sleep(4000);
-		WebElement ViewButton = getDriver().findElement(locator);	
+		WebElement ViewButton = driver.findElement(locator);	
 		Thread.sleep(3000);
-		JavascriptExecutor jse=(JavascriptExecutor)getDriver();
+		JavascriptExecutor jse=(JavascriptExecutor)driver;
 	    jse.executeScript("arguments[0].click();", ViewButton);
-	    performerPOM.clickCustomerMgmtRegion().click();
+	    performerPOM.clickCustomerMgmtRegion(driver).click();
 		
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtTerritory().click();
+	    performerPOM.clickCustomerMgmtTerritory(driver).click();
 	   // Thread.sleep(3000);
 	    //performerPOM.clickCustomerMgmtTerritorydropdown(driver).get(0).click();
 	    
 	     By locator1 = By.xpath("//*[@id='ddlTerritory_listbox']/li");
 	     wait.until(ExpectedConditions.presenceOfElementLocated(locator1));
 	  	 Thread.sleep(4000);
-	  	 WebElement ViewButton1 = getDriver().findElement(locator1);	
+	  	 WebElement ViewButton1 = driver.findElement(locator1);	
 	  	 Thread.sleep(3000);
-	  	 JavascriptExecutor jse1=(JavascriptExecutor)getDriver();
+	  	 JavascriptExecutor jse1=(JavascriptExecutor)driver;
 		 jse.executeScript("arguments[0].click();", ViewButton1);
 		 Thread.sleep(3000);
 		 
-	  	 performerPOM.clickCustomerMgmtTerritory().click();
+	  	 performerPOM.clickCustomerMgmtTerritory(driver).click();
 	  	    
 	      Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtCityname().sendKeys("Agra");
+	    performerPOM.clickCustomerMgmtCityname(driver).sendKeys("Agra");
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtSave().click();
+	    performerPOM.clickCustomerMgmtSave(driver).click();
 	    try
 	    {
 	    	 
 	 	    
 	 	   Thread.sleep(5000);
       	   // Capturing alert message.    
-              String alertMessage1= getDriver().switchTo().alert().getText();	
+              String alertMessage1= driver.switchTo().alert().getText();	
                Thread.sleep(3000);
               test.log(LogStatus.PASS, alertMessage1);
             // Accepting alert		
-              getDriver().switchTo().alert().accept();	
+              driver.switchTo().alert().accept();	
               Thread.sleep(4000);
-      	     performerPOM.clickCustomerMgmtClose2().click();
+      	     performerPOM.clickCustomerMgmtClose2(driver).click();
       	     Thread.sleep(4000);
 	    }
          catch(Exception e)
          {
         	 Thread.sleep(3000);
- 	 	    performerPOM.clickCustomerMgmtOk().click();
+ 	 	    performerPOM.clickCustomerMgmtOk(driver).click();
  	 	  test.log(LogStatus.PASS, "City Added Successfully");
          }
 	    
 	   
 
 	/*    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtEdit().click();
-	    performerPOM.clickCustomerMgmtCityname().clear();
+	    performerPOM.clickCustomerMgmtEdit(driver).click();
+	    performerPOM.clickCustomerMgmtCityname(driver).clear();
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtCityname().sendKeys("Aaurngabad");
+	    performerPOM.clickCustomerMgmtCityname(driver).sendKeys("Aaurngabad");
 	    Thread.sleep(3000);
-	    performerPOM.clickCustomerMgmtSave().click();
+	    performerPOM.clickCustomerMgmtSave(driver).click();
 //	    Thread.sleep(3000);
-//	    performerPOM.clickCustomerMgmtok().click();
+//	    performerPOM.clickCustomerMgmtok(driver).click();
 	    
 	    Thread.sleep(6000);
 	    By locator2 = By.xpath("/html/body/div[27]/div[3]/button");        //clickUploadfile
 		    wait.until(ExpectedConditions.presenceOfElementLocated(locator2));
 		  	Thread.sleep(4000);
-		  	WebElement ViewButton2 = getDriver().findElement(locator2);	
+		  	WebElement ViewButton2 = driver.findElement(locator2);	
 		  	Thread.sleep(3000);
-		  	JavascriptExecutor jse2=(JavascriptExecutor)getDriver();
+		  	JavascriptExecutor jse2=(JavascriptExecutor)driver;
 		  	Thread.sleep(3000);
 		    jse2.executeScript("arguments[0].click();", ViewButton2);
 
@@ -2180,60 +2197,60 @@ public class MethodPOM1 extends BasePage {
 	    test.log(LogStatus.PASS, "City Updated Successfully");*/
 	    
 //	    Thread.sleep(3000);
-//	    performerPOM.clickCustomerMgmtDelete().click();
+//	    performerPOM.clickCustomerMgmtDelete(driver).click();
 //	    
 //	    Thread.sleep(5000);
 //	   // Capturing alert message.    
-//        String alertMessage1= getDriver().switchTo().alert().getText();	
+//        String alertMessage1= driver.switchTo().alert().getText();	
 //         Thread.sleep(3000);
 //        test.log(LogStatus.PASS, alertMessage1);
 //      // Accepting alert		
-//        getDriver().switchTo().alert().accept();	
+//        driver.switchTo().alert().accept();	
 //        
 //        Thread.sleep(5000);
 //     // Capturing alert message.    
-//        String alertMessage= getDriver().switchTo().alert().getText();	
+//        String alertMessage= driver.switchTo().alert().getText();	
 //         Thread.sleep(3000);
 //        test.log(LogStatus.PASS, alertMessage);
 //      // Accepting alert		
-//        getDriver().switchTo().alert().accept();	
+//        driver.switchTo().alert().accept();	
 	    
 //	    Thread.sleep(3000);
-//	    performerPOM.clickCustomerMgmtCustomer().click();
+//	    performerPOM.clickCustomerMgmtCustomer(driver).click();
 //	    Thread.sleep(3000);
-//	    performerPOM.clickCustomerMgmtCBUFilter().click();
+//	    performerPOM.clickCustomerMgmtCBUFilter(driver).click();
 //	    Thread.sleep(3000);
-//	    performerPOM.clickCustomerMgmtCBUFilter1().click();
+//	    performerPOM.clickCustomerMgmtCBUFilter1(driver).click();
 	    
 	   
 	}
-	public static void CustomerMgmtCustomer(ExtentTest test) throws InterruptedException
+	public static void CustomerMgmtCustomer(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait=new WebDriverWait(getDriver(),30);
+		WebDriverWait wait=new WebDriverWait(driver,30);
 		 Thread.sleep(2000);
-		    performerPOM.clickCustomerMgmt().click();
+		    performerPOM.clickCustomerMgmt(driver).click();
 		  Thread.sleep(4000);
-		    performerPOM.clickCustomerMgmtCustomer().click();
+		    performerPOM.clickCustomerMgmtCustomer(driver).click();
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerMgmtAdd().click();
+		    performerPOM.clickCustomerMgmtAdd(driver).click();
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerName().sendKeys("Amol");
+		    performerPOM.clickCustomerName(driver).sendKeys("Amol");
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerID().sendKeys("030");
+		    performerPOM.clickCustomerID(driver).sendKeys("030");
 		    Thread.sleep(3000);
-		    performerPOM.clickSPOCName().sendKeys("Shiv");
+		    performerPOM.clickSPOCName(driver).sendKeys("Shiv");
 		    Thread.sleep(3000);
-		    performerPOM.clickEmailID().sendKeys("shiv@yahoo.com");
+		    performerPOM.clickEmailID(driver).sendKeys("shiv@yahoo.com");
 		    Thread.sleep(3000);
-		    performerPOM.clickMobNo().sendKeys("0000080000");
+		    performerPOM.clickMobNo(driver).sendKeys("0000080000");
 		     Thread.sleep(3000);
-		    performerPOM.clickWhatsappNo().sendKeys("1234078900");
+		    performerPOM.clickWhatsappNo(driver).sendKeys("1234078900");
 		    Thread.sleep(3000);
-		    performerPOM.clickCity1().click();
+		    performerPOM.clickCity1(driver).click();
 		    Thread.sleep(3000);
-		    performerPOM.selectCity1().click();
+		    performerPOM.selectCity1(driver).click();
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerMgmtSave().click();
+		    performerPOM.clickCustomerMgmtSave(driver).click();
 		    
 		    try
 		    {
@@ -2241,130 +2258,130 @@ public class MethodPOM1 extends BasePage {
 		 	    
 		 	   Thread.sleep(5000);
 	      	   // Capturing alert message.    
-	              String alertMessage1= getDriver().switchTo().alert().getText();	
+	              String alertMessage1= driver.switchTo().alert().getText();	
 	               Thread.sleep(3000);
 	              test.log(LogStatus.PASS, alertMessage1);
 	            // Accepting alert		
-	              getDriver().switchTo().alert().accept();	
+	              driver.switchTo().alert().accept();	
 	              Thread.sleep(5000);
-	      	     performerPOM.clickCustomerMgmtClose().click();
+	      	     performerPOM.clickCustomerMgmtClose(driver).click();
 	      	     Thread.sleep(4000);
 		    }
 	         catch(Exception e)
 	         {
 	        	 Thread.sleep(3000);
-	 	 	    performerPOM.clickCustomerMgmtOk().click();
+	 	 	    performerPOM.clickCustomerMgmtOk(driver).click();
 	 	 	  test.log(LogStatus.PASS, "Customer Added Successfully");
 	         }
 		    
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerMgmtEdit1().click();
+		    performerPOM.clickCustomerMgmtEdit1(driver).click();
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerID().clear();
+		    performerPOM.clickCustomerID(driver).clear();
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerID().sendKeys("330");
+		    performerPOM.clickCustomerID(driver).sendKeys("330");
 		    Thread.sleep(3000);
-		    performerPOM.clickCity1().click();
+		    performerPOM.clickCity1(driver).click();
 		    Thread.sleep(3000);
-		    performerPOM.selectCity1().click();
+		    performerPOM.selectCity1(driver).click();
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerMgmtSave().click();
+		    performerPOM.clickCustomerMgmtSave(driver).click();
 //		    Thread.sleep(5000);
-//		    performerPOM.clickCustomerMgmtok().click();
+//		    performerPOM.clickCustomerMgmtok(driver).click();
 		    
 		    Thread.sleep(6000);
 		    By locator = By.xpath("(//button[@class='k-button k-primary'])[1]");        //clickUploadfile
  		    wait.until(ExpectedConditions.presenceOfElementLocated(locator));
  		  	Thread.sleep(4000);
- 		  	WebElement ViewButton = getDriver().findElement(locator);	
+ 		  	WebElement ViewButton = driver.findElement(locator);	
  		  	Thread.sleep(3000);
- 		  	JavascriptExecutor jse=(JavascriptExecutor)getDriver();
+ 		  	JavascriptExecutor jse=(JavascriptExecutor)driver;
  		  	Thread.sleep(3000);
  		    jse.executeScript("arguments[0].click();", ViewButton);
  		    
 		    Thread.sleep(3000);
 		    test.log(LogStatus.PASS, "Customer Updated Successfully");
 //		    Thread.sleep(3000);
-//		    performerPOM.clickCustomerMgmtDelete1().click();
+//		    performerPOM.clickCustomerMgmtDelete1(driver).click();
 //
 //		    Thread.sleep(5000);
 //		   // Capturing alert message.    
-//	        String alertMessage1= getDrivr().switchTo().alert().getText();	
+//	        String alertMessage1= driver.switchTo().alert().getText();	
 //	         Thread.sleep(3000);
 //	        test.log(LogStatus.PASS, alertMessage1);
 //	      // Accepting alert		
-//	        getDriver().switchTo().alert().accept();	
+//	        driver.switchTo().alert().accept();	
 //	        
 //	        Thread.sleep(5000);	
 //	     // Capturing alert message.    
-//	        String alertMessage= getDriver().switchTo().alert().getText();	
+//	        String alertMessage= driver.switchTo().alert().getText();	
 //	         Thread.sleep(3000);
 //	        test.log(LogStatus.PASS, alertMessage);
 //	      // Accepting alert		
-//	        getDriver().switchTo().alert().accept();	
+//	        driver.switchTo().alert().accept();	
 	        
 	        Thread.sleep(6000);
-		    performerPOM.clickCustomerUpload().click();
+		    performerPOM.clickCustomerUpload(driver).click();
 		    
 		    Thread.sleep(6000);
-		    performerPOM.clickChooseFile();
+		    performerPOM.clickChooseFile(driver);
 
 		    Thread.sleep(6000);
 		    By locator1 = By.xpath("//*[@id='btnFileUploadForCustomer']");        //clickUploadfile
  		    wait.until(ExpectedConditions.presenceOfElementLocated(locator));
  		  	Thread.sleep(4000);
- 		  	WebElement ViewButton1 = getDriver().findElement(locator1);	
+ 		  	WebElement ViewButton1 = driver.findElement(locator1);	
  		  	Thread.sleep(3000);
- 		  	JavascriptExecutor js1=(JavascriptExecutor)getDriver();
+ 		  	JavascriptExecutor js1=(JavascriptExecutor)driver;
  		  	Thread.sleep(3000);
  		    jse.executeScript("arguments[0].click();", ViewButton1);
  		   //jse.executeScript("arguments[0].click();", ViewButton);
  		   
 // 		  Thread.sleep(2000);
-//		  performerPOM.clickCustomerUpload().click();
+//		  performerPOM.clickCustomerUpload(driver).click();
 		    
 		    try
 		    {
 		 	    
 		 	   Thread.sleep(5000);
 	      	   // Capturing alert message.    
-	              String alertMessage2= getDriver().switchTo().alert().getText();	
+	              String alertMessage2= driver.switchTo().alert().getText();	
 	               Thread.sleep(3000);
 	              test.log(LogStatus.PASS, alertMessage2);
 	            // Accepting alert		
-	              getDriver().switchTo().alert().accept();	
+	              driver.switchTo().alert().accept();	
 	              Thread.sleep(4000);
 	      	   
 		    }
 	         catch(Exception e)
 	         {
 	        	 Thread.sleep(2000);
-	   		  performerPOM.clickCustomerUpload().click();
+	   		  performerPOM.clickCustomerUpload(driver).click();
 	        	 Thread.sleep(3000);
-	 		    performerPOM.clickCustomerErrotfile().click();
+	 		    performerPOM.clickCustomerErrotfile(driver).click();
 	 		   test.log(LogStatus.FAIL, "Download Error File");
 	 	 	 Thread.sleep(4000);
-     	     performerPOM.clickCustomerMgmtClose().click();
+     	     performerPOM.clickCustomerMgmtClose(driver).click();
 	         }
 		      
 		    Thread.sleep(3000);
-		    performerPOM.clickCustomerUploadOutStanding().click();
+		    performerPOM.clickCustomerUploadOutStanding(driver).click();
 		    
 		    Thread.sleep(3000);
-		    performerPOM.clickChooseFile1();
+		    performerPOM.clickChooseFile1(driver);
 		    
 		    Thread.sleep(3000);
-		    performerPOM.clickUploadfile1().click();
+		    performerPOM.clickUploadfile1(driver).click();
 		    try
 		    {
 		 	    
 		 	   Thread.sleep(5000);
 	      	   // Capturing alert message.    
-	              String alertMessage2= getDriver().switchTo().alert().getText();	
+	              String alertMessage2= driver.switchTo().alert().getText();	
 	               Thread.sleep(3000);
 	              test.log(LogStatus.PASS, alertMessage2);
 	            // Accepting alert		
-	              getDriver().switchTo().alert().accept();	
+	              driver.switchTo().alert().accept();	
 	              Thread.sleep(4000);
 	      	   
 		    }
@@ -2372,81 +2389,81 @@ public class MethodPOM1 extends BasePage {
 	         {
 	        	
 	   		   Thread.sleep(3000);
-		       performerPOM.clickPlanVisitErrotfile().click();
+		       performerPOM.clickPlanVisitErrotfile(driver).click();
 	 	 	  test.log(LogStatus.FAIL, "Download Error File");
 	 	 	 Thread.sleep(4000);
-    	     performerPOM.clickCustomerMgmtClose1().click();
+    	     performerPOM.clickCustomerMgmtClose1(driver).click();
 	         }
 		    
 		   
 	}
-	public static void CustomerMgmtPalnVisit(ExtentTest test) throws InterruptedException
+	public static void CustomerMgmtPalnVisit(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait=new WebDriverWait(getDriver(),30);
+		WebDriverWait wait=new WebDriverWait(driver,30);
 		 Thread.sleep(2000);
-		    performerPOM.clickCustomerMgmt().click();
+		    performerPOM.clickCustomerMgmt(driver).click();
 	     
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisit().click();
+		    performerPOM.clickPlanVisit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitAdd().click();
+		    performerPOM.clickPlanVisitAdd(driver).click();
 		    
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitcustomaerid().click();
+		    performerPOM.clickPlanVisitcustomaerid(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.selectPlanVisitcustomaerid().click();
+		    performerPOM.selectPlanVisitcustomaerid(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitcustomaerid().click();
+		    performerPOM.clickPlanVisitcustomaerid(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitdate().clear();
+		    performerPOM.clickPlanVisitdate(driver).clear();
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitdate().sendKeys("16-02-2023");
+		    performerPOM.clickPlanVisitdate(driver).sendKeys("16-02-2023");
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitremark().sendKeys("Ok");
+		    performerPOM.clickPlanVisitremark(driver).sendKeys("Ok");
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitsubmit().click();
+		    performerPOM.clickPlanVisitsubmit(driver).click();
 		    
 		    Thread.sleep(5000);
 			   // Capturing alert message.    
-		        String alertMessage1= getDriver().switchTo().alert().getText();	
+		        String alertMessage1= driver.switchTo().alert().getText();	
 		         Thread.sleep(3000);
 		        test.log(LogStatus.PASS, alertMessage1);
 		      // Accepting alert		
-		        getDriver().switchTo().alert().accept();	
+		        driver.switchTo().alert().accept();	
 		        Thread.sleep(3000);
-	 	 	    performerPOM.clickCustomerMgmtOk().click();
+	 	 	    performerPOM.clickCustomerMgmtOk(driver).click();
 	 	 	  test.log(LogStatus.PASS, "Plan Visit Successfully Added");
 	 	 	  Thread.sleep(3000);
-	 	 	   performerPOM.startDate().sendKeys("01-02-2023");
+	 	 	   performerPOM.startDate(driver).sendKeys("01-02-2023");
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.endDate().sendKeys("28-02-2023");
+	 	 	   performerPOM.endDate(driver).sendKeys("28-02-2023");
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickPlanVisityear().clear();
+	 	 	   performerPOM.clickPlanVisityear(driver).clear();
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickPlanVisityear().sendKeys("2023",Keys.ENTER);
+	 	 	   performerPOM.clickPlanVisityear(driver).sendKeys("2023",Keys.ENTER);
 	 	 	 Thread.sleep(3000);
-	 	 	  performerPOM.clickPlanVisitedit().click();
-	 	 	performerPOM.clickPlanVisitedit().click();
-	 	 	 performerPOM.clickPlanVisitremark().clear();
+	 	 	  performerPOM.clickPlanVisitedit(driver).click();
+	 	 	performerPOM.clickPlanVisitedit(driver).click();
+	 	 	 performerPOM.clickPlanVisitremark(driver).clear();
 	 	 	 Thread.sleep(2000);
-		    performerPOM.clickPlanVisitremark().sendKeys("Ok");
+		    performerPOM.clickPlanVisitremark(driver).sendKeys("Ok");
 			    Thread.sleep(2000);
-			    performerPOM.clickPlanVisitsubmit().click();
+			    performerPOM.clickPlanVisitsubmit(driver).click();
 			    
 			    Thread.sleep(5000);
 				   // Capturing alert message.    
-			        String alertMessage= getDriver().switchTo().alert().getText();	
+			        String alertMessage= driver.switchTo().alert().getText();	
 			         Thread.sleep(3000);
 			        test.log(LogStatus.PASS, alertMessage);
 			      // Accepting alert		
-			        getDriver().switchTo().alert().accept();	
+			        driver.switchTo().alert().accept();	
 //			        Thread.sleep(3000);
 //		 	 	    performerPOM.clickCustomerMgmtok(driver).click();
 		 	 	    
 		 		    By locator3 = By.xpath("/html/body/div[32]/div[3]/button");
 		 		    wait.until(ExpectedConditions.presenceOfElementLocated(locator3));
 		 		  	Thread.sleep(4000);
-		 		  	WebElement ViewButton3 = getDriver().findElement(locator3);	
+		 		  	WebElement ViewButton3 = driver.findElement(locator3);	
 		 		  	Thread.sleep(3000);
 		 		  	JavascriptExecutor jse2=(JavascriptExecutor)driver;
 		 		    jse2.executeScript("arguments[0].click();", ViewButton3);
@@ -2467,191 +2484,189 @@ public class MethodPOM1 extends BasePage {
 					    performerPOM.clickPlanVisitOverdueVisit(driver).click();*/
 	 	 	 
 	}
-	public static void UpdateCommitmentsafterremarks(ExtentTest test) throws InterruptedException
+	public static void UpdateCommitmentsafterremarks(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		WebDriverWait wait=new WebDriverWait(getDriver(),30);
+		WebDriverWait wait=new WebDriverWait(driver,30);
 		 Thread.sleep(2000);
-		    performerPOM.clickCustomerMgmt().click();
+		    performerPOM.clickCustomerMgmt(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdateCommitmentsafterremarks().click();
+		    performerPOM.clickUpdateCommitmentsafterremarks(driver).click();
 
 		    Thread.sleep(2000);
-		    performerPOM.clickEditPendingVisit().click();
+		    performerPOM.clickEditPendingVisit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickAddNewRecord().click();
+		    performerPOM.clickAddNewRecord(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickScheduleDate().clear();
+		    performerPOM.clickScheduleDate(driver).clear();
 		    Thread.sleep(2000);
-		    performerPOM.clickScheduleDate().sendKeys("05-Feb-2023");
+		    performerPOM.clickScheduleDate(driver).sendKeys("05-Feb-2023");
 		    
             Thread.sleep(2000);
-		    performerPOM.clickAmount2().sendKeys("20000",Keys.ENTER);
+		    performerPOM.clickAmount2(driver).sendKeys("20000",Keys.ENTER);
 		    Thread.sleep(2000);
-		    performerPOM.clickFollowupDate().clear();
+		    performerPOM.clickFollowupDate(driver).clear();
 		    Thread.sleep(2000);
-		    performerPOM.clickFollowupDate().sendKeys("07-Feb-2023",Keys.ENTER);
+		    performerPOM.clickFollowupDate(driver).sendKeys("07-Feb-2023",Keys.ENTER);
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdate().click();
+		    performerPOM.clickUpdate(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitremark().sendKeys("Ok");
+		    performerPOM.clickPlanVisitremark(driver).sendKeys("Ok");
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitsubmit().click();
+		    performerPOM.clickPlanVisitsubmit(driver).click();
 		    Thread.sleep(5000);
 			   // Capturing alert message.    
-		        String alertMessage2= getDriver().switchTo().alert().getText();	
+		        String alertMessage2= driver.switchTo().alert().getText();	
 		         Thread.sleep(3000);
 		        test.log(LogStatus.PASS, alertMessage2);
 		      // Accepting alert		
-		        getDriver().switchTo().alert().accept();	
+		        driver.switchTo().alert().accept();	
 		        Thread.sleep(2000);
 		        
 
 	        	 Thread.sleep(3000);
-	 	 	    performerPOM.clickCustomerMgmtOk().click();
+	 	 	    performerPOM.clickCustomerMgmtOk(driver).click();
 	 	 	    
 	 	 	  test.log(LogStatus.PASS, "Visit Details Updated Successfully");
 	 	 	  
 	 	 /*	 Thread.sleep(2000);
-			 performerPOM.clickDelete().click();
+			 performerPOM.clickDelete(driver).click();
 			 // Capturing alert message.    
-		        String alertMessage= getDriver().switchTo().alert().getText();	
+		        String alertMessage= driver.switchTo().alert().getText();	
 		         Thread.sleep(3000);
 		        test.log(LogStatus.PASS, alertMessage);
 		      // Accepting alert		
-		        getDriver().switchTo().alert().accept();	
+		        driver.switchTo().alert().accept();	
 		     // Capturing alert message.    
-		        String alertMessage1= getDriver().switchTo().alert().getText();	
+		        String alertMessage1= driver.switchTo().alert().getText();	
 		         Thread.sleep(3000);
 		        test.log(LogStatus.PASS, alertMessage1);
 		      // Accepting alert		
-		        getDriver().switchTo().alert().accept();	
+		        driver.switchTo().alert().accept();	
 	 	 	  
 	 	 	Thread.sleep(2000);
-		    performerPOM.clickUpdatedVisit().click();
+		    performerPOM.clickUpdatedVisit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickEditUpdatedVisit().click();
+		    performerPOM.clickEditUpdatedVisit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickAddNewRecord().click();
+		    performerPOM.clickAddNewRecord(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickEdit().click();
+		    performerPOM.clickEdit(driver).click();
 		    Thread.sleep(4000);
-		    performerPOM.clickScheduleDate1().click();;
+		    performerPOM.clickScheduleDate1(driver).click();;
 		    Thread.sleep(4000);
-		    performerPOM.clickScheduleDate2().click();
+		    performerPOM.clickScheduleDate2(driver).click();
             Thread.sleep(2000);
-		    performerPOM.clickAmount2().sendKeys("20000",Keys.ENTER);
+		    performerPOM.clickAmount2(driver).sendKeys("20000",Keys.ENTER);
 		    Thread.sleep(2000);
-		    performerPOM.clickFollowupDate().clear();
+		    performerPOM.clickFollowupDate(driver).clear();
 		    Thread.sleep(2000);
-		    performerPOM.clickFollowupDate().sendKeys("07-Feb-2023",Keys.ENTER);
+		    performerPOM.clickFollowupDate(driver).sendKeys("07-Feb-2023",Keys.ENTER);
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdate().click();
+		    performerPOM.clickUpdate(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickPlanVisitsubmit().click();
+		    performerPOM.clickPlanVisitsubmit(driver).click();
 		    Thread.sleep(5000);
 			   // Capturing alert message.    
-		        String alertMessage= getDriver().switchTo().alert().getText();	
+		        String alertMessage= driver.switchTo().alert().getText();	
 		         Thread.sleep(3000);
 		        test.log(LogStatus.PASS, alertMessage);
 		      // Accepting alert		
-		        getDriver().switchTo().alert().accept();	
+		        driver.switchTo().alert().accept();	
 		        Thread.sleep(2000);
 		        
 
 	        	 Thread.sleep(3000);
-	 	 	    performerPOM.clickCustomerMgmtOk().click();
+	 	 	    performerPOM.clickCustomerMgmtOk(driver).click();
 	 	 	  test.log(LogStatus.PASS, "Visit Details Successfully Updated");*/
 		    
 	}
-	public static void UpdateCommitmentsStatus(ExtentTest test) throws InterruptedException
+	public static void UpdateCommitmentsStatus(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-			WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-			Thread.sleep(500);
-			JavascriptExecutor js = (JavascriptExecutor)getDriver() ;
-			Thread.sleep(2000);
-		    performerPOM.clickCustomerMgmt().click();
+		WebDriverWait wait=new WebDriverWait(driver,30);
+		 Thread.sleep(2000);
+		    performerPOM.clickCustomerMgmt(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdateCommitmentsStatus().click();
+		    performerPOM.clickUpdateCommitmentsStatus(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdateCommitmentsStatusEdit().click();
+		    performerPOM.clickUpdateCommitmentsStatusEdit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickAddNewRecords().click();
+		    performerPOM.clickAddNewRecords(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickCommitDate().sendKeys("01-Feb-2023",Keys.ENTER);
+		    performerPOM.clickCommitDate(driver).sendKeys("01-Feb-2023",Keys.ENTER);
 		    
 		    Thread.sleep(2000);
-		    performerPOM.clickCommitAmount().sendKeys("20000");
+		    performerPOM.clickCommitAmount(driver).sendKeys("20000");
 		    Thread.sleep(2000);
-		    performerPOM.clickRecieptDate().sendKeys("05-Feb-2023");
+		    performerPOM.clickRecieptDate(driver).sendKeys("05-Feb-2023");
 		    Thread.sleep(2000);
-		    performerPOM.clickRecieptDateAmount().sendKeys("10000");
+		    performerPOM.clickRecieptDateAmount(driver).sendKeys("10000");
 		    Thread.sleep(2000);
-		    performerPOM.clickCommitRemark().sendKeys("ok");
+		    performerPOM.clickCommitRemark(driver).sendKeys("ok");
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdateCommit().click();
+		    performerPOM.clickUpdateCommit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdateCommitedit().click();
+		    performerPOM.clickUpdateCommitedit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickCommitRemark().clear();
+		    performerPOM.clickCommitRemark(driver).clear();
 		    Thread.sleep(2000);
-		    performerPOM.clickCommitRemark().sendKeys("ok");
+		    performerPOM.clickCommitRemark(driver).sendKeys("ok");
 		    Thread.sleep(2000);
-		    performerPOM.clickUpdateCommit().click();
+		    performerPOM.clickUpdateCommit(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickSendReminder().click();
+		    performerPOM.clickSendReminder(driver).click();
 		    
 		    Thread.sleep(2000);
 		 // Capturing alert message.    
-	        String alertMessage= getDriver().switchTo().alert().getText();	
+	        String alertMessage= driver.switchTo().alert().getText();	
 	         Thread.sleep(3000);
 	        test.log(LogStatus.PASS, alertMessage);
 	      // Accepting alert		
-	        getDriver().switchTo().alert().accept();
+	        driver.switchTo().alert().accept();
 	        
 	        Thread.sleep(2000);
-		    performerPOM.clickStopReminder().click();
+		    performerPOM.clickStopReminder(driver).click();
 		    Thread.sleep(2000);
 		    // Capturing alert message.    
-	        String alertMessage1= getDriver().switchTo().alert().getText();	
+	        String alertMessage1= driver.switchTo().alert().getText();	
 	         Thread.sleep(3000);
 	        test.log(LogStatus.PASS, alertMessage1);
 	      // Accepting alert		
-	        getDriver().switchTo().alert().accept();
+	        driver.switchTo().alert().accept();
 	        
 	        Thread.sleep(2000);
-		    performerPOM.clickDelete1().click();
+		    performerPOM.clickDelete1(driver).click();
 		    
 		    // Capturing alert message.    
-	        String alertMessage2= getDriver().switchTo().alert().getText();	
+	        String alertMessage2= driver.switchTo().alert().getText();	
 	         Thread.sleep(3000);
 	        test.log(LogStatus.PASS, alertMessage2);
 	      // Accepting alert		
-	        getDriver().switchTo().alert().accept();
+	        driver.switchTo().alert().accept();
 	        Thread.sleep(2000);
-		    performerPOM.clickclosePopuopCommitments().click();
+		    performerPOM.clickclosePopuopCommitments(driver).click();
 	}
-	public static void Report(ExtentTest test) throws InterruptedException
+	public static void Report(WebDriver driver,ExtentTest test) throws InterruptedException
 	{
-		
+		WebDriverWait wait=new WebDriverWait(driver,30);
 		 Thread.sleep(2000);
-		    performerPOM.clickCustomerMgmt().click();
+		    performerPOM.clickCustomerMgmt(driver).click();
 		    Thread.sleep(2000);
-		    performerPOM.clickReports().click();
+		    performerPOM.clickReports(driver).click();
 		    
 		    Thread.sleep(3000);
-	 	 	   performerPOM.startDate().sendKeys("01-02-2023");
+	 	 	   performerPOM.startDate(driver).sendKeys("01-02-2023");
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.endDate().sendKeys("28-02-2023");
+	 	 	   performerPOM.endDate(driver).sendKeys("28-02-2023");
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickPlanVisityear().clear();
+	 	 	   performerPOM.clickPlanVisityear(driver).clear();
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickPlanVisityear().sendKeys("2023",Keys.ENTER);
+	 	 	   performerPOM.clickPlanVisityear(driver).sendKeys("2023",Keys.ENTER);
 
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickSchedulesReport().click();
+	 	 	   performerPOM.clickSchedulesReport(driver).click();
 	 	 	   
 	 	 	   
-//	 	 	   String Data=performerPOM.clickNoRecordFound().getText();
+//	 	 	   String Data=performerPOM.clickNoRecordFound(driver).getText();
 //	 	 	   
 //	 	 	   if(!performerPOM.clickNoRecordFound(driver).isDisplayed())
 //	 	 	   {
@@ -2663,13 +2678,13 @@ public class MethodPOM1 extends BasePage {
 //	 	 	   }
 	 	 	   
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickNoRecordFound().click();
+	 	 	   performerPOM.clickNoRecordFound(driver).click();
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickCommitmentReport().click();
+	 	 	   performerPOM.clickCommitmentReport(driver).click();
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickAuditLogReport().click();
+	 	 	   performerPOM.clickAuditLogReport(driver).click();
 	 	 	 Thread.sleep(3000);
-	 	 	   performerPOM.clickExportAuditLogReport().click();
+	 	 	   performerPOM.clickExportAuditLogReport(driver).click();
 	 	 	   
 	 	 	 test.log(LogStatus.PASS, "File Download succssfully");
 	 	 	   

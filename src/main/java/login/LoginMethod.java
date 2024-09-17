@@ -27,7 +27,7 @@ import com.relevantcodes.extentreports.LogStatus;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import litigationAdditionalOwner.performerPOM;
 
-public class LoginMethod extends BasePage{
+public class LoginMethod {
 	
 	
 	public static WebDriver driver = null;		//WebDriver instance created
@@ -39,15 +39,15 @@ public class LoginMethod extends BasePage{
 	public static XSSFSheet sheet = null;		//Sheet variable
 	public static List<WebElement> elementsList = null;
 	
-//	public static XSSFSheet ReadExcel() throws IOException
-//	{
-//		//String workingDir = System.getProperty("user.dir");
-//		fis = new FileInputStream("C:\\Users\\Admin\\Desktop\\Snehal\\ComplianceLatest\\ComplianceLatest\\TestData\\LitigationSheet.xlsx");
-//		
-//		workbook = new XSSFWorkbook(fis);
-//		sheet = workbook.getSheetAt(12);					//Retrieving second sheet of Workbook
-//		return sheet;
-//	}
+	public static XSSFSheet ReadExcel() throws IOException
+	{
+		//String workingDir = System.getProperty("user.dir");
+		fis = new FileInputStream("C:\\Users\\Admin\\Desktop\\Snehal\\ComplianceLatest\\ComplianceLatest\\TestData\\LitigationSheet.xlsx");
+		
+		workbook = new XSSFWorkbook(fis);
+		sheet = workbook.getSheetAt(12);					//Retrieving second sheet of Workbook
+		return sheet;
+	}
 	
 	@Parameters("browser")
 	@BeforeTest
@@ -132,7 +132,7 @@ public class LoginMethod extends BasePage{
 	void CorrectPassword() throws InterruptedException, IOException
 	{
 		
-		LoginPOM.Clickdiffuser().click();
+		LoginPOM.Clickdiffuser(driver).click();
     	 XSSFSheet sheet = ReadExcel();
 		test = extent.startTest("Litigation Logging In - Correct Password");
 		//test.log(LogStatus.INFO, "Logging into system");
@@ -149,7 +149,7 @@ public class LoginMethod extends BasePage{
 		driver = login.Login.UserLogin1(uname,password,"cfo");		//Method of Login class to login user.
 		
 		 Thread.sleep(3000);
-		 String msg1 = LoginPOM.Clickreadmsg().getText();
+		 String msg1 = LoginPOM.Clickreadmsg(driver).getText();
 			if(msg1.contains("Please enter valid username or password."))
 			{
 				test.log(LogStatus.PASS, "Message Displayed" +msg1);
@@ -183,7 +183,7 @@ public class LoginMethod extends BasePage{
  		driver = login.Login.UserLogin1(uname,password,"cfo");		//Method of Login class to login user.
  		
  		 Thread.sleep(3000);
-		 String msg1 = LoginPOM.Clickreadmsg().getText();
+		 String msg1 = LoginPOM.Clickreadmsg(driver).getText();
 			if(msg1.contains("Please enter valid username or password."))
 			{
 				test.log(LogStatus.PASS, "Message Displayed- " +msg1);
@@ -236,7 +236,7 @@ public class LoginMethod extends BasePage{
 			test.log(LogStatus.PASS, "Please Enter User Name/ Email ID.");
 			
 			Thread.sleep(3000);
-			login.Login.AccountLocked(test, "Cfo-");
+			login.Login.AccountLocked(driver, test, "Cfo-");
 			
 //			 Thread.sleep(5000);
 //			 String msg1 = LoginPOM.ClickreadMsg(driver).getText();
@@ -260,7 +260,7 @@ public class LoginMethod extends BasePage{
 					test.log(LogStatus.PASS, "Google button work successfully");
 					
 					Thread.sleep(3000);
-					login.Login.Google(test, "Cfo-");
+					login.Login.Google(driver, test, "Cfo-");
 					
 					extent.endTest(test);
 					extent.flush();
@@ -273,7 +273,7 @@ public class LoginMethod extends BasePage{
 					test.log(LogStatus.PASS, "Login help link  work successfully");
 					
 					Thread.sleep(3000);
-					login.Login.LoginHelp( test, "Cfo-");
+					login.Login.LoginHelp(driver, test, "Cfo-");
 					Thread.sleep(2000);
 					driver.navigate().back();
 					extent.endTest(test);

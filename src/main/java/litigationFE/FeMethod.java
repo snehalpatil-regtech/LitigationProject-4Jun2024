@@ -20,11 +20,11 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import cfo.CFOcountPOM;
+import licensePerformer.LiPerformerPOM;
 import litigationAdditionalOwner.performerPOM;
-import login.BasePage;
-import cfo.OverduePOM;
+import performer.OverduePOM;
 
-public class FeMethod extends BasePage {
+public class FeMethod {
 	
 	 private static List<WebElement> elementsList = null;
 	    public static FileInputStream fis = null;	//File input stream variable
@@ -33,101 +33,101 @@ public class FeMethod extends BasePage {
 		public static XSSFSheet sheet1 = null;		//Sheet variable
 
 
-//		public static void progress(WebDriver driver) throws InterruptedException
-//		{
-//			WebDriverWait wait = new WebDriverWait(driver, 180);
-//			try
-//			{
-//				Thread.sleep(300);
-//				wait.until(ExpectedConditions.invisibilityOf(LiPerformerPOM.Progress(driver)));
-//			}
-//			catch(Exception e)
-//			{
-//				
-//			}
-//		}
+		public static void progress(WebDriver driver) throws InterruptedException
+		{
+			WebDriverWait wait = new WebDriverWait(driver, 180);
+			try
+			{
+				Thread.sleep(300);
+				wait.until(ExpectedConditions.invisibilityOf(LiPerformerPOM.Progress(driver)));
+			}
+			catch(Exception e)
+			{
+				
+			}
+		}
 		
-		public static void DashBoardFilter(ExtentTest test, String type) throws InterruptedException
+		public static void DashBoardFilter(WebDriver driver,ExtentTest test, String type) throws InterruptedException
 		{
 			
-			WebDriverWait wait=new WebDriverWait(getDriver(),20);
+			WebDriverWait wait=new WebDriverWait(driver,20);
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 	       	js.executeScript("window.scrollBy(0,600)");
 	       	
 	       	Thread.sleep(5000);
-			performerPOM.clickDashboardLocFilter().click();
+			performerPOM.clickDashboardLocFilter(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickDashboardLocFilter1().click();
+			performerPOM.clickDashboardLocFilter1(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickDashboardCaseNoticeFilter().click();
+			performerPOM.clickDashboardCaseNoticeFilter(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickDashboardNoticeFilter().click();
+			performerPOM.clickDashboardNoticeFilter(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickDashboardTypeFilter().click();
+			performerPOM.clickDashboardTypeFilter(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickDashboardTypeFilter1().click();
+			performerPOM.clickDashboardTypeFilter1(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickDashboardDeptFilter().click();
+			performerPOM.clickDashboardDeptFilter(driver).click();
 				
 			Thread.sleep(6000);
-			performerPOM.clickDashboardDeptFilter1().click();
+			performerPOM.clickDashboardDeptFilter1(driver).click();
 			
 			Thread.sleep(6000);
-			performerPOM.clickDashboardstatusFilter().click();
+			performerPOM.clickDashboardstatusFilter(driver).click();
 			
 			Thread.sleep(6000);
-			performerPOM.clickDashboardstatusFilter1().click();
+			performerPOM.clickDashboardstatusFilter1(driver).click();
 			
 	        Thread.sleep(6000);
-			performerPOM.clickDashboardRiskFilter().click();
+			performerPOM.clickDashboardRiskFilter(driver).click();
 			
 	        Thread.sleep(6000);
-			performerPOM.clickDashboardRiskFilter1().click();
+			performerPOM.clickDashboardRiskFilter1(driver).click();
 			
 		    Thread.sleep(5000);
-			performerPOM.clickDashboardApplyBtn().click();
+			performerPOM.clickDashboardApplyBtn(driver).click();
 			
 		    Thread.sleep(5000);
-			performerPOM.clickDashboardClearBtn().click();
+			performerPOM.clickDashboardClearBtn(driver).click();
 			
 			Thread.sleep(500);
-			OverduePOM.clickDashboard().click();
+			OverduePOM.clickDashboard(driver).click();
 			
 			test.log(LogStatus.PASS,"DashBoard Filter Work Successfully");
 			
 		}
-	public static void CaseNoticeStageGraph(ExtentTest test, String type) throws InterruptedException, IOException
+	public static void CaseNoticeStageGraph(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 		
 		{
 			
-			WebDriverWait wait=new WebDriverWait(getDriver(),20);
-			JavascriptExecutor js = (JavascriptExecutor) getDriver();
+			WebDriverWait wait=new WebDriverWait(driver,20);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
 	       	js.executeScript("window.scrollBy(0,800)");
 			
 	       	Thread.sleep(2000);
 		
-	       	int	open = Integer.parseInt(performerPOM.clickCaseNoticeStageHearingGraph().getText());	//Reading Notice Open count.
-		    performerPOM.clickCaseNoticeStageHearingGraph().click();						//Clicking on 'Open' notice
+	       	int	open = Integer.parseInt(performerPOM.clickCaseNoticeStageHearingGraph(driver).getText());	//Reading Notice Open count.
+		    performerPOM.clickCaseNoticeStageHearingGraph(driver).click();						//Clicking on 'Open' notice
 		
 			Thread.sleep(2000);
 			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showChartDetails"));
 			
 			Thread.sleep(10000);
-			CFOcountPOM.readTotalItems1().click();
-			String item = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();
+			String item = CFOcountPOM.readTotalItems1(driver).getText();
 			String[] bits = item.split(" ");								//Splitting the String
 			String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 			int count1 = 0;
 			if(compliancesCount.equalsIgnoreCase("to"))
 			{
 				Thread.sleep(2000);
-			   item = CFOcountPOM.readTotalItems1().getText();
+			   item = CFOcountPOM.readTotalItems1(driver).getText();
 				bits = item.split(" ");								//Splitting the String
 			   compliancesCount = bits[bits.length - 2];
 			}
@@ -153,91 +153,93 @@ public class FeMethod extends BasePage {
 	       	
 	    
 			Thread.sleep(3000);
-			performerPOM.CaseNoticeTypeViewGraph().click();
+			performerPOM.CaseNoticeTypeViewGraph(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.CaseNoticeTypeclosePopupGraph().click();
+			performerPOM.CaseNoticeTypeclosePopupGraph(driver).click();
 			
 			
 		/*	Thread.sleep(3000);
-			performerPOM.clickLocationFilter().click();
+			performerPOM.clickLocationFilter(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickLocationFilter1().click();
+			performerPOM.clickLocationFilter1(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickLocationFilter3().click();
+			performerPOM.clickLocationFilter3(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickCaseNotice().click();
+			performerPOM.clickCaseNotice(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.selectCaseNotice().click();
+			performerPOM.selectCaseNotice(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickStatusFilter().click();
+			performerPOM.clickStatusFilter(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.selectstatusFiltercfo().click();
+			performerPOM.selectstatusFiltercfo(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickDepartmentFilter().click();
+			performerPOM.clickDepartmentFilter(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.selectDepartmentFilter2().click();
+			performerPOM.selectDepartmentFilter2(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickCaseNoticeType1().click();
+			performerPOM.clickCaseNoticeType1(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.selectCaseNoticeType2().click();
+			performerPOM.selectCaseNoticeType2(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickRiskFilter().click();
+			performerPOM.clickRiskFilter(driver).click();
 			
 
 			Thread.sleep(5000);
-			performerPOM.selectRiskFilter2cfo().click();
+			performerPOM.selectRiskFilter2cfo(driver).click();
 			
 //			Thread.sleep(5000);
-//			performerPOM.clickAgeFilter().click();
+//			performerPOM.clickAgeFilter(driver).click();
 //			
 //			Thread.sleep(5000);
-//			performerPOM.selectAgeFiltercfo().click();
+//			performerPOM.selectAgeFiltercfo(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickCategoryFilter().click();
+			performerPOM.clickCategoryFilter(driver).click();
 			
 			
 			Thread.sleep(5000);
-			performerPOM.selectCategoryFilter2().click();
+			performerPOM.selectCategoryFilter2(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.clickStageFilter().click();
+			performerPOM.clickStageFilter(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.selectStageFilter2().click(); */
+			performerPOM.selectStageFilter2(driver).click(); */
 			
 			
-			
+			Thread.sleep(500);
+			progress(driver);
 			
 			Thread.sleep(1000);
-			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
-			
+			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
+			Thread.sleep(2000);
+			JavascriptExecutor js1 = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(0,1000)");
 			
 			
 			
 			Thread.sleep(1000);
-			CFOcountPOM.readTotalItems1().click();
-			String item1 = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();
+			String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 			String[] bits1 = item1.split(" ");								//Splitting the String
 			String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 			int count2 = Integer.parseInt(compliancesCount1);
 			
 		    try
 			{
-				performerPOM.clickExcelReport().sendKeys(Keys.PAGE_DOWN);
+				performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
 			}
 			catch(Exception e)
 			{
@@ -251,9 +253,9 @@ public class FeMethod extends BasePage {
 			File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 			
 			Thread.sleep(500);
-			CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+			CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 			Thread.sleep(250);
-			performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+			performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 			test.log(LogStatus.PASS, "File downloaded successfully.");
 			
 			Thread.sleep(5500);
@@ -302,19 +304,19 @@ public class FeMethod extends BasePage {
 			
 
 			Thread.sleep(7000);
-			performerPOM.clearButton().click();
+			performerPOM.clearButton(driver).click();
 			
 			
 			Thread.sleep(3000);
-			getDriver().switchTo().parentFrame();
+			driver.switchTo().parentFrame();
 			Thread.sleep(2000);
-			performerPOM.caseNoticeSummaryGraphClose().click();
+			performerPOM.caseNoticeSummaryGraphClose(driver).click();
 			
 			Thread.sleep(3000);
-			OverduePOM.clickDashboard().click();
+			OverduePOM.clickDashboard(driver).click();
 			
 	   }	
-	public static void CaseNoticeTypeGraph(ExtentTest test, String type) throws InterruptedException, IOException
+	public static void CaseNoticeTypeGraph(WebDriver driver, ExtentTest test, String type) throws InterruptedException, IOException
 	{
 		
 //		Thread.sleep(3000);
@@ -322,29 +324,29 @@ public class FeMethod extends BasePage {
 		
 		
 		
-		WebDriverWait wait=new WebDriverWait(getDriver(),20);
-		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
        	js.executeScript("window.scrollBy(0,1000)");
 		
        	Thread.sleep(2000);
 	
-       	int	open = Integer.parseInt(performerPOM.CaseNoticeTypeOutwardPlaintiff().getText());	//Reading Notice Open count.
-	    performerPOM.CaseNoticeTypeOutwardPlaintiff().click();						//Clicking on 'Open' notice
+       	int	open = Integer.parseInt(performerPOM.CaseNoticeTypeOutwardPlaintiff(driver).getText());	//Reading Notice Open count.
+	    performerPOM.CaseNoticeTypeOutwardPlaintiff(driver).click();						//Clicking on 'Open' notice
 	    
 	    
 	    Thread.sleep(2000);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showChartDetails"));
 		
 		Thread.sleep(10000);
-		CFOcountPOM.readTotalItems1().click();
-		String item = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits = item.split(" ");								//Splitting the String
 		String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 		int count1 = 0;
 		if(compliancesCount.equalsIgnoreCase("to"))
 		{
 			Thread.sleep(2000);
-		   item = CFOcountPOM.readTotalItems1().getText();
+		   item = CFOcountPOM.readTotalItems1(driver).getText();
 			bits = item.split(" ");								//Splitting the String
 		   compliancesCount = bits[bits.length - 2];
 		}
@@ -370,91 +372,92 @@ public class FeMethod extends BasePage {
        	
     
 		Thread.sleep(5000);
-		performerPOM.CaseNoticeTypeViewGraph().click();
+		performerPOM.CaseNoticeTypeViewGraph(driver).click();
 		
 		Thread.sleep(5000);
-		performerPOM.CaseNoticeTypeclosePopupGraph().click();
+		performerPOM.CaseNoticeTypeclosePopupGraph(driver).click();
 		
 		
 	/*	Thread.sleep(3000);
-		performerPOM.clickLocationFilter().click();
+		performerPOM.clickLocationFilter(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickLocationFilter1().click();
+		performerPOM.clickLocationFilter1(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickLocationFilter3().click();
+		performerPOM.clickLocationFilter3(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickCaseNotice().click();
+		performerPOM.clickCaseNotice(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.selectCaseNotice().click();
+		performerPOM.selectCaseNotice(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickStatusFilter().click();
+		performerPOM.clickStatusFilter(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectstatusFiltercfo().click();
+		performerPOM.selectstatusFiltercfo(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickDepartmentFilter().click();
+		performerPOM.clickDepartmentFilter(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectDepartmentFilter2().click();
+		performerPOM.selectDepartmentFilter2(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickCaseNoticeType1().click();
+		performerPOM.clickCaseNoticeType1(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectCaseNoticeType2().click();
+		performerPOM.selectCaseNoticeType2(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickRiskFilter().click();
+		performerPOM.clickRiskFilter(driver).click();
 		
 
 		Thread.sleep(4000);
-		performerPOM.selectRiskFilter2cfo().click();
+		performerPOM.selectRiskFilter2cfo(driver).click();
 		
 //		Thread.sleep(5000);
-//		performerPOM.clickAgeFilter().click();
+//		performerPOM.clickAgeFilter(driver).click();
 //		
 //		Thread.sleep(5000);
-//		performerPOM.selectAgeFiltercfo().click();
+//		performerPOM.selectAgeFiltercfo(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickCategoryFilter().click();
+		performerPOM.clickCategoryFilter(driver).click();
 		
 		
 		Thread.sleep(4000);
-		performerPOM.selectCategoryFilter2().click();
+		performerPOM.selectCategoryFilter2(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickStageFilter().click();
+		performerPOM.clickStageFilter(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectStageFilter2().click(); */
+		performerPOM.selectStageFilter2(driver).click(); */
 		
-		
+		Thread.sleep(500);
+		progress(driver);
 		
 		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
 		Thread.sleep(2000);
-		
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,1000)");
 		
 		
 		
 		Thread.sleep(10000);
-		CFOcountPOM.readTotalItems1().click();
-		String item1 = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits1 = item1.split(" ");								//Splitting the String
 		String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 		int count2 = Integer.parseInt(compliancesCount1);
 		
 	    try
 		{
-			performerPOM.clickExcelReport().sendKeys(Keys.PAGE_DOWN);
+			performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
 		}
 		catch(Exception e)
 		{
@@ -468,9 +471,9 @@ public class FeMethod extends BasePage {
 		File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 		
 		Thread.sleep(500);
-		CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 		Thread.sleep(250);
-		performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+		performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 		test.log(LogStatus.PASS, "File downloaded successfully.");
 		
 		Thread.sleep(5500);
@@ -519,44 +522,44 @@ public class FeMethod extends BasePage {
 		
 
 		Thread.sleep(7000);
-		performerPOM.clearButton().click();
+		performerPOM.clearButton(driver).click();
 		
 		
 		Thread.sleep(3000);
-		getDriver().switchTo().parentFrame();
+		driver.switchTo().parentFrame();
 		Thread.sleep(2000);
-		performerPOM.caseNoticeSummaryGraphClose().click();
+		performerPOM.caseNoticeSummaryGraphClose(driver).click();
 		
 		Thread.sleep(3000);
-		OverduePOM.clickDashboard().click();
+		OverduePOM.clickDashboard(driver).click();
 		
    }	
-	public static void RiskSummaryGraph(ExtentTest test, String type) throws InterruptedException, IOException
+	public static void RiskSummaryGraph(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 	
 	{
 		
-		WebDriverWait wait=new WebDriverWait(getDriver(),20);
-		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+		WebDriverWait wait=new WebDriverWait(driver,20);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
        	js.executeScript("window.scrollBy(0,1500)");
 		
        	Thread.sleep(2000);
 	
-      	int	open = Integer.parseInt(performerPOM.RiskSummaryHigh().getText());	//Reading Notice Open count.
-	    performerPOM.RiskSummaryHigh().click();						//Clicking on 'Open' notice
+      	int	open = Integer.parseInt(performerPOM.RiskSummaryHigh(driver).getText());	//Reading Notice Open count.
+	    performerPOM.RiskSummaryHigh(driver).click();						//Clicking on 'Open' notice
 	
 		Thread.sleep(2000);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showChartDetails"));
 		
 		Thread.sleep(10000);
-		CFOcountPOM.readTotalItems1().click();
-		String item = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits = item.split(" ");								//Splitting the String
 		String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 		int count1 = 0;
 		if(compliancesCount.equalsIgnoreCase("to"))
 		{
 			Thread.sleep(2000);
-		   item = CFOcountPOM.readTotalItems1().getText();
+		   item = CFOcountPOM.readTotalItems1(driver).getText();
 			bits = item.split(" ");								//Splitting the String
 		   compliancesCount = bits[bits.length - 2];
 		}
@@ -582,90 +585,91 @@ public class FeMethod extends BasePage {
        	
     	
 		Thread.sleep(5000);
-		performerPOM.CaseNoticeTypeViewGraph().click();
+		performerPOM.CaseNoticeTypeViewGraph(driver).click();
 		
 		Thread.sleep(5000);
-		performerPOM.CaseNoticeTypeclosePopupGraph().click();
+		performerPOM.CaseNoticeTypeclosePopupGraph(driver).click();
 		
 	/*	Thread.sleep(3000);
-		performerPOM.clickLocationFilter().click();
+		performerPOM.clickLocationFilter(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickLocationFilter1().click();
+		performerPOM.clickLocationFilter1(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickLocationFilter3().click();
+		performerPOM.clickLocationFilter3(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.clickCaseNotice().click();
+		performerPOM.clickCaseNotice(driver).click();
 		
 		Thread.sleep(3000);
-		performerPOM.selectCaseNotice().click();
+		performerPOM.selectCaseNotice(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickStatusFilter().click();
+		performerPOM.clickStatusFilter(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectstatusFiltercfo().click();
+		performerPOM.selectstatusFiltercfo(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickDepartmentFilter().click();
+		performerPOM.clickDepartmentFilter(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectDepartmentFilter2().click();
+		performerPOM.selectDepartmentFilter2(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickCaseNoticeType1().click();
+		performerPOM.clickCaseNoticeType1(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectCaseNoticeType2().click();
+		performerPOM.selectCaseNoticeType2(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickRiskFilter().click();
+		performerPOM.clickRiskFilter(driver).click();
 		
 
 		Thread.sleep(4000);
-		performerPOM.selectRiskFilter2cfo().click();
+		performerPOM.selectRiskFilter2cfo(driver).click();
 		
 //		Thread.sleep(5000);
-//		performerPOM.clickAgeFilter().click();
+//		performerPOM.clickAgeFilter(driver).click();
 //		
 //		Thread.sleep(5000);
-//		performerPOM.selectAgeFiltercfo().click();
+//		performerPOM.selectAgeFiltercfo(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickCategoryFilter().click();
+		performerPOM.clickCategoryFilter(driver).click();
 		
 		
 		Thread.sleep(4000);
-		performerPOM.selectCategoryFilter2().click();
+		performerPOM.selectCategoryFilter2(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.clickStageFilter().click();
+		performerPOM.clickStageFilter(driver).click();
 		
 		Thread.sleep(4000);
-		performerPOM.selectStageFilter2().click(); */
+		performerPOM.selectStageFilter2(driver).click(); */
 		
-
+		Thread.sleep(500);
+		progress(driver);
 		
 		Thread.sleep(1000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
 		Thread.sleep(2000);
-		
+		JavascriptExecutor js1 = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,1000)");
 		
 		
 		
 		Thread.sleep(10000);
-		CFOcountPOM.readTotalItems1().click();
-		String item1 = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits1 = item1.split(" ");								//Splitting the String
 		String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 		int count2 = Integer.parseInt(compliancesCount1);
 		
 	    try
 		{
-			performerPOM.clickExcelReport().sendKeys(Keys.PAGE_DOWN);
+			performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
 		}
 		catch(Exception e)
 		{
@@ -679,9 +683,9 @@ public class FeMethod extends BasePage {
 		File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 		
 		Thread.sleep(500);
-		CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 		Thread.sleep(250);
-		performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+		performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 		test.log(LogStatus.PASS, "File downloaded successfully.");
 		
 		Thread.sleep(5500);
@@ -730,44 +734,44 @@ public class FeMethod extends BasePage {
 		
 
 		Thread.sleep(7000);
-		performerPOM.clearButton().click();
+		performerPOM.clearButton(driver).click();
 		
 		
 		Thread.sleep(3000);
-		getDriver().switchTo().parentFrame();
+		driver.switchTo().parentFrame();
 		Thread.sleep(2000);
-		performerPOM.caseNoticeSummaryGraphClose().click();
+		performerPOM.caseNoticeSummaryGraphClose(driver).click();
 		
 		Thread.sleep(3000);
-		OverduePOM.clickDashboard().click();
+		OverduePOM.clickDashboard(driver).click();
 		
 	}
-	 public static void DepartmentSummaryGraph(ExtentTest test, String type) throws InterruptedException, IOException
+	 public static void DepartmentSummaryGraph(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 		
 		{
 			
-			WebDriverWait wait=new WebDriverWait(getDriver(),20);
-			JavascriptExecutor js = (JavascriptExecutor) getDriver();
+			WebDriverWait wait=new WebDriverWait(driver,20);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
 	       	js.executeScript("window.scrollBy(0,1500)");
 			
 	       	Thread.sleep(2000);
 		
-	      	int	open = Integer.parseInt(performerPOM.DepartmentSummaryGraph1().getText());	//Reading Notice Open count.
-		    performerPOM.DepartmentSummaryGraph1().click();						//Clicking on 'Open' notice
+	      	int	open = Integer.parseInt(performerPOM.DepartmentSummaryGraph1(driver).getText());	//Reading Notice Open count.
+		    performerPOM.DepartmentSummaryGraph1(driver).click();						//Clicking on 'Open' notice
 		
 			Thread.sleep(2000);
 			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showChartDetails"));
 			
 			Thread.sleep(10000);
-			CFOcountPOM.readTotalItems1().click();
-			String item = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();
+			String item = CFOcountPOM.readTotalItems1(driver).getText();
 			String[] bits = item.split(" ");								//Splitting the String
 			String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 			int count1 = 0;
 			if(compliancesCount.equalsIgnoreCase("to"))
 			{
 				Thread.sleep(2000);
-			   item = CFOcountPOM.readTotalItems1().getText();
+			   item = CFOcountPOM.readTotalItems1(driver).getText();
 				bits = item.split(" ");								//Splitting the String
 			   compliancesCount = bits[bits.length - 2];
 			}
@@ -793,90 +797,92 @@ public class FeMethod extends BasePage {
 	       	
 	    	
 			Thread.sleep(5000);
-			performerPOM.CaseNoticeTypeViewGraph().click();
+			performerPOM.CaseNoticeTypeViewGraph(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.CaseNoticeTypeclosePopupGraph().click();
+			performerPOM.CaseNoticeTypeclosePopupGraph(driver).click();
 			
 		/*	Thread.sleep(3000);
-			performerPOM.clickLocationFilter().click();
+			performerPOM.clickLocationFilter(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickLocationFilter1().click();
+			performerPOM.clickLocationFilter1(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickLocationFilter3().click();
+			performerPOM.clickLocationFilter3(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickCaseNotice().click();
+			performerPOM.clickCaseNotice(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.selectCaseNotice().click();
+			performerPOM.selectCaseNotice(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickStatusFilter().click();
+			performerPOM.clickStatusFilter(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectstatusFiltercfo().click();
+			performerPOM.selectstatusFiltercfo(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickDepartmentFilter().click();
+			performerPOM.clickDepartmentFilter(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectDepartmentFilter2().click();
+			performerPOM.selectDepartmentFilter2(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickCaseNoticeType1().click();
+			performerPOM.clickCaseNoticeType1(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectCaseNoticeType2().click();
+			performerPOM.selectCaseNoticeType2(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickRiskFilter().click();
+			performerPOM.clickRiskFilter(driver).click();
 			
 
 			Thread.sleep(4000);
-			performerPOM.selectRiskFilter2cfo().click();
+			performerPOM.selectRiskFilter2cfo(driver).click();
 			
 //			Thread.sleep(5000);
-//			performerPOM.clickAgeFilter().click();
+//			performerPOM.clickAgeFilter(driver).click();
 //			
 //			Thread.sleep(7000);
-//			performerPOM.selectAgeFiltercfo().click();
+//			performerPOM.selectAgeFiltercfo(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickCategoryFilter().click();
+			performerPOM.clickCategoryFilter(driver).click();
 			
 			
 			Thread.sleep(4000);
-			performerPOM.selectCategoryFilter2().click();
+			performerPOM.selectCategoryFilter2(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickStageFilter().click();
+			performerPOM.clickStageFilter(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectStageFilter2().click(); */
+			performerPOM.selectStageFilter2(driver).click(); */
 			
 			
-			
+			Thread.sleep(500);
+			progress(driver);
 			
 			Thread.sleep(1000);
-			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
-		
+			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
+			Thread.sleep(2000);
+			JavascriptExecutor js1 = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(0,1000)");
 			
 			
 			
 			Thread.sleep(10000);
-			CFOcountPOM.readTotalItems1().click();
-			String item1 = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();
+			String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 			String[] bits1 = item1.split(" ");								//Splitting the String
 			String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 			int count2 = Integer.parseInt(compliancesCount1);
 			
 		    try
 			{
-				performerPOM.clickExcelReport().sendKeys(Keys.PAGE_DOWN);
+				performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
 			}
 			catch(Exception e)
 			{
@@ -890,9 +896,9 @@ public class FeMethod extends BasePage {
 			File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 			
 			Thread.sleep(500);
-			CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+			CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 			Thread.sleep(250);
-			performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+			performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 			test.log(LogStatus.PASS, "File downloaded successfully.");
 			
 			Thread.sleep(5500);
@@ -941,46 +947,46 @@ public class FeMethod extends BasePage {
 			
 
 			Thread.sleep(7000);
-			performerPOM.clearButton().click();
+			performerPOM.clearButton(driver).click();
 			
 			
 			Thread.sleep(3000);
-			getDriver().switchTo().parentFrame();
+			driver.switchTo().parentFrame();
 			Thread.sleep(2000);
-			performerPOM.caseNoticeSummaryGraphClose().click();
+			performerPOM.caseNoticeSummaryGraphClose(driver).click();
 			
 			Thread.sleep(3000);
-			OverduePOM.clickDashboard().click();
+			OverduePOM.clickDashboard(driver).click();
 			
 			
 		}
-	 public static void LocationSummaryGraph(ExtentTest test, String type) throws InterruptedException, IOException
+	 public static void LocationSummaryGraph(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 		
 		{
 			
-			WebDriverWait wait=new WebDriverWait(getDriver(),20);
-			JavascriptExecutor js = (JavascriptExecutor) getDriver();
+			WebDriverWait wait=new WebDriverWait(driver,20);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
 	      	js.executeScript("window.scrollBy(0,1800)");
 			
 	      	Thread.sleep(2000);
 		
-	      	int	open = Integer.parseInt(performerPOM.LocationSummaryGraph().getText());	//Reading Notice Open count.
-		    performerPOM.LocationSummaryGraph().click();						//Clicking on 'Open' notice
+	      	int	open = Integer.parseInt(performerPOM.LocationSummaryGraph(driver).getText());	//Reading Notice Open count.
+		    performerPOM.LocationSummaryGraph(driver).click();						//Clicking on 'Open' notice
 		
 			Thread.sleep(2000);
 			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showChartDetails"));
 			
 			
 			Thread.sleep(10000);
-			CFOcountPOM.readTotalItems1().click();
-			String item = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();
+			String item = CFOcountPOM.readTotalItems1(driver).getText();
 			String[] bits = item.split(" ");								//Splitting the String
 			String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 			int count1 = 0;
 			if(compliancesCount.equalsIgnoreCase("to"))
 			{
 				Thread.sleep(2000);
-			   item = CFOcountPOM.readTotalItems1().getText();
+			   item = CFOcountPOM.readTotalItems1(driver).getText();
 				bits = item.split(" ");								//Splitting the String
 			   compliancesCount = bits[bits.length - 2];
 			}
@@ -1006,89 +1012,91 @@ public class FeMethod extends BasePage {
 	       	
 	    	
 			Thread.sleep(5000);
-			performerPOM.CaseNoticeTypeViewGraph().click();
+			performerPOM.CaseNoticeTypeViewGraph(driver).click();
 			
 			Thread.sleep(5000);
-			performerPOM.CaseNoticeTypeclosePopupGraph().click();
+			performerPOM.CaseNoticeTypeclosePopupGraph(driver).click();
 			
 		/*	Thread.sleep(3000);
-			performerPOM.clickLocationFilter().click();
+			performerPOM.clickLocationFilter(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickLocationFilter1().click();
+			performerPOM.clickLocationFilter1(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickLocationFilter3().click();
+			performerPOM.clickLocationFilter3(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.clickCaseNotice().click();
+			performerPOM.clickCaseNotice(driver).click();
 			
 			Thread.sleep(3000);
-			performerPOM.selectCaseNotice().click();
+			performerPOM.selectCaseNotice(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickStatusFilter().click();
+			performerPOM.clickStatusFilter(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectstatusFiltercfo().click();
+			performerPOM.selectstatusFiltercfo(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickDepartmentFilter().click();
+			performerPOM.clickDepartmentFilter(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectDepartmentFilter2().click();
+			performerPOM.selectDepartmentFilter2(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickCaseNoticeType1().click();
+			performerPOM.clickCaseNoticeType1(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectCaseNoticeType2().click();
+			performerPOM.selectCaseNoticeType2(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickRiskFilter().click();
+			performerPOM.clickRiskFilter(driver).click();
 			
 
 			Thread.sleep(4000);
-			performerPOM.selectRiskFilter2cfo().click();
+			performerPOM.selectRiskFilter2cfo(driver).click();
 			
 //			Thread.sleep(5000);
-//			performerPOM.clickAgeFilter().click();
+//			performerPOM.clickAgeFilter(driver).click();
 //			
 //			Thread.sleep(5000);
-//			performerPOM.selectAgeFiltercfo().click();
+//			performerPOM.selectAgeFiltercfo(driver).click();
 		
 			Thread.sleep(4000);
-			performerPOM.clickCategoryFilter().click();
+			performerPOM.clickCategoryFilter(driver).click();
 			
 			
 			Thread.sleep(4000);
-			performerPOM.selectCategoryFilter2().click();
+			performerPOM.selectCategoryFilter2(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.clickStageFilter().click();
+			performerPOM.clickStageFilter(driver).click();
 			
 			Thread.sleep(4000);
-			performerPOM.selectStageFilter2().click(); */
+			performerPOM.selectStageFilter2(driver).click(); */
 			
-		
+			Thread.sleep(500);
+			progress(driver);
 			
 			Thread.sleep(1000);
-			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
-			
+			wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
+			Thread.sleep(2000);
+			JavascriptExecutor js1 = (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(0,1000)");
 			
 			
 			
 			Thread.sleep(10000);
-			CFOcountPOM.readTotalItems1().click();
-			String item1 = CFOcountPOM.readTotalItems1().getText();
+			CFOcountPOM.readTotalItems1(driver).click();
+			String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 			String[] bits1 = item1.split(" ");								//Splitting the String
 			String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 			int count2 = Integer.parseInt(compliancesCount1);
 			
 		    try
 			{
-				performerPOM.clickExcelReport().sendKeys(Keys.PAGE_DOWN);
+				performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
 			}
 			catch(Exception e)
 			{
@@ -1102,9 +1110,9 @@ public class FeMethod extends BasePage {
 			File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 			
 			Thread.sleep(500);
-			CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+			CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 			Thread.sleep(250);
-			performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+			performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 			test.log(LogStatus.PASS, "File downloaded successfully.");
 			
 			Thread.sleep(5500);
@@ -1153,44 +1161,44 @@ public class FeMethod extends BasePage {
 			
 
 			Thread.sleep(7000);
-			performerPOM.clearButton().click();
+			performerPOM.clearButton(driver).click();
 			
 			
 			Thread.sleep(3000);
-			getDriver().switchTo().parentFrame();
+			driver.switchTo().parentFrame();
 			Thread.sleep(2000);
-			performerPOM.caseNoticeSummaryGraphClose().click();
+			performerPOM.caseNoticeSummaryGraphClose(driver).click();
 			
 			Thread.sleep(3000);
-			OverduePOM.clickDashboard().click();
+			OverduePOM.clickDashboard(driver).click();
 			
 	}
-	  public static void CategorySummaryGraph(ExtentTest test, String type) throws InterruptedException, IOException
+	  public static void CategorySummaryGraph(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 		
 			{
 				
-				WebDriverWait wait=new WebDriverWait(getDriver(),20);
-				JavascriptExecutor js = (JavascriptExecutor) getDriver();
+				WebDriverWait wait=new WebDriverWait(driver,20);
+				JavascriptExecutor js = (JavascriptExecutor) driver;
 		      	js.executeScript("window.scrollBy(0,2000)");
 				
 		      	Thread.sleep(2000);
 			
-		      	int	open = Integer.parseInt(performerPOM.CategorySummaryGraph().getText());	//Reading Notice Open count.
-			    performerPOM.CategorySummaryGraph().click();						//Clicking on 'Open' notice
+		      	int	open = Integer.parseInt(performerPOM.CategorySummaryGraph(driver).getText());	//Reading Notice Open count.
+			    performerPOM.CategorySummaryGraph(driver).click();						//Clicking on 'Open' notice
 			
 				Thread.sleep(2000);
 				wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showChartDetails"));
 				
 				Thread.sleep(10000);
-				CFOcountPOM.readTotalItems1().click();
-				String item = CFOcountPOM.readTotalItems1().getText();
+				CFOcountPOM.readTotalItems1(driver).click();
+				String item = CFOcountPOM.readTotalItems1(driver).getText();
 				String[] bits = item.split(" ");								//Splitting the String
 				String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 				int count1 = 0;
 				if(compliancesCount.equalsIgnoreCase("to"))
 				{
 					Thread.sleep(2000);
-				   item = CFOcountPOM.readTotalItems1().getText();
+				   item = CFOcountPOM.readTotalItems1(driver).getText();
 					bits = item.split(" ");								//Splitting the String
 				   compliancesCount = bits[bits.length - 2];
 				}
@@ -1222,95 +1230,97 @@ public class FeMethod extends BasePage {
 				
 				
 				Thread.sleep(2000);
-				CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+				CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 				Thread.sleep(2000);
-				performerPOM.clickCaseNoticeStageHearingExport().click();					//Clicking on 'Excel Report' image.
+				performerPOM.clickCaseNoticeStageHearingExport(driver).click();					//Clicking on 'Excel Report' image.
 				test.log(LogStatus.PASS, "File downloaded successfully.");
 				
 				Thread.sleep(5000);
-				performerPOM.CaseNoticeTypeViewGraph().click();
+				performerPOM.CaseNoticeTypeViewGraph(driver).click();
 				
 				Thread.sleep(5000);
-				performerPOM.CaseNoticeTypeclosePopupGraph().click();
+				performerPOM.CaseNoticeTypeclosePopupGraph(driver).click();
 				
 			/*	Thread.sleep(3000);
-				performerPOM.clickLocationFilter().click();
+				performerPOM.clickLocationFilter(driver).click();
 				
 				Thread.sleep(3000);
-				performerPOM.clickLocationFilter1().click();
+				performerPOM.clickLocationFilter1(driver).click();
 				
 				Thread.sleep(3000);
-				performerPOM.clickLocationFilter3().click();
+				performerPOM.clickLocationFilter3(driver).click();
 				
 				Thread.sleep(3000);
-				performerPOM.clickCaseNotice().click();
+				performerPOM.clickCaseNotice(driver).click();
 				
 				Thread.sleep(3000);
-				performerPOM.selectCaseNotice().click();
+				performerPOM.selectCaseNotice(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.clickStatusFilter().click();
+				performerPOM.clickStatusFilter(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.selectstatusFiltercfo().click();
+				performerPOM.selectstatusFiltercfo(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.clickDepartmentFilter().click();
+				performerPOM.clickDepartmentFilter(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.selectDepartmentFilter2().click();
+				performerPOM.selectDepartmentFilter2(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.clickCaseNoticeType1().click();
+				performerPOM.clickCaseNoticeType1(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.selectCaseNoticeType2().click();
+				performerPOM.selectCaseNoticeType2(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.clickRiskFilter().click();
+				performerPOM.clickRiskFilter(driver).click();
 				
 
 				Thread.sleep(4000);
-				performerPOM.selectRiskFilter2cfo().click();
+				performerPOM.selectRiskFilter2cfo(driver).click();
 				
 //				Thread.sleep(5000);
-//				performerPOM.clickAgeFilter().click();
+//				performerPOM.clickAgeFilter(driver).click();
 //				
 //				Thread.sleep(5000);
-//				performerPOM.selectAgeFiltercfo().click();
+//				performerPOM.selectAgeFiltercfo(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.clickCategoryFilter().click();
+				performerPOM.clickCategoryFilter(driver).click();
 				
 				
 				Thread.sleep(4000);
-				performerPOM.selectCategoryFilter2().click();
+				performerPOM.selectCategoryFilter2(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.clickStageFilter().click();
+				performerPOM.clickStageFilter(driver).click();
 				
 				Thread.sleep(4000);
-				performerPOM.selectStageFilter2().click(); */
+				performerPOM.selectStageFilter2(driver).click(); */
 				
-				
+				Thread.sleep(500);
+				progress(driver);
 				
 				Thread.sleep(1000);
-				wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
-				
+				wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
+				Thread.sleep(2000);
+				JavascriptExecutor js1 = (JavascriptExecutor) driver;
 				js.executeScript("window.scrollBy(0,1000)");
 				
 				
 				
 				Thread.sleep(10000);
-				CFOcountPOM.readTotalItems1().click();
-				String item1 = CFOcountPOM.readTotalItems1().getText();
+				CFOcountPOM.readTotalItems1(driver).click();
+				String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 				String[] bits1 = item1.split(" ");								//Splitting the String
 				String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 				int count2 = Integer.parseInt(compliancesCount1);
 				
 			    try
 				{
-					performerPOM.clickExcelReport().sendKeys(Keys.PAGE_DOWN);
+					performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
 				}
 				catch(Exception e)
 				{
@@ -1324,9 +1334,9 @@ public class FeMethod extends BasePage {
 				File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 				
 				Thread.sleep(500);
-				CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+				CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 				Thread.sleep(250);
-				performerPOM.clickExcelReport().click();					//Clicking on 'Excel Report' image.
+				performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 				test.log(LogStatus.PASS, "File downloaded successfully.");
 				
 				Thread.sleep(5500);
@@ -1375,16 +1385,16 @@ public class FeMethod extends BasePage {
 				
 
 				Thread.sleep(7000);
-				performerPOM.clearButton().click();
+				performerPOM.clearButton(driver).click();
 				
 				
 				Thread.sleep(3000);
-				getDriver().switchTo().parentFrame();
+				driver.switchTo().parentFrame();
 				Thread.sleep(2000);
-				performerPOM.caseNoticeSummaryGraphClose().click();
+				performerPOM.caseNoticeSummaryGraphClose(driver).click();
 				
 				Thread.sleep(3000);
-				OverduePOM.clickDashboard().click();
+				OverduePOM.clickDashboard(driver).click();
 			}
 
 }

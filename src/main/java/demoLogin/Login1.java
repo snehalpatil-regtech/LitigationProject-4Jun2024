@@ -21,7 +21,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-
+import licensePerformer.LiPerformerPOM;
 import litigationManagement.CFOMethod;
 
 public class Login1 {
@@ -39,19 +39,19 @@ public class Login1 {
 	
 
 
-//		public static void progress(WebDriver driver) throws InterruptedException
-//		{
-//			WebDriverWait wait = new WebDriverWait(driver, 180);
-//			try
-//			{
-//				Thread.sleep(300);
-//				wait.until(ExpectedConditions.invisibilityOf(LiPerformerPOM.Progress(driver)));
-//			}
-//			catch(Exception e)
-//			{
-//				
-//			}
-//		}
+		public static void progress(WebDriver driver) throws InterruptedException
+		{
+			WebDriverWait wait = new WebDriverWait(driver, 180);
+			try
+			{
+				Thread.sleep(300);
+				wait.until(ExpectedConditions.invisibilityOf(LiPerformerPOM.Progress(driver)));
+			}
+			catch(Exception e)
+			{
+				
+			}
+		}
 		
 		public static void BrowserSetup(String URL)
 		{
@@ -86,7 +86,7 @@ public class Login1 {
 //		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
 //		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
 		
-		//login.Login.BrowserSetup("https://login.teamleaseregtech.com/Login.aspx");					//Method of Login class to set browser.
+		login.Login.BrowserSetup("https://login.teamleaseregtech.com/Login.aspx");					//Method of Login class to set browser.
 		
 		test.log(LogStatus.PASS, "Test Passed.");
 		extent.endTest(test);

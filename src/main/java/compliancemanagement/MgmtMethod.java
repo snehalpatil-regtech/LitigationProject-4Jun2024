@@ -82,7 +82,7 @@ public class MgmtMethod
 		
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		Thread.sleep(2000);
-		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad()));
+		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
 		
 		Thread.sleep(7000);
 		MgmtPOM.clickUserFilter(driver).click();
@@ -141,8 +141,8 @@ public class MgmtMethod
 				//scroll down a page
 				a.sendKeys(Keys.PAGE_DOWN).build().perform();
 				
-				CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-				String s = CFOcountPOM.readTotalItems1().getText();
+				CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+				String s = CFOcountPOM.readTotalItems1(driver).getText();
 				Thread.sleep(2000);
 
 				if(!s.equalsIgnoreCase("No items to display")) {
@@ -242,8 +242,8 @@ public class MgmtMethod
 		a.sendKeys(Keys.PAGE_DOWN).build().perform();
 		
 		Thread.sleep(1000);
-		CFOcountPOM.readTotalItems1().click();
-		String item1 = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits1 = item1.split(" ");								//Splitting the String
 		String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 		int count2 = Integer.parseInt(compliancesCount1);
@@ -264,7 +264,7 @@ public class MgmtMethod
 		File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 		
 		Thread.sleep(500);
-		CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 		Thread.sleep(250);
 		MgmtPOM.clickExport(driver).click();					//Clicking on 'Excel Report' image.
 		test.log(LogStatus.PASS, "File downloaded successfully.");
@@ -431,8 +431,8 @@ public class MgmtMethod
 				//scroll down a page
 				a.sendKeys(Keys.PAGE_DOWN).build().perform();
 				
-				CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-				String s = CFOcountPOM.readTotalItems1().getText();
+				CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+				String s = CFOcountPOM.readTotalItems1(driver).getText();
 				Thread.sleep(2000);
 
 				if(!s.equalsIgnoreCase("No items to display")) {
@@ -589,8 +589,8 @@ public class MgmtMethod
 		a.sendKeys(Keys.PAGE_DOWN).build().perform();
 		
 		Thread.sleep(1000);
-		CFOcountPOM.readTotalItems1().click();
-		String item1 = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits1 = item1.split(" ");								//Splitting the String
 		String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 		int count2 = Integer.parseInt(compliancesCount1);
@@ -611,7 +611,7 @@ public class MgmtMethod
 		File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 		
 		Thread.sleep(500);
-		CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 		Thread.sleep(250);
 		MgmtPOM.clickExport(driver).click();					//Clicking on 'Excel Report' image.
 		test.log(LogStatus.PASS, "File downloaded successfully.");

@@ -12,7 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,11 +21,11 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import cfo.CFOcountPOM;
+import licensePerformer.LiPerformerPOM;
 import litigationAdditionalOwner.performerPOM;
-import login.BasePage;
-import cfo.OverduePOM;
+import performer.OverduePOM;
 
-public class MgmtMethod extends BasePage{
+public class MgmtMethod {
 	
 private static List<WebElement> elementsList = null;
 
@@ -38,33 +38,51 @@ private static List<WebElement> elementsList = null;
 
 	
 
-	public static void AdvocateBill(ExtentTest test) throws InterruptedException
+
+
+	
+	public static void progress(WebDriver driver) throws InterruptedException
 	{
-		 WebDriverWait wait=new WebDriverWait(getDriver(),20);
+		WebDriverWait wait = new WebDriverWait(driver, 180);
+		try
+		{
+			Thread.sleep(300);
+			wait.until(ExpectedConditions.invisibilityOf(LiPerformerPOM.Progress(driver)));
+		}
+		catch(Exception e)
+		{
+			
+		}
+	}
+	
+	
+	public static void AdvocateBill(WebDriver driver,ExtentTest test) throws InterruptedException
+	{
+		 WebDriverWait wait=new WebDriverWait(driver,20);
 		 
 		 Thread.sleep(4000);
-          performerPOM.clickCaseOpen().click();
+          performerPOM.clickCaseOpen(driver).click();
           Thread.sleep(3000);
-          performerPOM.clickEditNotice().click();
+          performerPOM.clickEditNotice(driver).click();
           
-     	 getDriver().switchTo().parentFrame();
+     	 driver.switchTo().parentFrame();
           Thread.sleep(3000);
 		    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 		    
 		   
 		   
 	      Thread.sleep(3000);
-		 performerPOM.clickAdvocateBill().click();
+		 performerPOM.clickAdvocateBill(driver).click();
 		 
 		 Thread.sleep(3000);
-		 performerPOM.clickExportAdvocateBill().click();
+		 performerPOM.clickExportAdvocateBill(driver).click();
 		 Thread.sleep(3000);
-		 performerPOM. clickNewAdvocateBill().click();
+		 performerPOM. clickNewAdvocateBill(driver).click();
 		 
 		/* Thread.sleep(4000);
-		 performerPOM.clickSaveAdvocateBill().click();
+		 performerPOM.clickSaveAdvocateBill(driver).click();
 		 
-			String msg6 = performerPOM.clickReadAdvocateMsg1().getText();		//Reading Message appeared after save button
+			String msg6 = performerPOM.clickReadAdvocateMsg1(driver).getText();		//Reading Message appeared after save button
 		 
 			
 				test.log(LogStatus.PASS, "Message displayed = "+msg6);*/
@@ -76,34 +94,34 @@ private static List<WebElement> elementsList = null;
 		 
 		
 		 Thread.sleep(5000);
-	     performerPOM. clickInvoiceNum().sendKeys("604657");
+	     performerPOM. clickInvoiceNum(driver).sendKeys("604657");
 		 Thread.sleep(5000);
-		 performerPOM. clickInvoiceDate().sendKeys("17-11-2022");
+		 performerPOM. clickInvoiceDate(driver).sendKeys("17-11-2022");
 		 //Thread.sleep(5000);
-		 //performerPOM.clickAdvocateBillPanel().click();
+		 //performerPOM.clickAdvocateBillPanel(driver).click();
 		 Thread.sleep(5000);
-		 performerPOM. clickInvoiceAmount().sendKeys("30000");
+		 performerPOM. clickInvoiceAmount(driver).sendKeys("30000");
 		 Thread.sleep(4000);
-		 performerPOM.clickLawFirm1().click();
-		// performerPOM.selectLawFirm2().get(2).click();
+		 performerPOM.clickLawFirm1(driver).click();
+		// performerPOM.selectLawFirm2(driver).get(2).click();
 		 Thread.sleep(5000);
-		 performerPOM.clickApprover1().click();
+		 performerPOM.clickApprover1(driver).click();
 	      Thread.sleep(5000);
-	      performerPOM.selectApprover1().get(5).click();
+	      performerPOM.selectApprover1(driver).get(5).click();
 		 Thread.sleep(5000);
-		 performerPOM.clickApprover2().click();
+		 performerPOM.clickApprover2(driver).click();
 	     Thread.sleep(5000);
-		 performerPOM.selectApprover2().get(5).click();
+		 performerPOM.selectApprover2(driver).get(5).click();
 		 
 		 Thread.sleep(5000);
-		 performerPOM.clickUploadDoc().click();
+		 performerPOM.clickUploadDoc(driver).click();
 		
 		 Thread.sleep(4000);
-		 performerPOM.clickSaveAdvocateBill().click();
+		 performerPOM.clickSaveAdvocateBill(driver).click();
 		 
 		 Thread.sleep(500);
-			String msg5 = performerPOM.clickReadAdvocateMsg().getText();		//Reading Message appeared after save button
-			String msg7= performerPOM.clickReadAdvocateMsg1().getText();		//Reading Message appeared after save button
+			String msg5 = performerPOM.clickReadAdvocateMsg(driver).getText();		//Reading Message appeared after save button
+			String msg7= performerPOM.clickReadAdvocateMsg1(driver).getText();		//Reading Message appeared after save button
 			if(msg5.equalsIgnoreCase("Advocate Bill Added Successfully."))
 			{
 				test.log(LogStatus.PASS, "Message displayed = "+msg5);
@@ -114,18 +132,18 @@ private static List<WebElement> elementsList = null;
 			{
 				test.log(LogStatus.FAIL, "Message displayed = "+msg7);
 			}
-			performerPOM.clickeditAdvocatebill().click();
+			performerPOM.clickeditAdvocatebill(driver).click();
 			
 			 Thread.sleep(5000);
-		     performerPOM. clickInvoiceNum().clear();
+		     performerPOM. clickInvoiceNum(driver).clear();
 			 Thread.sleep(5000);
-		     performerPOM. clickInvoiceNum().sendKeys("60957");
+		     performerPOM. clickInvoiceNum(driver).sendKeys("60957");
 		     
 		     Thread.sleep(4000);
-			 performerPOM.clickSaveAdvocateBill().click();
+			 performerPOM.clickSaveAdvocateBill(driver).click();
 		     
 			 Thread.sleep(500);
-				String msgg = performerPOM.clickReadAdvocateMsg().getText();		//Reading Message appeared after save button
+				String msgg = performerPOM.clickReadAdvocateMsg(driver).getText();		//Reading Message appeared after save button
 			
 				if(msgg.equalsIgnoreCase("Advocate Bill Updated Successfully."))
 				{
@@ -138,35 +156,35 @@ private static List<WebElement> elementsList = null;
 				}
 				
 				Thread.sleep(2000);
-				performerPOM.clickDownloadDocAdvocatebill().click();
+				performerPOM.clickDownloadDocAdvocatebill(driver).click();
 				
 				 test.log(LogStatus.PASS, "Advocate Bill Document Download Successfully");
 				 
 				 Thread.sleep(2000);
-				performerPOM.clickViewDocAdvocatebill().click();
+				performerPOM.clickViewDocAdvocatebill(driver).click();
 		         
 				 test.log(LogStatus.PASS, "Advocate Bill Document View Successfully");
 				 
 				 Thread.sleep(2000);
-				performerPOM.clickViewDocAdvocatebillClose().click();
+				performerPOM.clickViewDocAdvocatebillClose(driver).click();
 		 
 				 Thread.sleep(2000);
-				performerPOM.clickViewDocAdvocatebillPdf().click();
+				performerPOM.clickViewDocAdvocatebillPdf(driver).click();
 					
 			    Thread.sleep(3000);
-				performerPOM.clickViewDocAdvocatebillPdfClose().click();
+				performerPOM.clickViewDocAdvocatebillPdfClose(driver).click();
 				
 				 test.log(LogStatus.PASS, "Advocate Bill Document Pdf Successfully");
 				
 				Thread.sleep(2000);
-				performerPOM.clickAdvocateBillDelete().click();
+				performerPOM.clickAdvocateBillDelete(driver).click();
 				
 				Thread.sleep(5000);
 			    // Switching to Alert        
-		        Alert alert = getDriver().switchTo().alert();		
+		        Alert alert = driver.switchTo().alert();		
 		        		
 		        // Capturing alert message.    
-		        String alertMessage= getDriver().switchTo().alert().getText();	
+		        String alertMessage= driver.switchTo().alert().getText();	
 		        
 		        
 		        test.log(LogStatus.PASS, alertMessage);
@@ -180,48 +198,48 @@ private static List<WebElement> elementsList = null;
 				 test.log(LogStatus.PASS, "Advocate Bill Document Deleted Successfully");
 				 
 				 
-				 getDriver().switchTo().parentFrame();
+				 driver.switchTo().parentFrame();
 				 Thread.sleep(3000);
-			  		performerPOM .clickclosebutton().click();
+			  		performerPOM .clickclosebutton(driver).click();
 			  		
 
 			  		Thread.sleep(500);
-			  		performerPOM.clickDashboard().click();
+			  		OverduePOM.clickDashboard(driver).click();
 			  		
 			  		
 			  		
 		 
   }
 	
-	public static void AdvocateBillTab(ExtentTest test) throws InterruptedException, IOException
+	public static void AdvocateBillTab(WebDriver driver,ExtentTest test) throws InterruptedException, IOException
 	{
-  		WebDriverWait wait=new WebDriverWait(getDriver(),20);
+  		WebDriverWait wait=new WebDriverWait(driver,20);
 	     Thread.sleep(3000);
-  		performerPOM.clickAdvocateBillTab().click();
+  		performerPOM.clickAdvocateBillTab(driver).click();
   		 Thread.sleep(3000);
-  		performerPOM.clickAdvocateBillTabViewIcon().click();
+  		performerPOM.clickAdvocateBillTabViewIcon(driver).click();
   		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
   		Thread.sleep(2000);
-  		performerPOM.clickAdvocateBillTabAuditLog().click();
-  		getDriver().switchTo().parentFrame();
+  		performerPOM.clickAdvocateBillTabAuditLog(driver).click();
+  		driver.switchTo().parentFrame();
   		Thread.sleep(2000);
-  		performerPOM.clickAdvocateBillTabclose().click();
+  		performerPOM.clickAdvocateBillTabclose(driver).click();
   		Thread.sleep(2000);
-  		performerPOM.clickAdvocateBillTabTriangle().click();
+  		performerPOM.clickAdvocateBillTabTriangle(driver).click();
   		Thread.sleep(2000);
-  		performerPOM.clearButton().click();
+  		performerPOM.clearButton(driver).click();
 
   		
 		Thread.sleep(10000);
-		CFOcountPOM.readTotalItems1().click();
-		String item1 = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits1 = item1.split(" ");								//Splitting the String
 		String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 		int count2 = Integer.parseInt(compliancesCount1);
 		
 	    try
 		{
-			performerPOM.clickExportAdavanced().sendKeys(Keys.PAGE_DOWN);
+			performerPOM.clickExportAdavanced(driver).sendKeys(Keys.PAGE_DOWN);
 		}
 		catch(Exception e)
 		{
@@ -234,9 +252,9 @@ private static List<WebElement> elementsList = null;
 		File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 		
 		Thread.sleep(500);
-		CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 		Thread.sleep(250);
-		performerPOM.clickExportAdavanced().click();					//Clicking on 'Excel Report' image.
+		performerPOM.clickExportAdavanced(driver).click();					//Clicking on 'Excel Report' image.
 		
 		
 		Thread.sleep(5500);
@@ -285,41 +303,41 @@ private static List<WebElement> elementsList = null;
 		{
 		
   		Thread.sleep(3000);
-  		performerPOM.clickApproverAssignmentLog().click();
+  		performerPOM.clickApproverAssignmentLog(driver).click();
 		}
 		
 		
 	}	
-		public static void ApproverAssignmentLog(ExtentTest test) throws InterruptedException, IOException
+		public static void ApproverAssignmentLog(WebDriver driver,ExtentTest test) throws InterruptedException, IOException
     	{
 		
-			WebDriverWait wait=new WebDriverWait(getDriver(),20);
+			WebDriverWait wait=new WebDriverWait(driver,20);
     	     Thread.sleep(3000);
-      		performerPOM.clickAdvocateBillTab().click();
+      		performerPOM.clickAdvocateBillTab(driver).click();
 		Thread.sleep(3000);
-  		performerPOM.clickApproverAssignmentLog().click();
+  		performerPOM.clickApproverAssignmentLog(driver).click();
   		
 //  		Thread.sleep(3000);
-//		performerPOM.clickExportAdavanced().click();
+//		performerPOM.clickExportAdavanced(driver).click();
   		
 //		Thread.sleep(3000);
-//		performerPOM.clickExportAdavanced().sendKeys(Keys.PAGE_DOWN);
-//		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+//		performerPOM.clickExportAdavanced(driver).sendKeys(Keys.PAGE_DOWN);
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
 //		js.executeScript("window.scrollBy(0,700)");
 //  		
 //  		
 //  		
 //		
 //		Thread.sleep(3000);
-//		CFOcountPOM.readTotalItems1().click();
-//		String item = CFOcountPOM.readTotalItems1().getText();
+//		CFOcountPOM.readTotalItems1(driver).click();
+//		String item = CFOcountPOM.readTotalItems1(driver).getText();
 //		String[] bits = item.split(" ");								//Splitting the String
 //		String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 //		int count = Integer.parseInt(compliancesCount);
 		
 //	    try
 //		{
-//			performerPOM.clickExportAdavanced().sendKeys(Keys.PAGE_UP);
+//			performerPOM.clickExportAdavanced(driver).sendKeys(Keys.PAGE_UP);
 //		}
 //		catch(Exception e)
 //		{
@@ -334,7 +352,7 @@ private static List<WebElement> elementsList = null;
 //		Thread.sleep(500);
 //		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 		Thread.sleep(250);
-		performerPOM.clickExportAdavanced().click();					//Clicking on 'Excel Report' image.
+		performerPOM.clickExportAdavanced(driver).click();					//Clicking on 'Excel Report' image.
 		
 		
 		Thread.sleep(5500);
@@ -366,16 +384,16 @@ private static List<WebElement> elementsList = null;
 			fis.close();
 			
 			Thread.sleep(3000);
-    		performerPOM.clickExportAdavanced().sendKeys(Keys.PAGE_DOWN);
-    		JavascriptExecutor js = (JavascriptExecutor) getDriver();
+    		performerPOM.clickExportAdavanced(driver).sendKeys(Keys.PAGE_DOWN);
+    		JavascriptExecutor js = (JavascriptExecutor) driver;
     		js.executeScript("window.scrollBy(0,700)");
       		
       		
       		
 			
 			Thread.sleep(3000);
-			CFOcountPOM.readTotalItems2().click();
-			String item = CFOcountPOM.readTotalItems2().getText();
+			CFOcountPOM.readTotalItems2(driver).click();
+			String item = CFOcountPOM.readTotalItems2(driver).getText();
 			String[] bits = item.split(" ");								//Splitting the String
 			String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
 			int count = Integer.parseInt(compliancesCount);
@@ -394,35 +412,35 @@ private static List<WebElement> elementsList = null;
   		
   		
   		Thread.sleep(500);
-  		OverduePOM.clickDashboard().click();
+  		OverduePOM.clickDashboard(driver).click();
   		
     	}		
 		
-		  public static void AdvocateBillApprover(ExtentTest test) throws InterruptedException
+		  public static void AdvocateBillApprover(WebDriver driver,ExtentTest test) throws InterruptedException
 		  {
 			  Thread.sleep(3000);
-			  performerPOM.clickMasters().click();
+			  performerPOM.clickMasters(driver).click();
 			  Thread.sleep(3000);
-			  performerPOM.clickMasterAdvocateBill().click();
+			  performerPOM.clickMasterAdvocateBill(driver).click();
 			  Thread.sleep(3000);
-			  performerPOM.clickAddApprover().click();
+			  performerPOM.clickAddApprover(driver).click();
 			  Thread.sleep(3000);
-			  performerPOM.clickSelectapprover1().click();
+			  performerPOM.clickSelectapprover1(driver).click();
 			  Thread.sleep(3000);
-			  performerPOM.clickSelectapprover1Dropdown().click();
+			  performerPOM.clickSelectapprover1Dropdown(driver).click();
 			  Thread.sleep(3000);
-			  performerPOM.clickSelectapprover2().click();
+			  performerPOM.clickSelectapprover2(driver).click();
 			  Thread.sleep(3000);
-			  performerPOM.clickSelectapprover1Dropdown1().click();
+			  performerPOM.clickSelectapprover1Dropdown1(driver).click();
 			  Thread.sleep(3000);
-			  performerPOM.clickupdate().click();
+			  performerPOM.clickupdate(driver).click();
 			  
 			  Thread.sleep(5000);
 			    // Switching to Alert        
-		        Alert alert = getDriver().switchTo().alert();		
+		        Alert alert = driver.switchTo().alert();		
 		        		
 		        // Capturing alert message.    
-		        String alertMessage= getDriver().switchTo().alert().getText();	
+		        String alertMessage= driver.switchTo().alert().getText();	
 		        
 		        Thread.sleep(3000);
 		        test.log(LogStatus.PASS, alertMessage);
@@ -435,7 +453,7 @@ private static List<WebElement> elementsList = null;
 		        alert.accept();	
 		        
 		        Thread.sleep(2000);
-		        OverduePOM.clickDashboard().click();
+		        OverduePOM.clickDashboard(driver).click();
 
 
 		  }

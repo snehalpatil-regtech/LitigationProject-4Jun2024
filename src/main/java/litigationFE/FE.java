@@ -18,9 +18,8 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import litigationManagement.CFOMethod;
-import login.BasePage;
 
-public class FE extends BasePage {
+public class FE {
 
 	public static WebDriver driver = null;		//WebDriver instance created
 	public static WebElement upload = null;		//WebElement to get upload button
@@ -31,50 +30,56 @@ public class FE extends BasePage {
 	public static XSSFSheet sheet = null;		//Sheet variable
 	public static List<WebElement> elementsList = null;
 	
-//	public static XSSFSheet ReadExcel() throws IOException
-//	{
-//		//String workingDir = System.getProperty("user.dir");
-//		fis = new FileInputStream("C:\\Users\\Admin\\Desktop\\Snehal\\ComplianceLatest\\ComplianceLatest\\TestData\\LitigationSheet.xlsx");
-//	
-//		workbook = new XSSFWorkbook(fis);
-//		sheet = workbook.getSheetAt(10);					//Retrieving second sheet of Workbook
-//		return sheet;
-//	}
+	public static XSSFSheet ReadExcel() throws IOException
+	{
+		//String workingDir = System.getProperty("user.dir");
+		fis = new FileInputStream("C:\\Users\\Admin\\Desktop\\Snehal\\ComplianceLatest\\ComplianceLatest\\TestData\\LitigationSheet.xlsx");
+	
+		workbook = new XSSFWorkbook(fis);
+		sheet = workbook.getSheetAt(10);					//Retrieving second sheet of Workbook
+		return sheet;
+	}
 	
 	@BeforeTest
 	void setBrowser() throws InterruptedException, IOException
 	{
 		String workingDir = System.getProperty("user.dir");
-		extent = new com.relevantcodes.extentreports.ExtentReports(workingDir+"//Reports//LitigationCompanyAdmin.html",true);
-		test = extent.startTest("Litigation Logging In - Company Admin");
-		test.log(LogStatus.PASS, "Test Passed = Verify Chrome browser.");
+		extent = new com.relevantcodes.extentreports.ExtentReports(workingDir+"//Reports//LitigationFE.html",true);
+		test = extent.startTest("Verify OpenBrowser");
+		test.log(LogStatus.INFO, "Browser test is initiated");
+		
+		XSSFSheet sheet = ReadExcel();
+		Row row0 = sheet.getRow(0);						//Selected 0th index row (First row)
+		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
+		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
+		
+		login.Login.BrowserSetup(URL);					//Method of Login class to set browser.
+		
+		test.log(LogStatus.PASS, "Test Passed.");
 		extent.endTest(test);
 		extent.flush();
 	}
 	
-	
 	@Test(priority = 1)
 	void Login() throws InterruptedException, IOException
 	{
-//		test = extent.startTest("Litigation Logging In - fe");
-//		test.log(LogStatus.INFO, "Logging into system");
-//		
-//		XSSFSheet sheet = ReadExcel();
-//		Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
-//		Cell c1 = row1.getCell(1);						//Selected cell (1 row,1 column)
-//		String uname = c1.getStringCellValue();			//Got the URL stored at position 1,1
-//		
-//		Row row2 = sheet.getRow(2);						//Selected 2nd index row (Third row)
-//		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
-//		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
-//		
-//		driver = login.Login.UserLogin(uname,password,"fe");		//Method of Login class to login user.
-//		
-//		test.log(LogStatus.PASS, "Test Passed.");
-//		extent.endTest(test);
-//		extent.flush();
+		test = extent.startTest("Litigation Logging In - fe");
+		test.log(LogStatus.INFO, "Logging into system");
 		
-		initialization("company",10);
+		XSSFSheet sheet = ReadExcel();
+		Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
+		Cell c1 = row1.getCell(1);						//Selected cell (1 row,1 column)
+		String uname = c1.getStringCellValue();			//Got the URL stored at position 1,1
+		
+		Row row2 = sheet.getRow(2);						//Selected 2nd index row (Third row)
+		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
+		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
+		
+		driver = login.Login.UserLogin(uname,password,"fe");		//Method of Login class to login user.
+		
+		test.log(LogStatus.PASS, "Test Passed.");
+		extent.endTest(test);
+		extent.flush();
 	}
 	 @Test(priority = 2)
 		void DashBoardFilter() throws InterruptedException, IOException
@@ -83,7 +88,7 @@ public class FE extends BasePage {
 			test.log(LogStatus.INFO, "Test Initiated");
 			
 			Thread.sleep(3000);
-		    FeMethod.DashBoardFilter(test, "fe-");
+		    FeMethod.DashBoardFilter(driver, test, "fe-");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -95,7 +100,7 @@ public class FE extends BasePage {
 			test.log(LogStatus.INFO, "Test Initiated");
 			
 			Thread.sleep(3000);
-			FeMethod.CaseNoticeStageGraph( test,"fe -");
+			FeMethod.CaseNoticeStageGraph(driver, test,"fe -");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -107,7 +112,7 @@ public class FE extends BasePage {
 			test.log(LogStatus.INFO, "Test Initiated");
 			
 			Thread.sleep(3000);
-			FeMethod.CaseNoticeTypeGraph(test,"fe -");
+			FeMethod.CaseNoticeTypeGraph(driver, test,"fe -");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -118,7 +123,7 @@ public class FE extends BasePage {
 			test = extent.startTest("Risk Graph Count Verification");
 			test.log(LogStatus.INFO, "Test Initiated");
 			Thread.sleep(3000);
-			FeMethod.RiskSummaryGraph( test,"fe -");
+			FeMethod.RiskSummaryGraph(driver, test,"fe -");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -129,7 +134,7 @@ public class FE extends BasePage {
 		       test = extent.startTest("Department Graph Count Verification");
 		       test.log(LogStatus.INFO, "Test Initiated");
 		       Thread.sleep(3000);
-		       FeMethod.DepartmentSummaryGraph(test,"fe -");
+		       FeMethod.DepartmentSummaryGraph(driver, test,"fe -");
 		
 		       extent.endTest(test);
 		       extent.flush();
@@ -140,7 +145,7 @@ public class FE extends BasePage {
 		       test = extent.startTest("Location Graph Count Verification");
 		       test.log(LogStatus.INFO, "Test Initiated");
 		       Thread.sleep(3000);
-		       FeMethod.LocationSummaryGraph( test,"fe -");
+		       FeMethod.LocationSummaryGraph(driver, test,"fe -");
 		
 		       extent.endTest(test);
 		       extent.flush();
@@ -152,7 +157,7 @@ public class FE extends BasePage {
 		       test = extent.startTest("Category Graph Count Verification");
 		       test.log(LogStatus.INFO, "Test Initiated");
 		       Thread.sleep(3000);
-		       FeMethod.CategorySummaryGraph( test,"fe -");
+		       FeMethod.CategorySummaryGraph(driver, test,"fe -");
 		
 		       extent.endTest(test);
 		       extent.flush();

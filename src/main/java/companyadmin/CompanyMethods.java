@@ -33,11 +33,10 @@ import com.relevantcodes.extentreports.LogStatus;
 
 import cfo.CFOcountPOM;
 import litigationAdditionalOwner.performerPOM;
-import login.BasePage;
 
 
 
-public class CompanyMethods extends BasePage
+public class CompanyMethods
 
 {
 	
@@ -46,14 +45,14 @@ public class CompanyMethods extends BasePage
 	public static XSSFSheet sheet = null;		//Sheet variable
 	public static XSSFSheet sheet1 = null;		//Sheet variable
 
-	public static void UserLogReport(ExtentTest test) throws InterruptedException, IOException
+	public static void UserLogReport(WebDriver driver, ExtentTest test) throws InterruptedException, IOException
 	{
 	
 		
 		try
 		{
 			Thread.sleep(5000);
-	       	CompanyPOM.clickAlertpopup().click();	
+	       	CompanyPOM.clickAlertpopup(driver).click();	
 	       	//test.log(LogStatus.PASS, "Alert Popup should be displayed");
 		}
 		catch(Exception e)
@@ -62,19 +61,19 @@ public class CompanyMethods extends BasePage
 		}
 		
 		Thread.sleep(5000);
-       	CompanyPOM.clickNotificatonpopup().click();	
+       	CompanyPOM.clickNotificatonpopup(driver).click();	
 		
 		
-       	SwitchtoChild(test);
+       	SwitchtoChild(driver,test);
      	
     	Thread.sleep(5000);
-       	CompanyPOM.clickReport().click();
+       	CompanyPOM.clickReport(driver).click();
        	
        
-       	if(CompanyPOM.clickUserLogReport().isDisplayed())
+       	if(CompanyPOM.clickUserLogReport(driver).isDisplayed())
 		{
 			Thread.sleep(7000);
-			CompanyPOM.clickUserLogReport().click();
+			CompanyPOM.clickUserLogReport(driver).click();
 			test.log(LogStatus.PASS, "The tab of User Log Report should be seen under the tab of Report dropdown.");
 		}
 		else
@@ -82,62 +81,62 @@ public class CompanyMethods extends BasePage
 			test.log(LogStatus.FAIL, "The tab of User Log Report should not be seen under the tab of Report dropdown.");
 		}
        	
-       	SwitchtoParent(test);
+       	SwitchtoParent(driver,test);
        	
        	
        	
 	}
-	public static void ExportButton(ExtentTest test) throws InterruptedException, IOException
+	public static void ExportButton(WebDriver driver, ExtentTest test) throws InterruptedException, IOException
 	{
 		
 		
 			Thread.sleep(5000);
-	       	CompanyPOM.clickAlertpopup().click();	
+	       	CompanyPOM.clickAlertpopup(driver).click();	
 	       	
 		
 	      
 		Thread.sleep(5000);
-       	CompanyPOM.clickNotificatonpopup().click();	
+       	CompanyPOM.clickNotificatonpopup(driver).click();	
 		
 		
-       	SwitchtoChild(test);
+       	SwitchtoChild(driver,test);
      	
     	Thread.sleep(5000);
-       	CompanyPOM.clickReport().click();
+       	CompanyPOM.clickReport(driver).click();
        	
      
        	
        	Thread.sleep(7000);
-		CompanyPOM.clickUserLogReport().click();
+		CompanyPOM.clickUserLogReport(driver).click();
 		
-		SwitchtoParent(test);
+		SwitchtoParent(driver,test);
 		
 	 	Thread.sleep(2000);
-		SwitchtoChild1(test);
+		SwitchtoChild1(driver,test);
 		
 		Thread.sleep(7000);
-		CompanyPOM.clickUsers().click();
+		CompanyPOM.clickUsers(driver).click();
 		
 		Thread.sleep(7000);
-		CompanyPOM.clickUserName().click();
+		CompanyPOM.clickUserName(driver).click();
 		
 		Thread.sleep(7000);
-		CompanyPOM.clickAppyButton().click();
+		CompanyPOM.clickAppyButton(driver).click();
 	
-		Actions a = new Actions(getDriver());
+		Actions a = new Actions(driver);
 		//scroll down a page
 		a.sendKeys(Keys.PAGE_DOWN).build().perform();
 		
 		Thread.sleep(1000);
-		CFOcountPOM.readTotalItems1().click();
-		String item1 = CFOcountPOM.readTotalItems1().getText();
+		CFOcountPOM.readTotalItems1(driver).click();
+		String item1 = CFOcountPOM.readTotalItems1(driver).getText();
 		String[] bits1 = item1.split(" ");								//Splitting the String
 		String compliancesCount1 = bits1[bits1.length - 2];				//Getting the second last word (total number of users)
 		int count2 = Integer.parseInt(compliancesCount1);
 		
 	    try
 		{
-	    	CompanyPOM.clickExport().sendKeys(Keys.PAGE_DOWN);
+	    	CompanyPOM.clickExport(driver).sendKeys(Keys.PAGE_DOWN);
 		}
 		catch(Exception e)
 		{
@@ -151,9 +150,9 @@ public class CompanyMethods extends BasePage
 		File[] dirContents = dir.listFiles();							//Counting number of files in directory before download 
 		
 		Thread.sleep(500);
-		CFOcountPOM.clickNextPage1().sendKeys(Keys.PAGE_UP);
+		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 		Thread.sleep(250);
-		CompanyPOM.clickExport().click();					//Clicking on 'Excel Report' image.
+		CompanyPOM.clickExport(driver).click();					//Clicking on 'Excel Report' image.
 		test.log(LogStatus.PASS, "File downloaded successfully.");
 		
 		Thread.sleep(5500);
@@ -200,46 +199,46 @@ public class CompanyMethods extends BasePage
 			test.log(LogStatus.FAIL, "File doesn't downloaded successfully.");
 		}
 		
-		SwitchtoParent(test);
+		SwitchtoParent(driver,test);
 	}
-	public static void SelectMultipleUsers( ExtentTest test) throws InterruptedException, IOException
+	public static void SelectMultipleUsers(WebDriver driver, ExtentTest test) throws InterruptedException, IOException
 	{
 		
 		Thread.sleep(5000);
-	    CompanyPOM.clickAlertpopup().click();	
+	    CompanyPOM.clickAlertpopup(driver).click();	
 	      
 		Thread.sleep(5000);
-       	CompanyPOM.clickNotificatonpopup().click();	
+       	CompanyPOM.clickNotificatonpopup(driver).click();	
 		
 		
-       	SwitchtoChild(test);
+       	SwitchtoChild(driver,test);
      	
     	Thread.sleep(5000);
-       	CompanyPOM.clickReport().click();
+       	CompanyPOM.clickReport(driver).click();
        	
        	Thread.sleep(7000);
-		CompanyPOM.clickUserLogReport().click();
+		CompanyPOM.clickUserLogReport(driver).click();
 		
-		SwitchtoParent(test);
+		SwitchtoParent(driver,test);
 		
 	 	Thread.sleep(2000);
-		SwitchtoChild1(test);
+		SwitchtoChild1(driver,test);
 		
 		Thread.sleep(7000);
-		CompanyPOM.clickUsers().click();
+		CompanyPOM.clickUsers(driver).click();
 		
 		Thread.sleep(7000);
-		CompanyPOM.clickUserName().click();
+		CompanyPOM.clickUserName(driver).click();
 		
 		Thread.sleep(7000);
-		CompanyPOM.clickUserName1().click();
+		CompanyPOM.clickUserName1(driver).click();
 		
 		
 		Thread.sleep(4000);
-	  	if(CompanyPOM.clickAppyButton().isEnabled())
+	  	if(CompanyPOM.clickAppyButton(driver).isEnabled())
 			{
 				Thread.sleep(4000);
-				CompanyPOM.clickAppyButton().click();
+				CompanyPOM.clickAppyButton(driver).click();
 				test.log(LogStatus.PASS, " Multiple users selected  from the user dropdown.");
 			}
 			else
@@ -247,40 +246,40 @@ public class CompanyMethods extends BasePage
 				test.log(LogStatus.FAIL, " Multiple users not selected  from the user dropdown.");
 			}
 	  	Thread.sleep(4000);
-	       	SwitchtoParent(test);
+	       	SwitchtoParent(driver,test);
 	  }
-	public static void UserFilter( ExtentTest test) throws InterruptedException, IOException
+	public static void UserFilter(WebDriver driver, ExtentTest test) throws InterruptedException, IOException
 	{
 		
 			Thread.sleep(5000);
-			CompanyPOM.clickAlertpopup().click();	
+			CompanyPOM.clickAlertpopup(driver).click();	
 	      
 			Thread.sleep(5000);
-			CompanyPOM.clickNotificatonpopup().click();	
+			CompanyPOM.clickNotificatonpopup(driver).click();	
 		
 		
-       		SwitchtoChild(test);
+       		SwitchtoChild(driver,test);
      	
        		Thread.sleep(5000);
-    		CompanyPOM.clickReport().click();
+    		CompanyPOM.clickReport(driver).click();
        	
        		Thread.sleep(7000);
-       		CompanyPOM.clickUserLogReport().click();
+       		CompanyPOM.clickUserLogReport(driver).click();
 		
-			SwitchtoParent(test);
+			SwitchtoParent(driver,test);
 			
 	 		Thread.sleep(2000);
-	 		SwitchtoChild1(test);
+	 		SwitchtoChild1(driver,test);
 		
 		
 		  	Thread.sleep(500);
-		  	CompanyPOM.clickUsers().click();
+		  	CompanyPOM.clickUsers(driver).click();
 		   	Thread.sleep(500);
-	       	String user=CompanyPOM.clickUserName().getText();
+	       	String user=CompanyPOM.clickUserName(driver).getText();
 	       	Thread.sleep(500);
-	       	CompanyPOM.clickUserName().click();
+	       	CompanyPOM.clickUserName(driver).click();
 	       	Thread.sleep(500);
-			  CompanyPOM.clickAppyButton().click();
+			  CompanyPOM.clickAppyButton(driver).click();
 			  
 			  
 			  List<String> li=new ArrayList<String>();
@@ -289,18 +288,18 @@ public class CompanyMethods extends BasePage
 		        List<String> filter=new ArrayList<String>();	
 				filter.add("user");
 				
-				Actions a = new Actions(getDriver());
+				Actions a = new Actions(driver);
 				//scroll down a page
 				a.sendKeys(Keys.PAGE_DOWN).build().perform();
 				
-				CFOcountPOM.readTotalItems1().click();					//Clicking on Text of total items just to scroll down.
-				String s = CFOcountPOM.readTotalItems1().getText();
+				CFOcountPOM.readTotalItems1(driver).click();					//Clicking on Text of total items just to scroll down.
+				String s = CFOcountPOM.readTotalItems1(driver).getText();
 				Thread.sleep(2000);
 
 				if(!s.equalsIgnoreCase("No items to display")) {
 				Thread.sleep(5000);
 			
-				List<WebElement> usercol=getDriver().findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[1]"));
+				List<WebElement> usercol=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[1]"));
 				
 				for(int i=0; i<li.size(); i++){
 					
@@ -364,48 +363,48 @@ public class CompanyMethods extends BasePage
 						test.log(LogStatus.PASS,"No records found");	
 					}
 				Thread.sleep(4000);
-		       	SwitchtoParent(test);
+		       	SwitchtoParent(driver,test);
 	}
 		
 		
-	public static void SwitchtoChild( ExtentTest test) throws InterruptedException, IOException
+	public static void SwitchtoChild( WebDriver driver,ExtentTest test) throws InterruptedException, IOException
 	{		
 		Thread.sleep(3000);
-		CompanyPOM.clickMyAdmin().click();
-		Set w = getDriver().getWindowHandles();    // window handles
+		CompanyPOM.clickMyAdmin(driver).click();
+		Set w = driver.getWindowHandles();    // window handles
 		Thread.sleep(3000);
 	      Iterator t = w.iterator();  // window handles iterate
 	      String pw = (String) t.next();
 	      String ch = (String) t.next();
 	      
-	      getDriver().switchTo().window(ch);         // switching child window
+	      driver.switchTo().window(ch);         // switching child window
 	  }
-	public static void SwitchtoChild1(ExtentTest test) throws InterruptedException, IOException
+	public static void SwitchtoChild1( WebDriver driver,ExtentTest test) throws InterruptedException, IOException
 	{		
 		//Thread.sleep(3000);
 		//CompanyPOM.clickMyAdmin(driver).click();
-		Set w = getDriver().getWindowHandles();    // window handles
+		Set w = driver.getWindowHandles();    // window handles
 		Thread.sleep(3000);
 	      Iterator t = w.iterator();  // window handles iterate
 	      String pw = (String) t.next();
 	      String ch = (String) t.next();
 	      
-	      getDriver().switchTo().window(ch);         // switching child window
+	      driver.switchTo().window(ch);         // switching child window
 	  }
 
 
-public static void SwitchtoParent( ExtentTest test) throws InterruptedException, IOException
+public static void SwitchtoParent( WebDriver driver,ExtentTest test) throws InterruptedException, IOException
 	{		
 		Thread.sleep(3000);
 		
-		Set w = getDriver().getWindowHandles();    // window handles
+		Set w = driver.getWindowHandles();    // window handles
 		Thread.sleep(3000);
 	      Iterator t = w.iterator();  // window handles iterate
 	      String pw = (String) t.next();
 	      String ch = (String) t.next();
-	      getDriver().close();
+	      driver.close();
 	      Thread.sleep(3000);
-	      getDriver().switchTo().window(pw);         // switching child window
+	      driver.switchTo().window(pw);         // switching child window
 	       
 	}
 

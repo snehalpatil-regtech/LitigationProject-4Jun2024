@@ -64,7 +64,7 @@ public class CompanyCount
 		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
 		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
 		
-		//login.Login.BrowserSetup(URL);					//Method of Login class to set browser.
+		login.Login.BrowserSetup(URL);					//Method of Login class to set browser.
 		
 		
 		Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
@@ -88,7 +88,7 @@ public class CompanyCount
 		test = extent.startTest("User Log Report Verification");
 		
 		
-		CompanyMethods.UserLogReport(test);
+		CompanyMethods.UserLogReport(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -100,7 +100,7 @@ public class CompanyCount
 		test = extent.startTest("Select Multiple User  Verification");
 		
 		
-		CompanyMethods.SelectMultipleUsers( test);
+		CompanyMethods.SelectMultipleUsers(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -111,7 +111,7 @@ public class CompanyCount
 		test = extent.startTest("User filter Verification");
 		
 		
-		CompanyMethods.UserFilter(test);
+		CompanyMethods.UserFilter(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -123,7 +123,7 @@ public class CompanyCount
 		test = extent.startTest("Export Button  Verification");
 		
 		
-		CompanyMethods.ExportButton( test);
+		CompanyMethods.ExportButton(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();

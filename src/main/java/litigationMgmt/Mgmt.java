@@ -18,9 +18,8 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import litigationAdditionalOwner.MethodsPOM;
-import login.BasePage;
 
-public class Mgmt extends BasePage{
+public class Mgmt {
 	
 	public static WebDriver driver = null;		//WebDriver instance created
 	public static WebElement upload = null;		//WebElement to get upload button
@@ -32,18 +31,32 @@ public class Mgmt extends BasePage{
 	public static List<WebElement> elementsList = null;
 	
 	
-
+	public static XSSFSheet ReadExcel() throws IOException
+	{
+		//String workingDir = System.getProperty("user.dir");
+		fis = new FileInputStream("C:\\Users\\Admin\\Desktop\\Snehal\\ComplianceLatest\\ComplianceLatest\\TestData\\LitigationSheet.xlsx");
+	
+		workbook = new XSSFWorkbook(fis);
+		sheet = workbook.getSheetAt(11);					//Retrieving second sheet of Workbook
+		return sheet;
+	}
 	
 	@BeforeTest
-	
-	void setBrowser() throws Exception
+	void setBrowser() throws InterruptedException, IOException
 	{
 		String workingDir = System.getProperty("user.dir");
-		extent = new com.relevantcodes.extentreports.ExtentReports(workingDir+"//Reports//LitigationCFO.html",true);
-		test = extent.startTest("Litigation Logging In - CFO");
+		extent = new com.relevantcodes.extentreports.ExtentReports(workingDir+"//Reports//LitigationMgmt.html",true);
+		test = extent.startTest("Verify OpenBrowser");
+		test.log(LogStatus.INFO, "Browser test is initiated");
 		
+		XSSFSheet sheet = ReadExcel();
+		Row row0 = sheet.getRow(0);						//Selected 0th index row (First row)
+		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
+		String URL = c1.getStringCellValue();			//Got the URL stored at position 0,1
 		
-		test.log(LogStatus.PASS, "Test Passed = Verify chrome Browser");
+		login.Login.BrowserSetup(URL);					//Method of Login class to set browser.
+		
+		test.log(LogStatus.PASS, "Test Passed.");
 		extent.endTest(test);
 		extent.flush();
 	}
@@ -51,25 +64,23 @@ public class Mgmt extends BasePage{
 	@Test(priority = 1)
 	void Login() throws InterruptedException, IOException
 	{
-//		test = extent.startTest("Litigation Logging In - Company Admin");
-//		test.log(LogStatus.INFO, "Logging into system");
-//		
-//		XSSFSheet sheet = ReadExcel();
-//		Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
-//		Cell c1 = row1.getCell(1);						//Selected cell (1 row,1 column)
-//		String uname = c1.getStringCellValue();			//Got the URL stored at position 1,1
-//		
-//		Row row2 = sheet.getRow(2);						//Selected 2nd index row (Third row)
-//		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
-//		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
-//		
-//		driver = login.Login.UserLogin(uname,password,"company");		//Method of Login class to login user.
-//		
-//		test.log(LogStatus.PASS, "Test Passed.");
-//		extent.endTest(test);
-//		extent.flush();
+		test = extent.startTest("Litigation Logging In - Company Admin");
+		test.log(LogStatus.INFO, "Logging into system");
 		
-		initialization("mgmt",11);
+		XSSFSheet sheet = ReadExcel();
+		Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
+		Cell c1 = row1.getCell(1);						//Selected cell (1 row,1 column)
+		String uname = c1.getStringCellValue();			//Got the URL stored at position 1,1
+		
+		Row row2 = sheet.getRow(2);						//Selected 2nd index row (Third row)
+		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
+		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
+		
+		driver = login.Login.UserLogin(uname,password,"company");		//Method of Login class to login user.
+		
+		test.log(LogStatus.PASS, "Test Passed.");
+		extent.endTest(test);
+		extent.flush();
 	}
 	
 	@Test(priority = 2)
@@ -78,7 +89,7 @@ public class Mgmt extends BasePage{
  		test = extent.startTest("Case advocate bill verification");
  		
  		
- 		MgmtMethod.AdvocateBill( test);
+ 		MgmtMethod.AdvocateBill(driver, test);
  		
  		extent.endTest(test);
  		extent.flush();
@@ -89,7 +100,7 @@ public class Mgmt extends BasePage{
 		test = extent.startTest("Advocate bill verification");
 		
 		
-		MgmtMethod.AdvocateBillTab( test);
+		MgmtMethod.AdvocateBillTab(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -100,7 +111,7 @@ public class Mgmt extends BasePage{
 		test = extent.startTest("Advocate bill verification");
 		
 		
-		MgmtMethod.ApproverAssignmentLog( test);
+		MgmtMethod.ApproverAssignmentLog(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -111,7 +122,7 @@ public class Mgmt extends BasePage{
 		test = extent.startTest("Masters - Advocate Bill Approver  verification");
 		
 		
-		MgmtMethod.AdvocateBillApprover( test);
+		MgmtMethod.AdvocateBillApprover(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -122,7 +133,7 @@ public class Mgmt extends BasePage{
 		test = extent.startTest("Reports -excel count verification");
 		
 		
-		MethodsPOM.MyReports(test);
+		MethodsPOM.MyReports(driver, test, workbook, "Company Admin");
 		
 		extent.endTest(test);
 		extent.flush();

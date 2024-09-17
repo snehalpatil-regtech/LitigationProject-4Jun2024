@@ -1,55 +1,60 @@
 package login;
 
 import java.io.IOException;
-
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import com.relevantcodes.extentreports.ExtentTest;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.managers.OperaDriverManager;
+import performer.OverduePOM;
 
-import cfo.OverduePOM;
-
-public class Login extends BasePage
+public class Login 
 {
-	//public static Web  = null;				//Web instance created
-	//public static WebElement upload = null;				//WebElement to get upload button
+	public static WebDriver driver = null;				//WebDriver instance created
+	public static WebElement upload = null;				//WebElement to get upload button
 	
-	/*public static void BrowserSetup(String URL)
+	public static void BrowserSetup(String URL) throws InterruptedException
 	{
-
 		
-			//WebManager.edge().setup();
-			// = new Edge();					//Created new Chrome  instance. 
+			//WebDriverManager.edgedriver().setup();
+			//driver = new EdgeDriver();					//Created new Chrome driver instance. 
 		
-			//WebManager.chrome().setup();
-			// System.setProperty("web.chrome.","E:\eclips-projects\Selenium\chromedriver-win64_1\\chrome.exe");
+			//WebDriverManager.chromedriver().setup();
+			// System.setProperty("webdriver.chrome.driver","E:\\eclips-projects\\Selenium\\chromedriver-win32\\chromedriver.exe");
 		  	 
-			WebManager.chrome().setup();		
-		    = new Chrome();		
+			WebDriverManager.chromedriver().setup();		
+		   driver = new ChromeDriver();		
 				
 			
-			//WebManager.firefox().setup();
-			// = new Firefox();
+			//WebDriverManager.firefoxdriver().setup();
+			//driver = new FirefoxDriver();
 		
-			//	WebManager.opera().setup();
-			//	 = new Opera();
+			//	WebDriverManager.operadriver().setup();
+			//	driver = new OperaDriver();
 		
-		    System.setProperty("web.opera.", "E:\\eclips-projects\\Selenium\\opera_win64 -121 version\\opera.exe");
+		  /*  System.setProperty("webdriver.opera.driver", "E:\\eclips-projects\\Selenium\\operadriver_win64 -121 version\\operadriver.exe");
 		    OperaOptions operaOptions =new OperaOptions();
 		    operaOptions.setBinary("C:\\Program Files\\OperaBroswer\\opera.exe");
-			 = new Opera(operaOptions);
+			driver = new OperaDriver(operaOptions);*/
 		
-			.manage().window().maximize();			//Set window size to maximum.
-			.get(URL);								//Set the URL of WebApplication.
+		
+		   
+			driver.manage().window().maximize();			//Set window size to maximum.
+			Thread.sleep(500);
+			
+			driver.get(URL);								//Set the URL of WebApplication.
 	}
-
 	
 	
 	public static void BrowserSetup1(String URL,String browser) throws Exception
@@ -59,34 +64,34 @@ public class Login extends BasePage
 		if(browser.equalsIgnoreCase("firefox"))
 		{
 			 //create firefox instance
-				System.setProperty("web.gecko.", "E:\\eclips-projects\\Selenium\\gecko-v0.33.0-win64\\gecko.exe");
-				 = new Firefox();
+				System.setProperty("webdriver.gecko.driver", "E:\\eclips-projects\\Selenium\\geckodriver-v0.33.0-win64\\geckodriver.exe");
+				driver = new FirefoxDriver();
 			}
 			//Check if parameter passed as 'chrome'
 			else if(browser.equalsIgnoreCase("chrome"))
 			{
-				//set path to chrome.exe
-				System.setProperty("web.chrome.","E:\eclips-projects\Selenium\chromedriver-win64_1\\chrome.exe");
+				//set path to chromedriver.exe
+				System.setProperty("webdriver.chrome.driver","E:\\eclips-projects\\Selenium\\chromedriver-win32\\chromedriver.exe");
 				//create chrome instance
-				 = new Chrome();
+				driver = new ChromeDriver();
 			
 			}
 			else if(browser.equalsIgnoreCase("Opera"))
 			{
-				//set path to chrome.exe
-				System.setProperty("web.opera.","E:\\eclips-projects\\Selenium\\opera_win32\\opera.exe");
+				//set path to chromedriver.exe
+				System.setProperty("webdriver.opera.driver","E:\\eclips-projects\\Selenium\\operadriver_win32\\operadriver.exe");
 				//create chrome instance
-				 = new Opera();
+				driver = new OperaDriver();
 			
 			}
 			//Check if parameter passed as 'Edge'
 			else if(browser.equalsIgnoreCase("Edge")) 
 			{
-			     //set path to Edge.exeMicrosoftWeb
-			     WebManager.edge().setup();
-			     //System.setProperty("web.edge.","C:\\Users\\Admin\\Desktop\\eclips-projects\\Selenium\\Edge\\msedge.exe");
+			     //set path to Edge.exeMicrosoftWebDriver
+			     WebDriverManager.edgedriver().setup();
+			     //System.setProperty("webdriver.edge.driver","C:\\Users\\Admin\\Desktop\\eclips-projects\\Selenium\\EdgeDriver\\msedgedriver.exe");
 			     //create Edge instance
-				  = new Edge();
+				 driver = new EdgeDriver();
 			}
 			else
 			{
@@ -95,39 +100,39 @@ public class Login extends BasePage
 			}
 							 
 							 
-		               .manage().window().maximize();			//Set window size to maximum.
-		                .get(URL);
+		               driver.manage().window().maximize();			//Set window size to maximum.
+		                driver.get(URL);
 		
-	}*/
+	}
 	
 	public static WebDriver UserLogin(String username, String password, String method) throws InterruptedException
 	{		
-		 WebDriverWait wait = new WebDriverWait(getDriver(),20);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		WebDriverWait wait1 = new WebDriverWait(driver, 60);
 		
-		
-		LoginPOM.setUname().sendKeys(username);		//Sent username to input box 
+		LoginPOM.setUname(driver).sendKeys(username);		//Sent username to input box 
 		Thread.sleep(500);
-		LoginPOM.setPassword().sendKeys(password);	//Sent password to input box
-		LoginPOM.clickSubmit().click();				//Clicked on Sign-in button
+		LoginPOM.setPassword(driver).sendKeys(password);	//Sent password to input box
+		LoginPOM.clickSubmit(driver).click();				//Clicked on Sign-in button
 		Thread.sleep(500);
 		if(!username.equalsIgnoreCase("performer@avantis.info"))
 		{
 			try
 			{
 				Thread.sleep(500);
-				wait.until(ExpectedConditions.visibilityOf(LoginPOM.clickQALink()));
-				wait.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickQALink()));
-				LoginPOM.clickQALink().click();				//Clicking on QA Link instead of OTP.
+				wait1.until(ExpectedConditions.visibilityOf(LoginPOM.clickQALink(driver)));
+				wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickQALink(driver)));
+				LoginPOM.clickQALink(driver).click();				//Clicking on QA Link instead of OTP.
 				
 				//----------------------------------------------------------------------------//
 				
-				wait.until(ExpectedConditions.invisibilityOf(LoginPOM.clickQALink()));
+				wait1.until(ExpectedConditions.invisibilityOf(LoginPOM.clickQALink(driver)));
 		
 			
 		 Thread.sleep(1000);
-			wait.until(ExpectedConditions.visibilityOf(LoginPOM.Question1()));
-			wait.until(ExpectedConditions.elementToBeClickable(LoginPOM.Question1()));
-			String que1 = LoginPOM.Question1().getText();	//Storing the question in que variable.
+			wait1.until(ExpectedConditions.visibilityOf(LoginPOM.Question1(driver)));
+			wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.Question1(driver)));
+			String que1 = LoginPOM.Question1(driver).getText();	//Storing the question in que variable.
 			String ans1 = null;
 			
 			if(method.equalsIgnoreCase("cfo"))
@@ -158,14 +163,14 @@ public class Login extends BasePage
 			}
 			
 			if(ans1.equalsIgnoreCase("birthplace"))
-				LoginPOM.Answer1().sendKeys("place");		//Sending answer to the input box.
+				LoginPOM.Answer1(driver).sendKeys("place");		//Sending answer to the input box.
 			else
-				LoginPOM.Answer1().sendKeys(ans1);		//Sending answer to the input box.
+				LoginPOM.Answer1(driver).sendKeys(ans1);		//Sending answer to the input box.
 			Thread.sleep(1000);
 			
 			//----------------------------------------------------------//
 			
-			String que2 = LoginPOM.Question2().getText();	//Storing the question in que variable.
+			String que2 = LoginPOM.Question2(driver).getText();	//Storing the question in que variable.
 			String ans2 = null;
 			if(method.equalsIgnoreCase("cfo"))
 			{
@@ -195,12 +200,12 @@ public class Login extends BasePage
 			
 			
 			if(ans2.equalsIgnoreCase("birthplace"))
-				LoginPOM.Answer2().sendKeys("place");		//Sending answer to the input box.
+				LoginPOM.Answer2(driver).sendKeys("place");		//Sending answer to the input box.
 			else
-				LoginPOM.Answer2().sendKeys(ans2);		//Sending answer to the input box.
+				LoginPOM.Answer2(driver).sendKeys(ans2);		//Sending answer to the input box.
 			Thread.sleep(100);
 			
-			LoginPOM.SubmitAnswer().click();				//Clicking on Submit button.
+			LoginPOM.SubmitAnswer(driver).click();				//Clicking on Submit button.
 		
 			}
 			catch(Exception e)
@@ -214,34 +219,34 @@ public class Login extends BasePage
 		
 		if(!method.equalsIgnoreCase("Implementation"))
 		{
-			//wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickComplicane()));
+			//wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickComplicane(driver)));
 			
 			if(method.equalsIgnoreCase("License"))
 			{
-				LoginPOM.clickLicense().click();				//Clicking on Litigation Image.
+				LoginPOM.clickLicense(driver).click();				//Clicking on Litigation Image.
 			}
 			else if(method.equalsIgnoreCase("Litigation"))
 			{
 				//Thread.sleep(8000);
-				LoginPOM.ClickLitigation().click();			//Clicking on Litigation Image.
+				LoginPOM.ClickLitigation(driver).click();			//Clicking on Litigation Image.
 			}
 			else if(method.equalsIgnoreCase("Contract"))
 			{
-				LoginPOM.ClickContract().click();			//Clicking on Litigation Image.
+				LoginPOM.ClickContract(driver).click();			//Clicking on Litigation Image.
 			}
 			else
 			{
-				LoginPOM.ClickLitigation().click();	
-				//LoginPOM.clickComplicane().click();			//Clicking on Compliance Image.
+				LoginPOM.ClickLitigation(driver).click();	
+				//LoginPOM.clickComplicane(driver).click();			//Clicking on Compliance Image.
 			}
 			
 			try
 			{
 				Thread.sleep(500);
-				if(OverduePOM.closeMessage().isDisplayed())	//If Compliance Updation message popped up,
+				if(OverduePOM.closeMessage(driver).isDisplayed())	//If Compliance Updation message popped up,
 				{
-					wait.until(ExpectedConditions.elementToBeClickable(OverduePOM.closeMessage()));
-					OverduePOM.closeMessage().click();		//then close the message.
+					wait.until(ExpectedConditions.elementToBeClickable(OverduePOM.closeMessage(driver)));
+					OverduePOM.closeMessage(driver).click();		//then close the message.
 				}
 			}
 			catch(Exception e)
@@ -249,7 +254,7 @@ public class Login extends BasePage
 				
 			}
 		}		
-		return getDriver() ;
+		return driver;
 	}
 	
 	public static String getAnswer(String que)				//Method created to extract last word from question
@@ -282,70 +287,70 @@ public class Login extends BasePage
 			ans = "red";
 		return ans.toLowerCase();							//Returning answer and converting to LowerCase too.  
 	}
-	/*public static Web UserLogin1(String username, String password, String method) throws InterruptedException
+	public static WebDriver UserLogin1(String username, String password, String method) throws InterruptedException
 	{		
-		WebWait wait = new WebWait(, 20);
-		WebWait wait1 = new WebWait(, 60);
+		WebDriverWait wait = new WebDriverWait(driver, 20);
+		WebDriverWait wait1 = new WebDriverWait(driver, 60);
 		
-		LoginPOM.setUname().clear();
-		LoginPOM.setUname().sendKeys(username);		//Sent username to input box 
+		LoginPOM.setUname(driver).clear();
+		LoginPOM.setUname(driver).sendKeys(username);		//Sent username to input box 
 		Thread.sleep(500);
-		LoginPOM.setPassword().sendKeys(password);	//Sent password to input box
-		LoginPOM.clickSubmit().click();				//Clicked on Sign-in button
+		LoginPOM.setPassword(driver).sendKeys(password);	//Sent password to input box
+		LoginPOM.clickSubmit(driver).click();				//Clicked on Sign-in button
 		
-		return ;
+		return driver;
     }
 	
-	  public static Web forgotPassword() throws InterruptedException, IOException
+	  public static WebDriver forgotPassword() throws InterruptedException, IOException
 		
 		{
 	
 		  
-		LoginPOM.ClickForgotPass().click();
+		LoginPOM.ClickForgotPass(driver).click();
 		
-		//LoginPOM.ClickEmailid().sendKeys("");
+		//LoginPOM.ClickEmailid(driver).sendKeys("");
 		
 		Thread.sleep(2000);
-		LoginPOM.ClickSubmit().click();
+		LoginPOM.ClickSubmit(driver).click();
 		Thread.sleep(2000);
-		LoginPOM.ClickBackButton().click();
-		return ;
+		LoginPOM.ClickBackButton(driver).click();
+		return driver;
 	}
 	  
-	  public static void AccountLocked(Web ,ExtentTest test, String type) throws InterruptedException, IOException
+	  public static void AccountLocked(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 		
 		{
-		WebWait wait1 = new WebWait(, 60);
+		WebDriverWait wait1 = new WebDriverWait(driver, 60);
 		
 	
 		Thread.sleep(2000);
-		LoginPOM.ClickAccountLocked().click();
+		LoginPOM.ClickAccountLocked(driver).click();
 		
-		//LoginPOM.ClickEmailid().sendKeys("");
+		//LoginPOM.ClickEmailid(driver).sendKeys("");
 		Thread.sleep(2000);
-		LoginPOM.ClickSubmit().click();
+		LoginPOM.ClickSubmit(driver).click();
 		Thread.sleep(2000);
-		LoginPOM.ClickBackButton1().click();
+		LoginPOM.ClickBackButton1(driver).click();
 	}
-	  public static void Google(Web ,ExtentTest test, String type) throws InterruptedException, IOException
+	  public static void Google(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 		
 		{
-		WebWait wait1 = new WebWait(, 60);
+		WebDriverWait wait1 = new WebDriverWait(driver, 60);
 		
 		
-		LoginPOM.ClickGoogle().click();
+		LoginPOM.ClickGoogle(driver).click();
 		
-		//LoginPOM.ClickEmailid().sendKeys("");
-		//LoginPOM.ClickSubmit().click();
-		//LoginPOM.ClickBackButton().click();
+		//LoginPOM.ClickEmailid(driver).sendKeys("");
+		//LoginPOM.ClickSubmit(driver).click();
+		//LoginPOM.ClickBackButton(driver).click();
 	}
-	  public static void LoginHelp(Web ,ExtentTest test, String type) throws InterruptedException, IOException
+	  public static void LoginHelp(WebDriver driver,ExtentTest test, String type) throws InterruptedException, IOException
 		
 		{
-		WebWait wait1 = new WebWait(, 60);
+		WebDriverWait wait1 = new WebDriverWait(driver, 60);
 		
-		LoginPOM.ClickLoginHelp().click();
+		LoginPOM.ClickLoginHelp(driver).click();
 		
 		
-	}*/
+	}
 }

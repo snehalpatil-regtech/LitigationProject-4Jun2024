@@ -1,10 +1,10 @@
 package login;
 
 import org.openqa.selenium.By;
-
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class LoginPOM extends BasePage
+public class LoginPOM 
 {
 	private static WebElement uname = null;			//WebElement variable created for Username input 
 	private static WebElement pass = null;			//WebElement variable created for Password input
@@ -17,137 +17,137 @@ public class LoginPOM extends BasePage
 	private static WebElement validate = null;		//WebElement variable created for Answer Submit/Validate button
 	private static WebElement comp_img = null;		//WebElement variable created for Compliance Image click
 	
-	public static WebElement setUname()		//Method for searching Username input
+	public static WebElement setUname(WebDriver driver)		//Method for searching Username input
 	{
-		uname = getDriver().findElement(By.xpath("//input[@placeholder='Username']"));
+		uname = driver.findElement(By.xpath("//input[@placeholder='Username']"));
 		return uname;
 	}
 	
-	public static WebElement setPassword()	//Method for searching Password input
+	public static WebElement setPassword(WebDriver driver)	//Method for searching Password input
 	{
-		pass =getDriver().findElement(By.xpath("//input[@placeholder='Password']"));
+		pass =driver.findElement(By.xpath("//input[@placeholder='Password']"));
 		return pass;
 	}
 	
-	public static WebElement clickSubmit()	//Method for searching button for Save/Sign-in
+	public static WebElement clickSubmit(WebDriver driver)	//Method for searching button for Save/Sign-in
 	{
-		submit = getDriver().findElement(By.xpath("//input[@name='Submit']"));
+		submit = driver.findElement(By.xpath("//input[@name='Submit']"));
 		return submit;
 	}
 	
-	public static WebElement clickQALink()	//Method for searching QALink for user login
+	public static WebElement clickQALink(WebDriver driver)	//Method for searching QALink for user login
 	{
-		QALink = getDriver().findElement(By.xpath("//a[@id='lnkSecurityQA']"));
+		QALink = driver.findElement(By.xpath("//a[@id='lnkSecurityQA']"));
 		return QALink;
 	}
 	
-	public static WebElement Answer1()		//Method for searching input box of first answer
+	public static WebElement Answer1(WebDriver driver)		//Method for searching input box of first answer
 	{
-		ans1 = getDriver().findElement(By.xpath("//input[@name='txtAnswer1']"));
+		ans1 = driver.findElement(By.xpath("//input[@name='txtAnswer1']"));
 		return ans1;
 	}
 	
-	public static WebElement Answer2()		//Method for searching input box of second answer
+	public static WebElement Answer2(WebDriver driver)		//Method for searching input box of second answer
 	{
-		ans2 = getDriver().findElement(By.xpath("//input[@name='txtAnswar2']"));
+		ans2 = driver.findElement(By.xpath("//input[@name='txtAnswar2']"));
 		return ans2;
 	}
-	public static WebElement Question1()	//Method for searching first Question 
+	public static WebElement Question1(WebDriver driver)	//Method for searching first Question 
 	{
-		question1 = getDriver().findElement(By.xpath("//span[@id='lblQuestion1']"));
+		question1 = driver.findElement(By.xpath("//span[@id='lblQuestion1']"));
 		return question1;
 	}
 	
-	public static WebElement Question2()	//Method for searching second Question
+	public static WebElement Question2(WebDriver driver)	//Method for searching second Question
 	{
-		question2 = getDriver().findElement(By.xpath("//span[@id='lblQuestion2']"));
+		question2 = driver.findElement(By.xpath("//span[@id='lblQuestion2']"));
 		return question2;
 	}
 	
-	public static WebElement SubmitAnswer()	//Method for searching button to submit answers
+	public static WebElement SubmitAnswer(WebDriver driver)	//Method for searching button to submit answers
 	{
-		validate = getDriver().findElement(By.xpath("//input[@value='Validate']"));
+		validate = driver.findElement(By.xpath("//input[@value='Validate']"));
 		return validate;
 	}
 	
-	public static WebElement clickComplicane()		//Method for searching Compliance image
+	public static WebElement clickComplicane(WebDriver driver)		//Method for searching Compliance image
 	{
-		//comp_img = getDriver().findElement(By.xpath("//div[@id='dvbtnCompliance']/div[1]/img"));
-		comp_img = getDriver().findElement(By.xpath("//div[@id='dvbtnCompliance']"));
+		//comp_img = driver.findElement(By.xpath("//div[@id='dvbtnCompliance']/div[1]/img"));
+		comp_img = driver.findElement(By.xpath("//div[@id='dvbtnCompliance']"));
 		return comp_img;
 	}
 	
-	public static WebElement clickLicense()
+	public static WebElement clickLicense(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='dvbtnLicense']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='dvbtnLicense']"));
 		return comp_img;
 	}
 	
-	public static WebElement ClickLitigation()
+	public static WebElement ClickLitigation(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='dvbtnLitigation']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='dvbtnLitigation']"));
 		return comp_img;
 	}
 	
-	public static WebElement ClickContract()
+	public static WebElement ClickContract(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='dvbtnContract']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='dvbtnContract']"));
 		return comp_img;
 	}
 
-	public static WebElement ClickForgotPass()
+	public static WebElement ClickForgotPass(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='lbtResetPassword']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='lbtResetPassword']"));
 		return comp_img;
 	}
-	public static WebElement ClickEmailid()
+	public static WebElement ClickEmailid(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='txtResetPasswordUserID']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='txtResetPasswordUserID']"));
 		return comp_img;
 	}
-	public static WebElement ClickSubmit()
+	public static WebElement ClickSubmit(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='btnProceed']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='btnProceed']"));
 		return comp_img;
 	}
-	public static WebElement ClickBackButton()
+	public static WebElement ClickBackButton(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='lnklogin']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='lnklogin']"));
 		return comp_img;
-	}public static WebElement ClickBackButton1()
+	}public static WebElement ClickBackButton1(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='lnkBackLogin']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='lnkBackLogin']"));
 		return comp_img;
 	}
 	
-	public static WebElement ClickAccountLocked()
+	public static WebElement ClickAccountLocked(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='lbtUnlockAccount']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='lbtUnlockAccount']"));
 		return comp_img;
 	}
-	public static WebElement ClickGoogle()
+	public static WebElement ClickGoogle(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='divLogin']/div[10]/div[1]/div/span[2]"));
+		comp_img = driver.findElement(By.xpath("//*[@id='divLogin']/div[10]/div[1]/div/span[2]"));
 		return comp_img;
 	}
-	public static WebElement ClickLoginHelp()
+	public static WebElement ClickLoginHelp(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='hlnkHelp']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='hlnkHelp']"));
 		return comp_img;
 	}
-	public static WebElement Clickreadmsg()
+	public static WebElement Clickreadmsg(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='vsLogin']/ul/li"));
+		comp_img = driver.findElement(By.xpath("//*[@id='vsLogin']/ul/li"));
 		return comp_img;
 	}
-	public static WebElement Clickdiffuser()
+	public static WebElement Clickdiffuser(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='lnkLogOut']"));
+		comp_img = driver.findElement(By.xpath("//*[@id='lnkLogOut']"));
 		return comp_img;
 	}
-	public static WebElement ClickreadMsg()
+	public static WebElement ClickreadMsg(WebDriver driver)
 	{
-		comp_img = getDriver().findElement(By.xpath("//*[@id='ValidationSummary3']/ul/li"));
+		comp_img = driver.findElement(By.xpath("//*[@id='ValidationSummary3']/ul/li"));
 		return comp_img;
 	}
 }

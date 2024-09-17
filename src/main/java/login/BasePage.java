@@ -1,11 +1,14 @@
 package login;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import javax.xml.datatype.Duration;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,9 +20,19 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ThreadGuard;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+
+
+import cfo.CFOcountPOM;
+import performer.OverduePOM;
 
 	
 
@@ -35,12 +48,12 @@ import com.relevantcodes.extentreports.ExtentTest;
 		public static FileInputStream fis = null;	//File input stream variable
 		public static XSSFWorkbook workbook = null;	//Excel sheet workbook variable
 		public static XSSFSheet sheet = null;		//Sheet variable
-		protected final ReadWriteLock lock;
+		private final ReadWriteLock lock;
 	    protected String uname;
 	    protected   String password;
 	    protected String url;
 	    
-	    String filePath ="E:\\Snehal\\ComplianceLatest\\Litigation-Project-main (1)\\Litigation-Project-main\\TestData\\LitigationSheet.xlsx";
+	    String filePath ="D:\\Avacom22Nov\\AvacomUpdated26JULY2023\\TestData\\ComplianceSheet.xlsx";
 	    
 		public static WebDriver getDriver() {
 			return driver.get();
@@ -48,21 +61,31 @@ import com.relevantcodes.extentreports.ExtentTest;
 
 		public static XSSFSheet ReadExcel(int no) throws IOException
 		{
-			
-			fis = new FileInputStream("E:\\Snehal\\ComplianceLatest\\Litigation-Project-main (1)\\Litigation-Project-main\\TestData\\LitigationSheet.xlsx");
+			//String workingDir = System.getProperty("webdriver.chrome.driver","C:/March2022/PerformerPom/Driver/chromedriver.exe");
+			fis = new FileInputStream("D:\\Avacom22Nov\\AvacomUpdated26JULY2023\\TestData\\ComplianceSheet.xlsx");
 			workbook = new XSSFWorkbook(fis);
 			sheet = workbook.getSheetAt(no);					//Retrieving third sheet of Workbook
 			return sheet;
 		}
 		
-	/*private synchronized void loadProperties(int no) throws IOException {
+	private synchronized void loadProperties(int no) throws IOException {
 		
 		XSSFSheet sheet = ReadExcel(no);
 		Row row0 = sheet.getRow(0);						//Selected 0th index row (First row)
 		Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
 		 URL = c1.getStringCellValue();
-			
-		}*/
+			/*prop = new Properties();
+			try {
+				FileInputStream file = new FileInputStream("D:\\LabourCompliance_m\\LabourCompliance\\LabourCompliance\\env_data\\config.properties");
+				prop.load(file);
+				  browser = prop.getProperty("browser");	
+				  website = prop.getProperty("website");
+				  
+				  }
+			catch(Exception e){
+				e.printStackTrace();
+			}*/
+		}
 		
 
 		
@@ -138,7 +161,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 	private void openBrower(int no) throws IOException {
 
 		if (browser.contains("chrome")) {
-					System.setProperty("webdriver.chrome.driver", "E:\\eclips-projects\\Selenium\\chromedriver-win64_1\\chromedriver.exe");
+					System.setProperty("webdriver.chrome.driver", "D:\\Avacom22Nov\\AvacomUpdated26JULY2023\\Chrome\\chromedriver.exe");
 					//WebDriverManager.chromedriver().setup();
 					ChromeOptions options = new ChromeOptions();
 					options.addArguments("--remote-allow-origins=*");
@@ -159,7 +182,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 
 	 }
 
-	public void initialization(String link,int no) throws InterruptedException, IOException {
+	public void initialization(String link,int no,String text) throws InterruptedException, IOException {
 		try {
 		//loadProperties(no);
 		openBrower(no);
@@ -168,36 +191,46 @@ import com.relevantcodes.extentreports.ExtentTest;
 			e.printStackTrace();
 		}
 		
-	
+	/*	Row row1 = sheet.getRow(1);						//Selected 1st index row (Second row)
+		Cell c1 = row1.getCell(1);						//Selected cell (1 row,1 column)
+		String uname = c1.getStringCellValue();			//Got the URL stored at position 1,1
+		
+		Row row2 = sheet.getRow(2);						//Selected 2nd index row (Third row)
+		Cell c2 = row2.getCell(1);						//Selected cell (2 row,1 column)
+		String password = c2.getStringCellValue();		//Got the URL stored at position 2,1
+		*/
 		
 		read_Login_username( no);
 		read_Login_password( no);
 		
 		login.Login.UserLogin(uname,password,link);		//Method of Login class to login user.
 		
-
+	/*	if(text.equalsIgnoreCase("internal")) {
+		Thread.sleep(3000);
+		Select drp = new Select(CFOcountPOM.selectInternal());
+		Thread.sleep(700);
+		drp.selectByIndex(1);
+		
+		Thread.sleep(1000);
+		CFOcountPOM.clickApply().click();
+		Thread.sleep(3000);
+		}else if(text.equalsIgnoreCase("StatutoryExcludingChecklist")) {
+			Thread.sleep(3000);
+			ApprovalcountPOM.Filters().click();
+			Thread.sleep(2000);
+			ApprovalcountPOM.StatutoryExcludingChecklist().click();
+			Thread.sleep(4000);
+			CFOcountPOM.clickApply().click();
+		}else {
+			
+		}*/
 		
 	//	CFOcountPOM.RefreshNow().click();
 		Thread.sleep(3000);
 		
 	}
 	
-	public Sheet ReadExcel() throws IOException {
-		  lock.readLock().lock();
-	    try {
-	        FileInputStream fis = new FileInputStream(filePath);
-	        Workbook workbook = WorkbookFactory.create(fis);
-	        Sheet sheet1 = workbook.getSheetAt(0);
-	        workbook.close();
-	        fis.close();
-	        return sheet;
-	    }
-	    
-	    finally {
-	        lock.readLock().unlock();
-	    }
-
-	}
+	
 	public void closeBrowser() {
 		getDriver().quit();
 		driver.remove();
