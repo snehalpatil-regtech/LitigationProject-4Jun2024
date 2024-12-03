@@ -71,7 +71,7 @@ public class Login
 			else if(browser.equalsIgnoreCase("chrome"))
 			{
 				//set path to chromedriver.exe
-				System.setProperty("webdriver.chrome.driver","E:\\eclips-projects\\Selenium\\chromedriver-win32\\chromedriver.exe");
+				System.setProperty("webdriver.chrome.driver","E:\\eclips-projects\\Selenium\\chromedriver-win64\\chromedriver.exe");
 				//create chrome instance
 				driver = new ChromeDriver();
 			

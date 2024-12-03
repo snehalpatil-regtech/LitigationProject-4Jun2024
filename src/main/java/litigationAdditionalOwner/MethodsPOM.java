@@ -38,6 +38,7 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import cfo.CFOcountPOM;
 import licensePerformer.LiPerformerPOM;
+import litigationManagement.CFOMethod;
 import performer.OverduePOM;
 
 public class MethodsPOM 
@@ -84,7 +85,7 @@ public class MethodsPOM
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		WebDriverWait wait1 = new WebDriverWait(driver, 300);
 		progress(driver);
-		
+		driver.navigate().refresh();
 		Thread.sleep(500);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 //		CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.UP);
@@ -92,9 +93,13 @@ public class MethodsPOM
 		Thread.sleep(4000);
 		clickNewNotice(driver);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
+		Thread.sleep(500);
 		clickDated(driver);
+		Thread.sleep(500);
 		clickFinancialYear(driver);
+		Thread.sleep(500);
 		clickRefNo(driver);
+		Thread.sleep(500);
 		selectNoticeType(driver);
 		Thread.sleep(300);
 		clickAct(driver);
@@ -1489,15 +1494,17 @@ public class MethodsPOM
 	
 		js.executeScript("window.scrollBy(0,-700)");
 		
+		driver.navigate().refresh();
 		Thread.sleep(3000);
 		clickNewCase(driver);
 				
 		progress(driver);
+		Thread.sleep(3000);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 		
 		Thread.sleep(1000);
 		selectCaseType(driver);
-		Thread.sleep(3000);
+		Thread.sleep(4000);
 		clickDated1(driver);
 		Thread.sleep(3000);
 		clickFinanicialYear(driver);
@@ -2027,7 +2034,7 @@ public class MethodsPOM
 		    
 		    
 		    Thread.sleep(8000);
-		    performerPOM.clickHearingDate(driver).sendKeys("02-10-2024");
+		    performerPOM.clickHearingDate(driver).sendKeys("29-12-2024");
 		    Thread.sleep(8000);
 		    performerPOM.clickSaveHearingDate(driver).click();
 		  
@@ -2402,7 +2409,7 @@ public class MethodsPOM
 //				int HearingDate = (int) c1.getNumericCellValue();
 //				performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 //				
-				performerPOM.clickCaseHearingDate(driver).sendKeys("30-10-2024");	//Writing 'HearingDate'
+				performerPOM.clickCaseHearingDate(driver).sendKeys("30-11-2024");	//Writing 'HearingDate'
 				
 			
 			    Thread.sleep(8000);
@@ -2436,7 +2443,7 @@ public class MethodsPOM
 	 				Thread.sleep(8000);
 	 				performerPOM.clickNewCaseHearing(driver).click();
 	 				  Thread.sleep(8000);
- 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("30-10-2024");	//Writing 'HearingDate'
+ 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("30-11-2024");	//Writing 'HearingDate'
 	 				
 	 			
 	 			    Thread.sleep(8000);
@@ -3214,7 +3221,7 @@ public class MethodsPOM
 			
 		}
 		Thread.sleep(5000);
-		row0 = sheet.getRow(17);									//Selected 0th index row (First row)
+		row0 = sheet.getRow(5);									//Selected 0th index row (First row)
 		c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
 		String remark = c1.getStringCellValue();
 		performerPOM.clickRemark(driver).sendKeys(remark);		//Writing 'Remark'
@@ -3353,7 +3360,7 @@ public class MethodsPOM
 			
 			//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeOpen(driver)));
 			
-			
+			driver.navigate().refresh();
 			int open = 0;
 			if(type.equalsIgnoreCase("Notice - Open"))
 			{
@@ -3533,7 +3540,7 @@ public class MethodsPOM
 		
 
 		Thread.sleep(3000);
-		int open = CountExcel(driver, test, "Notice - Open");
+		int open = CFOMethod.CountExcel(driver, test, "Notice - Open");
 		
 		Thread.sleep(3000);
 		performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
@@ -3567,13 +3574,14 @@ public class MethodsPOM
 		sheet = workbook.getSheetAt(sheetNo);
 		
 		perform(driver, test, sheet, open, gridRecords, "Notice - Open",compliancesCount);
+		
 	}
 	
 	public static void NoticeClosed(WebDriver driver, ExtentTest test, XSSFWorkbook workbook, String login) throws InterruptedException, IOException
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		
-		CountExcel(driver, test, "Notice - Closed");
+		CFOMethod.CountExcel(driver, test, "Notice - Closed");
 		
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNew(driver)));
@@ -3594,7 +3602,7 @@ public class MethodsPOM
 //	    	sheetNo = 6;
 //	    }
 		
-		int open = CountExcel(driver, test, "Case - Open");
+		int open = CFOMethod.CountExcel(driver, test, "Case - Open");
 		
 		
 		Thread.sleep(5000);
@@ -3629,11 +3637,11 @@ public class MethodsPOM
 		perform1(driver, test, sheet, open, gridRecords, "Case - Open");
 	}
 	
-	public static void CaseClosed(WebDriver driver, ExtentTest test, XSSFWorkbook workbook, String login) throws InterruptedException, IOException
+	public static void CaseClosed(WebDriver driver, ExtentTest test) throws InterruptedException, IOException
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		
-		CountExcel(driver, test, "Case - Closed");
+		CFOMethod.CountExcel(driver, test, "Case - Closed");
 		
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNew(driver)));
@@ -3658,7 +3666,7 @@ public class MethodsPOM
 	    }
 	    
 	 
-		int open = CountExcel(driver, test, "Task - Open");
+		int open = CFOMethod.CountExcel(driver, test, "Task - Open");
 		
 		Thread.sleep(500);
 		performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
@@ -3696,7 +3704,7 @@ public class MethodsPOM
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		
-		CountExcel(driver, test, "Task - Closed");
+		CFOMethod.CountExcel(driver, test, "Task - Closed");
 		
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(performerPOM.clickAddNewTask(driver)));
@@ -4184,8 +4192,9 @@ public class MethodsPOM
 			sheet = workbook.getSheetAt(1);
 			
 			performerPOM.clickStatusPayments(driver).click();			//Clicking on 'Status/Payments'
-			
+			Thread.sleep(300);
 			wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+			Thread.sleep(300);
 			performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 			Thread.sleep(300);
 			performerPOM.clickClosedStatus(driver).click();				//Selecting 'Closed' option from drop down.
@@ -4234,9 +4243,9 @@ public class MethodsPOM
 		else if(type.equals("Case"))
 		{
 			performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
-			
+			Thread.sleep(300);
 			wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
-			
+			Thread.sleep(300);
 			performerPOM.clickCaseStage(driver).click();
 			Thread.sleep(300);
 			performerPOM.selectCaseStage1(driver).sendKeys("Hearing", Keys.ENTER);
@@ -5331,13 +5340,13 @@ public class MethodsPOM
 		action.moveToElement(performerPOM.clickTitle(driver)).click().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).perform();
 		
 		Thread.sleep(8000);
-		performerPOM.clickReminderText(driver).sendKeys("Reminder as on date test 16mar2024");
+		performerPOM.clickReminderText(driver).sendKeys("Reminder as on date test 22mar2024");
 		
 		Thread.sleep(8000);
-		performerPOM.clickDescription(driver).sendKeys("Reminder as on date test 16mar2024");
+		performerPOM.clickDescription(driver).sendKeys("Reminder as on date test 22mar2024");
 		
 		Thread.sleep(8000);
-		performerPOM.clickRemark2(driver).sendKeys("Reminder as on date test 16mar2024");
+		performerPOM.clickRemark2(driver).sendKeys("Reminder as on date test 22mar2024");
 		
 		Thread.sleep(8000);
 		performerPOM.clickDate(driver).click();
@@ -5392,7 +5401,7 @@ public class MethodsPOM
 		performerPOM.clickReminderText(driver).clear();
 		
 		Thread.sleep(8000);
-		performerPOM.clickReminderText(driver).sendKeys("Reminder as on dated 6jan2024");
+		performerPOM.clickReminderText(driver).sendKeys("Reminder as on dated 8jan2024");
 		
 		Thread.sleep(8000);
 		performerPOM.clickDate(driver).click();
@@ -17005,8 +17014,8 @@ public static void CategorySummaryGraphFilter(WebDriver driver,ExtentTest test) 
 	 	 	 	 		   Thread.sleep(6000);
 	 	 	 	 		   performerPOM.clickSendMail(driver).click();
 	 	 	 	 		   
-	 	 	 	 		Thread.sleep(1000);
-	 	 	 	        wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
+//	 	 	 	 		Thread.sleep(8000);
+//	 	 	 	        wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
 	 	 	 	 		   
 	 	 	 	 		 Thread.sleep(4000);
 		 	 	 		 performerPOM.clickSelectCheckbox(driver).click();
@@ -17089,8 +17098,8 @@ public static void CategorySummaryGraphFilter(WebDriver driver,ExtentTest test) 
 	 	 	 	 		   Thread.sleep(6000);
 	 	 	 	 		   performerPOM.clickSendMail(driver).click();
 	 	 	 	 		   
-	 	 	 	 		Thread.sleep(1000);
- 	 	 	        	wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
+//	 	 	 	 		Thread.sleep(8000);
+// 	 	 	        	wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
 	 	 	 	 		   
 	 	 	 	 		 Thread.sleep(4000);
 		 	 	 		 performerPOM.clickSelectCheckbox(driver).click();
@@ -23805,8 +23814,9 @@ public static void CategorySummaryGraphFilter(WebDriver driver,ExtentTest test) 
 	 				 performerPOM.clickStatusPayments(driver).click();
 	 				 
 	 				
-	 				
+	 				Thread.sleep(300);
 	 				wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+	 				Thread.sleep(300);
 	 				performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 	 				Thread.sleep(4000);
 	 				performerPOM.clickClosedStatus(driver).click();				//Selecting 'Closed' option from drop down.

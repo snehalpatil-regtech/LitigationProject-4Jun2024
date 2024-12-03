@@ -791,10 +791,12 @@ public class MethodPOM
 				
 			       wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 			       
-			performerPOM.clickNoticeDocument(driver).click();     //click notice document
-			performerPOM.clickNewDocument(driver).click();        //click new document button
+			       Thread.sleep(8000);
+			       performerPOM.clickNoticeDocument(driver).click();     //click notice document
+			       Thread.sleep(8000);
+			       performerPOM.clickNewDocument(driver).click();        //click new document button
 			
-			Thread.sleep(1000);
+			Thread.sleep(7000);
 			driver.switchTo().frame("IFrameManageDocument");
 			performerPOM.selectDocumentType(driver);
 			Thread.sleep(3000);
@@ -1006,8 +1008,8 @@ public class MethodPOM
 					
 					Thread.sleep(3000);
 					OverduePOM.clickSaveButton(driver).click();				//Clicking on 'Save' button.
-					
-					wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsg1(driver)));
+					//Thread.sleep(3000);
+					//wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsg1(driver)));
 					
 					try
 					{
@@ -1027,10 +1029,10 @@ public class MethodPOM
 				    }
 					Thread.sleep(3000);
 					performerPOM.clickNoticeEditTaskcfo(driver).click();
-					
+					Thread.sleep(3000);
 					performerPOM.clickTaskTitle(driver).clear();
 					
-					
+					Thread.sleep(3000);
 					performerPOM.clickTaskTitle(driver).sendKeys("Automation test 1520423");	//Writing 'Task Title'
 					
 					Thread.sleep(3000);
@@ -1287,12 +1289,13 @@ public class MethodPOM
 				performerPOM.clickEditNotice(driver).click();//click edit notice
 				Thread.sleep(8000);
 					wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
-				   performerPOM.clickStatusPayments(driver).click();			//Clicking on 'Status/Payments'
+					Thread.sleep(8000);
+					performerPOM.clickStatusPayments(driver).click();			//Clicking on 'Status/Payments'
 				
 
 				
 								
-					Thread.sleep(300);
+					Thread.sleep(3000);
 					performerPOM.clickInvoiceNo(driver).sendKeys("48579");
 					
 					
@@ -1316,7 +1319,7 @@ public class MethodPOM
 					performerPOM.clickSavePaymentLog(driver).click();
 					
 
-					 // Thread.sleep(1000);
+					 Thread.sleep(1000);
 					  
 					 wait.until(ExpectedConditions.visibilityOf(performerPOM.readPymentmsg(driver)));
 						
@@ -2075,7 +2078,7 @@ public class MethodPOM
 			    
 			    
 			    Thread.sleep(8000);
-			    performerPOM.clickHearingDate(driver).sendKeys("26-09-2024");
+			    performerPOM.clickHearingDate(driver).sendKeys("28-12-2024");
 			    Thread.sleep(8000);
 			    performerPOM.clickSaveHearingDate(driver).click();
 			  
@@ -2342,7 +2345,7 @@ public class MethodPOM
 //				int HearingDate = (int) c1.getNumericCellValue();
 //				performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 //				
-				performerPOM.clickCaseHearingDate(driver).sendKeys("23-09-2024");	//Writing 'HearingDate'
+				performerPOM.clickCaseHearingDate(driver).sendKeys("26-12-2024");	//Writing 'HearingDate'
 				
 			
 			    Thread.sleep(8000);
@@ -3018,7 +3021,7 @@ public class MethodPOM
 	  	{
 	  		WebDriverWait wait = new WebDriverWait(driver, 180);
 	  		progress(driver);
-	  		
+	  		sheet = workbook.getSheetAt(6);
 	  		wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeOpen(driver)));
 	  		int closed = 0;
 	  		int open = 0;
@@ -3068,19 +3071,23 @@ public class MethodPOM
 	  		Thread.sleep(300);
 	  		if(type.equals("Notice"))
 	  		{
-	  			sheet = workbook.getSheetAt(6);
 	  			
+	  			Thread.sleep(3000);
 	  			performerPOM.clickStatusPayments(driver).click();			//Clicking on 'Status/Payments'
-	  			
+	  			Thread.sleep(3000);
 	  			wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+	  			Thread.sleep(3000);
 	  			performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.clickClosedStatus(driver).click();				//Selecting 'Closed' option from drop down.
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCloseDate(driver)));
+	  			
 	  			performerPOM.clickCloseDate(driver).click();				//Clicking on 'Closed Date' date box
+	  			
 	  			OverduePOM.selectLastMonth(driver).click();					//Getting last month
+	  			
 	  			OverduePOM.selectDate2(driver).click();						//Selecting particular date.
 	  			
 	  			Thread.sleep(300);
@@ -3088,19 +3095,19 @@ public class MethodPOM
 	  			performerPOM.clickSelectResult(driver).sendKeys("In Progress", Keys.ENTER);
 	  			
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			Row r1 = sheet.getRow(43);
 	  			Cell c1 = r1.getCell(1);
 	  			String remark = c1.getStringCellValue();
 	  			performerPOM.clickRemark1(driver).sendKeys(remark);
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			r1 = sheet.getRow(44);
 	  			c1 = r1.getCell(1);
 	  			String CaseNo = c1.getStringCellValue();
 	  			performerPOM.clickCourtCaseNo(driver).sendKeys(CaseNo);
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.clickSaveConvertCase(driver).click();	
 	  			
 //	  			Thread.sleep(300);
@@ -3120,33 +3127,34 @@ public class MethodPOM
 	  		}
 	  		else if(type.equals("Case"))
 	  		{
+	  			Thread.sleep(3000);
 	  			performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
-	  			
+	  			Thread.sleep(3000);
 	  			wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
-	  			
+	  			Thread.sleep(3000);
 	  			performerPOM.clickCaseStage(driver).click();
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.selectCaseStage1(driver).sendKeys("Hearing", Keys.ENTER);
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.clickCaseStatus(driver).click();				//Clicking on 'Case Status' drop down.
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.clickCaseStatusClose(driver).click();			//Selecting 'Closed' option from drop down.
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseCloseDate(driver)));
 	  			performerPOM.clickCaseCloseDate(driver).click();				//Clicking on 'Closed Date' date box
 	  			OverduePOM.selectLastMonth(driver).click();					//Getting last month
 	  			OverduePOM.selectDate2(driver).click();						//Selecting particular date.
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.clickCaseResult(driver).click();
 	  			performerPOM.clickSelectCaseResult(driver).sendKeys("In Progress", Keys.ENTER);
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.clickRemark1(driver).sendKeys("Automation Testing");
 	  			
-	  			Thread.sleep(300);
+	  			Thread.sleep(3000);
 	  			performerPOM.clickSave1(driver).click();
 	  		}
 	  		else if(type.equals("Task"))
@@ -4816,13 +4824,13 @@ public class MethodPOM
 				action.moveToElement(performerPOM.clickTitle(driver)).click().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).perform();
 				
 				Thread.sleep(3000);
-				performerPOM.clickReminderText(driver).sendKeys("Reminder as on  test 8");
+				performerPOM.clickReminderText(driver).sendKeys("Reminder as on  test 12");
 				
 				Thread.sleep(3000);
-				performerPOM.clickDescription(driver).sendKeys("Reminder as on  test 8");
+				performerPOM.clickDescription(driver).sendKeys("Reminder as on  test 12");
 				
 				Thread.sleep(3000);
-				performerPOM.clickRemark2(driver).sendKeys("Reminder as on test 8");
+				performerPOM.clickRemark2(driver).sendKeys("Reminder as on test 12");
 				
 				Thread.sleep(3000);
 				performerPOM.clickDate(driver).click();
@@ -10654,7 +10662,7 @@ public class MethodPOM
 				 				 performerPOM.clickStatusPayments(driver).click();
 				 				 
 				 				
-				 				
+				 				Thread.sleep(8000);
 				 				wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
 				 				performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 				 				Thread.sleep(4000);
@@ -10752,7 +10760,7 @@ public class MethodPOM
 				 				 performerPOM.clickStatusPayments(driver).click();
 				 				 
 				 				
-				 				
+				 			   	Thread.sleep(8000);
 				 				wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
 				 				performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 				 				Thread.sleep(4000);
@@ -10816,7 +10824,7 @@ public class MethodPOM
 				 			   	Thread.sleep(8000);
 				 			
 				 			   	performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
-							
+				 			   	Thread.sleep(8000);
 				 			   	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 							
 				 			   	performerPOM.clickCaseStage(driver).click();

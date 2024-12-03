@@ -20,6 +20,8 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+import litigationCompanyAdmin.MethodsPOM;
+
 
 public class ExternalLawyer 
 
@@ -367,7 +369,7 @@ void LinkCase() throws InterruptedException, IOException
 
 	extent.endTest(test);
 	extent.flush();
-}*/
+}
 
 @Test(priority =24)
    void LinkCaseViewIcon() throws InterruptedException, IOException
@@ -397,18 +399,18 @@ void LinkCase() throws InterruptedException, IOException
 			test = extent.startTest("Notice - Closed Count Verification");
 	
 			
-			MethodPOM.NoticeClosed(driver, test, workbook, "Performer");
+			MethodsPOM.NoticeClosed(driver, test, workbook, "Performer");
 			
 			extent.endTest(test);
 			extent.flush();
 		}
-	@Test(priority = 26)
+	@Test(priority = 27)
 		void CaseClose() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Case - Closed Count Verification");
 	
 			
-			MethodPOM.CaseClosed(driver, test, workbook, "Performer");
+			MethodsPOM.CaseClosed(driver, test, workbook, "Performer");
 			
 			extent.endTest(test);
 			extent.flush();
@@ -610,7 +612,7 @@ void NoticeTaskActivityTab() throws InterruptedException, IOException
 		extent.flush();
 	}
 
-@Test(priority =39)
+//@Test(priority =39)
 	void TaskActivtityExistingData() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice Task/Activtiy with existing data verification");
@@ -709,7 +711,7 @@ void NoticePaymentLogTab() throws InterruptedException, IOException
 	test = extent.startTest("Notice PaymentLog tab verification");
 	
 	
-	MethodPOM.PaymentLog(driver, test);
+	MethodsPOM.PaymentLog(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -719,7 +721,7 @@ void NoticePaymentLogTab() throws InterruptedException, IOException
 void PaymentLogwithExistingData() throws InterruptedException, IOException
 {
 	test = extent.startTest("Notice Payment with existing data verification");
-	MethodPOM.PaymentLogExistingData(driver,test);
+	MethodsPOM.PaymentLogExistingData(driver,test);
    extent.endTest(test);
     extent.flush();
 }
@@ -770,7 +772,7 @@ void NoticePaymentWithoutData() throws InterruptedException, IOException
 				test = extent.startTest("Case Document verification");
 				
 				
-				MethodPOM.Document(driver, test);
+				MethodsPOM.Document(driver, test);
 				
 				extent.endTest(test);
 				extent.flush();
@@ -798,7 +800,7 @@ void NoticePaymentWithoutData() throws InterruptedException, IOException
 		
 		extent.endTest(test);
 		extent.flush();
-	}
+	}*/
 @Test(priority =54)
 	void CaseDocumentSearchFields() throws InterruptedException, IOException
 	{
@@ -1038,7 +1040,7 @@ void NoticePaymentWithoutData() throws InterruptedException, IOException
 		test = extent.startTest("Case Status/Payment verification");
 			
 				
-		MethodPOM.StatusPayment(driver, test,workbook);
+		MethodsPOM.StatusPayment(driver, test,workbook);
 				
 		extent.endTest(test);
 		extent.flush();
@@ -1050,7 +1052,7 @@ void NoticePaymentWithoutData() throws InterruptedException, IOException
  		test = extent.startTest("Case Status/Payment with existing data verification");
  	
  		
- 		MethodPOM.StatusPaymentWithExistingData(driver, test,workbook);
+ 		MethodsPOM.StatusPaymentWithExistingData(driver, test,workbook);
  		
  		extent.endTest(test);
  		extent.flush();
@@ -1061,7 +1063,7 @@ void NoticePaymentWithoutData() throws InterruptedException, IOException
 		test = extent.startTest("Case Status/Payment without data ");
 		
 		
-		MethodPOM.StatusPaymentWithoutdata(driver, test);
+		MethodsPOM.StatusPaymentWithoutdata(driver, test);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -1072,7 +1074,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 	test = extent.startTest("Case Status/Payment with Invalid data ");
 	
 	
-	MethodPOM.StatusPaymentwithInvaliddata(driver, test,workbook);
+	MethodsPOM.StatusPaymentwithInvaliddata(driver, test,workbook);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -1083,7 +1085,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 		test = extent.startTest("Case Status With Empty Fields");
 	
 	
-		MethodPOM.CaseStatuswithEmptyFields(driver, test);
+		MethodsPOM.CaseStatuswithEmptyFields(driver, test);
 	
 		extent.endTest(test);
 		extent.flush();
@@ -1103,7 +1105,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 
 
 
-			@Test(priority =90)
+			@Test(priority =81)
 			void NoticeClosedDoc() throws InterruptedException, IOException
 			{
 			test = extent.startTest("Close Notice Document verification");
@@ -1113,7 +1115,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 			extent.endTest(test);
 			extent.flush();
 			}
-			@Test(priority = 91)
+			@Test(priority = 82)
 			void NoticeClosedWithoutDoc() throws InterruptedException, IOException
 			{
 			test = extent.startTest("Close Notice Without Document verification");
@@ -1125,7 +1127,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 			}
 			
 			
-			@Test(priority = 92)
+			@Test(priority = 83)
 			void CaseClosedDoc() throws InterruptedException, IOException
 			{
 			test = extent.startTest("Close Case Document verification");
@@ -1137,7 +1139,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 			}
 			
 			
-			@Test(priority = 93)
+			@Test(priority = 84)
 			void CaseClosedWithoutDoc() throws InterruptedException, IOException
 			{
 			test = extent.startTest("Close Case Without Document verification");
@@ -1164,7 +1166,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 				test = extent.startTest("Download and View Document");
 			
 				
-				MethodPOM.MyDocument(driver, test, workbook, "Performer");
+				MethodsPOM.MyDocument(driver, test, workbook, "Performer");
 				
 				extent.endTest(test);
 				extent.flush();
@@ -1179,7 +1181,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 		extent.endTest(test);
 	     extent.flush();
 	}
-	@Test(priority = 97)
+	//@Test(priority = 97)
 	void ClosedNoticeDoc() throws InterruptedException, IOException
 	{
 	test = extent.startTest("Closed notice document verification");
@@ -1194,7 +1196,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 				test = extent.startTest("Advanced search -Download and View Document");
 				
 				
-				MethodPOM.AdvancedSearchDocument(driver, test,"Performer");
+				MethodsPOM.AdvancedSearchDocument(driver, test,"Performer");
 				
 				extent.endTest(test);
 				extent.flush();
@@ -1205,7 +1207,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 			test = extent.startTest("My Document-Advance search-Share Case Document Verification");
 		
 			
-			MethodPOM.AdvancedSearchShareCaseDocument(driver, test);
+			MethodsPOM.AdvancedSearchShareCaseDocument(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
@@ -1233,7 +1235,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 					extent.flush();
 				}
 	
-	@Test(priority =102)
+//	@Test(priority =102)
 	void AdvancedSearchClosedNoticeDoc() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Document-Advanced search- Closed notice document verification");
@@ -1256,7 +1258,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 				{
 					test = extent.startTest(" Critical Document Verification");
 					
-					MethodPOM.CriticalDocuments(driver, test);
+					MethodsPOM.CriticalDocuments(driver, test);
 					
 					extent.endTest(test);
 					extent.flush();
@@ -1267,7 +1269,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 				{
 					test = extent.startTest(" Critical Document Verification");
 					
-					MethodPOM.CriticalDocuments1(driver, test);
+					MethodsPOM.CriticalDocuments1(driver, test);
 					
 					extent.endTest(test);
 					extent.flush();
@@ -1312,7 +1314,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 				test = extent.startTest("My Reminder verification");
 			
 				
-				MethodPOM.MyReminder(driver, test, workbook);
+				MethodsPOM.MyReminder(driver, test, workbook);
 				
 				extent.endTest(test);
 				extent.flush();

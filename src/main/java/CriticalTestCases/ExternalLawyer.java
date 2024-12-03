@@ -85,7 +85,7 @@ public class ExternalLawyer
 	}
 	
 
-@Test(priority = 0)
+/*@Test(priority = 0)
 		void NoticeOpen() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice - Open Count Verification");
@@ -141,7 +141,7 @@ public class ExternalLawyer
 					test = extent.startTest("Notice - Closed Count Verification");
 			
 					
-					MethodPOM.NoticeClosed(driver, test, workbook, "Performer");
+					CFOMethod.NoticeClosed(driver, test, workbook, "Performer");
 					
 					extent.endTest(test);
 					extent.flush();
@@ -152,7 +152,8 @@ public class ExternalLawyer
 					test = extent.startTest("Case - Closed Count Verification");
 			
 					
-					MethodPOM.CaseClosed(driver, test, workbook, "Performer");
+
+					CFOMethod.CaseClosed(driver, test);
 					
 					extent.endTest(test);
 					extent.flush();
@@ -391,7 +392,7 @@ void MyReports() throws InterruptedException, IOException
 	
 	extent.endTest(test);
 	extent.flush();
-}
+}*/
 @Test(priority = 22)
 void MoreReports() throws InterruptedException, IOException
 {

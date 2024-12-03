@@ -144,7 +144,7 @@ public class AddtionalOwner
 		{
 			test = extent.startTest("Case - Closed Count Verification");
 			
-			MethodsPOM.CaseClosed(driver, test, workbook, "Performer");
+			MethodsPOM.CaseClosed(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();

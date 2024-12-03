@@ -106,7 +106,7 @@ public class CFO {
 				
 				
 	
-		@Test(priority =1)
+		/*@Test(priority =1)
 			    	void NoticeOpen() throws InterruptedException, IOException
 			    	{
 			    		test = extent.startTest("Notice - Open Count verification");
@@ -332,7 +332,7 @@ public class CFO {
 			
 			extent.endTest(test);
 			extent.flush();
-		}
+		}*/
 	@Test(priority =21)
 		void NoticeDocumentShareWithoutData() throws InterruptedException, IOException
 		{
@@ -1395,7 +1395,7 @@ public class CFO {
 @Test(priority = 111)
 void CaseNoticeTypeGraph() throws InterruptedException, IOException
 {
-	test = extent.startTest("Select Notice type Filter:- To check Case Notice Type Graph Count Verification");
+	test = extent.startTest("Select Notice from Notice/Case Filter to verify count of Case/Notice Type Summary graph");
 	
 	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1480,7 +1480,7 @@ void CaseNoticeStageGraph() throws InterruptedException, IOException
 	js.executeScript("window.scrollBy(0,850)");
 
 	 String StageName =performerPOM.StageName(driver).getText();
-	 test = extent.startTest("Select Notice type Filter :-"+StageName+"stage - Case Notice Stage Graph Count Verification");
+	 test = extent.startTest("Select Notice from Notice/Case Filter :- "+StageName+" Stage :-  to verify count of Case/Notice Stage Summary graph");
 	
 	CFOMethod.CaseNoticeStageGraph(driver, test,"cfo -");
 	
@@ -1510,7 +1510,7 @@ void CaseNoticeStageGraph() throws InterruptedException, IOException
 @Test(priority =115)
 void RiskSummaryGraph() throws InterruptedException, IOException
 {
-	test = extent.startTest("Select Notice type Filter:-To check Risk Graph Count Verification");
+	test = extent.startTest("Select Notice from Notice/Case Filter to verify count of Risk Summary graph");
 	
 	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1590,7 +1590,7 @@ void DepartmentSummaryGraph() throws InterruptedException, IOException
 	 js.executeScript("window.scrollBy(0,950)");
 
 	 String DeptName =performerPOM.DepartName(driver).getText();
-	 test = extent.startTest("Select Notice type Filter :- "+DeptName+" Department - To check Department Summary Graph Count Verification");
+	 test = extent.startTest("Select Notice from Notice/Case Filter :- "+DeptName+" Dept :-  to verify count of Department Summary graph");
 	
   
    Thread.sleep(3000);
@@ -1641,7 +1641,7 @@ void LocationSummaryGraph() throws InterruptedException, IOException
    js.executeScript("window.scrollBy(0,1400)");
 	
 	  String LocationName =performerPOM.LocationName(driver).getText();
-		test = extent.startTest("Select Notice type Filter :- "+LocationName+" Location- To check Location Summary Graph Count Verification");
+		test = extent.startTest("Select Notice from Notice/Case Filter :- "+LocationName+" Location :-  to verify count of Location Summary graph");
 		
   
    Thread.sleep(3000);
@@ -1694,7 +1694,7 @@ void CategorySummaryGraph() throws InterruptedException, IOException
 	Thread.sleep(2000);
 		//String CategoryName =performerPOM.CategoryName(driver).getText();
 	//test = extent.startTest("Select Notice type Filter :-"+CategoryName+" Category - To check Category Summary Graph Count Verification");
-	test = extent.startTest("Select Notice type Filter :-Company Law Category - To check Category Summary Graph Count Verification");
+	test = extent.startTest("Select Notice from Notice/Case Filter :- Company Law Category :-  to verify count of Category Summary graph");
 	
    Thread.sleep(3000);
    CFOMethod.CategorySummaryGraph(driver, test,"cfo -");
@@ -1702,7 +1702,7 @@ void CategorySummaryGraph() throws InterruptedException, IOException
    extent.endTest(test);
    extent.flush();
 }
- @Test(priority =121)
+ @Test(priority =122)
 	void CategorySummaryGraphFilter() throws InterruptedException, IOException
 	{
 	 
@@ -1728,7 +1728,7 @@ void CategorySummaryGraph() throws InterruptedException, IOException
 @Test(priority = 123)
 void InwardDefendantAgeingGraph() throws InterruptedException, IOException
 {
- 		test = extent.startTest("Select Notice type Filter :- Less than a year  = To check Ageing Graph Count Verification");
+ 		test = extent.startTest("Select Notice from Notice/Case Filter to verify count of Ageing(Less than year) Summary graph");
  
  		JavascriptExecutor js = (JavascriptExecutor) driver;
      	js.executeScript("window.scrollBy(0,800)");
@@ -1794,7 +1794,7 @@ void LessThanYearGraphFilter() throws InterruptedException, IOException
 
 void AgeingGraph1to2years() throws InterruptedException, IOException
 {
-		test = extent.startTest("Select Notice type Filter :- 1 to 2 years :- To check Ageing Graph Count Verification");
+		test = extent.startTest("Select Notice from Notice/Case Filter to verify count of Ageing(1 to 2 year) Summary graph");
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
     	js.executeScript("window.scrollBy(0,800)");
@@ -1839,7 +1839,7 @@ void AgeingGraph1to2years() throws InterruptedException, IOException
 	extent.flush();
 }
 
-@Test(priority =126)
+@Test(priority =128)
 void AgeingGraph1to2yearsGraphFilter() throws InterruptedException, IOException
 {
  
@@ -1863,7 +1863,7 @@ void AgeingGraph1to2yearsGraphFilter() throws InterruptedException, IOException
 @Test(priority =127)
 void AgeingGraph2to3years() throws InterruptedException, IOException
 {
-	test = extent.startTest("Select Notice type Filter :- 2 to 3 years:- To check Ageing Graph Count Verification");
+	test = extent.startTest("Select Notice from Notice/Case Filter to verify count of Ageing(2 to 3 year) Summary graph");
 
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,800)");
@@ -1923,10 +1923,10 @@ void AgeingGraph2to3yearsGraphFilter() throws InterruptedException, IOException
  	
  	
 }
-@Test(priority = 128)
+@Test(priority = 143)
 void AgeingGraphMorethan3years() throws InterruptedException, IOException
 {
-test = extent.startTest("Select Notice type Filter :- More than 3 years :- To check Ageing Graph Count Verification");
+test = extent.startTest("Select Notice from Notice/Case Filter to verify count of Ageing(more than 3 year) Summary graph");
 
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.scrollBy(0,800)");
@@ -1963,7 +1963,7 @@ test = extent.startTest("Select Notice type Filter :- More than 3 years :- To ch
 	 extent.flush();
 }	
 
-@Test(priority =132)
+@Test(priority =129)
 void AgeingMoreThanYearGraphFilter() throws InterruptedException, IOException
 {
  
@@ -1982,10 +1982,10 @@ void AgeingMoreThanYearGraphFilter() throws InterruptedException, IOException
  	
 }
 
-@Test(priority =131)
+@Test(priority =130)
 void CaseNoticeTypeGraph1() throws InterruptedException, IOException
 {
-	test = extent.startTest("Select Case type Filter :- To check Case Notice Type Graph Count Verification");
+	test = extent.startTest("Select Case from Notice/Case Filter to verify count of Case/Notice Summary graph");
 	
 	
 	JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -2000,6 +2000,7 @@ void CaseNoticeTypeGraph1() throws InterruptedException, IOException
 	
 	 Thread.sleep(5000);
 	 performerPOM.clickDashboardApplyBtn(driver).click();
+	  js.executeScript("window.scrollBy(0,50)");
 	 Thread.sleep(5000);
 	
 	int	InwardDefendent = Integer.parseInt(performerPOM.CaseNoticeTypeInwardDefendentCase(driver).getText());	//Reading Notice Open count.
@@ -2056,7 +2057,7 @@ void CaseNoticeStageGraph1() throws InterruptedException, IOException
 	
 	   Thread.sleep(3000);
 	   String StageName =performerPOM.CaseStageName(driver).getText();
-		test = extent.startTest("Select Case type Filter :- "+StageName+" Stage :- To check Case Notice Stage Graph Count Verification");
+		test = extent.startTest("Select Case from Notice/Case Filter :- "+StageName+" Stage:- To verify count of Case/Notice Summary graph");
  	
 		Thread.sleep(3000);
 		CFOMethod.CaseNoticeStageGraph1(driver, test,"cfo -");
@@ -2067,7 +2068,7 @@ void CaseNoticeStageGraph1() throws InterruptedException, IOException
 @Test(priority = 133)
 void RiskSummaryGraph1() throws InterruptedException, IOException
 {
-	test = extent.startTest("Select Case type Filter :- To check Risk Graph Count Verification");
+	test = extent.startTest("Select Case from Notice/Case Filter to verify count of Risk Summary graph");
     
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	js.executeScript("window.scrollBy(0,800)");
@@ -2126,7 +2127,7 @@ void RiskSummaryGraph1() throws InterruptedException, IOException
 
 //	 String DeptName =performerPOM.DepartName(driver).getText();
 //	 test = extent.startTest("Select Case type Filter :- "+DeptName+" Department - To check Department Summary Graph Count Verification");
-	 test = extent.startTest("Select Case type Filter :-HR Department Department - To check Department Summary Graph Count Verification");
+	 test = extent.startTest("Select Case from Notice/Case Filter :-HR Department:- To verify count of Department Summary graph");
 	  
 	 
    Thread.sleep(3000);
@@ -2156,7 +2157,7 @@ void LocationSummaryGraph1() throws InterruptedException, IOException
 	
 //	  String LocationName =performerPOM.LocationName(driver).getText();
 //		test = extent.startTest("Select Case type Filter :- "+LocationName+" Location :- To check Location Summary Graph Count Verification");
-		test = extent.startTest("Select Case type Filter :- A Pvt Ltd  Location :- To check Location Summary Graph Count Verification");
+		test = extent.startTest("Select Case from Notice/Case Filter :- A Pvt Ltd Location:- To verify count of Location Summary graph");
   
    Thread.sleep(3000);
    CFOMethod.LocationSummaryGraph1(driver, test,"cfo -");
@@ -2189,7 +2190,7 @@ void LocationSummaryGraph1() throws InterruptedException, IOException
 	Thread.sleep(2000);
 //		String CategoryName =performerPOM.CategoryName(driver).getText();
 //	test = extent.startTest("Select Case type Filter :- "+CategoryName+" Category :- To check Category Summary Graph Count Verification");
-	test = extent.startTest("Select Case type Filter :-CNType Category :- To check Category Summary Graph Count Verification");
+	test = extent.startTest("Select Case from Notice/Case Filter :-Civil Category:- To verify count of category Summary graph");
 	
    Thread.sleep(3000);
    CFOMethod.CategorySummaryGraph1(driver, test,"cfo -");
@@ -2201,7 +2202,7 @@ void LocationSummaryGraph1() throws InterruptedException, IOException
 @Test(priority =137)
 void ExpensesCaseGraph() throws InterruptedException, IOException
 {
-   test = extent.startTest("Select Case type Filter :- To check Expenses Case-Wise Graph Count Verification");
+   test = extent.startTest("Select Case from Notice/Case Filter to verify count of Expense case wise graph");
   
    Thread.sleep(3000);
    CFOMethod.ExpensesCaseGraph( driver,test,"cfo -");
@@ -2212,7 +2213,7 @@ void ExpensesCaseGraph() throws InterruptedException, IOException
 @Test(priority =138)
 void ExpensesCategoryWiseCaseGraph() throws InterruptedException, IOException
 {
-   test = extent.startTest("Select Case type Filter :- To check Expenses Category Wise Graph Count Verification");
+   test = extent.startTest("Select Case from Notice/Case Filter to verify count of Expense category wise graph");
   
    Thread.sleep(3000);
    CFOMethod.ExpensesCategoryWiseCaseGraph(driver, test,"cfo -");
@@ -2223,7 +2224,7 @@ void ExpensesCategoryWiseCaseGraph() throws InterruptedException, IOException
 @Test(priority =139)
 void ExpensesCounselWiseCaseGraph() throws InterruptedException, IOException
 {
-test = extent.startTest("Select Case type Filter:- To check Expenses Counsel Wise Graph Count Verification");
+test = extent.startTest("Select Case from Notice/Case Filter to verify count of Expense counsel wise graph");
 
 Thread.sleep(3000);
 CFOMethod.ExpensesCounselWiseCaseGraph( driver,test,"cfo -");
@@ -2234,7 +2235,7 @@ extent.flush();
 @Test(priority =140)
 void UtilizedBudgetGraph() throws InterruptedException, IOException
 {
-test = extent.startTest("Select Case type Filter :- To check Utilized budget Graph Count Verification");
+test = extent.startTest("Select Case from Notice/Case Filter to verify count of Utilized budget graph");
 
 Thread.sleep(3000);
 CFOMethod.UtilizedBudgetGraph(driver, test,"cfo -");
@@ -2242,10 +2243,10 @@ CFOMethod.UtilizedBudgetGraph(driver, test,"cfo -");
 extent.endTest(test);
 extent.flush();
 }
-@Test(priority =144)
+@Test(priority =141)
 void AgeingGraph() throws InterruptedException, IOException
 {
-			test = extent.startTest("Select Case type Filter :- Less than a year :- To check Ageing Graph Count Verification");
+			test = extent.startTest("Select Case from Notice/Case Filter to verify count of Ageing(Less than year) Summary graph");
      
      		JavascriptExecutor js = (JavascriptExecutor) driver;
 	     	js.executeScript("window.scrollBy(0,800)");
@@ -2296,10 +2297,10 @@ void AgeingGraph() throws InterruptedException, IOException
 			extent.flush();
 }
 
-@Test(priority =145)
+@Test(priority =142)
 void AgeingGraph1to2yearsCase() throws InterruptedException, IOException
 {
-     	test = extent.startTest("Select Case type Filter :- 1 to 2 years :- To check Ageing Graph Count Verification");
+     	test = extent.startTest("Select Case from Notice/Case Filter to verify count of Ageing(1 to 2 year) Summary graph");
      
      	JavascriptExecutor js = (JavascriptExecutor) driver;
      	js.executeScript("window.scrollBy(0,800)");
@@ -2346,7 +2347,7 @@ void AgeingGraph1to2yearsCase() throws InterruptedException, IOException
 @Test(priority =146)
 void AgeingGraph2to3yearsCase() throws InterruptedException, IOException
 {
-     	test = extent.startTest("Select Case type Filter :-2 to 3 years :- To check Ageing Graph Count Verification");
+     	test = extent.startTest("Select Case from Notice/Case Filter to verify count of Ageing(2 to 3 year) Summary graph");
      
      	JavascriptExecutor js = (JavascriptExecutor) driver;
      	js.executeScript("window.scrollBy(0,800)");
@@ -2385,7 +2386,7 @@ void AgeingGraph2to3yearsCase() throws InterruptedException, IOException
 @Test(priority =147)
 void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 {
-     test = extent.startTest("Select Case type Filter :-More than 3 years :-To check Ageing Graph Count Verification");
+     test = extent.startTest("Select Case from Notice/Case Filter to verify count of Ageing(more than 3 year) Summary graph");
      
      JavascriptExecutor js = (JavascriptExecutor) driver;
      	js.executeScript("window.scrollBy(0,800)");

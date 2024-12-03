@@ -5166,14 +5166,14 @@ public class CFOMethod {
     	
 	
 		
-    	  static int CountExcel(WebDriver driver, ExtentTest test, String type) throws InterruptedException, IOException
+    	 public static int CountExcel(WebDriver driver, ExtentTest test, String type) throws InterruptedException, IOException
     		{
     		  WebDriverWait wait = new WebDriverWait(driver, 50);
     			progress(driver);
     			
     			//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeOpen(driver)));
     			
-    			
+    			driver.navigate().refresh();
     			int open = 0;
     			if(type.equalsIgnoreCase("Notice - Open"))
     			{
@@ -6035,7 +6035,7 @@ public class CFOMethod {
 			    Thread.sleep(300);
 			    performerPOM.clickCaseNewTask(driver).click();
 			    Thread.sleep(5000);
-			    performerPOM.clickHearingDate(driver).sendKeys("18-09-2024");
+			    performerPOM.clickHearingDate(driver).sendKeys("19-11-2024");
 			    
 			    
 //			    Thread.sleep(300);
@@ -6274,7 +6274,7 @@ public class CFOMethod {
 //					int HearingDate = (int) c1.getNumericCellValue();
 //					performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 					
-					performerPOM.clickCaseHearingDate(driver).sendKeys("20-09-2024");	//Writing 'HearingDate'
+					performerPOM.clickCaseHearingDate(driver).sendKeys("22-11-2024");	//Writing 'HearingDate'
 					
 					
 					Thread.sleep(2000);
@@ -6382,7 +6382,7 @@ public class CFOMethod {
 				 Thread.sleep(6000);
 				 performerPOM.clickNewCaseOrder(driver).click();
 				 Thread.sleep(6000);
-				 performerPOM. clickCaseOrderDate(driver).sendKeys("12-06-2023");
+				 performerPOM. clickCaseOrderDate(driver).sendKeys("22-06-2023");
 				 Thread.sleep(3000);
 				 performerPOM.clickOrderPanel(driver).click();
 				 Thread.sleep(3000);
@@ -9941,11 +9941,11 @@ public class CFOMethod {
 
 						//--------------------------------Task----------------------------------
 						
-//						Thread.sleep(1500);
+						Thread.sleep(1000);
 //						js.executeScript("window.scrollBy(500,0)");
 						
 						performerPOM.clickTypeDropdown(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
-						Thread.sleep(300);
+						Thread.sleep(1000);
 						performerPOM.selectTypeTask(driver).click();					//Selecting 'Task' option.
 						
 						Thread.sleep(1000);
@@ -10668,7 +10668,7 @@ public class CFOMethod {
 					public static void TaskClosed(WebDriver driver, ExtentTest test, XSSFWorkbook workbook, String login) throws InterruptedException, IOException
 					{
 						WebDriverWait wait = new WebDriverWait(driver, 50);
-						
+						Thread.sleep(500);
 						CountExcel(driver, test, "Task - Closed");
 						
 						Thread.sleep(500);
@@ -10690,7 +10690,7 @@ public class CFOMethod {
 						WebDriverWait wait = new WebDriverWait(driver, 50);
 						
 						Thread.sleep(500);
-					     CountExcel(driver, test, "Notice - Closed");
+					    CountExcel(driver, test, "Notice - Closed");
 						
 						Thread.sleep(500);
 						wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNew(driver)));
@@ -11715,10 +11715,10 @@ public class CFOMethod {
 						action.moveToElement(performerPOM.clickTitle(driver)).click().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).perform();
 						
 						Thread.sleep(3000);
-						performerPOM.clickReminderText(driver).sendKeys("Reminder new 18Mar24");
+						performerPOM.clickReminderText(driver).sendKeys("Reminder new 22Mar24");
 						
 						Thread.sleep(3000);
-						performerPOM.clickDescription(driver).sendKeys("Reminder new 18Mar24");
+						performerPOM.clickDescription(driver).sendKeys("Reminder new 22Mar24");
 						
 						Thread.sleep(3000);
 						performerPOM.clickRemark2(driver).sendKeys("Remark");
@@ -15752,111 +15752,119 @@ public class CFOMethod {
 								
 
 							
-//							    robot.keyPress(KeyEvent.VK_CONTROL);
-								//  robot.keyPress(KeyEvent.VK_SUBTRACT);
-								/*String month="March 2023";
-								String day="22";
-						
-								while(true)
+							    Thread.sleep(8000);
+							    JavascriptExecutor js = (JavascriptExecutor) driver;
+							    js.executeScript("window.scrollBy(0,100)");
+							    
+							    WebDriverWait Wait=new WebDriverWait(driver,20);
+							 	Wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("calframe"));
+							    
+							    Thread.sleep(2000);
+								performerPOM.HearingCalenderExport(driver).click();					//Clicking on 'Excel Report' image.
+								test.log(LogStatus.PASS, "File downloaded successfully.");
+								
+								Thread.sleep(700);
+					            performerPOM.HearingCalenderView(driver).click();
+					            test.log(LogStatus.PASS, "Show Hearing details View Popup open successfully.");
+					            Thread.sleep(2000);
+								driver.switchTo().parentFrame();
+					            
+					            Thread.sleep(3000);
+								performerPOM.HearingCalenderclose(driver).click();
+					            Thread.sleep(8000);
+							    try 
+							    {
+							           
+
+						            // Set zoom level to 50% (0.5) for zooming out
+						            setZoomLevel(driver, 0.9);
+
+						            // Wait to observe the effect
+						            Thread.sleep(2000);
+
+						            // Set zoom level back to 100% (1.0) to reset to normal
+						          //  setZoomLevel(getDriver(), 1.0);
+							    }
+							     catch (Exception e) 
+							    {
+							    	 e.printStackTrace();
+							    }
+
+						            Thread.sleep(2000);    
+								WebElement text=driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[3]/div[1]/div/div[3]/div[10]/a"));
+								if(text.isEnabled())
 								{
-						        	String text=driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[2]/div[1]/div/div[1]/h4")).getText();    //click month and year 
-						           if(text.equals(month))
-						           {
-							                       break;
-						            }
-						           else
-						            {
-						            	Thread.sleep(2000);
-							        driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[2]/div[1]/div/div[1]/a[2]/div")).click();           // click forward
-						
-							         }
-							        Thread.sleep(4000);
-							      //  driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[2]/div[1]/div/div[3]/div/a[contains(text(),"+day+")]")).click();    //click day
-							        driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[2]/div[1]/div/div[3]/div[24]/a")).click();             
-						    	} */
-							WebElement text=driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[3]/div[1]/div/div[3]/div[20]/a"));
-							if(text.isEnabled())
-							{
-								driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[3]/div[1]/div/div[3]/div[20]/a")).click();
+									driver.findElement(By.xpath("//*[@id='collapseUpcomingHearing']/div/div[3]/div[1]/div/div[3]/div[10]/a")).click();
+									
+									test.log(LogStatus.PASS, "Hearing for particular date is clickable.");
+									
+								}
 								
-								test.log(LogStatus.PASS, "Hearing for particular date is clickable.");
+							
 								
-							}
-							
-			
-							int	open = Integer.parseInt(performerPOM.HearingCalenderNumcfo(driver).getText());	//Reading Notice Open count.
-							WebDriverWait Wait=new WebDriverWait(driver,20);
-						 	Wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("calframe"));
-							
-							Thread.sleep(10000);
-							CFOcountPOM.readcalenderCount(driver).click();
-							String item = CFOcountPOM.readcalenderCount(driver).getText();
-							String[] bits = item.split(" ");								//Splitting the String
-							String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
-							int count1 = 0;
-							if(compliancesCount.equalsIgnoreCase("to"))
-							{
-								Thread.sleep(2000);
-							    item = CFOcountPOM.readcalenderCount(driver).getText();
-								bits = item.split(" ");								//Splitting the String
-							   compliancesCount = bits[bits.length - 2];
-							}
-							if(compliancesCount.equalsIgnoreCase("to"))
-							{
-								count1 = 0;
-							}
-							else
-							{
-								count1 = Integer.parseInt(compliancesCount);
-							}
-							
-							if(open == count1)
-							{
-								//test.log(LogStatus.PASS, type+" count matches to number of records displayed.");
+								Thread.sleep(4000);
+								int	open = Integer.parseInt(performerPOM.HearingCalenderNumcfo(driver).getText());	//Reading Notice Open count.
+								//WebDriverWait Wait=new WebDriverWait(driver,20);
+							 	Wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("calframe"));
+								
+								Thread.sleep(1000);
+								CFOcountPOM.readcalenderCount(driver).click();
+								String item = CFOcountPOM.readcalenderCount(driver).getText();
+								String[] bits = item.split(" ");								//Splitting the String
+								String compliancesCount = bits[bits.length - 2];				//Getting the second last word (total number of users)
+								int count1 = 0;
+								if(compliancesCount.equalsIgnoreCase("to"))
+								{
+									Thread.sleep(2000);
+								    item = CFOcountPOM.readcalenderCount(driver).getText();
+									bits = item.split(" ");								//Splitting the String
+								   compliancesCount = bits[bits.length - 2];
+								}
+								if(compliancesCount.equalsIgnoreCase("to"))
+								{
+									count1 = 0;
+								}
+								else
+								{
+									count1 = Integer.parseInt(compliancesCount);
+								}
+								
+								if(open == count1)
+								{
+									//test.log(LogStatus.PASS, type+" count matches to number of records displayed.");
 								test.log(LogStatus.PASS, "Dashboard Count = "+open+" | Displayed records from grid = "+count1);
-							}
-							else
-							{
-								//test.log(LogStatus.FAIL, type+" count doesn't matches to number of records displayed.");
-								test.log(LogStatus.FAIL, "Dashboard Count = "+open+" | Displayed records from grid = "+count1);
-							}
-				           	
-							
-							
-							
-							JavascriptExecutor js = (JavascriptExecutor) driver;
-			               	js.executeScript("window.scrollBy(0,300)");
-			               	
-			            
-			               	Thread.sleep(2000);
-					
-							
-							Thread.sleep(100);
-							new File("C://Users//snehalp//Downloads");
+								}
+								else
+								{
+									//test.log(LogStatus.FAIL, type+" count doesn't matches to number of records displayed.");
+									test.log(LogStatus.FAIL, "Dashboard Count = "+open+" | Displayed records from grid = "+count1);
+								}
+							    
+							  
+//							     Thread.sleep(4000);
+//							     // Set zoom level back to 100% (1.0) to reset to normal
+//							     setZoomLevel(driver, 1.0);
 						
-							
-							Thread.sleep(250);
-							performerPOM.HearingCalenderExport(driver).click();					//Clicking on 'Excel Report' image.
-							test.log(LogStatus.PASS, "File downloaded successfully.");
-							
-							Thread.sleep(500);
-				            performerPOM.HearingCalenderView(driver).click();
-				            test.log(LogStatus.PASS, "Show Hearing details View Popup open successfully.");
-				            
-				        	driver.findElement(By.tagName("html")).sendKeys(Keys.chord(Keys.CONTROL, "0"));
-							
-							Thread.sleep(2000);
-							driver.switchTo().parentFrame();
+							   
 						
-							Thread.sleep(3000);
-							performerPOM.HearingCalenderclose(driver).click();
+//							    Thread.sleep(2000);
+//								performerPOM.HearingCalenderExport(driver).click();					//Clicking on 'Excel Report' image.
+//								test.log(LogStatus.PASS, "File downloaded successfully.");
+//								
+//								Thread.sleep(700);
+//					            performerPOM.HearingCalenderView(driver).click();
+//					            test.log(LogStatus.PASS, "Show Hearing details View Popup open successfully.");
+					            Thread.sleep(2000);
+								driver.switchTo().parentFrame();
+//					            
+//					            Thread.sleep(3000);
+//								performerPOM.HearingCalenderclose(driver).click();
 							
-					
-							
-		                 	Thread.sleep(1000);
-							OverduePOM.clickDashboard(driver).click();
+								Thread.sleep(1000);
+								OverduePOM.clickDashboard(driver).click();
 							
 						}	
+
 							
 						
 						 
@@ -23627,7 +23635,7 @@ public class CFOMethod {
 					Thread.sleep(3000);
 					performerPOM.clickNewCaseHearing(driver).click();
 					Thread.sleep(3000);
-                	performerPOM.clickCaseHearingDate(driver).sendKeys("20-09-2024");	//Writing 'HearingDate'
+                	performerPOM.clickCaseHearingDate(driver).sendKeys("21-10-2024");	//Writing 'HearingDate'
 				    Thread.sleep(3000);
 				    performerPOM.clickSaveCaseHearingDate(driver).click();
 				
@@ -24854,12 +24862,12 @@ public class CFOMethod {
 				     
 				     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
                      wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-				     Thread.sleep(4000);
+				     Thread.sleep(500);
 	                 WebElement ViewButton = driver.findElement(locator);	
-					 Thread.sleep(4000);
+					 Thread.sleep(500);
 					 JavascriptExecutor jse=(JavascriptExecutor)driver;
 					 jse.executeScript("arguments[0].click();", ViewButton);
-				     Thread.sleep(500);
+				     Thread.sleep(400);
 					 performerPOM.clickTrignle(driver).click();
 					
 					
@@ -25093,9 +25101,9 @@ public class CFOMethod {
 				     
 				     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
                      wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-				     Thread.sleep(4000);
+				     Thread.sleep(500);
 	                 WebElement ViewButton = driver.findElement(locator);	
-					 Thread.sleep(4000);
+					 Thread.sleep(500);
 					 JavascriptExecutor jse=(JavascriptExecutor)driver;
 					 jse.executeScript("arguments[0].click();", ViewButton);
 				     Thread.sleep(500);
@@ -25289,14 +25297,14 @@ public class CFOMethod {
 	//			       Thread.sleep(500);
 	//			       performerPOM.clickAgeFilter(driver).click();
 				       
-				       Thread.sleep(500);
-				       performerPOM. clickCategoryFilter(driver).click();
-				       Thread.sleep(500);
-				       String CategoryText = performerPOM.selectCategoryFilter(driver).getText();
-				       Thread.sleep(500);
-				       performerPOM. selectCategoryFilter(driver).click();
-				       Thread.sleep(500);
-				       performerPOM.clickCategoryFilter(driver).click();
+//				       Thread.sleep(500);
+//				       performerPOM. clickCategoryFilter(driver).click();
+//				       Thread.sleep(500);
+//				       String CategoryText = performerPOM.selectCategoryFilter(driver).getText();
+//				       Thread.sleep(500);
+//				       performerPOM. selectCategoryFilter(driver).click();
+//				       Thread.sleep(500);
+//				       performerPOM.clickCategoryFilter(driver).click();
 				       
 				       
 				        List<String> li=new ArrayList<String>();
@@ -25306,7 +25314,7 @@ public class CFOMethod {
 				        li.add(DeptText);
 				       // li.add(RiskText);
 				       // li.add(AgeText);
-				        li.add(CategoryText);
+				        //li.add(CategoryText);
 				        
 				        Thread.sleep(3000);
 				        
@@ -25317,7 +25325,7 @@ public class CFOMethod {
 						filter.add("Dept");
 					//	filter.add("Risk");
 						//filter.add("Age");
-						filter.add("Category");
+						//filter.add("Category");
 						
 						 Thread.sleep(500);
 						 performerPOM.clickTrignle(driver).click();
@@ -25328,9 +25336,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -25352,7 +25360,7 @@ public class CFOMethod {
 						List<WebElement> status=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[11]"));
 						List<WebElement> Dept=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[10]"));
 						//List<WebElement> Risk=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[12]"));
-						List<WebElement> Category=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[6]"));
+						//List<WebElement> Category=driver.findElements(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr/td[6]"));
 						Thread.sleep(2000);
 	
 						for(int i=0; i<li.size(); i++){
@@ -25384,10 +25392,10 @@ public class CFOMethod {
 //							   {
 //								   raw.addAll(Risk);
 //							   }
-							   else if(i==3)
-							   {
-								   raw.addAll(Category);
-							   }
+//							   else if(i==3)
+//							   {
+//								   raw.addAll(Category);
+//							   }
 										
 							for(int k=0;k<raw.size();k++)
 								{
@@ -25564,9 +25572,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -25800,9 +25808,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -26038,9 +26046,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -26274,9 +26282,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -26509,9 +26517,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -26745,9 +26753,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -26981,9 +26989,9 @@ public class CFOMethod {
 					     
 					     By locator = By.xpath("//span[@class='k-link k-menu-link'][normalize-space()='Risk']");
 	                     wait.until(ExpectedConditions.presenceOfElementLocated(locator));
-					     Thread.sleep(4000);
+					     Thread.sleep(500);
 		                 WebElement ViewButton = driver.findElement(locator);	
-						 Thread.sleep(4000);
+						 Thread.sleep(500);
 						 JavascriptExecutor jse=(JavascriptExecutor)driver;
 						 jse.executeScript("arguments[0].click();", ViewButton);
 					     Thread.sleep(500);
@@ -28103,7 +28111,11 @@ public class CFOMethod {
 			 		     
 				           
 		 			
-		 			
+		 		public static void setZoomLevel(WebDriver driver, double zoomLevel) 
+		 		{
+		 	        JavascriptExecutor js = (JavascriptExecutor) driver;
+		 	        js.executeScript("document.body.style.zoom='" + zoomLevel + "'");
+		 	    }
 		 		 
 		 		 
 				

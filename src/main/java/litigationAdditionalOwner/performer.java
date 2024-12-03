@@ -54,7 +54,7 @@ public class performer
 		System.out.println(workingDir);
 		extent = new com.relevantcodes.extentreports.ExtentReports(workingDir+"//Reports//LitigationPerformer.html",true);
 		test = extent.startTest("Litigation Logging In - Non Admin");
-		test.log(LogStatus.PASS, "Test Passed = Verify firefox browser.");
+		test.log(LogStatus.PASS, "Test Passed = Verify Chrome browser.");
 		extent.endTest(test);
 		extent.flush();
 	}
@@ -85,7 +85,7 @@ public class performer
 
 	}
 	
-	/*@Test(priority = 1)
+/*	@Test(priority = 1)
 	void NoticeOpen() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice - Open Count Verification");
@@ -208,7 +208,7 @@ public class performer
 
      extent.endTest(test);
      extent.flush();
-	}
+	}*/
 
 @Test(priority =12)
 	void CaseOpen() throws InterruptedException, IOException
@@ -913,7 +913,7 @@ void NoticeAuditLogTab() throws InterruptedException, IOException
 		
 		extent.endTest(test);
 		extent.flush();
-	}*/
+	}
  
 
  
@@ -1495,7 +1495,7 @@ extent.endTest(test);
 				extent.flush();
 			}
 
-@Test(priority = 181)
+//@Test(priority = 181)
 void AdvancedSearchClosedNoticeDoc() throws InterruptedException, IOException
 {
 	test = extent.startTest("My Document-Advanced search- Closed notice document verification");
@@ -1504,7 +1504,7 @@ void AdvancedSearchClosedNoticeDoc() throws InterruptedException, IOException
 	extent.endTest(test);
      extent.flush();
 }
-@Test(priority = 182)
+//@Test(priority = 182)
 void AdvancedSearchClosedCaseDoc() throws InterruptedException, IOException
 {
 	test = extent.startTest("My Document-Advanced search- Closed case document verification");
@@ -1513,7 +1513,7 @@ void AdvancedSearchClosedCaseDoc() throws InterruptedException, IOException
 	extent.endTest(test);
      extent.flush();
 }
-@Test(priority =183)
+//@Test(priority =183)
 			void AdvancedSearchShareTaskDocument() throws InterruptedException, IOException
 			{
 				test = extent.startTest("My Document-Advance search-Share Task Document Verification");
