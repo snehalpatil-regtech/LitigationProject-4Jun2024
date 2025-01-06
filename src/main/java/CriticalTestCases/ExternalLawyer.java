@@ -38,7 +38,7 @@ public class ExternalLawyer
 	public static XSSFSheet ReadExcel() throws IOException
 	{
 	
-		fis = new FileInputStream("E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
+		fis = new FileInputStream("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
 	
 		workbook = new XSSFWorkbook(fis);
 		sheet = workbook.getSheetAt(6);					//Retrieving second sheet of Workbook
@@ -53,6 +53,10 @@ public class ExternalLawyer
 		test = extent.startTest("Litigation Logging In - External Lawyer");
 		
 		test.log(LogStatus.PASS, "Test Passed = Verify Chrome browser.");
+		test.log(LogStatus.PASS, "URL = https://applicationtesting.teamleaseregtech.com/Login.aspx");
+		test.log(LogStatus.PASS, "Login =lawyer@avantis.info");
+		test.log(LogStatus.PASS, "Password = admin@123");
+		
 		extent.endTest(test);
 		extent.flush();
 	}
@@ -85,7 +89,7 @@ public class ExternalLawyer
 	}
 	
 
-/*@Test(priority = 0)
+@Test(priority = 0)
 		void NoticeOpen() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice - Open Count Verification");
@@ -392,7 +396,7 @@ void MyReports() throws InterruptedException, IOException
 	
 	extent.endTest(test);
 	extent.flush();
-}*/
+}
 @Test(priority = 22)
 void MoreReports() throws InterruptedException, IOException
 {

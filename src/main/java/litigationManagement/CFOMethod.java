@@ -70,7 +70,7 @@ public class CFOMethod {
 		public static XSSFSheet ReadExcel() throws IOException
 		{
 			//String workingDir = System.getProperty("user.dir");
-			fis = new FileInputStream("E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
+			fis = new FileInputStream("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
 			
 			workbook = new XSSFWorkbook(fis);
 			sheet = workbook.getSheetAt(5);					//Retrieving second sheet of Workbook
@@ -4499,15 +4499,15 @@ public class CFOMethod {
 				String outcome = c1.getStringCellValue();
 				performerPOM.clickExpOutcome(driver).sendKeys(outcome);	//Writing 'Expected Outcome'
 				
-				//Thread.sleep(500);
-				//row0 = sheet.getRow(15);									//Selected 0th index row (First row)
-				//c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
-				//String internalUser = c1.getStringCellValue();
+				Thread.sleep(500);
+				row0 = sheet.getRow(15);									//Selected 0th index row (First row)
+				c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
+				String internalUser = c1.getStringCellValue();
 				performerPOM.clickInternalUser2(driver).click();
 				//performerPOM.selectInternalUser2(driver).click();
-				//performerPOM.selectInternalUser2(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
-				Thread.sleep(1000);
-				performerPOM.selectInternalUser5(driver).click();
+				performerPOM.selectInternalUser2(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+//				Thread.sleep(1000);
+//				performerPOM.selectInternalUser5(driver).click();
 	
 				
 //				Thread.sleep(1000);
@@ -5328,8 +5328,10 @@ public class CFOMethod {
 //    					test.log(LogStatus.FAIL, "Total records from Grid = "+count2+" | Total records from Excel Sheet = "+records);
 //    				}
     			}
+    			
     			else
-    			{
+    			{  
+    				Thread.sleep(5500);
     				test.log(LogStatus.FAIL, "File doesn't downloaded successfully.");
     			}
     	     	
@@ -6035,7 +6037,7 @@ public class CFOMethod {
 			    Thread.sleep(300);
 			    performerPOM.clickCaseNewTask(driver).click();
 			    Thread.sleep(5000);
-			    performerPOM.clickHearingDate(driver).sendKeys("19-11-2024");
+			    performerPOM.clickHearingDate(driver).sendKeys("22-12-2024");
 			    
 			    
 //			    Thread.sleep(300);
@@ -6081,15 +6083,15 @@ public class CFOMethod {
 
 				
 				Thread.sleep(1000);
-//				row0 = sheet.getRow(15);									//Selected 0th index row (First row)
-//				c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
-//				String internalUser = c1.getStringCellValue();
-				performerPOM.clickInternalUser3(driver).click();
+				row0 = sheet.getRow(15);									//Selected 0th index row (First row)
+				c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
+				String internalUser = c1.getStringCellValue();
+				performerPOM.clickInternalUser2(driver).click();
 				
-				Thread.sleep(1000);
-				performerPOM.selectInternalUser4(driver).click();
-				//performerPOM.selectInternalUser2(driver).click();
-//				performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+//				Thread.sleep(1000);
+//				performerPOM.selectInternalUser5(driver).click();
+//				performerPOM.selectInternalUser2(driver).click();
+				performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
 				
 //				Thread.sleep(1000);
 //				row0 = sheet.getRow(16);									//Selected 0th index row (First row)
@@ -6274,7 +6276,7 @@ public class CFOMethod {
 //					int HearingDate = (int) c1.getNumericCellValue();
 //					performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 					
-					performerPOM.clickCaseHearingDate(driver).sendKeys("22-11-2024");	//Writing 'HearingDate'
+					performerPOM.clickCaseHearingDate(driver).sendKeys("24-12-2024");	//Writing 'HearingDate'
 					
 					
 					Thread.sleep(2000);
@@ -6382,7 +6384,7 @@ public class CFOMethod {
 				 Thread.sleep(6000);
 				 performerPOM.clickNewCaseOrder(driver).click();
 				 Thread.sleep(6000);
-				 performerPOM. clickCaseOrderDate(driver).sendKeys("22-06-2023");
+				 performerPOM. clickCaseOrderDate(driver).sendKeys("22-08-2023");
 				 Thread.sleep(3000);
 				 performerPOM.clickOrderPanel(driver).click();
 				 Thread.sleep(3000);
@@ -8202,6 +8204,7 @@ public class CFOMethod {
 					progress(driver);
 					
 					//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeOpen(driver)));	//Wait until 'Notice-Open' count get visible
+								
 					performerPOM.clickMyDocument(driver).click();					//Clicking on 'My Document'
 					performerPOM.clickmyDocument(driver).click();	                    //Clicking on 'My Document'
 					
@@ -8228,7 +8231,9 @@ public class CFOMethod {
 					wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 					
 					//--------------------------------Case----------------------------------
-					     Thread.sleep(4000);
+					     
+					
+						Thread.sleep(4000);
 					       performerPOM.clickDownloadDocument(driver).click();	
 					       test.log(LogStatus.PASS, "Case=Document  Downloaded Successfully.");
 					       
@@ -8265,19 +8270,19 @@ public class CFOMethod {
 					//--------------------------------Notice----------------------------------
 			 
 					       Thread.sleep(5000);
-						    JavascriptExecutor js = (JavascriptExecutor) driver;
-							js.executeScript("window.scrollBy(500,0)");
+						   // JavascriptExecutor js = (JavascriptExecutor) driver;
+							//js.executeScript("window.scrollBy(500,0)");
 							Thread.sleep(3000);
 							performerPOM.clickTypeDropdown(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
 							Thread.sleep(6000);
 							performerPOM.selectTypeNotice(driver).click();					//Selecting 'Case' option.
 							 Thread.sleep(4000);
-						       performerPOM.clickDownloadDocument(driver).click();	
+						       performerPOM.clickDownloadDocumentNotice(driver).click();	
 						       test.log(LogStatus.PASS, "Notice=Document Downloaded Successfully.");
 						      try
 						      {
 						         Thread.sleep(4000);
-						         performerPOM.clickViewDocument(driver).click();	
+						         performerPOM.clickViewDocumentNotice(driver).click();	
 						         Thread.sleep(4000);
 						         performerPOM.clickcloseViewDocument(driver).click();
 						         test.log(LogStatus.PASS, "Notice=Document view Successfully.");
@@ -8315,7 +8320,7 @@ public class CFOMethod {
 						     try
 						     {
 						    	 Thread.sleep(5000);
-						    	 performerPOM.clickViewDocument(driver).click();	
+						    	 performerPOM.clickViewDocumentTask(driver).click();	
 						    	 Thread.sleep(3000);
 						    	 performerPOM.clickcloseViewDocument(driver).click();
 
@@ -8343,7 +8348,7 @@ public class CFOMethod {
 						   }
 						     
 						     Thread.sleep(4000);
-						     performerPOM.clickDownloadDocument(driver).click();
+						     performerPOM.clickDownloadDocumentTask(driver).click();
 						     
 							try
 								{
@@ -8553,9 +8558,10 @@ public class CFOMethod {
 							 Thread.sleep(3000);
 							 performerPOM.AdvancedSearchReports(driver).click();
 						      Thread.sleep(4000);
-						       performerPOM.clickDownloadDocument1(driver).click();	
+						       performerPOM.clickDownloadDocumentAdvancedDearch(driver).click();	
 						       Thread.sleep(4000);
-						       performerPOM.clickViewDocument1(driver).click();	
+						       performerPOM.clickViewDocumentAdvancedDearch(driver).click();	
+						   
 						       Thread.sleep(10000);
 						       performerPOM.clickcloseViewDocument1(driver).click();
 							
@@ -8573,9 +8579,9 @@ public class CFOMethod {
 								Thread.sleep(5000);
 								performerPOM.selectTypeCase2(driver).click();					//Selecting 'Case' option.
 								 Thread.sleep(4000);
-							       performerPOM.clickDownloadDocument1(driver).click();	
+							       performerPOM.clickDownloadDocumentASNotice(driver).click();	
 							       Thread.sleep(4000);
-							       performerPOM.clickViewDocument1(driver).click();	
+							       performerPOM.clickViewDocumentASNotice(driver).click();	
 							       Thread.sleep(10000);
 							       performerPOM.clickcloseViewDocument1(driver).click();
 							       
@@ -10553,14 +10559,14 @@ public class CFOMethod {
 						performerPOM.clickExpOutcome(driver).sendKeys(outcome);	//Writing 'Expected Outcome'
 						
 						Thread.sleep(1000);
-						//row0 = sheet.getRow(15);									//Selected 0th index row (First row)
-						//c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
-						//String internalUser = c1.getStringCellValue();
+						row0 = sheet.getRow(15);									//Selected 0th index row (First row)
+						c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
+						String internalUser = c1.getStringCellValue();
 						performerPOM.clickInternalUser3(driver).click();
 						//performerPOM.selectInternalUser2(driver).click();
-						//performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
-						Thread.sleep(1000);
-						performerPOM.selectInternalUser4(driver).click();
+						performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+						//Thread.sleep(1000);
+						//performerPOM.selectInternalUser4(driver).click();
 						
 						
 						//Thread.sleep(1000);
@@ -11715,10 +11721,10 @@ public class CFOMethod {
 						action.moveToElement(performerPOM.clickTitle(driver)).click().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).perform();
 						
 						Thread.sleep(3000);
-						performerPOM.clickReminderText(driver).sendKeys("Reminder new 22Mar24");
+						performerPOM.clickReminderText(driver).sendKeys("Reminder new 24Mar24");
 						
 						Thread.sleep(3000);
-						performerPOM.clickDescription(driver).sendKeys("Reminder new 22Mar24");
+						performerPOM.clickDescription(driver).sendKeys("Reminder new 24Mar24");
 						
 						Thread.sleep(3000);
 						performerPOM.clickRemark2(driver).sendKeys("Remark");

@@ -592,15 +592,15 @@ public class MethodsPOM
 			 Thread.sleep(8000);
 				performerPOM.clickNoticeOpen(driver).click();
 				
-				Thread.sleep(8000);
-				wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
+				//Thread.sleep(8000);
+				//wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));
 			    
 				Thread.sleep(8000);
 				performerPOM.clickEditNotice(driver).click();//click edit notice
 			
 		       wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 		       
-		       Thread.sleep(8000);
+		       Thread.sleep(9000);
 		       performerPOM.clickNoticeDocument(driver).click();     //click notice document
 		       Thread.sleep(8000);
 		       performerPOM.clickNewDocument(driver).click();        //click new document button
@@ -862,7 +862,7 @@ public class MethodsPOM
 				String title1 = c2.getStringCellValue();
 				performerPOM.clickTaskTitle(driver).sendKeys(title1);	//Writing 'Task Title'
 				
-				Thread.sleep(8000);
+				Thread.sleep(9000);
 				OverduePOM.clickSaveButton(driver).click();				//Clicking on 'Save' button.
 				
 				Thread.sleep(8000);
@@ -1176,7 +1176,7 @@ public class MethodsPOM
 				performerPOM.clickSavePaymentLog(driver).click();
 				
 
-				 Thread.sleep(3000);
+				 Thread.sleep(4000);
 				  WebDriverWait wait1 = new WebDriverWait(driver, 300);
 				 wait1.until(ExpectedConditions.visibilityOf(performerPOM.readPymentmsg(driver)));
 					
@@ -1932,7 +1932,7 @@ public class MethodsPOM
 	        Thread.sleep(8000);
 	        performerPOM.clickCaseDocumentViewcfo(driver).click();
 	        
-	        Thread.sleep(8000);
+	        Thread.sleep(9000);
 	        performerPOM.clickNoticeDocumentViewClosepopupcfo(driver).click();
 	        
 	        test.log(LogStatus.PASS, "Document View popup open  succssesfully");
@@ -2032,7 +2032,7 @@ public class MethodsPOM
 		    
 		    
 		    Thread.sleep(8000);
-		    performerPOM.clickHearingDate(driver).sendKeys("30-12-2024");
+		    performerPOM.clickHearingDate(driver).sendKeys("28-11-2025");
 		    Thread.sleep(8000);
 		    performerPOM.clickSaveHearingDate(driver).click();
 		  
@@ -2071,14 +2071,14 @@ public class MethodsPOM
 			
 			
 			Thread.sleep(8000);
-		//	row0 = sheet.getRow(144);									//Selected 0th index row (First row)
-		//	c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
-		//	String internalUser = c1.getStringCellValue();
+			row0 = sheet.getRow(144);									//Selected 0th index row (First row)
+			c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
+			String internalUser = c1.getStringCellValue();
 			performerPOM.clickInternalUser3(driver).click();
 			Thread.sleep(1000);
-			performerPOM.selectInternalUser4(driver).click();
+			//performerPOM.selectInternalUser4(driver).click();
 			//performerPOM.selectInternalUser2(driver).click();
-		//	performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+			performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
 			
 		//	Thread.sleep(8000);
 		//	row0 = sheet.getRow(145);									//Selected 0th index row (First row)
@@ -2404,7 +2404,7 @@ public class MethodsPOM
 //				int HearingDate = (int) c1.getNumericCellValue();
 //				performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 //				
-				performerPOM.clickCaseHearingDate(driver).sendKeys("18-12-2024");	//Writing 'HearingDate'
+				performerPOM.clickCaseHearingDate(driver).sendKeys("20-11-2025");	//Writing 'HearingDate'
 				
 			
 			    Thread.sleep(8000);
@@ -2438,7 +2438,7 @@ public class MethodsPOM
 	 				Thread.sleep(8000);
 	 				performerPOM.clickNewCaseHearing(driver).click();
 	 				  Thread.sleep(8000);
- 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("18-12-2024");	//Writing 'HearingDate'
+ 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("20-11-2025");	//Writing 'HearingDate'
 	 				
 	 			
 	 			    Thread.sleep(8000);
@@ -3189,14 +3189,16 @@ public class MethodsPOM
 		performerPOM.clickExpOutcome(driver).sendKeys(outcome);	//Writing 'Expected Outcome'
 		
 		Thread.sleep(8000);
-//		row0 = sheet.getRow(170);									//Selected 0th index row (First row)
-//		c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
-//		String internalUser = c1.getStringCellValue();
+		row0 = sheet.getRow(170);									//Selected 0th index row (First row)
+		c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
+		String internalUser = c1.getStringCellValue();
 		performerPOM.clickInternalUser1(driver).click();
 		
-		Thread.sleep(1000);
-		performerPOM.selectInternalUser4(driver).click();
-//		performerPOM.clickSearchInternalUser1(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+		//Thread.sleep(1000);
+		//performerPOM.selectInternalUser4(driver).click();
+		performerPOM.clickSearchInternalUser1(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+		//Thread.sleep(1000);
+		//performerPOM.selectInternalUser4(driver).click();
 		
 //		Thread.sleep(8000);
 //		row0 = sheet.getRow(171);									//Selected 0th index row (First row)
@@ -3455,7 +3457,7 @@ public class MethodsPOM
 			CFOcountPOM.clickNextPage1(driver).sendKeys(Keys.PAGE_UP);
 			Thread.sleep(5000);
 			performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
-			performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
+			//performerPOM.clickExcelReport(driver).click();					//Clicking on 'Excel Report' image.
 			
 			Thread.sleep(5500);
 			File dir1 = new File("C://Users//snehalp//Downloads");
@@ -3528,7 +3530,7 @@ public class MethodsPOM
 		
 		
 		Thread.sleep(3000);
-		int open = CFOMethod.CountExcel(driver, test, "Notice - Open");
+		int open=CountExcel(driver, test, "Notice - Open");
 		
 		Thread.sleep(3000);
 		performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
@@ -3568,7 +3570,7 @@ public class MethodsPOM
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		
-		CFOMethod.CountExcel(driver, test, "Notice - Closed");
+		CountExcel(driver, test, "Notice - Closed");
 		
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNew(driver)));
@@ -3581,7 +3583,7 @@ public class MethodsPOM
 	{
 
 		
-		int open = CFOMethod.CountExcel(driver, test, "Case - Open");
+		int open = CountExcel(driver, test, "Case - Open");
 		
 		
 		Thread.sleep(5000);
@@ -3620,7 +3622,7 @@ public class MethodsPOM
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		
-		CFOMethod.CountExcel(driver, test, "Case - Closed");
+		CountExcel(driver, test, "Case - Closed");
 		
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNew(driver)));
@@ -3631,7 +3633,7 @@ public class MethodsPOM
 	{
 	
 		
-		int open =CFOMethod.CountExcel(driver, test, "Task - Open");
+		int open =CountExcel(driver, test, "Task - Open");
 		
 		Thread.sleep(500);
 		performerPOM.clickExcelReport(driver).sendKeys(Keys.PAGE_DOWN);
@@ -3669,7 +3671,7 @@ public class MethodsPOM
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 50);
 		
-		CFOMethod.CountExcel(driver, test, "Task - Closed");
+		CountExcel(driver, test, "Task - Closed");
 		
 		Thread.sleep(500);
 		wait.until(ExpectedConditions.visibilityOf(performerPOM.clickAddNewTask(driver)));

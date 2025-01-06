@@ -2078,7 +2078,7 @@ public class MethodPOM
 			    
 			    
 			    Thread.sleep(8000);
-			    performerPOM.clickHearingDate(driver).sendKeys("28-12-2024");
+			    performerPOM.clickHearingDate(driver).sendKeys("29-12-2024");
 			    Thread.sleep(8000);
 			    performerPOM.clickSaveHearingDate(driver).click();
 			  
@@ -2345,7 +2345,7 @@ public class MethodPOM
 //				int HearingDate = (int) c1.getNumericCellValue();
 //				performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 //				
-				performerPOM.clickCaseHearingDate(driver).sendKeys("26-12-2024");	//Writing 'HearingDate'
+				performerPOM.clickCaseHearingDate(driver).sendKeys("30-12-2024");	//Writing 'HearingDate'
 				
 			
 			    Thread.sleep(8000);
@@ -2379,7 +2379,7 @@ public class MethodPOM
 	 				Thread.sleep(8000);
 	 				performerPOM.clickNewCaseHearing(driver).click();
 	 				  Thread.sleep(8000);
- 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("21-09-2024");	//Writing 'HearingDate'
+ 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("30-12-2024");	//Writing 'HearingDate'
 	 				
 	 			
 	 			    Thread.sleep(8000);
@@ -4824,13 +4824,13 @@ public class MethodPOM
 				action.moveToElement(performerPOM.clickTitle(driver)).click().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).perform();
 				
 				Thread.sleep(3000);
-				performerPOM.clickReminderText(driver).sendKeys("Reminder as on  test 12");
+				performerPOM.clickReminderText(driver).sendKeys("Reminder as on  test 13");
 				
 				Thread.sleep(3000);
-				performerPOM.clickDescription(driver).sendKeys("Reminder as on  test 12");
+				performerPOM.clickDescription(driver).sendKeys("Reminder as on  test 13");
 				
 				Thread.sleep(3000);
-				performerPOM.clickRemark2(driver).sendKeys("Reminder as on test 12");
+				performerPOM.clickRemark2(driver).sendKeys("Reminder as on test 13");
 				
 				Thread.sleep(3000);
 				performerPOM.clickDate(driver).click();

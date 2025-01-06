@@ -23,6 +23,7 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
 import litigationAdditionalOwner.performerPOM;
+import litigationCompanyAdmin.MethodsPOM;
 import litigationManagement.CFOMethod;
 import performer.OverduePOM;
 
@@ -40,7 +41,7 @@ public class CFOlogin
 	public static XSSFSheet ReadExcel() throws IOException
 	{
 		//String workingDir = System.getProperty("user.dir");
-		fis = new FileInputStream("E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
+		fis = new FileInputStream("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
 		
 		workbook = new XSSFWorkbook(fis);
 		sheet = workbook.getSheetAt(5);					//Retrieving second sheet of Workbook
@@ -57,6 +58,10 @@ public class CFOlogin
 		
 		
 		test.log(LogStatus.PASS, "Test Passed = Verify Open Chrome Browser");
+//		test.log(LogStatus.PASS, "Test Passed = Verify Chrome browser.");
+//		test.log(LogStatus.PASS, "URL = https://applicationtesting.teamleaseregtech.com/Login.aspx");
+//		test.log(LogStatus.PASS, "Username = snehal10.patil@tlregtech.in");
+//		test.log(LogStatus.PASS, "Password = admin@123");
 		extent.endTest(test);
 		extent.flush();
 	}
@@ -874,15 +879,15 @@ void AgeingGraph2to3years() throws InterruptedException, IOException
 	 Thread.sleep(5000);
    
 	 int InwardDefendent = Integer.parseInt(performerPOM.clickInwardDefendentNoticeCA2to3(driver).getText());	//Reading Notice Open count.
-	 int Applicant = Integer.parseInt(performerPOM.clickApplicantNoticeCA2to3(driver).getText());	//Reading Notice Open count.
+	// int Applicant = Integer.parseInt(performerPOM.clickApplicantNoticeCA2to3(driver).getText());	//Reading Notice Open count.
 	 int OutwardPlainftiff = Integer.parseInt(performerPOM.clickOutwardPlaintiffNoticeCA2to3(driver).getText());	//Reading Notice Open count.
 	 int Petitioner = Integer.parseInt(performerPOM.clickPetitionerNoticeCA2to3(driver).getText());	//Reading Notice Open count.
 	 int Plaintiff = Integer.parseInt(performerPOM.clickPlaintiffNoticeCA2to3(driver).getText());	//Reading Notice Open count.
 	 
     Thread.sleep(3000);
     CFOMethod.AgeingGraph2to3years(driver, test,"Inward/Defendent",InwardDefendent);
-	Thread.sleep(3000);
-	CFOMethod.AgeingGraph2to3years(driver,  test,"Applicant",Applicant);
+	//Thread.sleep(3000);
+	//CFOMethod.AgeingGraph2to3years(driver,  test,"Applicant",Applicant);
 		Thread.sleep(3000);
 		CFOMethod.AgeingGraph2to3years(driver,  test,"Outward/Plaintiff",OutwardPlainftiff);
 		Thread.sleep(3000);
@@ -1077,8 +1082,8 @@ void RiskSummaryGraph1() throws InterruptedException, IOException
 	js.executeScript("window.scrollBy(0,950)");
 	
     int	HighRisk = Integer.parseInt(performerPOM.RiskSummaryHigh(driver).getText());	//Reading Notice Open count.
-	int	MediumRisk = Integer.parseInt(performerPOM.RiskSummaryMedium(driver).getText());	//Reading Notice Open count.
-	int	LowRisk = Integer.parseInt(performerPOM.RiskSummaryLow(driver).getText());	//Reading Notice Open count.
+	int	MediumRisk = Integer.parseInt(performerPOM.RiskSummaryMedium1(driver).getText());	//Reading Notice Open count.
+	int	LowRisk = Integer.parseInt(performerPOM.RiskSummaryLowCA(driver).getText());	//Reading Notice Open count.
 	int	NotApplicableRisk = Integer.parseInt(performerPOM.RiskSummaryNotApplicable(driver).getText());	//Reading Notice Open count.
 	
 	
@@ -1187,49 +1192,111 @@ void LocationSummaryGraph1() throws InterruptedException, IOException
    extent.flush();
 }
 
-//@Test(priority =52)
+@Test(priority =52)
 void ExpensesCaseGraph() throws InterruptedException, IOException
 {
-   test = extent.startTest("Select Case from Notice/Case Filter to verify count of Expense case wise graph");
+	
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("window.scrollBy(0,800)");
+	
+ 	Thread.sleep(5000);
+	performerPOM.clickDashboardCaseNoticeFilter(driver).click();
+	
+	Thread.sleep(5000);
+	performerPOM.clickDashboardCaseFilter(driver).click();
   
+   	
+	 Thread.sleep(5000);
+	 performerPOM.clickDashboardApplyBtn(driver).click();
+
+	
+	js.executeScript("window.scrollBy(0,2400)");
+  
+   Thread.sleep(2000);
+	String ExpenseCase =performerPOM.ExpensesCaseNo(driver).getText();
+	
+	test = extent.startTest("Select Case from Notice/Case Filter :- "+ExpenseCase+" :- To verify count of Expense case wise graph");
+   
    Thread.sleep(3000);
-   CFOMethod.ExpensesCaseGraph( driver,test,"cfo -");
+   MethodsPOM.ExpensesCaseGraph( driver,test,"cfo -");
 
    extent.endTest(test);
    extent.flush();
 }
-//@Test(priority =53)
+	@Test(priority =53)
 void ExpensesCategoryWiseCaseGraph() throws InterruptedException, IOException
 {
-   test = extent.startTest("Select Case from Notice/Case Filter to verify count of Expense category wise graph");
-  
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		
+	 	js.executeScript("window.scrollBy(0,800)");
+     	
+     	Thread.sleep(5000);
+		performerPOM.clickDashboardCaseNoticeFilter(driver).click();
+		
+		Thread.sleep(5000);
+		performerPOM.clickDashboardCaseFilter(driver).click();
+      
+       	
+		 Thread.sleep(5000);
+		 performerPOM.clickDashboardApplyBtn(driver).click();
+		
+       	
+		js.executeScript("window.scrollBy(0,2500)");
+   
+		Thread.sleep(2000);
+	String ExpenseCategory =performerPOM.ExpensesCategoryNo(driver).getText();
+	
+	test = extent.startTest("Select Case from Notice/Case Filter :- "+ExpenseCategory+" :- To verify count of Expense category wise graph");
+   
    Thread.sleep(3000);
-   CFOMethod.ExpensesCategoryWiseCaseGraph(driver, test,"cfo -");
+   MethodsPOM.ExpensesCategoryWiseCaseGraph(driver, test,"cfo -");
 
    extent.endTest(test);
    extent.flush();
 }
-//@Test(priority =54)
+	@Test(priority =54)
 void ExpensesCounselWiseCaseGraph() throws InterruptedException, IOException
 {
-test = extent.startTest("Select Case from Notice/Case Filter to verify count of Expense counsel wise graph");
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+     	js.executeScript("window.scrollBy(0,800)");
+     	
+     	Thread.sleep(5000);
+		performerPOM.clickDashboardCaseNoticeFilter(driver).click();
+		
+		Thread.sleep(5000);
+		performerPOM.clickDashboardCaseFilter(driver).click();
+      
+       	
+		 Thread.sleep(5000);
+		 performerPOM.clickDashboardApplyBtn(driver).click();
+		
+       	
+			js.executeScript("window.scrollBy(0,3000)");	
+			
+			Thread.sleep(2000);
+			String ExpensesCansilNo =performerPOM.ExpensesCansilNo(driver).getText();
+			
+			test = extent.startTest("Select Case from Notice/Case Filter :- "+ExpensesCansilNo+" :- To verify count of Expense counsel wise graph");
 
-Thread.sleep(3000);
-CFOMethod.ExpensesCounselWiseCaseGraph( driver,test,"cfo -");
 
-extent.endTest(test);
-extent.flush();
+	Thread.sleep(3000);
+	MethodsPOM.ExpensesCounselWiseCaseGraph( driver,test,"cfo -");
+	
+	extent.endTest(test);
+	extent.flush();
 }
-//@Test(priority =55)
-void UtilizedBudgetGraph() throws InterruptedException, IOException
-{
-test = extent.startTest("Select Case from Notice/Case Filter to verify count of Utilized budget graph");
-
-Thread.sleep(3000);
-CFOMethod.UtilizedBudgetGraph(driver, test,"cfo -");
-
-extent.endTest(test);
-extent.flush();
+	@Test(priority =55)
+	void UtilizedBudgetGraph() throws InterruptedException, IOException
+	{
+	test = extent.startTest("Select Case from Notice/Case Filter to verify count of Utilized budget graph");
+	
+	Thread.sleep(3000);
+	MethodsPOM.UtilizedBudgetGraph(driver, test,"cfo -");
+	
+	extent.endTest(test);
+	extent.flush();
 }
 @Test(priority =56)
 void AgeingGraph() throws InterruptedException, IOException
@@ -1410,7 +1477,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
       extent.flush();
  }
 
-@Test(priority = 60)
+@Test(priority = 0)
 	void MyDocument() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Document-Download and View Document");
