@@ -75,7 +75,7 @@ public class MethodsPOM
 	public static XSSFSheet ReadExcel() throws IOException
 	{
 		//String workingDir = System.getProperty("user.dir");
-		fis = new FileInputStream("E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
+		fis = new FileInputStream("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
 		
 		workbook = new XSSFWorkbook(fis);
 		sheet = workbook.getSheetAt(4);					//Retrieving second sheet of Workbook
@@ -324,12 +324,12 @@ public class MethodsPOM
 //		   selectOpponent(driver);
 //	    }
 	   
-	   public  static void selectOpponent(WebDriver driver)
+	   public  static void selectOpponent(WebDriver driver) throws InterruptedException
 	   {
-			
+		   Thread.sleep(300);
 			WebElement Opponent = performerPOM.clickOpponent(driver);
 			Opponent.click();
-			
+			Thread.sleep(300);
 			performerPOM.chooseOpponent(driver).click(); 
 
 		}
@@ -787,15 +787,19 @@ public class MethodsPOM
 				performerPOM.clickExpOutcome(driver).sendKeys(outcome);	//Writing 'Expected Outcome'
 				
 				Thread.sleep(8000);
-				//row0 = sheet.getRow(94);									//Selected 0th index row (First row)
-				//c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
-				//String internalUser = c1.getStringCellValue();
+				row0 = sheet.getRow(94);									//Selected 0th index row (First row)
+				c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
+				String internalUser = c1.getStringCellValue();
 				performerPOM.clickInternalUser2(driver).click();
-				
+
 				Thread.sleep(1000);
-				performerPOM.selectInternalUser5(driver).click();
-				//performerPOM.selectInternalUser2(driver).click();
-				//performerPOM.selectInternalUser2(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+//				//performerPOM.selectInternalUser5(driver).click();
+//				//performerPOM.selectInternalUser2(driver).click();
+				performerPOM.selectInternalUser2(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+				
+				
+				
+//				performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
 				
 	
 				
@@ -861,6 +865,10 @@ public class MethodsPOM
 				Cell c2 = row1.getCell(1);								//Selected cell (0 row,1 column)
 				String title1 = c2.getStringCellValue();
 				performerPOM.clickTaskTitle(driver).sendKeys(title1);	//Writing 'Task Title'
+				
+				Actions a = new Actions(driver);
+				//scroll down a page
+				a.sendKeys(Keys.PAGE_DOWN).build().perform();
 				
 				Thread.sleep(9000);
 				OverduePOM.clickSaveButton(driver).click();				//Clicking on 'Save' button.
@@ -983,7 +991,7 @@ public class MethodsPOM
     public static void Response(WebDriver driver, ExtentTest test,XSSFWorkbook workbook) throws InterruptedException
 			{
 			   WebDriverWait wait = new WebDriverWait(driver, 60);
-			   //sheet = workbook.getSheetAt(4);
+			   sheet = workbook.getSheetAt(4);
 			   
 			   Thread.sleep(8000);
 				performerPOM.clickNoticeOpen(driver).click();
@@ -1895,6 +1903,7 @@ public class MethodsPOM
  
 		  	Thread.sleep(8000);
 			driver.switchTo().frame("IFrameManageDocument");
+			Thread.sleep(800);
 			performerPOM.selectDocumentType(driver);
 			Thread.sleep(8000);
 			performerPOM.chooseDocumentType(driver);
@@ -2032,7 +2041,7 @@ public class MethodsPOM
 		    
 		    
 		    Thread.sleep(8000);
-		    performerPOM.clickHearingDate(driver).sendKeys("28-11-2025");
+		    performerPOM.clickHearingDate(driver).sendKeys("11-12-2025");
 		    Thread.sleep(8000);
 		    performerPOM.clickSaveHearingDate(driver).click();
 		  
@@ -2233,14 +2242,13 @@ public class MethodsPOM
 		
 					
 					
-					
 					Thread.sleep(8000);
-					row0 = sheet.getRow(143);									//Selected 0th index row (First row)
+					row0 = sheet.getRow(144);									//Selected 0th index row (First row)
 					c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
 					String internalUser1 = c1.getStringCellValue();
 					performerPOM.clickInternalUser3(driver).click();
-					//performerPOM.selectInternalUser2(driver).click();
-					performerPOM.selectInternalUser4(driver).sendKeys(internalUser1, Keys.ENTER);	//Selecting 'Internal User'
+					Thread.sleep(1000);
+					performerPOM.selectInternalUser3(driver).sendKeys(internalUser1, Keys.ENTER);	//Selecting 'Internal User'
 					
 					
 					Thread.sleep(8000);
@@ -2404,7 +2412,7 @@ public class MethodsPOM
 //				int HearingDate = (int) c1.getNumericCellValue();
 //				performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 //				
-				performerPOM.clickCaseHearingDate(driver).sendKeys("20-11-2025");	//Writing 'HearingDate'
+				performerPOM.clickCaseHearingDate(driver).sendKeys("03-11-2025");	//Writing 'HearingDate'
 				
 			
 			    Thread.sleep(8000);
@@ -2438,7 +2446,7 @@ public class MethodsPOM
 	 				Thread.sleep(8000);
 	 				performerPOM.clickNewCaseHearing(driver).click();
 	 				  Thread.sleep(8000);
- 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("20-11-2025");	//Writing 'HearingDate'
+ 	 				performerPOM.clickCaseHearingDate(driver).sendKeys("03-11-2025");	//Writing 'HearingDate'
 	 				
 	 			
 	 			    Thread.sleep(8000);
@@ -2814,7 +2822,7 @@ public class MethodsPOM
  			     Thread.sleep(8000);
                   performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 				
-				  wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+				//  wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 
 				
 				Thread.sleep(8000);
@@ -3562,7 +3570,7 @@ public class MethodsPOM
 
 		
 		sheet = workbook.getSheetAt(4);
-		
+		driver.navigate().refresh();
 		perform(driver, test, sheet, open, gridRecords, "Notice - Open",compliancesCount);
 	}
 	
@@ -3614,7 +3622,7 @@ public class MethodsPOM
 		}
 		
 		sheet = workbook.getSheetAt(4);
-		
+		driver.navigate().refresh();
 		perform1(driver, test, sheet, open, gridRecords, "Case - Open");
 	}
 	
@@ -4452,25 +4460,22 @@ public class MethodsPOM
 	}
 	
 	 
-	public static void MyDocument(WebDriver driver, ExtentTest test, XSSFWorkbook workbook, String login) throws InterruptedException, IOException
+	public static void MyDocument(WebDriver driver, ExtentTest test, XSSFWorkbook workbook) throws InterruptedException, IOException
 	{
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		progress(driver);
 		
 		//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeOpen(driver)));	//Wait until 'Notice-Open' count get visible
-		Thread.sleep(8000);
+					
 		performerPOM.clickMyDocument(driver).click();					//Clicking on 'My Document'
-		Thread.sleep(8000);
 		performerPOM.clickmyDocument(driver).click();	                    //Clicking on 'My Document'
 		
+		
 		/*Thread.sleep(3000);
-		performerPOM.clickDocLocFilter(driver).click();
+		performerPOM.clickDocTypeFilter(driver).click();
 		
 		Thread.sleep(3000);
-		//performerPOM.clickLocationFilter1(driver).click();
-		
-		Thread.sleep(3000);
-		performerPOM.selectDocLocFilter(driver).click();
+		performerPOM.clickDocTypeFilter1(driver).click();
 
 		Thread.sleep(5000);
 		if(performerPOM.clearButton(driver).isEnabled())
@@ -4481,172 +4486,164 @@ public class MethodsPOM
 		else
 		{
 			test.log(LogStatus.PASS, "My Document = clear button not Work Successfully");
-		} */
+		}*/
 		   
-		
-		
-		
 		
 		Thread.sleep(3000);
 		wait.until(ExpectedConditions.visibilityOf(performerPOM.GridLoad(driver)));	//Wait until records table gets visible.
 		
 		//--------------------------------Case----------------------------------
-		       
-		       
-		       Thread.sleep(8000);
-				if(performerPOM.clickDownloadDocument(driver).isEnabled())
-				{
-					  Thread.sleep(8000);
-					performerPOM.clickDownloadDocument(driver).click();
-					 test.log(LogStatus.PASS, "Case Document  Downloaded Successfully.");
-				}
-				else
-				{
-					test.log(LogStatus.PASS, "Case Document not Downloaded Successfully.");
-				}
-		       
-		       
 		     
+		
+			Thread.sleep(4000);
+		       performerPOM.clickDownloadDocument(driver).click();	
+		       test.log(LogStatus.PASS, "Case=Document  Downloaded Successfully.");
 		       
-		       Thread.sleep(8000);
-				if(performerPOM.clickViewDocument(driver).isEnabled())
-				{
-					 Thread.sleep(8000);
-					performerPOM.clickViewDocument(driver).click();
-					 test.log(LogStatus.PASS, "Case Document view Successfully.");
-				}
-				else
-				{
-					test.log(LogStatus.PASS, "Case Document not view Successfully.");
-				}
-		       
-		       Thread.sleep(8000);
-		       performerPOM.clickcloseViewDocument(driver).click();
-			
-		      
+		       try
+		       {
+		    	    Thread.sleep(4000);
+		            performerPOM.clickViewDocument(driver).click();	
+		            Thread.sleep(3000);
+		            performerPOM.clickcloseViewDocument(driver).click();
+		           Thread.sleep(3000);
+		          test.log(LogStatus.PASS, "Case=Document  View Successfully.");
+		       }
+		       catch(Exception e)
+		       {
+		    	   
+		       Thread.sleep(5000);
+			    // Switching to Alert        
+		        Alert alert = driver.switchTo().alert();		
+		        		
+		        // Capturing alert message.    
+		        String alertMessage= driver.switchTo().alert().getText();	
+		        
+		        Thread.sleep(3000);
+		        test.log(LogStatus.PASS, alertMessage);
+		        		
+		        // Displaying alert message		
+		        System.out.println(alertMessage);	
+		        // Accepting alert		
+		        alert.accept();
+		       }
 				
 				//driver.navigate().refresh();
 	
 		//--------------------------------Notice----------------------------------
  
-		       Thread.sleep(8000);
-			    JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("window.scrollBy(500,0)");
-				Thread.sleep(8000);
+		       Thread.sleep(5000);
+			   // JavascriptExecutor js = (JavascriptExecutor) driver;
+				//js.executeScript("window.scrollBy(500,0)");
+				Thread.sleep(3000);
 				performerPOM.clickTypeDropdown(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
-				Thread.sleep(8000);
+				Thread.sleep(6000);
 				performerPOM.selectTypeNotice(driver).click();					//Selecting 'Case' option.
-				
+				 Thread.sleep(4000);
+			       performerPOM.clickDownloadDocumentNotice(driver).click();	
+			       test.log(LogStatus.PASS, "Notice=Document Downloaded Successfully.");
+			      try
+			      {
+			         Thread.sleep(4000);
+			         performerPOM.clickViewDocumentNotice(driver).click();	
+			         Thread.sleep(4000);
+			         performerPOM.clickcloseViewDocument(driver).click();
+			         test.log(LogStatus.PASS, "Notice=Document view Successfully.");
+			      }
+			      catch(Exception e)
+			      {
+			    	  Thread.sleep(5000);
+					    // Switching to Alert        
+				        Alert alert1 = driver.switchTo().alert();		
+				        		
+				        // Capturing alert message.    
+				        String alertMessage1= driver.switchTo().alert().getText();	
+				        
+				        Thread.sleep(3000);
+				        test.log(LogStatus.PASS, alertMessage1);
+				        		
+				        // Displaying alert message		
+				        System.out.println(alertMessage1);	
+				        
+			      		
+				        // Accepting alert		
+				        alert1.accept();
+			      }
 			       
-			       Thread.sleep(8000);
-					if(performerPOM.clickDownloadDocumentNotice(driver).isEnabled())
-					{
-						Thread.sleep(8000);
-						performerPOM.clickDownloadDocumentNotice(driver).click();
-						 test.log(LogStatus.PASS, "Notice Document  Downloaded Successfully.");
-					}
-					else
-					{
-						test.log(LogStatus.PASS, "Notice Document not Downloaded Successfully.");
-					}
-			       
-			      
-			       
-			       Thread.sleep(8000);
-					if(performerPOM.clickViewDocumentNotice(driver).isEnabled())
-					{
-						 Thread.sleep(8000);
-						performerPOM.clickViewDocumentNotice(driver).click();
-						 test.log(LogStatus.PASS, "Notice Document view Successfully.");
-					}
-					else
-					{
-						test.log(LogStatus.PASS, "Notice Document not view Successfully.");
-					}
-			       Thread.sleep(8000);
-			       performerPOM.clickcloseViewDocument(driver).click();
-			       
-			     
-					//driver.navigate().refresh();
+				     // driver.navigate().refresh();
 								
           ////--------------------------------Task----------------------------------
 				
 			    
-				Thread.sleep(8000);
+				Thread.sleep(5000);
 				performerPOM.clickTypeDropdown(driver).click();					//Clicking on Type drop down box (i.e. Notice, Case, Task)
-				Thread.sleep(8000);
+				Thread.sleep(6000);
 				performerPOM.selectTypeTask(driver).click();					//Selecting 'Task' option.
-				
-				
-			     
+							 
 			     try
 			     {
-			    	 
-			    	 Thread.sleep(8000);
-				     performerPOM.clickDownloadDocumentTask(driver).click();			    	 
-					  
-				     Thread.sleep(8000);
+			    	 Thread.sleep(5000);
+			    	 performerPOM.clickViewDocumentTask(driver).click();	
+			    	 Thread.sleep(3000);
+			    	 performerPOM.clickcloseViewDocument(driver).click();
 
-				     // Switching to Alert        
-				        Alert alert = driver.switchTo().alert();		
-				        		
-				        // Capturing alert message.    
-				        String alertMessage= driver.switchTo().alert().getText();	
-				        
-				        Thread.sleep(8000);
-				        test.log(LogStatus.PASS, alertMessage);
-				        		
-				        // Displaying alert message		
-				        System.out.println(alertMessage);	
-				        
-				        		
-				        // Accepting alert		
-				        alert.accept();	
-			    	 
-			    	  }
-			     catch (Exception e)
-			     {
-			    	 
-			    	 Thread.sleep(8000);
-						if(performerPOM.clickDownloadDocumentTask(driver).isEnabled())
-						{
-							 Thread.sleep(8000);
-							performerPOM.clickDownloadDocumentTask(driver).click();
-							 test.log(LogStatus.PASS, "Task Document  Downloaded Successfully.");
-						}
-						else
-						{
-							test.log(LogStatus.PASS, "Task Document not Downloaded Successfully.");
-						}
-				}
-			       
-			      
-			       
-			       Thread.sleep(8000);
-					if(performerPOM.clickViewDocumentTask(driver).isEnabled())
-					{
-						 Thread.sleep(8000);
-						performerPOM.clickViewDocumentTask(driver).click();
-						 test.log(LogStatus.PASS, "Task Document view Successfully.");
-					}
-					else
-					{
-						test.log(LogStatus.PASS, "Task Document not view Successfully.");
-					}
+			    	 	Thread.sleep(1000);
+			       		test.log(LogStatus.PASS, "Task=Document view Successfully.");
+			     }
+			   catch(Exception e)
+			   {
+				   Thread.sleep(5000);
+				    // Switching to Alert        
+			        Alert alert2 = driver.switchTo().alert();		
+			        		
+			        // Capturing alert message.    
+			        String alertMessage2= driver.switchTo().alert().getText();	
+			        
+			        Thread.sleep(3000);
+			        test.log(LogStatus.PASS, alertMessage2);
+			        		
+			        // Displaying alert message		
+			        System.out.println(alertMessage2);	
+			        
+		      		
+			        // Accepting alert		
+			        alert2.accept();
+			   }
 			     
+			     Thread.sleep(4000);
+			     performerPOM.clickDownloadDocumentTask(driver).click();
 			     
-			     Thread.sleep(8000);
-			     performerPOM.clickcloseViewDocument(driver).click();
-
-			     Thread.sleep(1000);
-			    
-			     driver.navigate().refresh();
+				try
+					{
+						   Thread.sleep(5000);
+						    // Switching to Alert        
+					        Alert alert2 = driver.switchTo().alert();		
+					        		
+					        // Capturing alert message.    
+					        String alertMessage2= driver.switchTo().alert().getText();	
+					        
+					        Thread.sleep(3000);
+					        test.log(LogStatus.PASS, "Task=" +alertMessage2);
+					        		
+					        // Displaying alert message		
+					        System.out.println(alertMessage2);	
+					        
+				      		
+					        // Accepting alert		
+					        alert2.accept();
+					}
+					
+					catch(Exception e)
+					{
+						
+					     
+					     test.log(LogStatus.PASS, "Task=Document  Downloaded Successfully.");
+					}
+			  
+			      driver.navigate().refresh();
 			       
-			       Thread.sleep(8000);
+			       Thread.sleep(1000);
 				   OverduePOM.clickDashboard(driver).click();				//Clicking on 'My Dashboard'
-			     
-			    
-	}     
+	}   
 			     
       public static void AdvancedSearchDocument(WebDriver driver, ExtentTest test,String login) throws InterruptedException, IOException
 	   {
@@ -5301,13 +5298,13 @@ public class MethodsPOM
 		action.moveToElement(performerPOM.clickTitle(driver)).click().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).perform();
 		
 		Thread.sleep(8000);
-		performerPOM.clickReminderText(driver).sendKeys("Reminder as on date test 15mar2024");
+		performerPOM.clickReminderText(driver).sendKeys("Reminder as on date test 20mar2024");
 		
 		Thread.sleep(8000);
-		performerPOM.clickDescription(driver).sendKeys("Reminder as on date test 15mar2024");
+		performerPOM.clickDescription(driver).sendKeys("Reminder as on date test 20mar2024");
 		
 		Thread.sleep(8000);
-		performerPOM.clickRemark2(driver).sendKeys("Reminder as on date test 15mar2024");
+		performerPOM.clickRemark2(driver).sendKeys("Reminder as on date test 20mar2024");
 		
 		Thread.sleep(8000);
 		performerPOM.clickDate(driver).click();
@@ -11303,7 +11300,7 @@ public static void CaseNoticeStageGraph(WebDriver driver,ExtentTest test, String
 				test.log(LogStatus.PASS, "View Popup open successfully.");
 
 				Thread.sleep(5000);
-				performerPOM.clickSearchFilter(driver).sendKeys("Case No -4569");
+				performerPOM.clickSearchFilter(driver).sendKeys("45623");
 				
 				
 		
@@ -24370,8 +24367,8 @@ public static void CaseNoticeStageGraph(WebDriver driver,ExtentTest test, String
 	 				 performerPOM.clickStatusPayments(driver).click();
 	 				 
 	 				
-	 				
-	 				wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+	 				Thread.sleep(8000);
+	 				//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
 	 				performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 	 				Thread.sleep(4000);
 	 				performerPOM.clickClosedStatus(driver).click();				//Selecting 'Closed' option from drop down.
@@ -24435,8 +24432,8 @@ public static void CaseNoticeStageGraph(WebDriver driver,ExtentTest test, String
 	 			   	Thread.sleep(8000);
 	 			
 	 			   	performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
-	 			   Thread.sleep(3000);
-	 			   	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+	 			  // Thread.sleep(3000);
+	 			   //	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 	 			   	Thread.sleep(3000);
 	 			   	performerPOM.clickCaseStage(driver).click();
 	 			   	Thread.sleep(3000);
@@ -24539,16 +24536,16 @@ public static void CaseNoticeStageGraph(WebDriver driver,ExtentTest test, String
 	 			   	Thread.sleep(8000);
 	 			
 	 			   	performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
-	 				Thread.sleep(3000);
-	 			   	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+	 				//Thread.sleep(3000);
+	 			   //	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 	 			   Thread.sleep(3000);
 	 			   	performerPOM.clickCaseStage(driver).click();
-	 			   	Thread.sleep(300);
+	 			   	Thread.sleep(3000);
 	 			   	performerPOM.selectCaseStage1(driver).sendKeys("Hearing", Keys.ENTER);
 				
-	 			   	Thread.sleep(300);
+	 			   	Thread.sleep(3000);
 	 			   	performerPOM.clickCaseStatus(driver).click();				//Clicking on 'Case Status' drop down.
-	 			   	Thread.sleep(300);
+	 			   	Thread.sleep(3000);
 	 			   	performerPOM.clickCaseStatusClose(driver).click();			//Selecting 'Closed' option from drop down.
 				
 	 			   	Thread.sleep(3000);

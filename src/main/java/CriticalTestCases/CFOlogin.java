@@ -15,7 +15,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.ExtentReports;
@@ -244,7 +243,7 @@ void NoticeResponse() throws InterruptedException, IOException
 	test = extent.startTest("Notice Response verification");
 	
 	
-	CFOMethod.Response(driver, test,workbook);
+	MethodsPOM.Response(driver, test,workbook);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -290,7 +289,7 @@ void CaseDocument() throws InterruptedException, IOException
 	test = extent.startTest("Case - Document Tab");
 	
 	
-	CFOMethod.Document(driver, test);
+	MethodsPOM.Document(driver, test);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -302,7 +301,7 @@ void CaseTaskActivity() throws InterruptedException, IOException
 	test = extent.startTest("Case - Task/Activty Tab");
 	
 	
-	CFOMethod.TaskActivity1(driver, test,workbook);
+	MethodsPOM.TaskActivity1(driver, test,workbook,"Performer");
 	
 	extent.endTest(test);
 	extent.flush();
@@ -327,7 +326,7 @@ void CaseOrder() throws InterruptedException, IOException
 	test = extent.startTest("Case - Case Order Tab");
 
 	
-	CFOMethod.CaseOrder(driver, test,workbook);
+	MethodsPOM.CaseOrder(driver, test,workbook,"Performer");
 	
 	extent.endTest(test);
 	extent.flush();
@@ -339,7 +338,7 @@ void CaseStatusPayment() throws InterruptedException, IOException
 	test = extent.startTest("Case - Status/Payment Tab");
 	
 	
-	CFOMethod.StatusPayment(driver, test,workbook);
+	MethodsPOM.StatusPayment(driver, test,workbook);
 	
 	extent.endTest(test);
 	extent.flush();
@@ -351,7 +350,9 @@ void CaseStatusPayment() throws InterruptedException, IOException
 		test = extent.startTest("Case - External Lawyer Rating");
 		
 		
-		CFOMethod.CaseExternalLawyer(driver, test);
+		//CFOMethod.CaseExternalLawyer(driver, test);
+		
+		MethodsPOM.ExternalLawyer(driver, test,1);
 		
 		extent.endTest(test);
 		extent.flush();
@@ -1022,10 +1023,6 @@ void CaseNoticeTypeGraph1() throws InterruptedException, IOException
 	CFOMethod.CaseNoticeTypeGraph1(driver, test,"Outward/Plaintiff Type",OutwardPlaintiff);
 	Thread.sleep(3000);
 	CFOMethod.CaseNoticeTypeGraph1(driver, test,"Respondent",Respondent);
-	Thread.sleep(3000);
-	CFOMethod.CaseNoticeTypeGraph1(driver, test,"Petitioner",Petitioner);
-	Thread.sleep(3000);
-	CFOMethod.CaseNoticeTypeGraph1(driver, test,"Respondent",Respondent);
 	
 	
 	Thread.sleep(3000);
@@ -1399,7 +1396,7 @@ void AgeingGraph1to2yearsCase() throws InterruptedException, IOException
  }
 
 
-@Test(priority =58)
+@Test(priority =60)
 void AgeingGraph2to3yearsCase() throws InterruptedException, IOException
 {
      	test = extent.startTest("Select Case from Notice/Case Filter to verify count of Ageing(2 to 3 year) Summary graph");
@@ -1438,7 +1435,7 @@ void AgeingGraph2to3yearsCase() throws InterruptedException, IOException
 		extent.endTest(test);
 		extent.flush();
  }
-@Test(priority =59)
+@Test(priority =61)
 void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 {
      test = extent.startTest("Select Case from Notice/Case Filter to verify count of Ageing(more than 3 year) Summary graph");
@@ -1477,7 +1474,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
       extent.flush();
  }
 
-@Test(priority = 0)
+@Test(priority = 62)
 	void MyDocument() throws InterruptedException, IOException
 	{
 		test = extent.startTest("My Document-Download and View Document");
@@ -1490,7 +1487,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 	}
 	
 
-@Test(priority = 61)
+@Test(priority = 63)
 	void MyReports() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Reports -excel count verification");

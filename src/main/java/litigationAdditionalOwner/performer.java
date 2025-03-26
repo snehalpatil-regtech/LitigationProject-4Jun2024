@@ -85,7 +85,7 @@ public class performer
 
 	}
 	
-/*	@Test(priority = 1)
+	@Test(priority = 1)
 	void NoticeOpen() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Notice - Open Count Verification");
@@ -208,7 +208,7 @@ public class performer
 
      extent.endTest(test);
      extent.flush();
-	}*/
+	}
 
 @Test(priority =12)
 	void CaseOpen() throws InterruptedException, IOException
@@ -1368,7 +1368,7 @@ void TaskDelete() throws InterruptedException, IOException
 		test = extent.startTest("Download and View Document Verification");
 		
 		
-		MethodsPOM.MyDocument(driver, test, workbook, "Performer");
+		MethodsPOM.MyDocument(driver, test, workbook);
 		
 		extent.endTest(test);
 		extent.flush();

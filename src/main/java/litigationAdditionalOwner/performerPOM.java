@@ -4,7 +4,6 @@ package litigationAdditionalOwner;
 
 import java.util.List;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -1048,7 +1047,7 @@ public class performerPOM
 	{
 		
 		WebElement closednoticedoc = driver.findElement(By.xpath("//input[@id='fuCloseStatusDoc']"));
-		closednoticedoc.sendKeys("E:\\Test Cases\\Approver Test Case.xlsx");
+		closednoticedoc.sendKeys("D:\\Test Cases\\Approver Test Case.xlsx");
 		return litigation;
 	}
 	public static WebElement clickClosedNoticeViewDoc(WebDriver driver)
@@ -1172,7 +1171,7 @@ public class performerPOM
 	}
 	public static WebElement clickMoreReports(WebDriver driver)
 	{
-		WebDriverWait wait=new WebDriverWait(driver,30);
+		
 		
 		litigation = driver.findElement(By.xpath("//*[@id='MoreReport']"));
 		return litigation;
@@ -2162,7 +2161,7 @@ public class performerPOM
 		 
 		 public static WebElement clickSaveCaseHearingDate(WebDriver driver)
 		 {
-			 WebDriverWait wait = new WebDriverWait(driver,30);
+			 
 				//litigation = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='lnkTabSaveRefNo']")));
 				litigation=driver.findElement(By.xpath("//*[@id='lnkTabSaveRefNo']"));
 				
@@ -2297,7 +2296,7 @@ public class performerPOM
 		 }
 		 public static List<WebElement> selectApprover1(WebDriver driver) throws InterruptedException
 		 {
-			 WebDriverWait wait=new WebDriverWait(driver,20);
+			
 			 elementsList=driver.findElements(By.xpath("//*[@id='ddlApprover1_chosen']/div/ul/li"));
 		      return elementsList; 
 		
@@ -2535,7 +2534,7 @@ public class performerPOM
 		  {
 			  
 			     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-			    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format.xlsx");
+			    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format.xlsx");
 			     return litigation;
 	      }
 		  public static WebElement ChooseCaseFile4(WebDriver driver) throws InterruptedException
@@ -2549,21 +2548,21 @@ public class performerPOM
 		  {
 			  
 			     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-			    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format (1).xlsx");
+			    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format (1).xlsx");
 			     return litigation;
 	      }
 		  public static WebElement ChooseCaseFile2(WebDriver driver) throws InterruptedException
 		  {
 			  
 			     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-			    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format (2).xlsx");
+			    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format (2).xlsx");
 			     return litigation;
 	      }
 		  public static WebElement ChooseCaseFile3(WebDriver driver) throws InterruptedException
 		  {
 			  
 			     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-			    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format (3).xlsx");
+			    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Case_Upload_Format (3).xlsx");
 			     return litigation;
 	      }
 		  public static WebElement ChooseCaseUpdationFile(WebDriver driver) throws InterruptedException
@@ -2577,14 +2576,14 @@ public class performerPOM
 		  {
 			  
 			     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-			    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\CaseUpdation-EmptyFile.xlsx");
+			    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\CaseUpdation-EmptyFile.xlsx");
 			     return litigation;
 	      }
 		  public static WebElement ChooseCaseUpdationFile2(WebDriver driver) throws InterruptedException
 		  {
 			  
 			     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-			    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\CaseUpdation-Invalid Data.xlsx");
+			    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\CaseUpdation-Invalid Data.xlsx");
 			     return litigation;
 	      }
 		  public static WebElement UploadCaseFile(WebDriver driver) throws InterruptedException
@@ -2667,7 +2666,7 @@ public class performerPOM
 	  {
 		  
 		     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-		    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format.xlsx");
+		    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format.xlsx");
 		     return litigation;
       }
 	  public static WebElement ChooseNoticeFile4(WebDriver driver) throws InterruptedException
@@ -2688,42 +2687,42 @@ public class performerPOM
 	  {
 		  
 		     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-		    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format (1).xlsx");
+		    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format (1).xlsx");
 		     return litigation;
       }
 	  public static WebElement ChooseNoticeFile2(WebDriver driver) throws InterruptedException
 	  {
 		  
 		     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-		    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format (2).xlsx");
+		    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format (2).xlsx");
 		     return litigation;
       }
 	  public static WebElement ChooseNoticeFile3(WebDriver driver) throws InterruptedException
 	  {
 		  
 		     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-		    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format (3).xlsx");
+		    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\Litigation_Notice_Upload_Format (3).xlsx");
 		     return litigation;
       }
 	  public static WebElement ChooseNoticeUpdtionEmptyFile(WebDriver driver) throws InterruptedException
 	  {
 		  
 		     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-		    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\NoticeUpdation-EmptyFile.xlsx");
+		    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\TestData\\NoticeUpdation-EmptyFile.xlsx");
 		     return litigation;
       }
 	  public static WebElement ChooseNoticeUpdtionInvalidData(WebDriver driver) throws InterruptedException
 	  {
 		  
 		     WebElement CaseFile=driver.findElement(By.cssSelector("input[type='file']"));
-		    CaseFile.sendKeys("E:\\Litigation-Project 10 April2024\\TestData\\NoticeUpdation-Invalid Data.xlsx");
+		    CaseFile.sendKeys("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\NoticeUpdation-Invalid Data.xlsx");
 		     return litigation;
       }
 	  public static WebElement ChooseOrderFile(WebDriver driver) throws InterruptedException
 	  {
 		  
 		     WebElement CaseFile=driver.findElement(By.xpath("//*[@id='fuCaseOrderDocUpload']"));
-		    CaseFile.sendKeys("E:\\Test Cases\\Approver Test Case.xlsx");
+		    CaseFile.sendKeys("D:\\Test Cases\\Approver Test Case.xlsx");
 		     return litigation;
       }
 	  public static WebElement UploadNoticeFile(WebDriver driver) throws InterruptedException
@@ -2826,7 +2825,7 @@ public class performerPOM
 	  public static WebElement LocationSummaryGraphCase(WebDriver driver) throws InterruptedException
 	  {
 		 
-		  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[5]"));
+		  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[5]"));
 	
 		  return litigation;
 	  }
@@ -4368,7 +4367,7 @@ public class performerPOM
 			}
 			public static WebElement selectCheckboxcfo(WebDriver driver)
 			{
-				litigation=driver.findElement(By.xpath("//label[normalize-space()='6052024']"));
+				litigation=driver.findElement(By.xpath("//label[normalize-space()='Notice300623']"));
 				return litigation;
 			}
 			public static WebElement selectCheckbox1(WebDriver driver)
@@ -5444,102 +5443,102 @@ public class performerPOM
 			 
 			 public static WebElement clickApplicantLessThanYearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[77]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[38]"));
 					return litigation;
 				}
 			 public static WebElement clickApplicantLessThanYearCaseCA(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[35]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[37]"));
 					return litigation;
 				}
 			 public static WebElement clickComplainantLessThanYearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[77]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[38]"));
 					return litigation;
 				}
 			 public static WebElement clickComplainantLessThanYearCaseCA(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[35]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[37]"));
 					return litigation;
 				}
 			 public static WebElement clickInwardDefendentLessThanYearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[9]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[10]"));
 					return litigation;
 				}
 			 public static WebElement clickAppellantLessThanYearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-3 '])[7]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-3 '])[9]"));
 					return litigation;
 				}
 			 public static WebElement clickOutwardPlaintiffLessthanyearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-4 '])[6]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-4 '])[7]"));
 					return litigation;
 				}
 			 public static WebElement clickPetitionerLeassThanYearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-5 '])[5]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-5 '])[7]"));
 					return litigation;
 				}
 			 public static WebElement clickRespondentLessThanYearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-6 '])[5]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-6 '])[6]"));
 					return litigation;
 				}
 			 public static WebElement clickComplianant1to2yearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[78]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[39]"));
 					return litigation;
 				}
 			 public static WebElement clickComplianant1to2yearCaseCA(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[36]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[38]"));
 					return litigation;
 				}
 			 public static WebElement clickInwardOutward1to2yearsCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[78]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[39]"));
 					return litigation;
 				}
 			 public static WebElement clickInwardOutward1to2yearsCaseCA(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[36]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[38]"));
 					return litigation;
 				}
 			 public static WebElement clickAppleant1to2YearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[10]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[11]"));
 					return litigation;
 				}
 			 public static WebElement clickOutwardplaintiff1toyearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-3 '])[8]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-3 '])[10]"));
 					return litigation;
 				}
 			 public static WebElement clickPetitioner1toyearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-4 '])[7]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-4 '])[8]"));
 					return litigation;
 				}
 			 public static WebElement clickRespondent1toyearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-5 '])[6]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-5 '])[8]"));
 					return litigation;
 				}
 			 public static WebElement clickApplicant2to3yearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[79]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[40]"));
 					return litigation;
 				}
 			 public static WebElement clickOutwardPlaintiff2To3YearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-3 '])[9]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-3 '])[11]"));
 					return litigation;
 				}
 			 public static WebElement clickRespondent2To3YearCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-4 '])[8]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-4 '])[9]"));
 					return litigation;
 				}
 			 public static WebElement DepartmentSummaryGraph1(WebDriver driver) throws InterruptedException
@@ -5685,7 +5684,7 @@ public class performerPOM
 			 public static WebElement ExpensesCategoryWiseCaseGraph(WebDriver driver) throws InterruptedException
 			  {
 				  
-				  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[58]"));
+				  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[16]"));
 				  return litigation;
 			  }
 			 public static WebElement ExpensesCounselWiseCaseGraph(WebDriver driver) throws InterruptedException
@@ -5697,7 +5696,7 @@ public class performerPOM
 			 public static WebElement ExpensesCounselWiseCaseGraphCA(WebDriver driver) throws InterruptedException
 			  {
 				  
-				  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[75]"));
+				  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[36]"));
 				  return litigation;
 			  }
 			 public static WebElement UtilizedBudgetGraph(WebDriver driver) throws InterruptedException
@@ -5709,7 +5708,7 @@ public class performerPOM
 			 public static WebElement UtilizedBudgetGraphCA(WebDriver driver) throws InterruptedException
 			  {
 				  
-				  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[76]"));
+				  litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[36]"));
 				  return litigation;
 			  }
 			 
@@ -6328,7 +6327,7 @@ public class performerPOM
 			
 			 public static List<WebElement> clickCustomerMgmtTerritorydropdown(WebDriver driver) throws InterruptedException
 			 {
-				 WebDriverWait wait=new WebDriverWait(driver,20);
+				
 				 elementsList=driver.findElements(By.xpath("//*[@id='ddlTerritory_listbox']/li"));
 			      return elementsList; 
 			
@@ -6946,7 +6945,7 @@ public class performerPOM
 				}
 			 public static WebElement clickPetitionerNoticeCA(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[6]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[7]"));
 					return litigation;
 				}
 			 public static WebElement clickRespondentNoticeCA(WebDriver driver)
@@ -6972,7 +6971,7 @@ public class performerPOM
 				}
 			 public static WebElement clickInwardDefendentNoticeCA1to2(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[7]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[8]"));
 					return litigation;
 				}
 			
@@ -6999,7 +6998,7 @@ public class performerPOM
 				}
 			 public static WebElement clickOutwardPlaintiffNoticeCA2to3(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[10]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[9]"));
 					return litigation;
 				}
 			 public static WebElement clickPetitionerNoticeCA2to3(WebDriver driver)
@@ -7031,7 +7030,7 @@ public class performerPOM
 			 
 			 public static WebElement clickOutwardPlaintiffMorethan3years(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[9]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[10]"));
 					return litigation;
 				}
 			 public static WebElement clickPetitionerMorethan3years(WebDriver driver)
@@ -7119,17 +7118,17 @@ public class performerPOM
 				}
 			 public static WebElement clickInwardDefendentCAMoreThan3yearsCase(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[80]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-0 '])[41]"));
 					return litigation;
 				}
 			 public static WebElement clickAppleantCaseCAMoreThan3years(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[80]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-1 '])[41]"));
 					return litigation;
 				}
 			 public static WebElement clickPetitionerCaseCAMoreThan3years(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[12]"));
+					litigation=driver.findElement(By.xpath("(//*[@class='highcharts-label highcharts-data-label highcharts-data-label-color-2 '])[13]"));
 					return litigation;
 				}
 			 public static WebElement clickAgeingViewIcon(WebDriver driver)
@@ -7525,7 +7524,17 @@ public class performerPOM
 				}
 			 public static WebElement shareDocumentIcon1(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("//*[@id='grid1']/div[3]/table/tbody/tr[1]/td[14]/a[3]"));
+					litigation=driver.findElement(By.xpath("//*[@id='grid1']/div[3]/table/tbody/tr[1]/td[12]/a[3]"));
+					return litigation;
+				}
+			 public static WebElement shareDocumentIconNotice(WebDriver driver)
+				{
+					litigation=driver.findElement(By.xpath("//*[@id='grid1']/div[3]/table/tbody/tr[1]/td[13]/a[3]"));
+					return litigation;
+				}
+			 public static WebElement shareDocumentIconTask(WebDriver driver)
+				{
+					litigation=driver.findElement(By.xpath("//*[@id='grid']/div[2]/table/tbody/tr[1]/td[14]/a[3]"));
 					return litigation;
 				}
 			 public static WebElement CloseSharePopup(WebDriver driver)
@@ -7620,7 +7629,7 @@ public class performerPOM
 				}
 			 public static WebElement StageName(WebDriver driver)
 				{
-					litigation=driver.findElement(By.xpath("(//*[name()='tspan'][normalize-space()='Notice abc'])[1]"));
+					litigation=driver.findElement(By.xpath("(//*[name()='tspan'][normalize-space()='Notice Stage'])[1]"));
 					return litigation;
 				}
 			 public static WebElement StageNameCA(WebDriver driver)

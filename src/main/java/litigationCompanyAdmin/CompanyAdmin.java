@@ -42,7 +42,7 @@ public class CompanyAdmin
 	public static XSSFSheet ReadExcel() throws IOException
 	{
 		//String workingDir = System.getProperty("user.dir");
-		fis = new FileInputStream("E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
+		fis = new FileInputStream("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
 	
 		workbook = new XSSFWorkbook(fis);
 		sheet = workbook.getSheetAt(4);					//Retrieving second sheet of Workbook
@@ -91,7 +91,7 @@ public class CompanyAdmin
 
 	 
  
-/*@Test(priority =0)
+@Test(priority =0)
  	void NoticeOpen() throws InterruptedException, IOException
  	{
  		test = extent.startTest("Notice - Open Count Verification");
@@ -228,7 +228,7 @@ void NoticeUserAssignmentDelete() throws InterruptedException, IOException
 		
 		extent.endTest(test);
 		extent.flush();
-	}*/
+	}
 
 @Test(priority = 12)
 	void CaseOpen() throws InterruptedException, IOException
@@ -2091,7 +2091,7 @@ void LocationSummaryGraph1() throws InterruptedException, IOException
 	
 //	  String LocationName =performerPOM.LocationName(driver).getText();
 //		test = extent.startTest("Select Case type Filter :- "+LocationName+" Location - To check Location Summary Graph Count Verification");
-		test = extent.startTest("Select Case from Notice/Case Filter :- A Pvt Ltd Location:- To verify count of Location Summary graph");
+		test = extent.startTest("Select Case from Notice/Case Filter :- Branch Pune Location:- To verify count of Location Summary graph");
   
    Thread.sleep(3000);
    MethodsPOM.LocationSummaryGraph1(driver, test,"cfo -");
@@ -2424,7 +2424,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 		test = extent.startTest("My Document-Download and View Document");
 		
 		
-		MethodsPOM.MyDocument(driver, test, workbook, "Performer");
+		MethodsPOM.MyDocument(driver, test, workbook);
 		
 		extent.endTest(test);
 		extent.flush();

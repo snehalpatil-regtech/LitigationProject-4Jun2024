@@ -252,7 +252,7 @@ public class AddtionalOwner
 	 	test = extent.startTest("Notice- Payment verification");
 	 	
 	 	
-	 	MethodsPOM.PaymentLog(driver,test);
+	 	MethodsPOM.PaymentLog(driver, test);;
 	 	
 	 	extent.endTest(test);
 	 	extent.flush();
@@ -373,7 +373,7 @@ public class AddtionalOwner
 	 		test = extent.startTest("My Document-Download and View Document");
 	 	
 	 		
-	 		MethodsPOM.MyDocument(driver, test, workbook, "Performer");
+	 		MethodsPOM.MyDocument(driver, test, workbook);
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();

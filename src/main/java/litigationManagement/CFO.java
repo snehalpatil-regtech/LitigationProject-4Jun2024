@@ -106,7 +106,7 @@ public class CFO {
 				
 				
 	
-		/*@Test(priority =1)
+/*		@Test(priority =1)
 			    	void NoticeOpen() throws InterruptedException, IOException
 			    	{
 			    		test = extent.startTest("Notice - Open Count verification");
@@ -206,7 +206,7 @@ public class CFO {
 				
 				     extent.endTest(test);
 				     extent.flush();
-			 }
+			 }*/
 			// @Test(priority =10)
 			   void NoticeUserAssignment() throws InterruptedException, IOException
 			  {
@@ -332,7 +332,7 @@ public class CFO {
 			
 			extent.endTest(test);
 			extent.flush();
-		}*/
+		}
 	@Test(priority =21)
 		void NoticeDocumentShareWithoutData() throws InterruptedException, IOException
 		{
@@ -364,7 +364,7 @@ public class CFO {
 	    		test = extent.startTest("Notice TaskActivtiy verification");
 	    		
 	    		
-	    		CFOMethod.TaskActivtity(driver, test,workbook);
+	    		MethodsPOM.TaskActivtity(driver, test,workbook);
 	    		
 	    		extent.endTest(test);
 	    		extent.flush();
@@ -391,7 +391,7 @@ public class CFO {
 			extent.endTest(test);
 			extent.flush();
 		}
-	@Test(priority =25)
+	//@Test(priority =0)
 		void TaskActivtityWithoutData() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice Task/Activtiy Without data verification");
@@ -402,7 +402,7 @@ public class CFO {
 			extent.endTest(test);
 			extent.flush();
 		}
-	@Test(priority = 26)
+	@Test(priority = 25)
 		void TaskActivtityResponseWithoutStatus() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice Task/Activtiy Response Without data verification");
@@ -737,7 +737,7 @@ public class CFO {
 				extent.flush();
 			}
 			
-			@Test(priority = 56)
+			//@Test(priority = 56)
 			void CaseDocumentSearchFields() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Case Document Search Fields verification");
@@ -823,7 +823,7 @@ public class CFO {
 		    		test = extent.startTest("Case - Task/Activity Tab");
 		    		
 		    		
-		    		CFOMethod.TaskActivity1(driver, test,workbook);
+		    		MethodsPOM.TaskActivity1(driver, test,workbook,"Performer");
 		    		
 		    		extent.endTest(test);
 		    		extent.flush();
@@ -983,7 +983,7 @@ public class CFO {
 		    		test = extent.startTest("Case - Status/Payment Tab");
 		    		
 		    		
-		    		CFOMethod.StatusPayment(driver, test,workbook);
+		    		MethodsPOM.StatusPayment(driver, test,workbook);
 		    		
 		    		extent.endTest(test);
 		    		extent.flush();
@@ -999,7 +999,7 @@ public class CFO {
 		    		extent.endTest(test);
 		    		extent.flush();
 		    	}
-		@Test(priority =78)
+		@Test(priority =79)
 		void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Case Status/Payment with Invalid data ");
@@ -1136,7 +1136,7 @@ public class CFO {
 		
 		
 		
-				@Test(priority =89)
+				@Test(priority =91)
 				void NoticeClosedDoc() throws InterruptedException, IOException
 				{
 					test = extent.startTest("Close Notice Document verification");
@@ -1146,7 +1146,7 @@ public class CFO {
 					extent.endTest(test);
 					extent.flush();
 				}
-				@Test(priority = 90)
+				@Test(priority = 92)
 				void NoticeClosedWithoutDoc() throws InterruptedException, IOException
 				{
 					test = extent.startTest("Close Notice Without Document verification");
@@ -1158,7 +1158,7 @@ public class CFO {
 				}
 				
 				
-				@Test(priority = 91)
+				@Test(priority = 93)
 				void CaseClosedDoc() throws InterruptedException, IOException
 				{
 					test = extent.startTest("Close Case Document verification");
@@ -1170,7 +1170,7 @@ public class CFO {
 				}
 				
 				
-				@Test(priority = 92)
+				@Test(priority = 94)
 				void CaseClosedWithoutDoc() throws InterruptedException, IOException
 				{
 					test = extent.startTest("Close Case Without Document verification");
@@ -1182,7 +1182,7 @@ public class CFO {
 				}
 		 
 		    
-			@Test(priority =93)
+			@Test(priority =94)
 			    			void TaskOpen() throws InterruptedException, IOException
 			    			{
 			    				test = extent.startTest("Task - Open Count verification");
@@ -2438,7 +2438,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 				}
 	
 	
-			//@Test(priority =147)
+			//@Test(priority =0)
 			void ClosedCaseDoc() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Closed case document verification");
@@ -2447,7 +2447,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 				extent.endTest(test);
 			     extent.flush();
 			}
-			//@Test(priority = 148)
+			//@Test(priority = 0)
 			void ClosedNoticeDoc() throws InterruptedException, IOException
 			{
 			test = extent.startTest("Closed notice document verification");
@@ -2574,7 +2574,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 166)
+	//@Test(priority = 166)
 	void DocumentFilter() throws InterruptedException, IOException
 	{
 		test = extent.startTest(" My Document = Notice = Multiple  Filters verification");
@@ -2585,7 +2585,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 		extent.endTest(test);
 		extent.flush();
 	}
-	@Test(priority = 167)
+	//@Test(priority = 167)
 	void DocumentCaseFilter() throws InterruptedException, IOException
 	{
 	test = extent.startTest(" My Document = Case = Multiple  Filters verification");
@@ -2596,7 +2596,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 	extent.endTest(test);
 	extent.flush();
 	}
-	@Test(priority =168)
+	//@Test(priority =168)
 	void DocumentTaskFilter() throws InterruptedException, IOException
 	{
 	test = extent.startTest(" My Document = Task = Multiple  Filters verification");
@@ -2684,7 +2684,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 					{
 						test = extent.startTest("My Reminder verification");
 						
-						CFOMethod.MyReminder(driver, test, workbook);
+						MethodsPOM.MyReminder(driver, test, workbook);
 						
 						extent.endTest(test);
 						extent.flush();
@@ -2694,7 +2694,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 		{
 			test = extent.startTest("My Reminder Without data verification");
 			
-			CFOMethod.ReminderWithoutData(driver, test);
+			MethodsPOM.ReminderWithoutData(driver, test);
 			
 			extent.endTest(test);
 			extent.flush();
@@ -2826,7 +2826,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 	
 		
 		
-			@Test(priority = 189)
+	/*		@Test(priority = 189)
 				void Masters() throws InterruptedException, IOException
 					{
 						test = extent.startTest("Masters - Legal Entity  verification");
@@ -3441,7 +3441,7 @@ void AgeingGraphMoreThan3yearsCase() throws InterruptedException, IOException
 						
 						extent.endTest(test);
 						extent.flush();
-					}
+					}*/
 	
 					
 					

@@ -107,9 +107,9 @@ public class Login
 	
 	public static WebDriver UserLogin(String username, String password, String method) throws InterruptedException
 	{		
-		WebDriverWait wait = new WebDriverWait(driver, 20);
-		WebDriverWait wait1 = new WebDriverWait(driver, 60);
 		
+		WebDriverWait wait = new WebDriverWait( driver,(60));
+		Thread.sleep(1000);
 		LoginPOM.setUname(driver).sendKeys(username);		//Sent username to input box 
 		Thread.sleep(500);
 		LoginPOM.setPassword(driver).sendKeys(password);	//Sent password to input box
@@ -120,20 +120,26 @@ public class Login
 			try
 			{
 				Thread.sleep(500);
-				wait1.until(ExpectedConditions.visibilityOf(LoginPOM.clickQALink(driver)));
-				wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickQALink(driver)));
+				wait.until(ExpectedConditions.visibilityOf(LoginPOM.clickQALink(driver)));
+				wait.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickQALink(driver)));
 				LoginPOM.clickQALink(driver).click();				//Clicking on QA Link instead of OTP.
 				
 				//----------------------------------------------------------------------------//
 				
-				wait1.until(ExpectedConditions.invisibilityOf(LoginPOM.clickQALink(driver)));
-		
+				wait.until(ExpectedConditions.invisibilityOf(LoginPOM.clickQALink(driver)));
+			}
+			catch(Exception e)
+			{
+				
+			}
 			
-				Thread.sleep(1000);
-			wait1.until(ExpectedConditions.visibilityOf(LoginPOM.Question1(driver)));
-			wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.Question1(driver)));
+			Thread.sleep(1000);
+			wait.until(ExpectedConditions.visibilityOf(LoginPOM.Question1(driver)));
+			wait.until(ExpectedConditions.elementToBeClickable(LoginPOM.Question1(driver)));
 			String que1 = LoginPOM.Question1(driver).getText();	//Storing the question in que variable.
 			String ans1 = null;
+			
+			
 			
 			if(method.equalsIgnoreCase("cfo"))
 			{
@@ -152,15 +158,14 @@ public class Login
 			{
 				ans1 = "123";						//Storing the answer in ans variable.
 			}
-			else if(method.equalsIgnoreCase("Implementation"))
-			{
-				ans1 = "123";						//Storing the answer in ans variable.
-			}
+			
+			
 			
 			else
 			{
 				ans1 = getAnswer(que1);							//Storing the answer in ans variable.
 			}
+			
 			
 			if(ans1.equalsIgnoreCase("birthplace"))
 				LoginPOM.Answer1(driver).sendKeys("place");		//Sending answer to the input box.
@@ -180,16 +185,13 @@ public class Login
 			{
 				ans2 = getAnswerFE(que2);						//Storing the answer in ans variable.
 			}
+			
 			else if(method.equalsIgnoreCase("cfo-diy"))
 			{
 				ans2 = "123";						//Storing the answer in ans variable.
 			}
 			
 			else if(method.equalsIgnoreCase("company"))
-			{
-				ans2 = "123";						//Storing the answer in ans variable.
-			}
-			else if(method.equalsIgnoreCase("Implementation"))
 			{
 				ans2 = "123";						//Storing the answer in ans variable.
 			}
@@ -206,56 +208,42 @@ public class Login
 			Thread.sleep(100);
 			
 			LoginPOM.SubmitAnswer(driver).click();				//Clicking on Submit button.
-		
-			}
-			catch(Exception e)
-			{
-				
-			}
+			
 			
 		}
 		
-		
-		
-		if(!method.equalsIgnoreCase("Implementation"))
-		{
-			//wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickComplicane(driver)));
-			
-			if(method.equalsIgnoreCase("License"))
-			{
-				LoginPOM.clickLicense(driver).click();				//Clicking on Litigation Image.
-			}
-			else if(method.equalsIgnoreCase("Litigation"))
-			{
-				//Thread.sleep(8000);
-				LoginPOM.ClickLitigation(driver).click();			//Clicking on Litigation Image.
-			}
-			else if(method.equalsIgnoreCase("Contract"))
-			{
-				LoginPOM.ClickContract(driver).click();			//Clicking on Litigation Image.
-			}
-			else
-			{
-				LoginPOM.ClickLitigation(driver).click();	
-				//LoginPOM.clickComplicane(driver).click();			//Clicking on Compliance Image.
-			}
-			
-			try
-			{
-				Thread.sleep(500);
-				if(OverduePOM.closeMessage(driver).isDisplayed())	//If Compliance Updation message popped up,
-				{
-					wait.until(ExpectedConditions.elementToBeClickable(OverduePOM.closeMessage(driver)));
-					OverduePOM.closeMessage(driver).click();		//then close the message.
-				}
-			}
-			catch(Exception e)
-			{
-				
-			}
-		}		
+		Thread.sleep(2000);
+		LoginPOM.ClickLitigation(driver).click();
+//		if(!method.equalsIgnoreCase("company"))
+//		{
+//			//wait1.until(ExpectedConditions.elementToBeClickable(LoginPOM.clickComplicane()));
+//			
+//			if(method.equalsIgnoreCase("License"))
+//			{
+//				LoginPOM.clickLicense(driver).click();				//Clicking on Litigation Image.
+//			}
+//			else if(method.equalsIgnoreCase("Litigation"))
+//			{
+//				LoginPOM.ClickLitigation(driver).click();			//Clicking on Litigation Image.
+//			}
+//			else if(method.equalsIgnoreCase("Contract"))
+//			{
+//				LoginPOM.ClickContract(driver).click();			//Clicking on Litigation Image.
+//			}
+////			
+//			else
+//			{
+//				LoginPOM.ClickLitigation(driver).click();	
+//			//	LoginPOM.clickComplicane().click();			//Clicking on Compliance Image.
+//			}
+//			
+//			
+//	
+//		}		
+	
 		return driver;
 	}
+	
 	
 	public static String getAnswer(String que)				//Method created to extract last word from question
 	{														//as it is the answer of the question.

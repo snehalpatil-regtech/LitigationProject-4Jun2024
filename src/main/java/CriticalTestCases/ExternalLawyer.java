@@ -53,7 +53,7 @@ public class ExternalLawyer
 		test = extent.startTest("Litigation Logging In - External Lawyer");
 		
 		test.log(LogStatus.PASS, "Test Passed = Verify Chrome browser.");
-		test.log(LogStatus.PASS, "URL = https://applicationtesting.teamleaseregtech.com/Login.aspx");
+		test.log(LogStatus.PASS, "URL = https://login.teamleaseregtech.com/Login.aspx");
 		test.log(LogStatus.PASS, "Login =lawyer@avantis.info");
 		test.log(LogStatus.PASS, "Password = admin@123");
 		
@@ -224,7 +224,7 @@ public class ExternalLawyer
 			}
 	
 
-	@Test(priority =11)
+	@Test(priority =12)
 		void NoticeTaskActivityTab() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice Task/Activity verification");
@@ -285,7 +285,7 @@ public class ExternalLawyer
 					extent.endTest(test);
 					extent.flush();
 			}
-		@Test(priority = 14)
+		@Test(priority = 16)
 						void CaseDocumentTab() throws InterruptedException, IOException
 						{
 							test = extent.startTest("Case Document verification");
@@ -298,7 +298,7 @@ public class ExternalLawyer
 						}
 	
 			 	 
-			 @Test(priority = 15)
+			 @Test(priority = 17)
 						void CaseTaskActivityTab() throws InterruptedException, IOException
 						{
 							test = extent.startTest("Case Task/Activity verification");
@@ -311,7 +311,7 @@ public class ExternalLawyer
 						}
 			 
 		
-				@Test(priority = 16)
+				@Test(priority = 18)
 				void CaseHearingTab() throws InterruptedException, IOException
 				{
 					test = extent.startTest("Case Hearing verification");
@@ -324,7 +324,7 @@ public class ExternalLawyer
 				}
 			
 		
-			@Test(priority = 17)
+			@Test(priority = 19)
 			void CaseOrderTab() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Case Order verification");
@@ -347,7 +347,7 @@ public class ExternalLawyer
 		extent.endTest(test);
 		extent.flush();
 	}
-@Test(priority =18)
+@Test(priority =20)
 	void StatusPayment() throws InterruptedException, IOException
 	{
 		test = extent.startTest("Case Status/Payment verification");
@@ -360,7 +360,7 @@ public class ExternalLawyer
 	}
 	
 
-	@Test(priority = 19)
+	@Test(priority = 21)
 			void Auditlog() throws InterruptedException, IOException
 			{
 				test = extent.startTest("Case Audit Log verification");
@@ -372,13 +372,13 @@ public class ExternalLawyer
 				extent.flush();
 			}
 	
-	 @Test(priority = 20)
+	 @Test(priority = 22)
 	 	void MyDocument() throws InterruptedException, IOException
 	 	{
 	 		test = extent.startTest("My Document-Download and View Document");
 	 	
 	 		
-	 		MethodPOM.MyDocument(driver, test, workbook, "Performer");
+	 		MethodPOM.MyDocument(driver, test, workbook);
 	 		
 	 		extent.endTest(test);
 	 		extent.flush();
@@ -386,7 +386,7 @@ public class ExternalLawyer
 
 
 
-@Test(priority = 21)
+@Test(priority = 23)
 void MyReports() throws InterruptedException, IOException
 {
 	test = extent.startTest("Reports excel count verification");
@@ -397,7 +397,7 @@ void MyReports() throws InterruptedException, IOException
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority = 22)
+@Test(priority = 24)
 void MoreReports() throws InterruptedException, IOException
 {
 	test = extent.startTest("More Report-Reports excel  verification");
@@ -409,7 +409,7 @@ void MoreReports() throws InterruptedException, IOException
 	extent.flush();
 
 }
-@Test(priority = 22)
+@Test(priority = 25)
 void MyReminder() throws InterruptedException, IOException
 {
 	test = extent.startTest("My Reminder verification");
@@ -421,7 +421,7 @@ void MyReminder() throws InterruptedException, IOException
 	extent.flush();
 }
 
-@Test(priority = 23)
+@Test(priority = 26)
 void ImportUtility() throws InterruptedException, IOException
 {
 	test = extent.startTest("Import Utility verification");
@@ -431,7 +431,7 @@ void ImportUtility() throws InterruptedException, IOException
 	extent.endTest(test);
 	extent.flush();
 }
-@Test(priority = 138)
+@Test(priority = 27)
 void CaseUpdationImportUtility() throws InterruptedException, IOException
 {
 	test = extent.startTest("Case Updation Import Utility verification");
@@ -442,7 +442,7 @@ void CaseUpdationImportUtility() throws InterruptedException, IOException
 	extent.flush();
 }
 
-@Test(priority = 139)
+@Test(priority = 28)
 void NoticeUpdation() throws InterruptedException, IOException
 {
 test = extent.startTest("Notice Updation Import Utility verification");

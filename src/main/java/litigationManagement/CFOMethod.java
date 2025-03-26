@@ -1090,12 +1090,12 @@ public class CFOMethod {
 			else if(type.equalsIgnoreCase("Medium Risk"))
 			{
 				Thread.sleep(2000);
-		        performerPOM.RiskSummaryMedium(driver).click();						//Clicking on 'Open' notice
+		        performerPOM.RiskSummaryMedium1(driver).click();						//Clicking on 'Open' notice
 			}
 			else if(type.equalsIgnoreCase("Low Risk"))
 			{
 				Thread.sleep(2000);
-		        performerPOM.RiskSummaryLow(driver).click();						//Clicking on 'Open' notice
+		        performerPOM.RiskSummaryLowCA(driver).click();						//Clicking on 'Open' notice
 			}
 			else if(type.equalsIgnoreCase("Not Applicable Risk"))
 			{
@@ -3758,7 +3758,7 @@ public class CFOMethod {
 		}
 		 public static void clickOpponentcfo(WebDriver driver) throws InterruptedException
 		   {
-	           Thread.sleep(300);
+	           Thread.sleep(100);
 //	           Row row0 = sheet.getRow(7);						//Selected 0th index row (First row)
 //	           Cell c1 = row0.getCell(1);						//Selected cell (0 row,1 column)
 //	            String Opponent = c1.getStringCellValue();
@@ -4302,6 +4302,8 @@ public class CFOMethod {
 			
 			sheet = workbook.getSheetAt(5);
 			
+			driver.navigate().refresh();
+			
 			perform(driver, test, sheet, open, gridRecords, "Notice - Open");
 		}
 	
@@ -4321,8 +4323,9 @@ public class CFOMethod {
 			
 			wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 			
-	        
+			Thread.sleep(5000);
 	        performerPOM.clickNoticeDocument(driver).click();     //click notice document
+	        Thread.sleep(5000);
 	        performerPOM.clickNewDocument(driver).click();        //click new document button
 	
 	        Thread.sleep(1000);
@@ -4563,11 +4566,11 @@ public class CFOMethod {
 				catch(Exception e)
 				{
 					Thread.sleep(300);
-					wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsg2(driver)));
+					wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsg1(driver)));
 					
 					Thread.sleep(300);
 					
-					String msg1 = performerPOM.readTaskMsg2(driver).getText();
+					String msg1 = performerPOM.readTaskMsg1(driver).getText();
 					if(msg1.contains(msg1))
 					{
 						test.log(LogStatus.PASS, "Add Task ="+msg1);
@@ -4593,9 +4596,10 @@ public class CFOMethod {
 				performerPOM.clickTaskTitle(driver).sendKeys(title1);	//Writing 'Task Title'
 				
 				Thread.sleep(3000);
-				OverduePOM.clickSaveButton(driver).click();				//Clicking on 'Save' button.
-				
-				Thread.sleep(300);
+				 JavascriptExecutor jse=(JavascriptExecutor)driver;
+				 jse.executeScript("arguments[0].click();",  OverduePOM.clickSaveButton(driver));
+				 
+					Thread.sleep(3000);
 				wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsg1(driver)));
 				
 				Thread.sleep(300);
@@ -4775,9 +4779,9 @@ public class CFOMethod {
 							
 							Thread.sleep(3000);
 							performerPOM.clickNoticeEditResponsecfo(driver).click();
-							
+							Thread.sleep(3000);
 							performerPOM.Description(driver).clear();
-							Thread.sleep(500);
+							Thread.sleep(3000);
 							Row row4 = sheet.getRow(23);								//Selected 0th index row (First row)
 							Cell c5 = row4.getCell(1);								//Selected cell (0 row,1 column)
 							String Description1= c5.getStringCellValue();
@@ -4885,18 +4889,18 @@ public class CFOMethod {
 				Thread.sleep(8000);
 				performerPOM.clickNoticAmountPaid(driver).sendKeys("2000");
 				
-				Thread.sleep(6000);
-				performerPOM.clickNoticeStatusPaymentUploadtcfo(driver);
+				//Thread.sleep(6000);
+				//performerPOM.clickNoticeStatusPaymentUploadtcfo(driver);
 			
-				Thread.sleep(300);
+				Thread.sleep(3000);
 				performerPOM.clickSavePaymentLog(driver).click();
 				
 
-				
+				Thread.sleep(3000);
 				 WebDriverWait wait1 = new WebDriverWait(driver, 300);
 				 wait1.until(ExpectedConditions.visibilityOf(performerPOM.readPymentmsg(driver)));
 					
-					Thread.sleep(500);
+					Thread.sleep(3000);
 					String msg4 = performerPOM.readPymentmsg(driver).getText();		//Reading Message appeared after save button
 				
 					if(msg4.equalsIgnoreCase(msg4))
@@ -4951,7 +4955,7 @@ public class CFOMethod {
 					
 					
 				        
-				        Thread.sleep(500);
+				        Thread.sleep(3000);
 						String msg5 = performerPOM.readPymentmsg(driver).getText();		//Reading Message appeared after save button
 					
 						if(msg5.equalsIgnoreCase(msg5))
@@ -5471,7 +5475,7 @@ public class CFOMethod {
 			}
 			
 			sheet = workbook.getSheetAt(5);
-			
+			driver.navigate().refresh();
 			perform1(driver, test, sheet, open, gridRecords, "Case - Open");
 		}
  static void perform1(WebDriver driver, ExtentTest test, XSSFSheet sheet, int open, int gridRecords, String type) throws InterruptedException
@@ -5889,7 +5893,12 @@ public class CFOMethod {
 				performerPOM.clickEditNotice(driver).click();//click edit notice
 				
 			  wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
+			  
+				Thread.sleep(1000);
+
 			  performerPOM.clickNoticeDocument(driver).click();     //click notice document
+				Thread.sleep(1000);
+
 			  performerPOM.clickNewDocument(driver).click();        //click new document button
 			
 	 
@@ -6034,10 +6043,10 @@ public class CFOMethod {
 			    
 			    Thread.sleep(3000);
 			    performerPOM.clickCaseTask(driver).click();
-			    Thread.sleep(300);
+			    Thread.sleep(3000);
 			    performerPOM.clickCaseNewTask(driver).click();
 			    Thread.sleep(5000);
-			    performerPOM.clickHearingDate(driver).sendKeys("22-12-2024");
+			    performerPOM.clickHearingDate(driver).sendKeys("24-03-2025");
 			    
 			    
 //			    Thread.sleep(300);
@@ -6086,7 +6095,7 @@ public class CFOMethod {
 				row0 = sheet.getRow(15);									//Selected 0th index row (First row)
 				c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
 				String internalUser = c1.getStringCellValue();
-				performerPOM.clickInternalUser2(driver).click();
+				performerPOM.clickInternalUser3(driver).click();
 				
 //				Thread.sleep(1000);
 //				performerPOM.selectInternalUser5(driver).click();
@@ -6276,7 +6285,7 @@ public class CFOMethod {
 //					int HearingDate = (int) c1.getNumericCellValue();
 //					performerPOM.clickCaseHearingDate(driver).sendKeys(HearingDate+"");	//Writing 'HearingDate'
 					
-					performerPOM.clickCaseHearingDate(driver).sendKeys("24-12-2024");	//Writing 'HearingDate'
+					performerPOM.clickCaseHearingDate(driver).sendKeys("06-02-2025");	//Writing 'HearingDate'
 					
 					
 					Thread.sleep(2000);
@@ -6384,7 +6393,7 @@ public class CFOMethod {
 				 Thread.sleep(6000);
 				 performerPOM.clickNewCaseOrder(driver).click();
 				 Thread.sleep(6000);
-				 performerPOM. clickCaseOrderDate(driver).sendKeys("22-08-2023");
+				 performerPOM. clickCaseOrderDate(driver).sendKeys("23-08-2024");
 				 Thread.sleep(3000);
 				 performerPOM.clickOrderPanel(driver).click();
 				 Thread.sleep(3000);
@@ -6415,21 +6424,21 @@ public class CFOMethod {
 				 
 				 Thread.sleep(3000);
 				 performerPOM.clickEditCaseOrdercfo(driver).click();
-				 
+				 Thread.sleep(3000);
 				 performerPOM.clickCaseOrderTitle(driver).clear();
-				 
+				 Thread.sleep(3000);
 				 performerPOM.clickCaseOrderTitle(driver).sendKeys("Order no 907");
-				 
+				 Thread.sleep(3000);
 				 performerPOM.clickCaseOrderDecri(driver).clear();
-				 
+				 Thread.sleep(3000);
 				 performerPOM.clickCaseOrderDecri(driver).sendKeys("order as on 16 Aug 23");     //click oder description
-				 
+				 Thread.sleep(3000);
 				 performerPOM.ChooseOrderFile(driver).click();
-				 
+				 Thread.sleep(3000);
 				 Thread.sleep(3000);
 				 performerPOM.clickSaveCaseOrder(driver).click();
 				 
-				 
+				 Thread.sleep(3000);
 				 wait.until(ExpectedConditions.visibilityOf(performerPOM.readResponseMsg(driver)));
 					
 				
@@ -6502,7 +6511,7 @@ public class CFOMethod {
 			    	       Thread.sleep(3000);
 			               performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 							
-							wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+							//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 //							
 							Thread.sleep(3000);
 							Row row0 = sheet.getRow(58);					//Selected 0th index row (First row)
@@ -6612,10 +6621,10 @@ public class CFOMethod {
 							Thread.sleep(3000);
 							performerPOM.clickSavePaymentLog1(driver).click();
 							
-							  Thread.sleep(500);
+							  Thread.sleep(3000);
 								String msg = performerPOM.readPymentmsg(driver).getText();		//Reading Message appeared after save button
 							
-								if(msg5.equalsIgnoreCase("Payment Details Saved Successfully."))
+								if(msg.equalsIgnoreCase(msg))
 								{
 									test.log(LogStatus.PASS, "Update Payment = "+msg);
 								
@@ -6976,10 +6985,10 @@ public class CFOMethod {
 				//-------------------------------------------Notice--------------------------------------------------
 					
 					Thread.sleep(4000);
-					performerPOM.startDate(driver).sendKeys("05/4/2022");
+					performerPOM.startDate(driver).sendKeys("05/01/2024");
 					
 					Thread.sleep(4000);
-					performerPOM.endDate(driver).sendKeys("05/7/2022");
+					performerPOM.endDate(driver).sendKeys("05/7/2025");
 					
 					Thread.sleep(4000);
 					performerPOM.clickApplyButton(driver).click();
@@ -7433,18 +7442,18 @@ public class CFOMethod {
 		       performerPOM. SelectLocationWorkspace(driver).click();*/
 		       
 		       
-               Thread.sleep(500);
+               Thread.sleep(3000);
 		       performerPOM.clickTaskPriorityFilter(driver).click();
-		       Thread.sleep(500);
+		       Thread.sleep(3000);
 		       String priorityText = performerPOM.SelectTaskPriorityFilter(driver).getText();
-		       Thread.sleep(500);
+		       Thread.sleep(3000);
 		       performerPOM. SelectTaskPriorityFilter(driver).click();
 		       				        
-		       Thread.sleep(500);
+		       Thread.sleep(3000);
 		       performerPOM.clickTaskStatusFilter(driver).click();
-		       Thread.sleep(500);
+		       Thread.sleep(3000);
 		       String Statustext = performerPOM.SelectTaskStatusFilter(driver).getText();
-		       Thread.sleep(500);
+		       Thread.sleep(3000);
 		       performerPOM.SelectTaskStatusFilter(driver).click();
 		           
 		       
@@ -8715,7 +8724,7 @@ public class CFOMethod {
 //						Thread.sleep(1000);
 //						performerPOM.selectDocument(driver).click();	
 						Thread.sleep(3000);
-						performerPOM.shareDocumentIcon1(driver).click();
+						performerPOM.shareDocumentIconNotice(driver).click();
 						
 						   wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("OverViews3"));
 						   
@@ -8766,7 +8775,7 @@ public class CFOMethod {
 							
 						
 						Thread.sleep(1000);
-						performerPOM.shareDocumentIcon1(driver).click();
+						performerPOM.shareDocumentIconTask(driver).click();
 						
 						   wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("OverViews3"));
 						   
@@ -9061,7 +9070,7 @@ public class CFOMethod {
 							
 							Thread.sleep(500);
 							
-							OverduePOM.uploadNewFile(driver).sendKeys("E:\\Test Cases\\Approver Test Case.xlsx");	//uploading new file		
+							OverduePOM.uploadNewFile(driver).sendKeys("D:\\Test Cases\\Approver Test Case.xlsx");	//uploading new file		
 							
 							Thread.sleep(500);
 							wait.until(ExpectedConditions.elementToBeClickable(OverduePOM.clickUploadDocument(driver)));
@@ -10769,14 +10778,17 @@ public class CFOMethod {
 						Thread.sleep(500);
 						wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));	//Waiting and switching to IFrame
 						
-						Thread.sleep(300);
+						Thread.sleep(3000);
 						if(type.equals("Notice"))
 						{
 							sheet = workbook.getSheetAt(5);
 							
+							Thread.sleep(3000);
 							performerPOM.clickStatusPayments(driver).click();			//Clicking on 'Status/Payments'
 							
-							wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+							//Thread.sleep(300);
+							//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+							Thread.sleep(3000);
 							performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 							Thread.sleep(300);
 							performerPOM.clickClosedStatus(driver).click();				//Selecting 'Closed' option from drop down.
@@ -10809,17 +10821,18 @@ public class CFOMethod {
 						}
 						else if(type.equals("Case"))
 						{
+							Thread.sleep(3000);
 							performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 							
-							wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
-							
+							//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+							Thread.sleep(3000);
 							performerPOM.clickCaseStage(driver).click();
 							Thread.sleep(300);
 							performerPOM.selectCaseStage1(driver).sendKeys("Hearing", Keys.ENTER);
 							
-							Thread.sleep(300);
+							Thread.sleep(3000);
 							performerPOM.clickCaseStatus(driver).click();				//Clicking on 'Case Status' drop down.
-							Thread.sleep(300);
+							Thread.sleep(3000);
 							performerPOM.clickCaseStatusClose(driver).click();			//Selecting 'Closed' option from drop down.
 							
 							Thread.sleep(300);
@@ -11702,9 +11715,11 @@ public class CFOMethod {
 						
 						Thread.sleep(500);
 						wait.until(ExpectedConditions.visibilityOf(performerPOM.clickAddNew1(driver)));
+						Thread.sleep(500);
 						performerPOM.clickAddNew1(driver).click();		//Clicking on 'Add New' button.
 						
 						wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("ContentPlaceHolder1_showReminderDetail"));
+						Thread.sleep(500);
 						wait.until(ExpectedConditions.visibilityOf(performerPOM.clickType(driver)));
 						Actions action = new Actions(driver);
 						
@@ -11721,10 +11736,10 @@ public class CFOMethod {
 						action.moveToElement(performerPOM.clickTitle(driver)).click().sendKeys(Keys.ARROW_DOWN, Keys.ARROW_DOWN, Keys.ENTER).perform();
 						
 						Thread.sleep(3000);
-						performerPOM.clickReminderText(driver).sendKeys("Reminder new 24Mar24");
+						performerPOM.clickReminderText(driver).sendKeys("Reminder new 30Mar24");
 						
 						Thread.sleep(3000);
-						performerPOM.clickDescription(driver).sendKeys("Reminder new 24Mar24");
+						performerPOM.clickDescription(driver).sendKeys("Reminder new 30Mar24");
 						
 						Thread.sleep(3000);
 						performerPOM.clickRemark2(driver).sendKeys("Remark");
@@ -11798,13 +11813,13 @@ public class CFOMethod {
 						performerPOM.clickReminderText(driver).clear();
 						
 						Thread.sleep(3000);
-						performerPOM.clickReminderText(driver).sendKeys("Reminder  new 16march2024");
+						performerPOM.clickReminderText(driver).sendKeys("Reminder  new 19march2024");
 						
 						Thread.sleep(3000);
 						performerPOM.clickDescription(driver).clear();
 						
 						Thread.sleep(3000);
-						performerPOM.clickDescription(driver).sendKeys("Reminder new 16march2024");
+						performerPOM.clickDescription(driver).sendKeys("Reminder new 19march2024");
 						
 						Thread.sleep(3000);
 						performerPOM.clickDate(driver).click();
@@ -11982,7 +11997,9 @@ public class CFOMethod {
 						performerPOM.clickAddNew1(driver).click();		//Clicking on 'Add New' button.
 						
 						wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("ContentPlaceHolder1_showReminderDetail"));
-						wait.until(ExpectedConditions.visibilityOf(performerPOM.clickType(driver)));
+						
+//						Thread.sleep(500);
+//						wait.until(ExpectedConditions.visibilityOf(performerPOM.clickType(driver)));
 					
 						
 						if(type.equalsIgnoreCase("Notice"))
@@ -20450,7 +20467,9 @@ public class CFOMethod {
  			JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollBy(0,-700)");
             Thread.sleep(500);
-        	performerPOM.clickNoticeOpen(driver).click();		
+        	performerPOM.clickNoticeOpen(driver).click();	
+        	
+        	driver.navigate().refresh();
  			
              Thread.sleep(4000);
  			clickNewNotice(driver);
@@ -20561,13 +20580,14 @@ public class CFOMethod {
  	 			JavascriptExecutor js = (JavascriptExecutor) driver;
  	            js.executeScript("window.scrollBy(0,-700)");
  	            Thread.sleep(500);
- 	        	performerPOM.clickNoticeOpen(driver).click();		
+ 	        	performerPOM.clickNoticeOpen(driver).click();	
+ 	        	
+ 	        	driver.navigate().refresh();
  	 			
  	             Thread.sleep(4000);
  	 			clickNewNotice(driver);
  	 			
  	 			wait1.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
- 	 			
  	 			
  	 			
  	 			Thread.sleep(3000);
@@ -21181,8 +21201,12 @@ public class CFOMethod {
  				
  				wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
  				
- 		        
+ 				Thread.sleep(3000);
+
  		        performerPOM.clickNoticeDocument(driver).click();     //click notice document
+ 		        
+ 		       Thread.sleep(1000);
+
  		        performerPOM.clickNewDocument(driver).click();        //click new document button
  		
  		        Thread.sleep(1000);
@@ -21232,8 +21256,10 @@ public class CFOMethod {
  				
  				wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
  				
- 		        
+ 				  Thread.sleep(3000);
  		        performerPOM.clickNoticeDocument(driver).click();     //click notice document
+ 		        
+ 		       Thread.sleep(1000);
  		        performerPOM.clickNewDocument(driver).click();        //click new document button
  		
  		        Thread.sleep(1000);
@@ -21668,17 +21694,19 @@ public class CFOMethod {
  				   wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
  	 			  Thread.sleep(1000);
  				  performerPOM.clickTaskorActivity(driver).click();
- 				  Thread.sleep(1000);
+ 				  Thread.sleep(3000);
  				  performerPOM.clickNewTask(driver).click(); 
  	 				
 
-  	
+ 				 JavascriptExecutor js = (JavascriptExecutor) driver;
+			     	
+			     	js.executeScript("window.scrollBy(900,0)");
   				
   				Thread.sleep(3000);
   				OverduePOM.clickSaveButton(driver).click();				//Clicking on 'Save' button.
   				
-  			  Thread.sleep(3000);
-				performerPOM.clickMinimize(driver).click();
+//  			  Thread.sleep(3000);
+//				performerPOM.clickMinimize(driver).click();
   				
 //  				Thread.sleep(300);
 //  				wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsg(driver)));
@@ -21719,13 +21747,13 @@ public class CFOMethod {
 				
 				
 				
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				performerPOM.clickNoticeTaskcmtResponsecfo(driver).sendKeys("Automate Test");
 				
-				Thread.sleep(3000);
+				Thread.sleep(4000);
 				performerPOM.clickNoticeTaskSaveResponsecfo(driver).click();
 				
-				
+				Thread.sleep(4000);
 				String msg=performerPOM.clickInvalidResponsemsg(driver).getText();
 				if(msg.equalsIgnoreCase("Provide Response Status."))
 				{
@@ -23023,6 +23051,7 @@ public class CFOMethod {
 				
 		        
 		        performerPOM.clickNoticeDocument(driver).click();     //click notice document
+		        Thread.sleep(3000);
 		        performerPOM.clickNewDocument(driver).click();        //click new document button
 		
 		        Thread.sleep(1000);
@@ -23076,6 +23105,7 @@ public class CFOMethod {
 				
 		        
 		        performerPOM.clickNoticeDocument(driver).click();     //click notice document
+		        Thread.sleep(3000);
 		        performerPOM.clickNewDocument(driver).click();        //click new document button
 		
 		        Thread.sleep(1000);
@@ -23166,7 +23196,7 @@ public class CFOMethod {
 		        Thread.sleep(3000);
 				 performerPOM.clickNoticeDocument(driver).click();     //click notice document
 				 
-				 Thread.sleep(3000);
+				 Thread.sleep(6000);
 		        performerPOM.clickCaseDocumentsharecfo(driver).click();
 		        
 		        Thread.sleep(5000);
@@ -23356,7 +23386,7 @@ public class CFOMethod {
 			    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 			    Thread.sleep(3000);
 			    performerPOM.clickCaseTask(driver).click();
-			    Thread.sleep(300);
+			    Thread.sleep(3000);
 			    performerPOM.clickCaseNewTask(driver).click();
 //			    Thread.sleep(5000);
 //			    performerPOM.clickHearingDate(driver).sendKeys("23-07-2022");
@@ -23403,15 +23433,14 @@ public class CFOMethod {
 				
 				
 				Thread.sleep(1000);
-//				row0 = sheet.getRow(15);									//Selected 0th index row (First row)
-//				c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
-//				String internalUser = c1.getStringCellValue();
+				row0 = sheet.getRow(15);									//Selected 0th index row (First row)
+				c1 = row0.getCell(1);									//Selected cell (0 row,1 column)
+				String internalUser = c1.getStringCellValue();
 				performerPOM.clickInternalUser3(driver).click();
 				
 				Thread.sleep(1000);
-				performerPOM.selectInternalUser4(driver).click();
-				//performerPOM.selectInternalUser2(driver).click();
-//				performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+				performerPOM.selectInternalUser3(driver).sendKeys(internalUser, Keys.ENTER);	//Selecting 'Internal User'
+
 				
 //				Thread.sleep(1000);
 //				row0 = sheet.getRow(16);									//Selected 0th index row (First row)
@@ -23441,8 +23470,8 @@ public class CFOMethod {
 				
 
 				
-				Thread.sleep(300);
-				wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsgcfo(driver)));
+//				Thread.sleep(300);
+//				wait.until(ExpectedConditions.visibilityOf(performerPOM.readTaskMsgcfo(driver)));
 				
 				Thread.sleep(3000);
 			
@@ -23477,7 +23506,7 @@ public class CFOMethod {
 			    wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 			    Thread.sleep(3000);
 			    performerPOM.clickCaseTask(driver).click();
-			    Thread.sleep(300);
+			    Thread.sleep(3000);
 			    performerPOM.clickCaseNewTask(driver).click();
 			    
 			    Thread.sleep(3000);
@@ -23530,7 +23559,7 @@ public class CFOMethod {
 				Thread.sleep(3000);
 				performerPOM.clickNoticeTaskSaveResponsecfo(driver).click();
 				
-				
+				Thread.sleep(3000);
 				String msg=performerPOM.clickInvalidResponsemsg(driver).getText();
 				if(msg.equalsIgnoreCase("Provide Response Status."))
 				{
@@ -23641,20 +23670,20 @@ public class CFOMethod {
 					Thread.sleep(3000);
 					performerPOM.clickNewCaseHearing(driver).click();
 					Thread.sleep(3000);
-                	performerPOM.clickCaseHearingDate(driver).sendKeys("21-10-2024");	//Writing 'HearingDate'
+                	performerPOM.clickCaseHearingDate(driver).sendKeys("06-02-2025");	//Writing 'HearingDate'
 				    Thread.sleep(3000);
 				    performerPOM.clickSaveCaseHearingDate(driver).click();
 				
 					
-					Thread.sleep(2000);
-					Row row1 = sheet.getRow(50);									//Selected 0th index row (First row)
-					Cell c2 = row1.getCell(1);									//Selected cell (0 row,1 column)
-					String HearingDescription = c2.getStringCellValue();
-					performerPOM.clickCaseHearingDecsri(driver).sendKeys(HearingDescription);		//Writing 'HearingDescription'
+//					Thread.sleep(2000);
+//					Row row1 = sheet.getRow(50);									//Selected 0th index row (First row)
+//					Cell c2 = row1.getCell(1);									//Selected cell (0 row,1 column)
+//					String HearingDescription = c2.getStringCellValue();
+//					performerPOM.clickCaseHearingDecsri(driver).sendKeys(HearingDescription);		//Writing 'HearingDescription'
 					
-					 Thread.sleep(3000);
-					 performerPOM.clickMinimizeHearing(driver).click();	
-				    Thread.sleep(3000);
+//					 Thread.sleep(3000);
+//					 performerPOM.clickMinimizeHearing(driver).click();	
+				    Thread.sleep(4000);
 					String msg = performerPOM.clickReadHearingMsg1(driver).getText();
 					if(msg.contains(msg))
 					{
@@ -24054,17 +24083,18 @@ public class CFOMethod {
 				performerPOM.clickEditNotice(driver).click();//click edit notice
 				 Thread.sleep(3000);
 			   wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
+			   Thread.sleep(3000);
 			   performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 			
-			   wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
-				
+			   //wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+			   Thread.sleep(3000);
 				performerPOM.clickCaseStage(driver).click();
-				Thread.sleep(300);
-				performerPOM.selectCaseStage1(driver).sendKeys("Select Stage", Keys.ENTER);
+				Thread.sleep(3000);
+				performerPOM.selectCaseStage1(driver).sendKeys("Select", Keys.ENTER);
 				
-				 Thread.sleep(300);
+				 Thread.sleep(3000);
 				    performerPOM.clickSave1(driver).click();
-				Thread.sleep(300);
+				Thread.sleep(3000);
 				String msg=performerPOM.clickCasereadMsg(driver).getText();
 				
 				if(msg.equalsIgnoreCase(msg))
@@ -24085,7 +24115,7 @@ public class CFOMethod {
 			   Thread.sleep(300);
 			    performerPOM.clickSave1(driver).click();
 			    
-				Thread.sleep(300);
+				Thread.sleep(3000);
 				String msg1=performerPOM.clickCasereadMsg(driver).getText();
 				
 				if(msg1.equalsIgnoreCase(msg1))
@@ -24122,7 +24152,7 @@ public class CFOMethod {
 		    	       Thread.sleep(3000);
 		               performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 						
-						wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+						//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 //						
 						Thread.sleep(3000);
 						Row row0 = sheet.getRow(58);					//Selected 0th index row (First row)
@@ -24134,17 +24164,17 @@ public class CFOMethod {
 						performerPOM.clickPaymentTyp1(driver).click();
 						Thread.sleep(2000);
 						List<WebElement> PaymentType1= driver.findElements(By.xpath("//*[@id='grdCasePayment_ddlPaymentType_chosen']/div/ul/li"));
-						selectOptionFromDropDown_bs(PaymentType1, "Checks");
+						selectOptionFromDropDown_bs(PaymentType1, "debit cards For SBI");
 						Thread.sleep(10000);
                      performerPOM.clickAmount1(driver).sendKeys("900000");	//Writing 'Amount'
 					
                  	Thread.sleep(10000);
                     performerPOM. clickAmountPaid(driver).sendKeys("5000");
-						Thread.sleep(3000);
+						Thread.sleep(4000);
 						performerPOM.clickSavePaymentLog1(driver).click();
 						
 						
-						   Thread.sleep(500);
+						   Thread.sleep(5000);
 							String msg5 = performerPOM.readPymentmsg(driver).getText();		//Reading Message appeared after save button
 						
 							if(msg5.equalsIgnoreCase("Payment Details Saved Successfully."))
@@ -24178,7 +24208,7 @@ public class CFOMethod {
 		    	       Thread.sleep(3000);
 		               performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 						
-						wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+					//	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 						
 						Thread.sleep(3000);
 						Row row0 = sheet.getRow(58);					//Selected 0th index row (First row)
@@ -27373,8 +27403,8 @@ public class CFOMethod {
 	 				 performerPOM.clickStatusPayments(driver).click();
 	 				 
 	 				
-	 				
-	 				wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+	 			 	Thread.sleep(8000);
+	 				//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
 	 				performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 	 				Thread.sleep(4000);
 	 				performerPOM.clickClosedStatus(driver).click();				//Selecting 'Closed' option from drop down.
@@ -27470,15 +27500,15 @@ public class CFOMethod {
 		 			
 		 			   	performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 					
-		 			   	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
-					
+		 			   //	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+		 			   Thread.sleep(8000);
 		 			   	performerPOM.clickCaseStage(driver).click();
 		 			   	Thread.sleep(300);
 		 			   	performerPOM.selectCaseStage1(driver).sendKeys("Hearing", Keys.ENTER);
 					
-		 			   	Thread.sleep(300);
+		 			   	Thread.sleep(3000);
 		 			   	performerPOM.clickCaseStatus(driver).click();				//Clicking on 'Case Status' drop down.
-		 			   	Thread.sleep(300);
+		 			   	Thread.sleep(3000);
 		 			   	performerPOM.clickCaseStatusClose(driver).click();			//Selecting 'Closed' option from drop down.
 					
 		 			   	Thread.sleep(3000);
@@ -27572,17 +27602,19 @@ public class CFOMethod {
 		 			   	wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("showdetails"));
 		 			   	Thread.sleep(8000);
 		 			
+		 			   Thread.sleep(3000);
 		 			   	performerPOM.clickCaseStatusPayments(driver).click();		//Clicking on 'Status/Payments'
 					
-		 			   	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
+		 			   //	wait.until(ExpectedConditions.visibilityOf(performerPOM.clickCaseStatus(driver)));
 					
+		 			   Thread.sleep(3000);
 		 			   	performerPOM.clickCaseStage(driver).click();
 		 			   	Thread.sleep(300);
 		 			   	performerPOM.selectCaseStage1(driver).sendKeys("Hearing", Keys.ENTER);
 					
-		 			   	Thread.sleep(300);
+		 			   	Thread.sleep(3000);
 		 			   	performerPOM.clickCaseStatus(driver).click();				//Clicking on 'Case Status' drop down.
-		 			   	Thread.sleep(300);
+		 			   	Thread.sleep(3000);
 		 			   	performerPOM.clickCaseStatusClose(driver).click();			//Selecting 'Closed' option from drop down.
 					
 		 			   	Thread.sleep(3000);
@@ -27598,8 +27630,8 @@ public class CFOMethod {
 		 			   	Thread.sleep(3000);
 		 			   	performerPOM.clickRemark1(driver).sendKeys("Automation Testing");
 					
-		 			   	Thread.sleep(4000);
-		 			   	performerPOM.clickClosedNoticeDoc(driver);
+//		 			   	Thread.sleep(4000);
+//		 			   	performerPOM.clickClosedNoticeDoc(driver);
 	 				
 		 			   	Thread.sleep(4000);
 		 			   	performerPOM.clickSave1(driver).click();
@@ -27700,7 +27732,7 @@ public class CFOMethod {
 					       performerPOM.clickcloseViewDocument(driver).click();
 					       
 					       Thread.sleep(8000);
-							performerPOM.shareDocumentIcon(driver).click();
+							performerPOM.shareDocumentIcon1(driver).click();
 							
 							   wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("OverViews1"));
 							   
@@ -27755,7 +27787,7 @@ public class CFOMethod {
 					       performerPOM.clickFilter2(driver).click();
 					      
 					        Thread.sleep(8000);
-					       performerPOM.clickSearchFilterworkspace(driver).sendKeys("6052024");
+					       performerPOM.clickSearchFilterworkspace(driver).sendKeys("Notice300623");
 					       
 					       Thread.sleep(3000);
 					       performerPOM. selectCheckboxcfo(driver).click();
@@ -28068,8 +28100,8 @@ public class CFOMethod {
 		 				 performerPOM.clickStatusPayments(driver).click();
 		 				 
 		 				
-		 				
-		 				wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
+		 				Thread.sleep(8000);
+		 				//wait.until(ExpectedConditions.visibilityOf(performerPOM.clickNoticeStatus(driver)));
 		 				performerPOM.clickNoticeStatus(driver).click();				//Clicking on 'Notice Status' drop down.
 		 				Thread.sleep(4000);
 		 				performerPOM.clickClosedStatus(driver).click();				//Selecting 'Closed' option from drop down.
@@ -28081,14 +28113,14 @@ public class CFOMethod {
 		 				OverduePOM.selectDate2(driver).click();						//Selecting particular date.
 		 				
 
-		 				Thread.sleep(4000);
-		 				performerPOM.clickClosedNoticeDoc(driver);
+//		 				Thread.sleep(4000);
+//		 				performerPOM.clickClosedNoticeDoc(driver);
 		 				
 		 				Thread.sleep(4000);
 		 				performerPOM.clickSave1(driver).click();
 		 				
 		 				Thread.sleep(3000);
-		 				wait.until(ExpectedConditions.visibilityOf(performerPOM.readMessage2(driver)));
+		 				//wait.until(ExpectedConditions.visibilityOf(performerPOM.readMessage2(driver)));
 		 				String msg = performerPOM.readMessage2(driver).getText();
 		 			
 		 				if(msg.contains(msg))

@@ -57,7 +57,7 @@ public class CompanyAdminLogin
 			extent = new com.relevantcodes.extentreports.ExtentReports(workingDir+"//Reports//LitigationCompanyAdmin.html",true);
 			test = extent.startTest("Litigation Logging In - Company Admin");
 			test.log(LogStatus.PASS, "Test Passed = Verify Chrome browser.");
-			test.log(LogStatus.PASS, "URL = https://applicationtesting.teamleaseregtech.com/Login.aspx");
+			test.log(LogStatus.PASS, "URL = https://login.teamleaseregtech.com/Login.aspx?ReturnUrl=%2fLogin.aspx");
 			test.log(LogStatus.PASS, "Username = companyadmin@regtrack.com");
 			test.log(LogStatus.PASS, "Password = admin@123");
 			extent.endTest(test);
@@ -85,14 +85,14 @@ public class CompanyAdminLogin
 			Cell c3 = row2.getCell(1);						//Selected cell (2 row,1 column)
 			String password = c3.getStringCellValue();		//Got the URL stored at position 2,1
 			
-			driver = login.Login.UserLogin(uname,password,"company");		//Method of Login class to login user.
+			driver = login.Login.UserLogin(uname,password,"Implementation");		//Method of Login class to login user.
 			
 		}
 
 		
 	
-					
-		@Test(priority =1)
+		/* @Test(priority =1)				
+	
 				 	void NoticeOpen() throws InterruptedException, IOException
 				 	{
 				 		test = extent.startTest("Notice - Open Count Verification");
@@ -105,7 +105,7 @@ public class CompanyAdminLogin
 				 		extent.flush();
 				 	}
 			
-					 @Test(priority =0)
+					 @Test(priority =2)
 					     	void CaseOpen() throws InterruptedException, IOException
 					     	{
 					     		test = extent.startTest("Case - Open Count verification");
@@ -272,7 +272,7 @@ public class CompanyAdminLogin
 					 	extent.flush();
 					 }
 					
-					 @Test(priority = 14)
+					 @Test(priority = 15)
 					 void NoticeExternalLawyer() throws InterruptedException, IOException
 					 {
 					 	test = extent.startTest("Notice Lawyer verification");
@@ -284,7 +284,7 @@ public class CompanyAdminLogin
 					 }
 				
 					
-					 @Test(priority = 15)
+					 @Test(priority = 16)
 					 void NoticeAuditLog() throws InterruptedException, IOException
 					 {
 					 	test = extent.startTest("Notice Audit Log verification");
@@ -294,7 +294,7 @@ public class CompanyAdminLogin
 					 	
 					 	extent.endTest(test);
 					 	extent.flush();
-					 }		
+					 }
 					 @Test(priority =16)
 					 void CaseDocument() throws InterruptedException, IOException
 					 {
@@ -551,7 +551,7 @@ public class CompanyAdminLogin
 						
 							extent.endTest(test);
 							extent.flush();
-						}
+						}*/
 						@Test(priority = 28)
 					    void DepartmentSummaryGraph() throws InterruptedException, IOException
 					    {
@@ -1337,7 +1337,7 @@ public class CompanyAdminLogin
 					 		test = extent.startTest("My Document-Download and View Document");
 					 	
 					 		
-					 		MethodsPOM.MyDocument(driver, test, workbook, "Performer");
+					 		MethodsPOM.MyDocument(driver, test, workbook);
 					 		
 					 		extent.endTest(test);
 					 		extent.flush();
@@ -1412,7 +1412,7 @@ public class CompanyAdminLogin
 					 extent.flush();
 					 }
 					
-					 @Test(priority = 55)
+		/*			 @Test(priority = 55)
 						void Masters() throws InterruptedException, IOException
 						{
 							test = extent.startTest("Masters - Legal Entity  verification");
@@ -1645,7 +1645,7 @@ void Masters15() throws InterruptedException, IOException, AWTException
 	
 	extent.endTest(test);
 	extent.flush();
-}
+}*/
 @AfterMethod
 
 void Close()

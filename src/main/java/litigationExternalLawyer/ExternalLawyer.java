@@ -38,7 +38,7 @@ public class ExternalLawyer
 	public static XSSFSheet ReadExcel() throws IOException
 	{
 	
-		fis = new FileInputStream("E:\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
+		fis = new FileInputStream("D:\\Litigation-Project 10 April2024\\Litigation-Project 10 April2024\\TestData\\LitigationSheet.xlsx");
 	
 		workbook = new XSSFWorkbook(fis);
 		sheet = workbook.getSheetAt(6);					//Retrieving second sheet of Workbook
@@ -85,7 +85,7 @@ public class ExternalLawyer
 	}
 	
 
-/*@Test(priority = 1)
+@Test(priority = 1)
 		void NoticeOpen() throws InterruptedException, IOException
 		{
 			test = extent.startTest("Notice - Open Count Verification");
@@ -800,7 +800,7 @@ void NoticePaymentWithoutData() throws InterruptedException, IOException
 		
 		extent.endTest(test);
 		extent.flush();
-	}*/
+	}
 @Test(priority =54)
 	void CaseDocumentSearchFields() throws InterruptedException, IOException
 	{
@@ -1166,7 +1166,7 @@ void StatusPaymentwithInvaliddata() throws InterruptedException, IOException
 				test = extent.startTest("Download and View Document");
 			
 				
-				MethodsPOM.MyDocument(driver, test, workbook, "Performer");
+				MethodsPOM.MyDocument(driver, test, workbook);
 				
 				extent.endTest(test);
 				extent.flush();
